@@ -10,15 +10,15 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.qibla.qiblacompass.prayertime.finddirection.BaseActivity
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.SplashActivity
 import com.qibla.qiblacompass.prayertime.finddirection.views.login.LoginActivity
 
-class OnboardingActivity : AppCompatActivity() {
+class OnboardingActivity : BaseActivity() {
     var indicator = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        makeFullScreen()
         setContentView(R.layout.activity_onboarding)
         findViewById<TextView>(R.id.tv_skip).setOnClickListener {
             Log.d(OnboardingActivity::class.simpleName, "onCreate: ")
@@ -31,15 +31,6 @@ class OnboardingActivity : AppCompatActivity() {
             indicator++
             showNextScreenValues(indicator)
         }
-    }
-
-    private fun makeFullScreen() {
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-        supportActionBar?.hide()
     }
 
     private fun showNextScreenValues(indicator: Int) {

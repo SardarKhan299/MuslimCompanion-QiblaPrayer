@@ -9,10 +9,9 @@ import com.qibla.qiblacompass.prayertime.finddirection.views.onboarding.Onboardi
 import java.util.*
 import kotlin.concurrent.schedule
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        makeFullScreen()
         setContentView(R.layout.activity_splash)
         Timer("splash", false).schedule(3000) {
             startActivity(Intent(this@SplashActivity, OnboardingActivity::class.java))
@@ -20,12 +19,5 @@ class SplashActivity : AppCompatActivity() {
             finish()
         }
     }
-    private fun makeFullScreen() {
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-        supportActionBar?.hide()
-    }
+
 }
