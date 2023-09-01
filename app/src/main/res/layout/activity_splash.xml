@@ -19,6 +19,7 @@
         />
 
     <TextView
+        style="@style/splash_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_splash"
@@ -26,8 +27,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/qibla_compass"
-        android:textSize="24sp"
-        android:textColor="@color/primary_color"
         />
 
 
