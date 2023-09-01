@@ -9,6 +9,20 @@
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
 
+    <style name="onboard_text_title" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_24sdp</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="onboard_text_desc" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
     <style name="skip_text" parent="@android:style/TextAppearance">
         <item name="android:textSize">@dimen/_18sdp</item>
         <item name="android:textColor">@color/primary_color</item>

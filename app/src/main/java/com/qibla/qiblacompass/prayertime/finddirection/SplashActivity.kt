@@ -3,10 +3,9 @@ package com.qibla.qiblacompass.prayertime.finddirection
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import android.view.WindowManager
-import com.qibla.qiblacompass.prayertime.finddirection.views.OnboardingActivity
+import com.qibla.qiblacompass.prayertime.finddirection.views.onboarding.OnboardingActivity
 import java.util.*
 import kotlin.concurrent.schedule
 

@@ -1,0 +1,57 @@
+package com.qibla.qiblacompass.prayertime.finddirection.views.onboarding
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.SplashActivity
+
+class OnboardingActivity : AppCompatActivity() {
+    var indicator = 1
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_onboarding)
+        findViewById<TextView>(R.id.tv_skip).setOnClickListener {
+            Log.d(OnboardingActivity::class.simpleName, "onCreate: ")
+            gotoLoginActivity()
+        }
+        findViewById<Button>(R.id.btn_next).setOnClickListener {
+            if(indicator==3){
+                gotoLoginActivity()
+            }
+            indicator++
+            showNextScreenValues(indicator)
+        }
+    }
+
+    private fun showNextScreenValues(indicator: Int) {
+        Log.d(OnboardingActivity::class.simpleName, "showNextScreenValues: $indicator")
+        when(indicator){
+            2->{
+                findViewById<ImageView>(R.id.iv_onboard).setImageDrawable(ContextCompat.getDrawable(this,R.drawable.splash_icon))
+                findViewById<TextView>(R.id.tv_onboard_title).text = getString(R.string.prayer_timing)
+                findViewById<TextView>(R.id.tv_onboard_desc).text = ""
+                findViewById<ImageView>(R.id.iv_onboard_indicator).setImageResource(R.drawable.indicator2)
+            }
+            3->{
+                findViewById<ImageView>(R.id.iv_onboard).setImageDrawable(ContextCompat.getDrawable(this,R.drawable.splash_icon))
+                findViewById<TextView>(R.id.tv_onboard_title).text = getString(R.string.holy_quran)
+                findViewById<TextView>(R.id.tv_onboard_desc).text = ""
+                findViewById<ImageView>(R.id.iv_onboard_indicator).setImageResource(R.drawable.indicator3)
+            }else->{
+            Log.d(OnboardingActivity::class.simpleName, "showNextScreenValues: Value Not Matched...")
+            }
+        }
+    }
+
+    private fun gotoLoginActivity() {
+        startActivity(Intent(this@OnboardingActivity, SplashActivity::class.java))
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        finish()
+    }
+}

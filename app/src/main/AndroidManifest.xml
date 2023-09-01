@@ -10,9 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MuslimCompanionQiblaPrayer">
         <activity
-            android:name=".views.OnboardingActivity"
-            android:exported="false">
-        </activity>
+            android:name=".views.onboarding.OnboardingActivity"
+            android:exported="false"></activity>
         <activity
             android:name=".SplashActivity"
             android:exported="true">
