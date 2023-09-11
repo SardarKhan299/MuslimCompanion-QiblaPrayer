@@ -9,6 +9,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.views.onboarding.Onboardi
 import java.util.*
 import kotlin.concurrent.schedule
 
+
 class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
