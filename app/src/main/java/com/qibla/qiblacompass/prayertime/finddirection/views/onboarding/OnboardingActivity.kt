@@ -1,18 +1,14 @@
 package com.qibla.qiblacompass.prayertime.finddirection.views.onboarding
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Window
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.qibla.qiblacompass.prayertime.finddirection.BaseActivity
+import com.qibla.qiblacompass.prayertime.finddirection.base.BaseActivity
 import com.qibla.qiblacompass.prayertime.finddirection.R
-import com.qibla.qiblacompass.prayertime.finddirection.SplashActivity
 import com.qibla.qiblacompass.prayertime.finddirection.views.login.LoginActivity
 
 class OnboardingActivity : BaseActivity() {
