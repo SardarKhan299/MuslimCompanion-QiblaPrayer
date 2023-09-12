@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MuslimCompanionQiblaPrayer">
         <activity
-            android:name=".views.onboarding.OnboardingActivity"
+            android:name=".presentation.views.onboarding.OnboardingActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".views.login.LoginActivity"
+            android:name=".presentation.views.login.LoginActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".presentation.views.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.qibla.qiblacompass.prayertime.finddirection.views.login
+package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login
 
 import android.os.Bundle
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseActivity

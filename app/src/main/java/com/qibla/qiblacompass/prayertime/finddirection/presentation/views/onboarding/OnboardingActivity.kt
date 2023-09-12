@@ -1,4 +1,4 @@
-package com.qibla.qiblacompass.prayertime.finddirection.views.onboarding
+package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.onboarding
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseActivity
 import com.qibla.qiblacompass.prayertime.finddirection.R
-import com.qibla.qiblacompass.prayertime.finddirection.views.login.LoginActivity
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login.LoginActivity
 
 class OnboardingActivity : BaseActivity() {
     var indicator = 1

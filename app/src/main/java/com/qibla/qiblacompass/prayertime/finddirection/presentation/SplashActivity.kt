@@ -1,9 +1,10 @@
-package com.qibla.qiblacompass.prayertime.finddirection
+package com.qibla.qiblacompass.prayertime.finddirection.presentation.views
 
 import android.content.Intent
 import android.os.Bundle
+import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseActivity
-import com.qibla.qiblacompass.prayertime.finddirection.views.onboarding.OnboardingActivity
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.onboarding.OnboardingActivity
 import java.util.*
 import kotlin.concurrent.schedule
 
