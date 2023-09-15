@@ -1,8 +1,12 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.qibla.qiblacompass.prayertime.finddirection.common.NetworkResult
+import com.qibla.qiblacompass.prayertime.finddirection.data.remote.dto.ApiDto
 import com.qibla.qiblacompass.prayertime.finddirection.domain.usecase.GetNamazTimeUsecase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -13,39 +17,30 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(val usecase: GetNamazTimeUsecase):ViewModel() {
 
-    /*private fun getNamazTimings(){
-        usecase.namazTimeLiveData
-    }*/
-
-    private val countDownFlow = flow<Int> {
-         val startValue = 10
-        var currentValue = startValue
-        emit(startValue)
-        while (currentValue>0){
-            delay(1000)
-            currentValue--
-            emit(currentValue)
-        }
-    }
     init {
-        collectFlow()
+        getNamazTimings()
     }
 
-    private fun collectFlow(){
-        viewModelScope.launch {
-            val count = countDownFlow.filter { time->
-                time%2==0
-            }.map { time->
-                time*time
-            }.onEach {
-                print(it)
+    val state: LiveData<MainActivityState>
+        get() = _state
+
+    private val _state = MutableLiveData<MainActivityState>()
+
+    private fun getNamazTimings(){
+        usecase().onEach { result->
+            when(result){
+                is NetworkResult.Success->{
+                    _state.value = MainActivityState(timings = result.data as List<ApiDto>)
+                }
+                is NetworkResult.Loading->{
+                    _state.value = MainActivityState(isLoading = true)
+                }
+                is NetworkResult.Error->{
+                    _state.value = MainActivityState(error = result.messageCode.toString())
+                }
             }
-            print(count)
-//            countDownFlow.collect{ time->
-//                Log.d(MainViewModel::class.simpleName, "collectFlow: $time)
-//            }
-
-        }
+        }.launchIn(viewModelScope)
     }
+
 
 }

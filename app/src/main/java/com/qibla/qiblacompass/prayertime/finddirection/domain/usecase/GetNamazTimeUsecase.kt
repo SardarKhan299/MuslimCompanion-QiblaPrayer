@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class GetNamazTimeUsecase @Inject constructor(private val repository: MainRepository) {
-    suspend operator fun invoke() = flow<NetworkResult<List<ApiDto>>>{
+     operator fun invoke() = flow<NetworkResult<List<ApiDto>>>{
         try {
             emit(NetworkResult.Loading())
             val timings = repository.getNamazTimings()
