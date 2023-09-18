@@ -8,5 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary_color">#2D6D5F</color>
-
+    <color name="secondary_color">#ECE9DB</color>
+    <color name="log_text_color">#4B5768</color>
+    <color name="toolbar_image_color">#402D6D5F</color>
 </resources>
