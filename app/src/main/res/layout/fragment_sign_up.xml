@@ -36,9 +36,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_signUp_compass"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_80sdp"
-            android:layout_marginTop="16dp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:src="@drawable/ic_compass"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
             app:layout_constraintHorizontal_bias="0.516"
@@ -60,7 +60,7 @@
             style="@style/heading_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_18sdp"
             android:text="@string/sign_up"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toBottomOf="@+id/tv_signUp_qibla_compass" />
@@ -69,10 +69,12 @@
             android:id="@+id/layoutTextInputMobileSignUp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toBottomOf="@+id/tv_signUp">
@@ -96,6 +98,8 @@
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toBottomOf="@+id/layoutTextInputMobileSignUp">
@@ -120,6 +124,8 @@
             app:endIconDrawable="@drawable/ic_password_toggle"
             app:endIconMode="password_toggle"
             app:errorEnabled="true"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toBottomOf="@+id/layoutTextInputEmail">
@@ -147,6 +153,8 @@
             app:endIconDrawable="@drawable/ic_password_toggle"
             app:endIconMode="password_toggle"
             app:errorEnabled="true"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toBottomOf="@+id/layoutTextInputPassword">
@@ -196,7 +204,6 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:background="@drawable/button_backgrund"
-            app:layout_constraintBottom_toTopOf="@+id/guideline_signUp_bottom"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toBottomOf="@+id/tv_sign_up_with" />
@@ -227,20 +234,21 @@
             app:layout_constraintStart_toStartOf="@+id/view_sign_up"
             app:layout_constraintTop_toTopOf="@+id/view_sign_up"
             app:layout_constraintVertical_bias="0.769" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_already_account"
             style="@style/login_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_34sdp"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/already_have_an_account"
             app:layout_constraintBottom_toTopOf="@+id/guideline_signUp_bottom"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toBottomOf="@+id/view_sign_up" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_account_signUp"
+            android:id="@+id/tv_account_loginIn"
             style="@style/skip_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

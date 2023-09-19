@@ -28,7 +28,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
         binding.btnLogin.setOnClickListener {
             Log.d("LoginFragment" ,"onViewCreated:Login Button Clicked. ")
-         //   Navigation.findNavController(requireView()).navigate(R.id.signUpFragment)
+
+        }
+        binding.tvAccountSignUp.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.signUpFragment)
 
         }
     }

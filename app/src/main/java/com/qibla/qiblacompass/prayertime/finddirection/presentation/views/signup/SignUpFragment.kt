@@ -5,22 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentSignUpBinding
 
 
-class SignUpFragment : Fragment() {
+class SignUpFragment :BaseFragment<FragmentSignUpBinding>(R.layout.fragment_sign_up) {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            signUpFragment =this@SignUpFragment
+        }
+        binding.tvAccountLoginIn.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.loginFragment)
+        }
+        binding.btnSignUp.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.loginFragment)
+        }
     }
 }
