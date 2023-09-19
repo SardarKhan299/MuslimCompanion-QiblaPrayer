@@ -1,21 +1,20 @@
-package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login
+package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.qibla.qiblacompass.prayertime.finddirection.base.BaseActivity
 import com.qibla.qiblacompass.prayertime.finddirection.R
 
-class LoginActivity : BaseActivity() {
+class DashBoardActivity : AppCompatActivity() {
     private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_dash_board)
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.nav_host_dash_board_fragment) as NavHostFragment
         navController = navHostFragment.navController
         setupActionBarWithNavController(navController)
     }
@@ -26,12 +25,8 @@ class LoginActivity : BaseActivity() {
 
     override fun onBackPressed() {
         when (navController.currentDestination?.id) {
-            R.id.loginFragment -> {
-                Log.d(LoginActivity::class.simpleName, "onBackPressed: Finish")
-                finish()
-            }
-            R.id.signUpFragment -> {
-                Log.d(LoginActivity::class.simpleName, "onBackPressed: Appointment Finish")
+            R.id.dashBoardFragment -> {
+                Log.d(DashBoardActivity::class.simpleName, "onBackPressed: Finish")
                 finish()
             }
             else -> {
