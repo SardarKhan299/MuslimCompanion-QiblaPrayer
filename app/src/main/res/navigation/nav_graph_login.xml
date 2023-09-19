@@ -5,9 +5,10 @@
     android:id="@+id/nav_graph_login"
     app:startDestination="@id/loginFragment">
 
+
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.asanaboard.login.LoginFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login.LoginFragment"
+        android:label="LoginFragment" />
 </navigation>
