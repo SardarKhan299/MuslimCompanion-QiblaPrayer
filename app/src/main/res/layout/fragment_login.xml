@@ -36,9 +36,9 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_login_compass"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:src="@drawable/ic_compass"
         app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
         app:layout_constraintHorizontal_bias="0.498"
@@ -60,7 +60,8 @@
         style="@style/heading_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:layout_marginStart="@dimen/_4sdp"
         android:text="@string/login"
         app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
         app:layout_constraintTop_toBottomOf="@+id/tv_login_qibla_compass" />
@@ -73,6 +74,8 @@
         app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:helperTextEnabled="true"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
         app:layout_constraintTop_toBottomOf="@+id/tv_login">
@@ -96,6 +99,8 @@
         app:endIconDrawable="@drawable/ic_password_toggle"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
         app:layout_constraintTop_toBottomOf="@+id/layoutTextInputMobile">
@@ -209,7 +214,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view_login" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_account_login"
+        android:id="@+id/tv_account_signUp"
         style="@style/skip_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
