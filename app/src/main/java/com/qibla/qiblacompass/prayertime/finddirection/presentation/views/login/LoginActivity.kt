@@ -30,10 +30,10 @@ class LoginActivity : BaseActivity() {
                 Log.d(LoginActivity::class.simpleName, "onBackPressed: Finish")
                 finish()
             }
-            R.id.signUpFragment -> {
-                Log.d(LoginActivity::class.simpleName, "onBackPressed: Appointment Finish")
-                finish()
-            }
+//            R.id.signUpFragment -> {
+//                Log.d(AuthActivity::class.simpleName, "onBackPressed: Appointment Finish")
+//                finish()
+//            }
             else -> {
                 onBackPressedDispatcher.onBackPressed()
             }
