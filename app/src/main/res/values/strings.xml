@@ -6,4 +6,18 @@
     <string name="test">Lorem ipsum dolor sit amet, consectetur adipiscing elit</string>
     <string name="prayer_timing">Prayer Timing</string>
     <string name="holy_quran">Holy Quran</string>
+    <string name="previous">Previous</string>
+    <string name="login">Login</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="forgot_password_">Forgot Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="log_in_with">or log in with</string>
+    <string name="sign_up_with">or sign up with</string>
+    <string name="google">Google</string>
+    <string name="don_t_have_an_account_sign_up">Don’t have an Account?</string>
+    <string name="already_have_an_account">Already have an Account? </string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email</string>
 </resources>
