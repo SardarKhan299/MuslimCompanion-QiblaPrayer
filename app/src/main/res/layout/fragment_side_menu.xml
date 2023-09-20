@@ -83,6 +83,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_8sdp"
+        android:onClick="@{()->sideMenuFragment.gotoUpdateAccountSettings()}"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
@@ -104,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
-        android:text="@string/account_setting"
+        android:text="@string/account_settings"
         app:layout_constraintBottom_toBottomOf="@+id/img_account"
         app:layout_constraintStart_toEndOf="@+id/img_account"
         app:layout_constraintTop_toTopOf="@+id/img_account" />
