@@ -83,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="tv_profile_name,img_profile_image,view_toolbar"
+        app:constraint_referenced_ids="tv_profile_name,img_profile_image,view_toolbar,img_toolbar_back_icon"
         app:layout_constraintStart_toStartOf="parent"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
