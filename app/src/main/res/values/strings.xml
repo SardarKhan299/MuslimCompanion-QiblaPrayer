@@ -23,10 +23,13 @@
     <string name="my_location">My Location</string>
     <string name="profile_name">Profile Name</string>
     <string name="profile">Profile</string>
-    <string name="account_setting">Account Setting</string>
+    <string name="account_settings">Account Setting</string>
     <string name="about_us">About Us</string>
     <string name="share_app">Share App</string>
     <string name="rate_us">Rate Us</string>
     <string name="logout">Logout</string>
+    <string name="prayer_notifications">Prayer Notifications</string>
+    <string name="bio_metric">Bio-metric</string>
+    <string name="security">Security</string>
 
 </resources>
