@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="signUpFragment"
+            type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.signup.SignUpFragment" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_signUp_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".signUp.SignUpFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_signUp_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_signUp_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_signUp_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.96" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_signUp_compass"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:src="@drawable/ic_compass"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
+            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_signUp_qibla_compass"
+            style="@style/qibla_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qibla_compass"
+            app:layout_constraintEnd_toEndOf="@+id/img_signUp_compass"
+            app:layout_constraintStart_toStartOf="@+id/img_signUp_compass"
+            app:layout_constraintTop_toBottomOf="@+id/img_signUp_compass" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_signUp"
+            style="@style/heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:text="@string/sign_up"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signUp_qibla_compass" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutTextInputMobileSignUp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signUp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_signUp_mobile_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_transparent"
+                android:ems="10"
+                android:hint="@string/mobile_number"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:maxLength="20" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutTextInputEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTextInputMobileSignUp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_signUp_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_transparent"
+                android:ems="10"
+                android:hint="@string/email"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:maxLength="20" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutTextInputPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:endIconDrawable="@drawable/ic_password_toggle"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="true"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTextInputEmail">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_signUp_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_transparent"
+                android:drawablePadding="@dimen/_4sdp"
+                android:ems="10"
+                android:hint="@string/password"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:textAlignment="viewStart" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutTextInputConfirmPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:endIconDrawable="@drawable/ic_password_toggle"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="true"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTextInputPassword">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_transparent"
+                android:drawablePadding="@dimen/_4sdp"
+                android:ems="10"
+                android:hint="@string/confirm_password"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:textAlignment="viewStart" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sign_up"
+            style="@style/button_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/button_bg"
+            android:text="@string/sign_up"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTextInputConfirmPassword" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_sign_up_with"
+            style="@style/log_in_with_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@string/sign_up_with"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
+            app:layout_constraintTop_toBottomOf="@+id/btn_sign_up" />
+
+        <View
+            android:id="@+id/view_sign_up"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/button_backgrund"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sign_up_with" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_google"
+            style="@style/forgot_password_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:gravity="center"
+            android:text="@string/google"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/img_sign_up_google_logo"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
+            app:layout_constraintHorizontal_bias="0.028"
+            app:layout_constraintStart_toEndOf="@+id/img_sign_up_google_logo"
+            app:layout_constraintTop_toTopOf="@+id/img_sign_up_google_logo"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_sign_up_google_logo"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_100sdp"
+            android:src="@drawable/google_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/view_sign_up"
+            app:layout_constraintStart_toStartOf="@+id/view_sign_up"
+            app:layout_constraintTop_toTopOf="@+id/view_sign_up"
+            app:layout_constraintVertical_bias="0.769" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_already_account"
+            style="@style/login_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_34sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/already_have_an_account"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_signUp_bottom"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
+            app:layout_constraintTop_toBottomOf="@+id/view_sign_up" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_account_loginIn"
+            style="@style/skip_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/login"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_already_account"
+            app:layout_constraintStart_toEndOf="@+id/tv_already_account"
+            app:layout_constraintTop_toTopOf="@+id/tv_already_account" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
