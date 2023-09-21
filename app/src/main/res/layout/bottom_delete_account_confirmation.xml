@@ -73,17 +73,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radio_group_delete_account" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+<!--    <androidx.appcompat.widget.AppCompatEditText-->
+<!--        android:id="@+id/edt_reason_to_delete_account"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/_8sdp"-->
+<!--        android:layout_marginTop="@dimen/_8sdp"-->
+<!--        android:layout_marginEnd="@dimen/_8sdp"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/tv_how_improve"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/tv_how_improve"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_how_improve" />-->
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edt_reason_to_delete_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        app:boxBackgroundMode="outline"
+        android:layout_marginStart="@dimen/_6sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         app:layout_constraintEnd_toEndOf="@+id/tv_how_improve"
         app:layout_constraintStart_toStartOf="@+id/tv_how_improve"
-        app:layout_constraintTop_toBottomOf="@+id/tv_how_improve" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_how_improve">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/feedbackEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cancel_button_bg"
+            android:inputType="textMultiLine"
+            android:maxLines="5" />
+    </com.google.android.material.textfield.TextInputLayout>
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_security_delete_account"
         android:layout_width="match_parent"
@@ -95,7 +113,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_delete_account_cancel"
         android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:background="@drawable/cancel_button_bg"
@@ -111,7 +129,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_delete_account_continue"
         android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:background="@drawable/button_bg"

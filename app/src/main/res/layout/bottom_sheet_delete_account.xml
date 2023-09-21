@@ -31,7 +31,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_delete_cancel"
         android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/cancel_button_bg"
@@ -47,7 +47,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_delete_account"
         android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:text="@string/delete"
