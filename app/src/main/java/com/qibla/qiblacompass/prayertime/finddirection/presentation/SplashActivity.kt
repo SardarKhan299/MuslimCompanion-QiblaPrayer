@@ -13,7 +13,7 @@ class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        Timer("splash", false).schedule(3000) {
+        Timer("splash", false).schedule(6000) {
             startActivity(Intent(this@SplashActivity, OnboardingActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
