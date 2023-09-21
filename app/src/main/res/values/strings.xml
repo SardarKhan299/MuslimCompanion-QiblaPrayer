@@ -38,6 +38,8 @@
     <string name="deleting_account">Why are you deleting your account?</string>
     <string name="continue_btn">Continue</string>
     <string name="cancel">Cancel</string>
-
-
+    <string name="account_to_delete">Deleting your account will do the \n following:</string>
+    <string name="deleting_your_account">\u2022Log you out on all devices\n
+\u2022Delete all of your account information</string>
+    <string name="delete">Delete</string>
 </resources>

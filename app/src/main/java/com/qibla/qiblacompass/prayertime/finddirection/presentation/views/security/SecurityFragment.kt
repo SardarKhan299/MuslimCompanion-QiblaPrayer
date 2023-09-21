@@ -76,6 +76,7 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>(R.layout.fragment
             }
         }
         btnContinue.setOnClickListener {
+          showBottomSheetDeleteInfo()
             bottomSheetDialog.dismiss()
 
         }
@@ -85,5 +86,17 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>(R.layout.fragment
         }
 
 
+    }
+    private fun showBottomSheetDeleteInfo() {
+        val bottomSheetView =
+            View.inflate(requireContext(), R.layout.bottom_sheet_delete_account, null)
+        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        bottomSheetDialog.setContentView(bottomSheetView)
+     val cancelButton :Button = bottomSheetView.findViewById(R.id.btn_delete_cancel)
+        val deleteButton : Button = bottomSheetView.findViewById(R.id.btn_delete_account)
+        cancelButton.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+        bottomSheetDialog.show()
     }
 }

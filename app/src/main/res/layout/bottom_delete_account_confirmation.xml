@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_bottom_sheet_select_doctor"
+    android:id="@+id/layout_bottom_sheet_delete_account_confirmation"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_bg"
@@ -32,6 +32,7 @@
             android:id="@+id/radioBtn_reason_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/delete_all_info_text_style"
             android:buttonTint="@color/primary_color"
             android:text="I don’t need it anymore" />
 
@@ -39,6 +40,7 @@
             android:id="@+id/radioBtn_reason_two"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/delete_all_info_text_style"
             android:buttonTint="@color/primary_color"
             android:text="It’s too expensive" />
 
@@ -46,6 +48,7 @@
             android:id="@+id/radioBtn_reason_three"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/delete_all_info_text_style"
             android:buttonTint="@color/primary_color"
             android:text="I’m switching to other app" />
 
@@ -53,6 +56,7 @@
             android:id="@+id/radioBtn_reason_four"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/delete_all_info_text_style"
             android:buttonTint="@color/primary_color"
             android:text="Other" />
 
@@ -95,13 +99,8 @@
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:background="@drawable/cancel_button_bg"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
         android:text="@string/cancel"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/primary_color"
-        android:textSize="@dimen/_14sdp"
+        style="@style/cancel_button_style"
         android:layout_marginBottom="@dimen/_20sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_delete_account_continue"
@@ -116,13 +115,8 @@
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:background="@drawable/button_bg"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
         android:text="@string/continue_btn"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_14sdp"
+        style="@style/continue_button_style"
         app:layout_constraintBottom_toBottomOf="@+id/btn_delete_account_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
