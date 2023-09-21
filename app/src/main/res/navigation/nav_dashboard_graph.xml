@@ -27,5 +27,14 @@
         android:id="@+id/accountSettingsFragment"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.accountsettings.AccountSettingsFragment"
         android:label="fragment_account_settings"
-        tools:layout="@layout/fragment_account_settings" />
+        tools:layout="@layout/fragment_account_settings" >
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_securityFragment"
+            app:destination="@id/securityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/securityFragment"
+        tools:layout="@layout/fragment_security"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.security.SecurityFragment"
+        android:label="SecurityFragment" />
 </navigation>

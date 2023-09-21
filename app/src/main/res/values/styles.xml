@@ -117,4 +117,10 @@
         <item name="android:includeFontPadding">false</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
+    <style name="delete_account_text_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textColor">@color/delete_account_text_color</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
 </resources>

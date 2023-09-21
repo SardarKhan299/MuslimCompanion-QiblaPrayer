@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
@@ -32,5 +33,9 @@ class AccountSettingsFragment :
         binding.toolbarAccountSettings.viewSubScreen.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
+
+    }
+    fun gotoSecurityScreen(){
+        findNavController().navigate(R.id.securityFragment)
     }
 }

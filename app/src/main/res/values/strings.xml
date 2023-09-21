@@ -31,5 +31,10 @@
     <string name="prayer_notifications">Prayer Notifications</string>
     <string name="bio_metric">Bio-metric</string>
     <string name="security">Security</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="new_password">New Password</string>
+    <string name="update">Update</string>
+    <string name="delete_account">Delete Account</string>
+
 
 </resources>

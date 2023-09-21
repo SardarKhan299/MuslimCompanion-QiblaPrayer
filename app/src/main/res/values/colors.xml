@@ -11,4 +11,6 @@
     <color name="secondary_color">#ECE9DB</color>
     <color name="log_text_color">#4B5768</color>
     <color name="toolbar_image_color">#402D6D5F</color>
+    <color name="delete_account_text_color">#FF4747</color>
+    <color name="bottom_bar_bg">#FFFFFF</color>
 </resources>
