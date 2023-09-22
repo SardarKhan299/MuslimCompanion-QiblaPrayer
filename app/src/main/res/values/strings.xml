@@ -23,7 +23,7 @@
     <string name="my_location">My Location</string>
     <string name="profile_name">Profile Name</string>
     <string name="profile">Profile</string>
-    <string name="account_settings">Account Setting</string>
+    <string name="account_settings">Account Settings</string>
     <string name="about_us">About Us</string>
     <string name="share_app">Share App</string>
     <string name="rate_us">Rate Us</string>
@@ -52,5 +52,6 @@
     <string name="check_for_updates">Check for updates</string>
     <string name="update_available">Update Available</string>
     <string name="twitter">Twitter</string>
-
+    <string name="title_verify_biometric">Verify your identity</string>
+    <string name="message_confirm_biometric">Confirm your identity so we can verify it\'s you</string>
 </resources>

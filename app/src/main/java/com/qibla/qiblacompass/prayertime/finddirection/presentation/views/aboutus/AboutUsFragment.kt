@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentAboutUsBinding
 
@@ -28,8 +29,10 @@ class AboutUsFragment : BaseFragment<FragmentAboutUsBinding>(R.layout.fragment_a
             aboutUsFragment = this@AboutUsFragment
         }
         binding.toolbarAboutUs.groupToolbarSubScreenProfile.visibility = View.VISIBLE
-        binding.toolbarAboutUs.tvToolbarSubScreen.text = "About Us"
-
+        binding.toolbarAboutUs.tvToolbarSubScreen.text = getString(R.string.about_us)
+        binding.toolbarAboutUs.viewSubScreen.setOnClickListener {
+            findNavController().closeCurrentScreen()
+        }
 
     }
 

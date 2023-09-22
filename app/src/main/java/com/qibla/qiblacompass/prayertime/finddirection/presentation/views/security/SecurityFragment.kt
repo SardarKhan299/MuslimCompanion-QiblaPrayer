@@ -1,13 +1,19 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.security
 
+import android.app.Activity
 import android.content.Intent
+import android.hardware.biometrics.BiometricManager
+import android.hardware.biometrics.BiometricPrompt
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.Group
 import androidx.navigation.fragment.findNavController
@@ -23,7 +29,6 @@ import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.Splash
 
 
 class SecurityFragment : BaseFragment<FragmentSecurityBinding>(R.layout.fragment_security) {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,4 +131,6 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>(R.layout.fragment
         }
         bottomSheetDialog.show()
     }
+
+
 }
