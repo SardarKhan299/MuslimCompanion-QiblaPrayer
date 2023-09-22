@@ -133,12 +133,13 @@
         app:layout_constraintEnd_toEndOf="@+id/layoutTextInputPassword"
         app:layout_constraintTop_toTopOf="@+id/checkBox_login" />
 
-    <CheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkBox_login"
         style="@style/forgot_password_text_style"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
         android:text="@string/remember_me"
+        android:button="@drawable/check_box_custom_bg"
         app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
         app:layout_constraintTop_toBottomOf="@+id/layoutTextInputPassword" />
 

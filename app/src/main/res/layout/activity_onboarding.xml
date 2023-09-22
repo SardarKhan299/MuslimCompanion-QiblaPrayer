@@ -6,24 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".presentation.views.onboarding.OnboardingActivity">
 
-    <TextView
-        style="@style/splash_text"
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_skip"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/skip"
-        android:padding="@dimen/_8sdp"
+        style="@style/skip_text_style"
+        android:padding="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_8sdp"
         />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_onboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/splash_icon"
+        android:src="@drawable/img_qibla"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.244" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         style="@style/onboard_text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
         />
 
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_onboard_desc"
         style="@style/onboard_text_desc"
         android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_onboard_title" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_onboard_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

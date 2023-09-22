@@ -115,6 +115,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_8sdp"
+        android:onClick="@{()->sideMenuFragment.gotoUpdateAboutUsScreen()}"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"

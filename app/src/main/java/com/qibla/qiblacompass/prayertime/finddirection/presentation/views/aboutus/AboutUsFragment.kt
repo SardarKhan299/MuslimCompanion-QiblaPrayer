@@ -1,7 +1,6 @@
-package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.sidemenu
+package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.aboutus
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,39 +9,32 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
-import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
-import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentSideMenuBinding
+import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentAboutUsBinding
 
 
-class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment_side_menu) {
+class AboutUsFragment : BaseFragment<FragmentAboutUsBinding>(R.layout.fragment_about_us) {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(SideMenuFragment::class.simpleName, "onCreate: ")
         (activity as AppCompatActivity?)?.hideActionBar()
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            sideMenuFragment = this@SideMenuFragment
+            aboutUsFragment = this@AboutUsFragment
         }
-        binding.toolbarSideMenu.groupToolbarProfile.visibility = View.VISIBLE
-        binding.toolbarSideMenu.groupToolbar.visibility = View.GONE
-        binding.toolbarSideMenu.viewToolbar.setOnClickListener {
-            findNavController().closeCurrentScreen()
-        }
+        binding.toolbarAboutUs.groupToolbarSubScreenProfile.visibility = View.VISIBLE
+        binding.toolbarAboutUs.tvToolbarSubScreen.text = "About Us"
+
 
     }
 
     fun gotoUpdateAccountSettings() {
         findNavController().navigate(R.id.accountSettingsFragment)
-    }
-
-    fun gotoUpdateAboutUsScreen() {
-        findNavController().navigate(R.id.aboutUsFragment)
 
     }
 }
