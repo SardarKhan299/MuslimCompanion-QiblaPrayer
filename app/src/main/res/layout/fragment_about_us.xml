@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="aboutUsFragment"
+            type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.aboutus.AboutUsFragment" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+   android:id="@+id/layout_about_us_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.views.aboutus.AboutUsFragment">
+
+    <include
+        android:id="@+id/toolbar_about_us"
+        layout="@layout/layout_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_about_us_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_about_us_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.96" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_about_us_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_about_us_compass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:src="@drawable/ic_compass"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_about_us" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/version"
+        style="@style/version_text_style"
+        app:layout_constraintEnd_toEndOf="@+id/img_about_us_compass"
+        app:layout_constraintStart_toStartOf="@+id/img_about_us_compass"
+        app:layout_constraintTop_toBottomOf="@+id/img_about_us_compass" />
+    <View
+        android:id="@+id/view_about_us_privacy"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
+        app:layout_constraintTop_toBottomOf="@+id/tv_version" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_privacy_policy"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:src="@drawable/ic_privacy_policy"
+        app:layout_constraintBottom_toBottomOf="@+id/view_about_us_privacy"
+        app:layout_constraintStart_toStartOf="@+id/view_about_us_privacy"
+        app:layout_constraintTop_toTopOf="@+id/view_about_us_privacy"
+        app:layout_constraintVertical_bias="0.487" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_privacy_policy"
+        style="@style/side_menu_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/privacy_policy"
+        app:layout_constraintBottom_toBottomOf="@+id/img_privacy_policy"
+        app:layout_constraintStart_toEndOf="@+id/img_privacy_policy"
+        app:layout_constraintTop_toTopOf="@+id/img_privacy_policy" />
+    <View
+        android:id="@+id/view_about_us_terms_conditions"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:onClick="@{()->aboutUsFragment.gotoUpdateAccountSettings()}"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
+        app:layout_constraintTop_toBottomOf="@+id/view_about_us_privacy" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_terms_conditions"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:src="@drawable/ic_terms_and_conditions"
+        app:layout_constraintBottom_toBottomOf="@+id/view_about_us_terms_conditions"
+        app:layout_constraintStart_toStartOf="@+id/view_about_us_terms_conditions"
+        app:layout_constraintTop_toTopOf="@+id/view_about_us_terms_conditions"
+        app:layout_constraintVertical_bias="0.487" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_terms_conditions"
+        style="@style/side_menu_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/terms_and_conditions"
+        app:layout_constraintBottom_toBottomOf="@+id/img_terms_conditions"
+        app:layout_constraintStart_toEndOf="@+id/img_terms_conditions"
+        app:layout_constraintTop_toTopOf="@+id/img_terms_conditions" />
+    <View
+        android:id="@+id/view_about_us_facebook"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
+        app:layout_constraintTop_toBottomOf="@+id/view_about_us_terms_conditions" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_facebook"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:src="@drawable/ic_facebook"
+        app:layout_constraintBottom_toBottomOf="@+id/view_about_us_facebook"
+        app:layout_constraintStart_toStartOf="@+id/view_about_us_facebook"
+        app:layout_constraintTop_toTopOf="@+id/view_about_us_facebook"
+        app:layout_constraintVertical_bias="0.487" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_facebook"
+        style="@style/side_menu_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/facebook"
+        app:layout_constraintBottom_toBottomOf="@+id/img_facebook"
+        app:layout_constraintStart_toEndOf="@+id/img_facebook"
+        app:layout_constraintTop_toTopOf="@+id/img_facebook" />
+    <View
+        android:id="@+id/view_about_us_linked_in"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
+        app:layout_constraintTop_toBottomOf="@+id/view_about_us_facebook" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_linked_in"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:src="@drawable/ic_linkedin"
+        app:layout_constraintBottom_toBottomOf="@+id/view_about_us_linked_in"
+        app:layout_constraintStart_toStartOf="@+id/view_about_us_linked_in"
+        app:layout_constraintTop_toTopOf="@+id/view_about_us_linked_in"
+        app:layout_constraintVertical_bias="0.487" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_linked_in"
+        style="@style/side_menu_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/linkedin"
+        app:layout_constraintBottom_toBottomOf="@+id/img_linked_in"
+        app:layout_constraintStart_toEndOf="@+id/img_linked_in"
+        app:layout_constraintTop_toTopOf="@+id/img_linked_in" />
+
+    <View
+        android:id="@+id/view_about_us_twitter"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
+        app:layout_constraintTop_toBottomOf="@+id/view_about_us_linked_in" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_twitter"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:src="@drawable/ic_twitter"
+        app:layout_constraintBottom_toBottomOf="@+id/view_about_us_twitter"
+        app:layout_constraintStart_toStartOf="@+id/view_about_us_twitter"
+        app:layout_constraintTop_toTopOf="@+id/view_about_us_twitter"
+        app:layout_constraintVertical_bias="0.487" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_twitter"
+        style="@style/side_menu_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/twitter"
+        app:layout_constraintBottom_toBottomOf="@+id/img_twitter"
+        app:layout_constraintStart_toEndOf="@+id/img_twitter"
+        app:layout_constraintTop_toTopOf="@+id/img_twitter" />
+
+    <View
+        android:id="@+id/view_about_us_security_updates"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
+        app:layout_constraintTop_toBottomOf="@+id/view_about_us_twitter" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_security_updates"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_outline_security_update"
+        app:layout_constraintBottom_toBottomOf="@+id/view_about_us_security_updates"
+        app:layout_constraintStart_toStartOf="@+id/view_about_us_security_updates"
+        app:layout_constraintTop_toTopOf="@+id/view_about_us_security_updates"
+        app:layout_constraintVertical_bias="0.487" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_security_updates"
+        style="@style/side_menu_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:text="@string/check_for_updates"
+        app:layout_constraintBottom_toBottomOf="@+id/img_security_updates"
+        app:layout_constraintStart_toEndOf="@+id/img_security_updates"
+        app:layout_constraintTop_toTopOf="@+id/img_security_updates" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_about_us_update_available"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/update_available"
+        android:textSize="@dimen/_10sdp"
+        android:includeFontPadding="false"
+        android:textColor="#59000000"
+        app:layout_constraintEnd_toEndOf="@+id/tv_security_updates"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_security_updates"
+        app:layout_constraintTop_toBottomOf="@+id/tv_security_updates" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        style="@style/button_text_style"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_bg"
+        android:text="@string/update"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_security_updates"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
+        app:layout_constraintTop_toTopOf="@+id/img_security_updates" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

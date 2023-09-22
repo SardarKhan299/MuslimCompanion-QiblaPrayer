@@ -33,15 +33,15 @@ class OnboardingActivity : BaseActivity() {
         Log.d(OnboardingActivity::class.simpleName, "showNextScreenValues: $indicator")
         when(indicator){
             2->{
-                findViewById<ImageView>(R.id.iv_onboard).setImageDrawable(ContextCompat.getDrawable(this,R.drawable.splash_icon))
+                findViewById<ImageView>(R.id.iv_onboard).setImageDrawable(ContextCompat.getDrawable(this,R.drawable.img_pray))
                 findViewById<TextView>(R.id.tv_onboard_title).text = getString(R.string.prayer_timing)
-                findViewById<TextView>(R.id.tv_onboard_desc).text = ""
+                findViewById<TextView>(R.id.tv_onboard_desc).text = getString(R.string.test)
                 findViewById<ImageView>(R.id.iv_onboard_indicator).setImageResource(R.drawable.indicator2)
             }
             3->{
-                findViewById<ImageView>(R.id.iv_onboard).setImageDrawable(ContextCompat.getDrawable(this,R.drawable.splash_icon))
+                findViewById<ImageView>(R.id.iv_onboard).setImageDrawable(ContextCompat.getDrawable(this,R.drawable.img_holy_quran))
                 findViewById<TextView>(R.id.tv_onboard_title).text = getString(R.string.holy_quran)
-                findViewById<TextView>(R.id.tv_onboard_desc).text = ""
+                findViewById<TextView>(R.id.tv_onboard_desc).text = getString(R.string.test)
                 findViewById<ImageView>(R.id.iv_onboard_indicator).setImageResource(R.drawable.indicator3)
             }else->{
             Log.d(OnboardingActivity::class.simpleName, "showNextScreenValues: Value Not Matched...")
