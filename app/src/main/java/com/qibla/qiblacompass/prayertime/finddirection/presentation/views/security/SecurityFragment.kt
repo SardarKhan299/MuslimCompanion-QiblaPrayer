@@ -42,7 +42,7 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>(R.layout.fragment
             securityFragment = this@SecurityFragment
         }
         binding.toolbarSecurity.groupToolbarSubScreenProfile.visible()
-        binding.toolbarSecurity.tvToolbarSubScreen.text = "Security"
+        binding.toolbarSecurity.tvToolbarSubScreen.text = getString(R.string.security)
         binding.toolbarSecurity.viewSubScreen.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
