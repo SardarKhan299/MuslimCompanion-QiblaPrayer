@@ -44,5 +44,15 @@
         android:id="@+id/aboutUsFragment"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.aboutus.AboutUsFragment"
         android:label="About Us"
-        tools:layout="@layout/fragment_about_us" />
+        tools:layout="@layout/fragment_about_us" >
+        <action
+            android:id="@+id/action_aboutUsFragment_to_webViewUrlLoadFragment"
+            app:destination="@id/webViewUrlLoadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewUrlLoadFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.webViewUrlLoad.WebViewUrlLoadFragment"
+        android:label="WebViewUrlLoadFragment"
+        tools:layout="@layout/fragment_web_view_url_load"
+        />
 </navigation>

@@ -74,8 +74,9 @@
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_prayer_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_account_setting"
             app:layout_constraintEnd_toEndOf="@+id/view_notification_prayer"
             app:layout_constraintTop_toTopOf="@+id/tv_account_setting"
@@ -104,8 +105,9 @@
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_bio_metric"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_bio_metric"
             app:layout_constraintEnd_toStartOf="@+id/guideline_account_settings_right"
             app:layout_constraintTop_toTopOf="@+id/tv_bio_metric"
