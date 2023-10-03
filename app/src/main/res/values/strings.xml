@@ -55,5 +55,16 @@
     <string name="twitter">Twitter</string>
     <string name="title_verify_biometric">Verify your identity</string>
     <string name="message_confirm_biometric">Confirm your identity so we can verify it\'s you</string>
+    <string name="auto_detect">Auto Detect</string>
+    <string name="tuesday_17_august_28_muharram_1445">Tuesday, 17 August</string>
+    <string name="next_prayer_in">Next Prayer in</string>
+    <string name="_00_25_20">- 00:25:20</string>
+    <string name="muharram_1445">Muharram_1445</string>
+    <string name="asar">Asar</string>
+    <string name="_05_30_pm">05:30 PM</string>
+    <string name="surah_ikhlaas_ayah_01">Surah-Ikhlaas - Ayah 01</string>
+    <string name="ayat_of_the_day">Ayat of the Day</string>
+    <string name="ayat_name">قُلْ هُوَ ٱللَّهُ أَحَدٌ</string>
+    <string name="say_o_prophet_he_is_allah_one_and_indivisible_1">Say, ˹O Prophet,˺ “He is Allah—One ˹and Indivisible˺ (1)</string>
 
 </resources>

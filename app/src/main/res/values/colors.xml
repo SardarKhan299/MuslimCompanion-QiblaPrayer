@@ -13,4 +13,6 @@
     <color name="toolbar_image_color">#402D6D5F</color>
     <color name="delete_account_text_color">#FF4747</color>
     <color name="bottom_bar_bg">#FFFFFF</color>
+    <color name="border_color">#592D6D5F</color>
+    <color name="ayat_name_color">#59000000</color>
 </resources>
