@@ -2,26 +2,456 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="boardFragment"
             type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment" />
-
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_board_fragment"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".board.BoardFragment">
+        android:scrollbars="none">
 
-        <include
-            android:id="@+id/toolbar_board"
-            layout="@layout/layout_toolbar"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_board_fragment"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:background="@drawable/bg"
+            tools:context=".board.BoardFragment">
+
+            <include
+                android:id="@+id/toolbar_board"
+                layout="@layout/layout_toolbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_left_dashboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.02"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_right_dashboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.98" />
+
+            <View
+                android:id="@+id/view_auto_detect"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_30sdp"
+                app:layout_constraintStart_toStartOf="@+id/toolbar_board"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_board" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_auto_detect"
+                style="@style/auto_detect_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:text="@string/auto_detect"
+                app:layout_constraintBottom_toBottomOf="@+id/view_auto_detect"
+                app:layout_constraintStart_toStartOf="@id/view_auto_detect"
+                app:layout_constraintTop_toTopOf="@+id/view_auto_detect" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:src="@drawable/ic_down_solid"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_auto_detect"
+                app:layout_constraintStart_toEndOf="@+id/tv_auto_detect"
+                app:layout_constraintTop_toTopOf="@+id/tv_auto_detect" />
+
+            <View
+                android:id="@+id/view_dashboard"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_165sdp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dashboard_next_prayer_bg"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
+                app:layout_constraintTop_toBottomOf="@+id/view_auto_detect" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_dashboard_date_time"
+                style="@style/date_time_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/tuesday_17_august_28_muharram_1445"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
+                app:layout_constraintTop_toTopOf="@+id/view_dashboard" />
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="@dimen/_2sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:background="@drawable/white_bg"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_dashboard_date_time"
+                app:layout_constraintStart_toEndOf="@+id/tv_dashboard_date_time"
+                app:layout_constraintTop_toTopOf="@+id/tv_dashboard_date_time"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_islamic_month"
+                style="@style/date_time_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:text="@string/muharram_1445"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_dashboard_date_time"
+                app:layout_constraintStart_toEndOf="@+id/separator"
+                app:layout_constraintTop_toTopOf="@+id/tv_dashboard_date_time"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_next_prayer_time"
+                style="@style/next_prayer_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/next_prayer_in"
+                app:layout_constraintStart_toStartOf="@+id/view_dashboard"
+                app:layout_constraintTop_toBottomOf="@+id/tv_dashboard_date_time" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_counter_next_prayer_time"
+                style="@style/time_next_prayer_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="@string/_00_25_20"
+                app:layout_constraintStart_toStartOf="@+id/view_dashboard"
+                app:layout_constraintTop_toBottomOf="@+id/tv_next_prayer_time" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_prayer_time"
+                style="@style/prayer_time_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/asar"
+                app:layout_constraintStart_toStartOf="@+id/tv_counter_next_prayer_time"
+                app:layout_constraintTop_toBottomOf="@+id/tv_counter_next_prayer_time" />
+
+            <View
+                android:id="@+id/view_separator"
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:background="@drawable/white_bg"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_prayer_time"
+                app:layout_constraintStart_toEndOf="@+id/tv_prayer_time"
+                app:layout_constraintTop_toTopOf="@+id/tv_prayer_time"
+                app:layout_constraintVertical_bias="0.555" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView4"
+                style="@style/prayer_time_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:text="@string/_05_30_pm"
+                app:layout_constraintBottom_toBottomOf="@+id/view_separator"
+                app:layout_constraintStart_toEndOf="@+id/view_separator"
+                app:layout_constraintTop_toTopOf="@+id/view_separator" />
+
+            <View
+                android:id="@+id/view_bell_icon"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:background="@drawable/button_bg"
+                app:layout_constraintEnd_toEndOf="@+id/view_dashboard"
+                app:layout_constraintHorizontal_bias="0.662"
+                app:layout_constraintStart_toEndOf="@+id/tv_islamic_month"
+                app:layout_constraintTop_toTopOf="@+id/view_dashboard" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_bell_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/view_bell_icon"
+                app:layout_constraintEnd_toEndOf="@+id/view_bell_icon"
+                app:layout_constraintStart_toStartOf="@+id/view_bell_icon"
+                app:layout_constraintTop_toTopOf="@+id/view_bell_icon" />
+
+            <View
+                android:id="@+id/view_dashboard_atay_day"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_140sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/dashboard_view_border_bg"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
+                app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_ayat"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:src="@drawable/ic_ayat_quran"
+                app:layout_constraintStart_toStartOf="@+id/view_dashboard_atay_day"
+                app:layout_constraintTop_toTopOf="@+id/view_dashboard_atay_day" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title_ayat_of_day"
+                style="@style/ayat_of_date_title_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:text="@string/ayat_of_the_day"
+                app:layout_constraintBottom_toBottomOf="@+id/img_ayat"
+                app:layout_constraintStart_toEndOf="@+id/img_ayat"
+                app:layout_constraintTop_toTopOf="@+id/view_dashboard_atay_day" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_ayat_number"
+                style="@style/ayat_name_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/surah_ikhlaas_ayah_01"
+                app:layout_constraintEnd_toEndOf="@+id/tv_title_ayat_of_day"
+                app:layout_constraintStart_toStartOf="@+id/tv_title_ayat_of_day"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_ayat_of_day" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_share_ayat"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:src="@drawable/ic_share"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_ayat_number"
+                app:layout_constraintEnd_toEndOf="@+id/view_dashboard_atay_day"
+                app:layout_constraintTop_toTopOf="@+id/tv_title_ayat_of_day"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <View
+                android:id="@+id/view_separator_right"
+                android:layout_width="@dimen/_2sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:background="@drawable/view_separator"
+                app:layout_constraintBottom_toBottomOf="@+id/img_share_ayat"
+                app:layout_constraintEnd_toStartOf="@+id/img_share_ayat"
+                app:layout_constraintTop_toTopOf="@+id/img_share_ayat" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_download"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:src="@drawable/ic_download"
+                app:layout_constraintBottom_toBottomOf="@+id/img_share_ayat"
+                app:layout_constraintEnd_toStartOf="@+id/view_separator_right"
+                app:layout_constraintTop_toTopOf="@+id/img_share_ayat" />
+
+            <View
+                android:id="@+id/view_separator_bottom"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:background="@drawable/view_separator"
+                app:layout_constraintEnd_toEndOf="@+id/view_dashboard_atay_day"
+                app:layout_constraintStart_toStartOf="@+id/view_dashboard_atay_day"
+                app:layout_constraintTop_toBottomOf="@+id/tv_ayat_number" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_ayat_name"
+                style="@style/ayat_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@string/ayat_name"
+                app:layout_constraintEnd_toEndOf="@+id/view_dashboard_atay_day"
+                app:layout_constraintTop_toBottomOf="@+id/view_separator_bottom" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="1dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
+                app:layout_constraintTop_toBottomOf="@+id/tv_prayer_time" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_ayat_translation"
+                style="@style/ayat_translation_text_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@string/say_o_prophet_he_is_allah_one_and_indivisible_1"
+                app:layout_constraintEnd_toEndOf="@+id/view_dashboard_atay_day"
+                app:layout_constraintStart_toStartOf="@+id/view_dashboard_atay_day"
+                app:layout_constraintTop_toBottomOf="@+id/tv_ayat_name" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_qibla"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_90sdp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
+                app:layout_constraintTop_toBottomOf="@+id/view_dashboard_atay_day"
+                tools:listitem="@layout/item_qibla_layout" />
+
+            <View
+                android:id="@+id/view_ads"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_80sdp"
+                android:background="@drawable/button_bg"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
+                app:layout_constraintTop_toBottomOf="@+id/rv_qibla" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_ads"
+                style="@style/advertisement_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/advertisement_here"
+                app:layout_constraintBottom_toBottomOf="@+id/view_ads"
+                app:layout_constraintEnd_toEndOf="@+id/view_ads"
+                app:layout_constraintStart_toStartOf="@+id/view_ads"
+                app:layout_constraintTop_toTopOf="@+id/view_ads" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_prayer_timing_heading"
+                style="@style/alert_dialog_button_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/prayer_timings"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
+                app:layout_constraintTop_toBottomOf="@+id/view_ads" />
+
+            <include
+                android:id="@+id/layout_prayer_timing"
+                layout="@layout/layout_prayer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
+                app:layout_constraintTop_toBottomOf="@+id/tv_prayer_timing_heading" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_direction_heading"
+                style="@style/alert_dialog_button_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="Direction"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
+                app:layout_constraintTop_toBottomOf="@+id/layout_prayer_timing" />
+
+            <View
+                android:id="@+id/view_qibla_direction"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:background="@drawable/ic_qibla_direction"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
+                app:layout_constraintTop_toBottomOf="@+id/tv_direction_heading" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_heading_qibla"
+                style="@style/toolbar_title_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:text="@string/qibla_dir"
+                app:layout_constraintStart_toStartOf="@+id/view_qibla_direction"
+                app:layout_constraintTop_toTopOf="@+id/view_qibla_direction" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_direction_qibla"
+                style="@style/toolbar_title_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:text="@string/_265"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_heading_qibla"
+                app:layout_constraintStart_toEndOf="@+id/tv_heading_qibla"
+                app:layout_constraintTop_toTopOf="@+id/tv_heading_qibla" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_distance"
+                style="@style/qibla_direction_heading_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/distance"
+                app:layout_constraintStart_toStartOf="@+id/tv_heading_qibla"
+                app:layout_constraintTop_toBottomOf="@+id/tv_heading_qibla" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView3"
+                style="@style/toolbar_title_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:text="@string/_1628_km"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_distance"
+                app:layout_constraintStart_toEndOf="@+id/tv_distance"
+                app:layout_constraintTop_toTopOf="@+id/tv_distance" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_heading_location"
+                style="@style/qibla_direction_heading_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/location"
+                app:layout_constraintStart_toStartOf="@+id/tv_heading_qibla"
+                app:layout_constraintTop_toBottomOf="@+id/tv_distance" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+
+                style="@style/toolbar_title_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:text="@string/islamabad"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_heading_location"
+                app:layout_constraintStart_toEndOf="@+id/tv_heading_location"
+                app:layout_constraintTop_toTopOf="@+id/tv_heading_location" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </layout>

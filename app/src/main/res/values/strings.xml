@@ -55,5 +55,34 @@
     <string name="twitter">Twitter</string>
     <string name="title_verify_biometric">Verify your identity</string>
     <string name="message_confirm_biometric">Confirm your identity so we can verify it\'s you</string>
+    <string name="auto_detect">Auto Detect</string>
+    <string name="tuesday_17_august_28_muharram_1445">Tuesday, 17 August</string>
+    <string name="next_prayer_in">Next Prayer in</string>
+    <string name="_00_25_20">- 00:25:20</string>
+    <string name="muharram_1445">Muharram_1445</string>
+    <string name="asar">Asar</string>
+    <string name="_05_30_pm">05:30 PM</string>
+    <string name="surah_ikhlaas_ayah_01">Surah-Ikhlaas - Ayah 01</string>
+    <string name="ayat_of_the_day">Ayat of the Day</string>
+    <string name="ayat_name">قُلْ هُوَ ٱللَّهُ أَحَدٌ</string>
+    <string name="say_o_prophet_he_is_allah_one_and_indivisible_1">Say, ˹O Prophet,˺ “He is Allah—One ˹and Indivisible˺ (1)</string>
+    <string name="qibla">Qibla</string>
+    <string name="note">Note</string>
+    <string name="allow_location_text">Allow location for this application to show results more accurate such as Prayer timings, mosque location and Qaba direction.</string>
+    <string name="allow_location">Allow Location</string>
+    <string name="only_when_using_this_app">Only when using this app</string>
+    <string name="deny_location_access">Deny Location Access</string>
+    <string name="advertisement_here">Advertisement here</string>
+    <string name="prayer_timings">Prayer Timings</string>
+    <string name="isha">Isha</string>
+    <string name="_09_15_pm">09:15 PM</string>
+    <string name="maghrib">Maghrib</string>
+    <string name="_07_20_pm">07:20 PM</string>
+    <string name="_265">265°</string>
+    <string name="qibla_dir">Qibla:</string>
+    <string name="location">Location:</string>
+    <string name="_1628_km">1628 km</string>
+    <string name="distance">Distance:</string>
+    <string name="islamabad">Islamabad</string>
 
 </resources>
