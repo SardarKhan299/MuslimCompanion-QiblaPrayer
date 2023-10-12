@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
@@ -16,7 +18,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.sideme
 
 
 class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragment_dash_board) {
-
+    private lateinit var rView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +33,40 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         }
         binding.toolbarBoard.groupToolbarProfile.visibility = View.GONE
         binding.toolbarBoard.groupToolbar.visibility = View.VISIBLE
+        rView = binding.layoutBoardFragment.findViewById(R.id.rv_qibla)
         binding.toolbarBoard.imgToolbar.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.sideMenuFragment)
         }
+        rView.layoutManager = LinearLayoutManager(
+            requireContext(),
+            RecyclerView.HORIZONTAL, false
+        )
+        setUpQibla()
+    }
 
+    private fun setUpQibla() {
+        val data = ArrayList<QiblaData>()
+        data.add(QiblaData(R.drawable.ic_compass_frame, "Qibal"))
+        data.add(QiblaData(R.drawable.ic_zakat_frame, "Zakat"))
+        data.add(QiblaData(R.drawable.ic_name_frame, "Names"))
+        data.add(QiblaData(R.drawable.ic_tasbih_frame, "Tasbih"))
+        data.add(QiblaData(R.drawable.ic_prayer_frame, "Prayer"))
+        data.add(QiblaData(R.drawable.ic_quran_frame, "Quran"))
+        data.add(QiblaData(R.drawable.ic_makkah_frame, "Makkah Live"))
+        data.add(QiblaData(R.drawable.ic_near_me_frame, "Near me"))
+        data.add(QiblaData(R.drawable.ic_calendar_frame, "Hijri Calendar"))
+        data.add(QiblaData(R.drawable.ic_hathid, "Hadith"))
+
+
+        val adapter = QiblaAdapter(requireContext(), data,itemClickListenerCallback())
+        rView.adapter = adapter
+
+    }
+    private fun itemClickListenerCallback(): (QiblaData) -> Unit {
+        return {
+            Log.d(DashBoardFragment::class.simpleName, "ok_btn_callback:")
+
+        }
     }
 
 }

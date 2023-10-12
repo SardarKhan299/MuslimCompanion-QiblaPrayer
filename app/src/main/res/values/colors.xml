@@ -15,4 +15,6 @@
     <color name="bottom_bar_bg">#FFFFFF</color>
     <color name="border_color">#592D6D5F</color>
     <color name="ayat_name_color">#59000000</color>
+    <color name="alert_dialog_color">#FAF7EC</color>
+    <color name="heading_qibla_direction_text_color">#59000000</color>
 </resources>

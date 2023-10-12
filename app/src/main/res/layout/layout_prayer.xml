@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/horizontalscrollView"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+  <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/img_fajr_screen"
+      android:layout_width="@dimen/_65sdp"
+      android:layout_height="@dimen/_140sdp"
+      android:scaleType="fitXY"
+      android:src="@drawable/ic_fajr_dashboard"
+      app:layout_constraintEnd_toStartOf="@+id/img_zuhr_screen"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/tv_time_prayer"
+      style="@style/prayer_timing_text_style"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/_8sdp"
+      android:text="03:30 AM"
+      app:layout_constraintBottom_toBottomOf="@+id/img_fajr_screen"
+      app:layout_constraintEnd_toEndOf="@+id/img_fajr_screen"
+      app:layout_constraintStart_toStartOf="@+id/img_fajr_screen" />
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/appCompatTextView"
+      style="@style/title_prayer_text_style"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Fajr"
+      app:layout_constraintBottom_toTopOf="@+id/tv_time_prayer"
+      app:layout_constraintEnd_toEndOf="@+id/tv_time_prayer"
+      app:layout_constraintStart_toStartOf="@+id/tv_time_prayer" />
+
+  <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/img_zuhr_screen"
+      android:layout_width="@dimen/_65sdp"
+      android:layout_height="@dimen/_140sdp"
+      android:layout_marginStart="@dimen/_4sdp"
+      android:scaleType="fitXY"
+      android:src="@drawable/ic_zuhr_dashboard"
+      app:layout_constraintBottom_toBottomOf="@+id/img_fajr_screen"
+      app:layout_constraintEnd_toStartOf="@+id/img_asr_screen"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/img_fajr_screen"
+      app:layout_constraintTop_toTopOf="@+id/img_fajr_screen"
+      app:layout_constraintVertical_bias="0.0" />
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/tv_time_zuhr_prayer"
+      style="@style/prayer_timing_text_style"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/_8sdp"
+      android:text="01:30 PM"
+      app:layout_constraintBottom_toBottomOf="@+id/img_zuhr_screen"
+      app:layout_constraintEnd_toEndOf="@+id/img_zuhr_screen"
+      app:layout_constraintStart_toStartOf="@+id/img_zuhr_screen" />
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/tv_zuhar_time"
+      style="@style/title_prayer_text_style"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Zuhar"
+      app:layout_constraintBottom_toTopOf="@+id/tv_time_zuhr_prayer"
+      app:layout_constraintEnd_toEndOf="@+id/img_zuhr_screen"
+      app:layout_constraintStart_toStartOf="@+id/img_zuhr_screen" />
+
+  <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/img_asr_screen"
+      android:layout_width="@dimen/_65sdp"
+      android:layout_height="@dimen/_140sdp"
+      android:layout_marginStart="@dimen/_4sdp"
+      android:scaleType="fitXY"
+      android:src="@drawable/ic_asr_dashboard"
+      app:layout_constraintBottom_toBottomOf="@+id/img_zuhr_screen"
+      app:layout_constraintEnd_toStartOf="@+id/img_maghrib_screen"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/img_zuhr_screen"
+      app:layout_constraintTop_toTopOf="@+id/img_zuhr_screen" />
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/tv_time_asr_prayer"
+      style="@style/prayer_timing_text_style"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/_8sdp"
+      android:text="05:30 PM"
+      app:layout_constraintBottom_toBottomOf="@+id/img_asr_screen"
+      app:layout_constraintEnd_toEndOf="@+id/img_asr_screen"
+      app:layout_constraintStart_toStartOf="@+id/img_asr_screen" />
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/tv_asr_time"
+      style="@style/title_prayer_text_style"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Asr"
+      app:layout_constraintBottom_toTopOf="@+id/tv_time_asr_prayer"
+      app:layout_constraintEnd_toEndOf="@+id/img_asr_screen"
+      app:layout_constraintStart_toStartOf="@+id/img_asr_screen" />
+
+  <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/img_maghrib_screen"
+      android:layout_width="@dimen/_65sdp"
+      android:layout_height="@dimen/_140sdp"
+      android:layout_marginStart="@dimen/_4sdp"
+      android:scaleType="fitXY"
+      android:src="@drawable/ic_maghrib_dashboard"
+      app:layout_constraintBottom_toBottomOf="@+id/img_asr_screen"
+      app:layout_constraintEnd_toStartOf="@+id/img_isha_screen"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/img_asr_screen"
+      app:layout_constraintTop_toTopOf="@+id/img_asr_screen"
+      app:layout_constraintVertical_bias="1.0" />
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/tv_time_maghrib_prayer"
+      style="@style/prayer_timing_text_style"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/_8sdp"
+      android:text="@string/_07_20_pm"
+      app:layout_constraintBottom_toBottomOf="@+id/img_maghrib_screen"
+      app:layout_constraintEnd_toEndOf="@+id/img_maghrib_screen"
+      app:layout_constraintStart_toStartOf="@+id/img_maghrib_screen" />
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/tv_maghrib_time"
+      style="@style/title_prayer_text_style"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/maghrib"
+      app:layout_constraintBottom_toTopOf="@+id/tv_time_maghrib_prayer"
+      app:layout_constraintEnd_toEndOf="@+id/img_maghrib_screen"
+      app:layout_constraintStart_toStartOf="@+id/img_maghrib_screen" />
+
+  <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/img_isha_screen"
+      android:layout_width="@dimen/_65sdp"
+      android:layout_height="@dimen/_140sdp"
+      android:layout_marginStart="@dimen/_4sdp"
+      android:scaleType="fitXY"
+      android:src="@drawable/ic_isha_dashboard"
+      app:layout_constraintBottom_toBottomOf="@+id/img_maghrib_screen"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/img_maghrib_screen"
+      app:layout_constraintTop_toTopOf="@+id/img_maghrib_screen" />
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/tv_time_isha_prayer"
+      style="@style/prayer_timing_text_style"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/_8sdp"
+      android:text="@string/_09_15_pm"
+      app:layout_constraintBottom_toBottomOf="@+id/img_isha_screen"
+      app:layout_constraintEnd_toEndOf="@+id/img_isha_screen"
+      app:layout_constraintStart_toStartOf="@+id/img_isha_screen" />
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/tv_isha_time"
+      style="@style/title_prayer_text_style"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/isha"
+      app:layout_constraintBottom_toTopOf="@+id/tv_time_isha_prayer"
+      app:layout_constraintEnd_toEndOf="@+id/img_isha_screen"
+      app:layout_constraintStart_toStartOf="@+id/img_isha_screen" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</HorizontalScrollView>
