@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bg_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/next_prayer_fajr_bg">
+
+        <View
+            android:id="@+id/view_fajr"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_fajr"
+            style="@style/next_prayer_unselected_main_heading_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="@string/fajr"
+            app:layout_constraintBottom_toBottomOf="@+id/view_fajr"
+            app:layout_constraintStart_toStartOf="@+id/view_fajr"
+            app:layout_constraintTop_toTopOf="@+id/view_fajr" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_fajr_notification"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:src="@drawable/ic_unselected_bell_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/view_fajr"
+            app:layout_constraintEnd_toEndOf="@+id/view_fajr"
+            app:layout_constraintTop_toTopOf="@+id/view_fajr" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_time_fajr"
+            style="@style/next_prayer_unselected_main_heading_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="03:30 AM"
+            app:layout_constraintBottom_toBottomOf="@+id/view_fajr"
+            app:layout_constraintEnd_toStartOf="@+id/img_fajr_notification"
+            app:layout_constraintTop_toTopOf="@+id/view_fajr" />
+
+        <View
+            android:id="@+id/view_zuhar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_fajr" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_zuhar"
+            style="@style/next_prayer_unselected_main_heading_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="@string/zuhar"
+            app:layout_constraintBottom_toBottomOf="@+id/view_zuhar"
+            app:layout_constraintStart_toStartOf="@+id/view_zuhar"
+            app:layout_constraintTop_toTopOf="@+id/view_zuhar" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_unselected_zuhar_icon"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:src="@drawable/ic_unselected_bell_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/view_zuhar"
+            app:layout_constraintEnd_toEndOf="@+id/view_zuhar"
+            app:layout_constraintTop_toTopOf="@+id/view_zuhar" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_unselected_zuhar_time"
+            style="@style/next_prayer_unselected_main_heading_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="@string/_03_30_am"
+            app:layout_constraintBottom_toBottomOf="@+id/img_unselected_zuhar_icon"
+            app:layout_constraintEnd_toStartOf="@+id/img_unselected_zuhar_icon"
+            app:layout_constraintTop_toTopOf="@+id/img_unselected_zuhar_icon" />
+
+        <View
+            android:id="@+id/view_asr"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_zuhar" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_asr"
+            style="@style/next_prayer_unselected_main_heading_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="@string/asr"
+            app:layout_constraintBottom_toBottomOf="@+id/view_asr"
+            app:layout_constraintStart_toStartOf="@+id/view_asr"
+            app:layout_constraintTop_toTopOf="@+id/view_asr" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_unselected_asr_icon"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:src="@drawable/ic_unselected_bell_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/view_asr"
+            app:layout_constraintEnd_toEndOf="@+id/view_asr"
+            app:layout_constraintTop_toTopOf="@+id/view_asr" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_unselected_asr_time"
+            style="@style/next_prayer_unselected_main_heading_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="@string/_03_30_am"
+            app:layout_constraintBottom_toBottomOf="@+id/img_unselected_asr_icon"
+            app:layout_constraintEnd_toStartOf="@+id/img_unselected_asr_icon"
+            app:layout_constraintTop_toTopOf="@+id/img_unselected_asr_icon" />
+
+        <View
+            android:id="@+id/view_maghrib"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_asr" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_maghrib_prayer"
+            style="@style/next_prayer_unselected_main_heading_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="@string/maghrib"
+            app:layout_constraintBottom_toBottomOf="@+id/view_maghrib"
+            app:layout_constraintStart_toStartOf="@+id/view_maghrib"
+            app:layout_constraintTop_toTopOf="@+id/view_maghrib" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_unselected_maghrib_icon"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:src="@drawable/ic_unselected_bell_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/view_maghrib"
+            app:layout_constraintEnd_toEndOf="@+id/view_maghrib"
+            app:layout_constraintTop_toTopOf="@+id/view_maghrib" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_unselected_maghrib_time"
+            style="@style/next_prayer_unselected_main_heading_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="@string/_03_30_am"
+            app:layout_constraintBottom_toBottomOf="@+id/img_unselected_maghrib_icon"
+            app:layout_constraintEnd_toStartOf="@+id/img_unselected_maghrib_icon"
+            app:layout_constraintTop_toTopOf="@+id/img_unselected_maghrib_icon" />
+
+        <View
+            android:id="@+id/view_isha"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_maghrib" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_isha_prayer"
+            style="@style/next_prayer_unselected_main_heading_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="@string/isha"
+            app:layout_constraintBottom_toBottomOf="@+id/view_isha"
+            app:layout_constraintStart_toStartOf="@+id/view_isha"
+            app:layout_constraintTop_toTopOf="@+id/view_isha" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_unselected_isha_icon"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:src="@drawable/ic_unselected_bell_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/view_isha"
+            app:layout_constraintEnd_toEndOf="@+id/view_isha"
+            app:layout_constraintTop_toTopOf="@+id/view_isha" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_unselected_tahajjud_icon"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:src="@drawable/ic_unselected_bell_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/view_tahajjud"
+            app:layout_constraintEnd_toEndOf="@+id/view_tahajjud"
+            app:layout_constraintTop_toTopOf="@+id/view_tahajjud" />
+
+        <View
+            android:id="@+id/view_tahajjud"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_isha" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tahajjud_prayer"
+            style="@style/next_prayer_unselected_main_heading_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="@string/tahajjud"
+            app:layout_constraintBottom_toBottomOf="@+id/view_tahajjud"
+            app:layout_constraintStart_toStartOf="@+id/view_tahajjud"
+            app:layout_constraintTop_toTopOf="@+id/view_tahajjud" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_unselected_isha_time"
+            style="@style/next_prayer_unselected_main_heading_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="@string/_03_30_am"
+            app:layout_constraintBottom_toBottomOf="@+id/img_unselected_isha_icon"
+            app:layout_constraintEnd_toStartOf="@+id/img_unselected_isha_icon"
+            app:layout_constraintTop_toTopOf="@+id/img_unselected_isha_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_unselected_tahajjud_time"
+            style="@style/next_prayer_unselected_main_heading_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="@string/_03_30_am"
+            app:layout_constraintBottom_toBottomOf="@+id/img_unselected_tahajjud_icon"
+            app:layout_constraintEnd_toStartOf="@+id/img_unselected_tahajjud_icon"
+            app:layout_constraintTop_toTopOf="@+id/img_unselected_tahajjud_icon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

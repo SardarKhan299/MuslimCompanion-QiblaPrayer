@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_boardFragment_to_sideMenuFragment"
             app:destination="@id/sideMenuFragment" />
+        <action
+            android:id="@+id/action_boardFragment_to_nextPrayerTimeFragment"
+            app:destination="@id/nextPrayerTimeFragment" />
     </fragment>
     <fragment
         android:id="@+id/sideMenuFragment"
@@ -55,4 +58,9 @@
         android:label="WebViewUrlLoadFragment"
         tools:layout="@layout/fragment_web_view_url_load"
         />
+    <fragment
+        android:id="@+id/nextPrayerTimeFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.nextprayertime.NextPrayerTimeFragment"
+        android:label="fragment_next_prayer_time"
+        tools:layout="@layout/fragment_next_prayer_time" />
 </navigation>

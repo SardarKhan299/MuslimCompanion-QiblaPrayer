@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
@@ -37,6 +39,12 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         binding.toolbarBoard.imgToolbar.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.sideMenuFragment)
         }
+        val dashBoardFajrScreen =
+            binding.layoutBoardFragment.findViewById<ImageView>(R.id.img_fajr_screen)
+
+        dashBoardFajrScreen.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.nextPrayerTimeFragment)
+        }
         rView.layoutManager = LinearLayoutManager(
             requireContext(),
             RecyclerView.HORIZONTAL, false
@@ -58,10 +66,11 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         data.add(QiblaData(R.drawable.ic_hathid, "Hadith"))
 
 
-        val adapter = QiblaAdapter(requireContext(), data,itemClickListenerCallback())
+        val adapter = QiblaAdapter(requireContext(), data, itemClickListenerCallback())
         rView.adapter = adapter
 
     }
+
     private fun itemClickListenerCallback(): (QiblaData) -> Unit {
         return {
             Log.d(DashBoardFragment::class.simpleName, "ok_btn_callback:")

@@ -84,5 +84,15 @@
     <string name="_1628_km">1628 km</string>
     <string name="distance">Distance:</string>
     <string name="islamabad">Islamabad</string>
+    <string name="direction">Direction</string>
+    <string name="islamabad_pakistan">Islamabad, Pakistan</string>
+    <string name="_18_32_30">18:32:30</string>
+    <string name="asr">Asr</string>
+    <string name="_03_30_am">03:30 AM</string>
+    <string name="fajr">Fajr</string>
+    <string name="zuhar">Zuhar</string>
+    <string name="tahajjud">Tahajjud</string>
+    <string name="today">Today</string>
+    <string name="_11_august_2023">11 August, 2023</string>
 
 </resources>
