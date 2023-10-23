@@ -11,6 +11,7 @@
         android:id="@+id/layout_signUp_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/ic_signup_bg"
         tools:context=".signUp.SignUpFragment">
 
         <androidx.constraintlayout.widget.Guideline
