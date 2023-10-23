@@ -94,5 +94,9 @@
     <string name="tahajjud">Tahajjud</string>
     <string name="today">Today</string>
     <string name="_11_august_2023">11 August, 2023</string>
+    <string name="day_date_string">Thursday 21,2023</string>
+    <string name="spacer">-</string>
+    <string name="counter">120/100</string>
+    <string name="history">History:</string>
 
 </resources>

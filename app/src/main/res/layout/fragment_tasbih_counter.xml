@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".presentation.views.TasbihCounterFragment">
+
+    <include
+        android:id="@+id/toolbar_tasbih_counter"
+        layout="@layout/layout_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left_tasbih_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.02"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right_tasbih_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title_history"
+        style="@style/alert_dialog_button_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:text="@string/history"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_tasbih_counter" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_history_count"
+        style="@style/toolbar_sub_screens_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/counter"
+        android:layout_marginStart="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/title_history"
+        app:layout_constraintStart_toEndOf="@+id/title_history"
+        app:layout_constraintTop_toTopOf="@+id/title_history" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_spacer"
+        style="@style/alert_dialog_button_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/spacer"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_history_count"
+        app:layout_constraintStart_toEndOf="@+id/tv_history_count"
+        app:layout_constraintTop_toTopOf="@+id/tv_history_count" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_day_date"
+        style="@style/toolbar_sub_screens_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/day_date_string"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_spacer"
+        app:layout_constraintStart_toEndOf="@+id/tv_spacer"
+        app:layout_constraintTop_toTopOf="@+id/tv_spacer" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_tasbih_name"
+        android:layout_marginTop="@dimen/_30sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_tasbih_counter"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
+        app:layout_constraintTop_toBottomOf="@+id/tv_spacer" />
+</androidx.constraintlayout.widget.ConstraintLayout>
