@@ -117,11 +117,73 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_subScreen"
         app:layout_constraintStart_toEndOf="@+id/view_subScreen"
         app:layout_constraintTop_toTopOf="@+id/view_subScreen" />
+
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_toolbar_sub_screen_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="tv_toolbar_sub_screen,img_subScreen_back_icon,view_subScreen"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/view_next_prayer_icon"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:background="@drawable/toolbar_next_prayer_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_close"
+        app:layout_constraintBottom_toBottomOf="@+id/view_next_prayer_icon"
+        app:layout_constraintEnd_toEndOf="@+id/view_next_prayer_icon"
+        app:layout_constraintStart_toStartOf="@+id/view_next_prayer_icon"
+        app:layout_constraintTop_toTopOf="@+id/view_next_prayer_icon" />
+
+    <View
+        android:id="@+id/view_bell_notification_icon"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:background="@drawable/toolbar_next_prayer_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/view_next_prayer_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view_next_prayer_icon" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_notification_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bell_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/view_bell_notification_icon"
+        app:layout_constraintEnd_toEndOf="@+id/view_bell_notification_icon"
+        app:layout_constraintStart_toStartOf="@+id/view_bell_notification_icon"
+        app:layout_constraintTop_toTopOf="@+id/view_bell_notification_icon" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_toolbar_title_next_prayer"
+        style="@style/today_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next Prayer Time"
+        app:layout_constraintBottom_toBottomOf="@+id/view_next_prayer_icon"
+        app:layout_constraintEnd_toStartOf="@+id/view_bell_notification_icon"
+        app:layout_constraintStart_toEndOf="@+id/view_next_prayer_icon"
+        app:layout_constraintTop_toTopOf="@+id/view_next_prayer_icon" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_toolbar_next_prayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="img_close,view_next_prayer_icon,
+        tv_toolbar_title_next_prayer,view_bell_notification_icon,
+img_notification_icon"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
