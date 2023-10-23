@@ -1,4 +1,4 @@
-package com.qibla.qiblacompass.prayertime.finddirection.presentation.views
+package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

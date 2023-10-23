@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".presentation.views.TasbihCounterFragment">
+    tools:context=".presentation.views.tasbihcounter.TasbihCounterFragment">
 
     <include
         android:id="@+id/toolbar_tasbih_counter"
@@ -38,8 +38,8 @@
         style="@style/alert_dialog_button_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:text="@string/history"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_tasbih_counter" />
@@ -49,8 +49,8 @@
         style="@style/toolbar_sub_screens_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/counter"
         android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/counter"
         app:layout_constraintBottom_toBottomOf="@+id/title_history"
         app:layout_constraintStart_toEndOf="@+id/title_history"
         app:layout_constraintTop_toTopOf="@+id/title_history" />
@@ -77,11 +77,22 @@
         app:layout_constraintTop_toTopOf="@+id/tv_spacer" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_tasbih"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_tasbih_name"
         android:layout_marginTop="@dimen/_30sdp"
+        android:src="@drawable/ic_tasbih_name"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_tasbih_counter"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
         app:layout_constraintTop_toBottomOf="@+id/tv_spacer" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right_tasbih_counter"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
+        tools:listitem="@layout/item_tasbih_counter_backround_layout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
