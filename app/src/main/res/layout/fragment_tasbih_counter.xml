@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/layout_tasbih_counter_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
@@ -95,4 +97,96 @@
         app:layout_constraintEnd_toEndOf="@id/guideline_right_tasbih_counter"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
         tools:listitem="@layout/item_tasbih_counter_backround_layout" />
+
+    <View
+        android:id="@+id/view_animated_counter"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_240sdp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_tasbih" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_top_counter_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-30dp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:src="@drawable/ic_counter_one"
+        app:layout_constraintStart_toStartOf="@+id/view_animated_counter"
+        app:layout_constraintTop_toTopOf="@+id/view_animated_counter" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_top_counter_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_counter_one"
+        app:layout_constraintBottom_toBottomOf="@+id/img_top_counter_one"
+        app:layout_constraintStart_toEndOf="@+id/img_top_counter_one"
+        app:layout_constraintTop_toTopOf="@+id/img_top_counter_one" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_top_counter_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_counter_one"
+        app:layout_constraintBottom_toBottomOf="@+id/img_top_counter_two"
+        app:layout_constraintStart_toEndOf="@+id/img_top_counter_two"
+        app:layout_constraintTop_toTopOf="@+id/img_top_counter_two"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_bottom_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_counter_one"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginEnd="-30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_animated_counter"
+        app:layout_constraintEnd_toEndOf="@+id/view_animated_counter" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_bottom_count_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_counter_one"
+        app:layout_constraintBottom_toBottomOf="@+id/img_bottom_counter"
+        app:layout_constraintEnd_toStartOf="@+id/img_bottom_counter"
+        app:layout_constraintTop_toTopOf="@+id/img_bottom_counter" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_counter_count"
+        style="@style/counter_count_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:text="33"
+        app:layout_constraintBottom_toBottomOf="@+id/view_animated_counter"
+        app:layout_constraintStart_toStartOf="@+id/view_animated_counter" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_count"
+        style="@style/counter_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="/100"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_counter_count"
+        app:layout_constraintStart_toEndOf="@+id/tv_counter_count"
+        app:layout_constraintTop_toTopOf="@+id/tv_counter_count"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:src="@drawable/ic_reset"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_count"
+        app:layout_constraintStart_toEndOf="@+id/tv_count"
+        app:layout_constraintTop_toTopOf="@+id/tv_count"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -326,4 +326,16 @@
         <item name="android:includeFontPadding">false</item>
         <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
+    <style name="counter_count_text_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_40sdp</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/poppins_extra_bold</item>
+    </style>
+    <style name="counter_text_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_30sdp</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
 </resources>
