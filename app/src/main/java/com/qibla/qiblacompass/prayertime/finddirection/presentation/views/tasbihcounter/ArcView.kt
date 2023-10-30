@@ -13,7 +13,7 @@ class ArcView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private val paint = Paint().apply {
         color = Color.BLACK
         style = Paint.Style.STROKE
-        strokeWidth = 5f
+        strokeWidth = 3f
     }
 
     private val path = Path()

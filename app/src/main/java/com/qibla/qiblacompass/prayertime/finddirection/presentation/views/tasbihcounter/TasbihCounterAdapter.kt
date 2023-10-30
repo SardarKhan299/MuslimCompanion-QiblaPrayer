@@ -1,16 +1,18 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
-import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.QiblaAdapter
 
-class TasbihCounterAdapter(private val tasbihCounterData: List<TasbihCounterData>) :
+class TasbihCounterAdapter(
+    private val imageList: List<Int>, private val onItemClick: (Int) -> Unit
+
+) :
     RecyclerView.Adapter<TasbihCounterAdapter.TasbihCounterViewModel>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasbihCounterViewModel {
         return TasbihCounterViewModel(
@@ -19,17 +21,23 @@ class TasbihCounterAdapter(private val tasbihCounterData: List<TasbihCounterData
         )
     }
 
+    override fun getItemCount(): Int = imageList.size// Number of items
+
     override fun onBindViewHolder(holder: TasbihCounterViewModel, position: Int) {
-        val counter = tasbihCounterData[position]
-        holder.counterImage.setImageResource(counter.counterImageBg)
+        val image = imageList[position]
+        holder.imageView.setImageResource(image)
+
     }
 
-    override fun getItemCount() = tasbihCounterData.size
+    inner class TasbihCounterViewModel(val view: View) : RecyclerView.ViewHolder(view) {
+        val imageView: ImageView = itemView.findViewById(R.id.img_tasbih_counter)
 
+        init {
+            imageView.setOnClickListener {
+                val position = adapterPosition
+                onItemClick(imageList[position])
+            }
+        }
 
-    class TasbihCounterViewModel(val view: View) : RecyclerView.ViewHolder(view) {
-        val counterImage: ImageView = view.findViewById(R.id.img_tasbih_counter)
     }
-
-
 }
