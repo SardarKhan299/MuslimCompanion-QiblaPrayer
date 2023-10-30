@@ -2,191 +2,218 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/layout_tasbih_counter_fragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    tools:context=".presentation.views.tasbihcounter.TasbihCounterFragment">
 
-    <include
-        android:id="@+id/toolbar_tasbih_counter"
-        layout="@layout/layout_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_left_tasbih_counter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.02"
-        app:layout_constraintStart_toStartOf="parent" />
+        <variable
+            name="TasbihCounterFragment"
+            type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter.TasbihCounterFragment" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_right_tasbih_counter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.98" />
+    </data>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title_history"
-        style="@style/alert_dialog_button_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_30sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:text="@string/history"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_tasbih_counter" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_tasbih_counter_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        tools:context=".presentation.views.tasbihcounter.TasbihCounterFragment">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_history_count"
-        style="@style/toolbar_sub_screens_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:text="@string/counter"
-        app:layout_constraintBottom_toBottomOf="@+id/title_history"
-        app:layout_constraintStart_toEndOf="@+id/title_history"
-        app:layout_constraintTop_toTopOf="@+id/title_history" />
+        <include
+            android:id="@+id/toolbar_tasbih_counter"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_spacer"
-        style="@style/alert_dialog_button_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:text="@string/spacer"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_history_count"
-        app:layout_constraintStart_toEndOf="@+id/tv_history_count"
-        app:layout_constraintTop_toTopOf="@+id/tv_history_count" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left_tasbih_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.02"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_day_date"
-        style="@style/toolbar_sub_screens_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/day_date_string"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_spacer"
-        app:layout_constraintStart_toEndOf="@+id/tv_spacer"
-        app:layout_constraintTop_toTopOf="@+id/tv_spacer" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right_tasbih_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.98" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_tasbih"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:src="@drawable/ic_tasbih_name"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right_tasbih_counter"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
-        app:layout_constraintTop_toBottomOf="@+id/tv_spacer" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_history"
+            style="@style/alert_dialog_button_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:text="@string/history"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_tasbih_counter" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right_tasbih_counter"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
-        tools:listitem="@layout/item_tasbih_counter_backround_layout" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_history_count"
+            style="@style/toolbar_sub_screens_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/counter"
+            app:layout_constraintBottom_toBottomOf="@+id/title_history"
+            app:layout_constraintStart_toEndOf="@+id/title_history"
+            app:layout_constraintTop_toTopOf="@+id/title_history" />
 
-    <View
-        android:id="@+id/view_animated_counter"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_240sdp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_tasbih" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_spacer"
+            style="@style/alert_dialog_button_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/spacer"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_history_count"
+            app:layout_constraintStart_toEndOf="@+id/tv_history_count"
+            app:layout_constraintTop_toTopOf="@+id/tv_history_count" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_top_counter_one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-30dp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:src="@drawable/ic_counter_one"
-        app:layout_constraintStart_toStartOf="@+id/view_animated_counter"
-        app:layout_constraintTop_toTopOf="@+id/view_animated_counter" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_day_date"
+            style="@style/toolbar_sub_screens_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_date_string"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_spacer"
+            app:layout_constraintStart_toEndOf="@+id/tv_spacer"
+            app:layout_constraintTop_toTopOf="@+id/tv_spacer" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_top_counter_two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_counter_one"
-        app:layout_constraintBottom_toBottomOf="@+id/img_top_counter_one"
-        app:layout_constraintStart_toEndOf="@+id/img_top_counter_one"
-        app:layout_constraintTop_toTopOf="@+id/img_top_counter_one" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_tasbih"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:src="@drawable/ic_tasbih_name"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_tasbih_counter"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
+            app:layout_constraintTop_toBottomOf="@+id/tv_spacer" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_top_counter_three"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_counter_one"
-        app:layout_constraintBottom_toBottomOf="@+id/img_top_counter_two"
-        app:layout_constraintStart_toEndOf="@+id/img_top_counter_two"
-        app:layout_constraintTop_toTopOf="@+id/img_top_counter_two"
-        app:layout_constraintVertical_bias="0.0" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right_tasbih_counter"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
+            tools:listitem="@layout/item_tasbih_counter_backround_layout" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_bottom_counter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_counter_one"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginEnd="-30dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view_animated_counter"
-        app:layout_constraintEnd_toEndOf="@+id/view_animated_counter" />
+        <include
+            layout="@layout/layout_tasbih_animation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_tasbih" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_bottom_count_counter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_counter_one"
-        app:layout_constraintBottom_toBottomOf="@+id/img_bottom_counter"
-        app:layout_constraintEnd_toStartOf="@+id/img_bottom_counter"
-        app:layout_constraintTop_toTopOf="@+id/img_bottom_counter" />
+        <include
+            android:id="@+id/layout_counter_type"
+            layout="@layout/layout_counter_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar_tasbih_counter"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_tasbih_counter" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_counter_count"
-        style="@style/counter_count_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_40sdp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:text="33"
-        app:layout_constraintBottom_toBottomOf="@+id/view_animated_counter"
-        app:layout_constraintStart_toStartOf="@+id/view_animated_counter" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_count"
-        style="@style/counter_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="/100"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_counter_count"
-        app:layout_constraintStart_toEndOf="@+id/tv_counter_count"
-        app:layout_constraintTop_toTopOf="@+id/tv_counter_count"
-        app:layout_constraintVertical_bias="1.0" />
+        <!--        <View-->
+<!--            android:id="@+id/view_animated_counter"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="@dimen/_240sdp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="1.0"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/img_tasbih" />-->
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:src="@drawable/ic_reset"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_count"
-        app:layout_constraintStart_toEndOf="@+id/tv_count"
-        app:layout_constraintTop_toTopOf="@+id/tv_count"
-        app:layout_constraintVertical_bias="1.0" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/img_top_counter_one"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="-30dp"-->
+<!--            android:layout_marginTop="@dimen/_8sdp"-->
+<!--            android:src="@drawable/ic_counter_one"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/view_animated_counter"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/view_animated_counter" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/img_top_counter_two"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_counter_one"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/img_top_counter_one"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/img_top_counter_one"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/img_top_counter_one" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/img_top_counter_three"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_counter_one"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/img_top_counter_two"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/img_top_counter_two"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/img_top_counter_two"-->
+<!--            app:layout_constraintVertical_bias="0.0" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/img_bottom_counter"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="-30dp"-->
+<!--            android:layout_marginBottom="@dimen/_8sdp"-->
+<!--            android:src="@drawable/ic_counter_one"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/view_animated_counter"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/view_animated_counter" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/img_bottom_count_counter"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_counter_one"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/img_bottom_counter"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/img_bottom_counter"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/img_bottom_counter" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/tv_counter_count"-->
+<!--            style="@style/counter_count_text_style"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/_40sdp"-->
+<!--            android:layout_marginBottom="@dimen/_8sdp"-->
+<!--            android:text="33"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/view_animated_counter"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/view_animated_counter" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/tv_count"-->
+<!--            style="@style/counter_text_style"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="4dp"-->
+<!--            android:text="/100"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/tv_counter_count"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/tv_counter_count"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/tv_counter_count"-->
+<!--            app:layout_constraintVertical_bias="1.0" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/img_animated"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_counter_one"-->
+<!--         />-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

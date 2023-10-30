@@ -36,9 +36,13 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         binding.toolbarBoard.groupToolbarProfile.visibility = View.GONE
         binding.toolbarBoard.groupToolbar.visibility = View.VISIBLE
         rView = binding.layoutBoardFragment.findViewById(R.id.rv_qibla)
+        binding.tvAds.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.tasbihCounterFragment)
+        }
         binding.toolbarBoard.imgToolbar.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.sideMenuFragment)
         }
+
         val dashBoardFajrScreen =
             binding.layoutBoardFragment.findViewById<ImageView>(R.id.img_fajr_screen)
 

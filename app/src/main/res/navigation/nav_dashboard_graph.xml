@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_boardFragment_to_nextPrayerTimeFragment"
             app:destination="@id/nextPrayerTimeFragment" />
+        <action
+            android:id="@+id/action_boardFragment_to_tasbihCounterFragment"
+            app:destination="@id/tasbihCounterFragment" />
     </fragment>
     <fragment
         android:id="@+id/sideMenuFragment"
@@ -63,4 +66,8 @@
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.nextprayertime.NextPrayerTimeFragment"
         android:label="fragment_next_prayer_time"
         tools:layout="@layout/fragment_next_prayer_time" />
+    <fragment
+        android:id="@+id/tasbihCounterFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter.TasbihCounterFragment"
+        android:label="TasbihCounterFragment" />
 </navigation>

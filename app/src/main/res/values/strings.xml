@@ -98,5 +98,10 @@
     <string name="spacer">-</string>
     <string name="counter">120/100</string>
     <string name="history">History:</string>
-
+    <string name="tasbih_counter">Tasbih Counter</string>
+    <string name="digital_tasbih">Digital Tasbih</string>
+    <string name="set_counter">Set Counter</string>
+    <string name="show_history">Show History</string>
+    <string name="_100">/100</string>
+    <string name="_33">33</string>
 </resources>
