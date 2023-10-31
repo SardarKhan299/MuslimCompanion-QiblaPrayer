@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_30sdp"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:text="@string/history"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_tasbih_counter" />
@@ -91,8 +91,8 @@
             android:id="@+id/img_tasbih"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_30sdp"
             android:src="@drawable/ic_tasbih_name"
+            android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_tasbih_counter"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
             app:layout_constraintTop_toBottomOf="@+id/tv_spacer" />
@@ -106,7 +106,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_right_tasbih_counter"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
-            app:layout_constraintTop_toBottomOf="@+id/include"
+            app:layout_constraintTop_toBottomOf="@+id/tv_incremental_counter"
             tools:listitem="@layout/item_tasbih_counter_backround_layout" />
 
         <include
@@ -114,7 +114,7 @@
             layout="@layout/layout_tasbih_animation"
             android:layout_width="0dp"
             android:layout_height="@dimen/_250sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_tasbih" />
@@ -127,7 +127,38 @@
             app:layout_constraintEnd_toEndOf="@+id/toolbar_tasbih_counter"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_tasbih_counter" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_incremental_counter"
+            style="@style/counter_count_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_100sdp"
+            android:text="@string/_33"
+            android:textAlignment="viewEnd"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_count"
+            style="@style/counter_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/_100"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_incremental_counter"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_tasbih_counter"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tv_incremental_counter"
+            app:layout_constraintTop_toTopOf="@+id/tv_incremental_counter"
+            app:layout_constraintVertical_bias="0.461" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_reset"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_reset"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_count"
+            app:layout_constraintStart_toEndOf="@+id/tv_count" />
         <!--        <View-->
 <!--            android:id="@+id/view_animated_counter"-->
 <!--            android:layout_width="0dp"-->

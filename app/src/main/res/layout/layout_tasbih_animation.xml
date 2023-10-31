@@ -80,37 +80,6 @@
         android:id="@+id/arcView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_incremental_counter"
-            style="@style/counter_count_text_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="viewEnd"
-            android:layout_marginStart="@dimen/_45sdp"
-            android:text="@string/_33"
-            app:layout_constraintBottom_toBottomOf="@+id/view_animated_counter"
-            app:layout_constraintStart_toStartOf="@+id/view_animated_counter" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_count"
-        style="@style/counter_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/_100"
-        android:layout_marginBottom="@dimen/_4sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/view_animated_counter"
-        app:layout_constraintStart_toEndOf="@+id/tv_incremental_counter"
-        app:layout_constraintTop_toTopOf="@+id/tv_incremental_counter"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_reset"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:src="@drawable/ic_reset"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/view_animated_counter"
-        app:layout_constraintStart_toEndOf="@+id/tv_count" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

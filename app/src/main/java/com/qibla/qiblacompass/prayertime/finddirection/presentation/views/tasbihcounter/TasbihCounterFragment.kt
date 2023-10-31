@@ -1,5 +1,6 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,6 +16,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentTasbihCounterBinding
+import kotlin.math.log
 
 
 class TasbihCounterFragment :
@@ -31,7 +33,6 @@ class TasbihCounterFragment :
     private var counter = 0
     private val maxCounter = 100
     lateinit var recyclerView: RecyclerView
-    lateinit var adapter: TasbihCounterAdapter
 
     private val imageResources = listOf(
         R.drawable.ic_counter_one,
@@ -53,6 +54,7 @@ class TasbihCounterFragment :
         (activity as AppCompatActivity?)?.hideActionBar()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
@@ -76,7 +78,6 @@ class TasbihCounterFragment :
 
         }
 
-        //motionLayout = binding.include.
         val includelayout = binding.include
         motionLayout = includelayout.motionLayout
         imageView1 = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_three)
@@ -86,20 +87,28 @@ class TasbihCounterFragment :
         imgSecond = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_two)
         imgAnimated = binding.layoutTasbihCounterFragment.findViewById(R.id.img_animated_move)
         imgFirstBottom = binding.layoutTasbihCounterFragment.findViewById(R.id.img_bottom_counter)
-
         counterTextView =
             binding.layoutTasbihCounterFragment.findViewById(R.id.tv_incremental_counter)
-        val movingView =
-            binding.layoutTasbihCounterFragment.findViewById<View>(R.id.view_animated_counter)
+        val view1 = motionLayout.findViewById<View>(R.id.view_animated_counter)
         recyclerView = binding.layoutTasbihCounterFragment.findViewById(R.id.recyclerView_tasbih_bg)
-        // Set the initial text for the counterTextView
-        counterTextView.text = counter.toString()
-
-motionLayout.setOnClickListener {
-
-}
+        counterTextView.text = counter.toString() // Set initial counter text
 
 
+        view1.setOnTouchListener { view, motionEvent ->
+            Log.d("TasbihCounterFragment", "onViewCreated: view touch")
+            if (counter < maxCounter) {
+                counter++
+                counterTextView.text = counter.toString()
+                Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
+            } else {
+                Log.d("TasbihCounterFragment", "Maximum count reached.")
+            }
+            false
+        }
+        binding.imgReset.setOnClickListener {
+            counter = 0
+            counterTextView.text = "0"
+        }
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {}
             override fun onTransitionChange(
@@ -108,6 +117,8 @@ motionLayout.setOnClickListener {
                 endId: Int,
                 progress: Float
             ) {
+                Log.d("TasbihCounterFragment", "onTransitionChange: Transition ")
+
                 // Calculate positions of images based on progress
                 val startX = imageView1.x + imageView1.width / 2
                 val startY = imageView1.y + imageView1.height / 2
@@ -120,8 +131,10 @@ motionLayout.setOnClickListener {
 
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {}
 
-            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {}
+            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+            }
         })
+
         recyclerView.layoutManager = LinearLayoutManager(
             requireContext(),
             RecyclerView.HORIZONTAL, false
@@ -142,3 +155,28 @@ motionLayout.setOnClickListener {
     }
 
 }
+//        motionLayout.setOnClickListener {
+//            Log.d("TasbihCounterFragment", "onViewCreated: ")
+////            if (counter < maxCounter) {
+////                counter++
+////                counterTextView.text = counter.toString()
+////                Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
+////            } else {
+////                Log.d("TasbihCounterFragment", "Maximum count reached.")
+////            }
+//        }
+//        motionLayout.setOnTouchListener { view, motionEvent ->
+//            Log.d("TasbihCounterFragment", "onViewCreated: Motion layout onTouchListener ")
+//            if (counter < maxCounter) {
+//                counter++
+//                counterTextView.text = counter.toString()
+//                Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
+//            } else {
+//                Log.d("TasbihCounterFragment", "Maximum count reached.")
+//            }
+//            false
+//        }
+
+//view1.setOnClickListener {
+//
+//}
