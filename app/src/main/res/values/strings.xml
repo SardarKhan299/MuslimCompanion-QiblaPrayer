@@ -104,4 +104,5 @@
     <string name="show_history">Show History</string>
     <string name="_100">/100</string>
     <string name="_33">33</string>
+    <string name="overflow">Overflow</string>
 </resources>

@@ -3,6 +3,7 @@ package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbi
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -94,15 +95,20 @@ class TasbihCounterFragment :
         counterTextView.text = counter.toString() // Set initial counter text
 
 
+
         view1.setOnTouchListener { view, motionEvent ->
-            Log.d("TasbihCounterFragment", "onViewCreated: view touch")
-            if (counter < maxCounter) {
-                counter++
-                counterTextView.text = counter.toString()
-                Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
-            } else {
-                Log.d("TasbihCounterFragment", "Maximum count reached.")
-            }
+           if( motionEvent.action == MotionEvent.ACTION_DOWN){
+               Log.d("TasbihCounterFragment", "onViewCreated: motionAction....... ")
+               Log.d("TasbihCounterFragment", "onViewCreated: view touch")
+               if (counter < maxCounter) {
+                   counter++
+                   counterTextView.text = counter.toString()
+                   Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
+               } else {
+                   Log.d("TasbihCounterFragment", "Maximum count reached.")
+               }
+           }
+
             false
         }
         binding.imgReset.setOnClickListener {

@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_tasbih_name"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_tasbih_counter"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
             app:layout_constraintTop_toBottomOf="@+id/tv_spacer" />
@@ -100,8 +100,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_tasbih_bg"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_right_tasbih_counter"
@@ -124,6 +124,7 @@
             layout="@layout/layout_counter_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="@+id/toolbar_tasbih_counter"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_tasbih_counter" />
 
@@ -154,11 +155,13 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_reset"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             android:src="@drawable/ic_reset"
+            android:padding="@dimen/_6sdp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_count"
-            app:layout_constraintStart_toEndOf="@+id/tv_count" />
+            app:layout_constraintStart_toEndOf="@+id/tv_count"
+            app:layout_constraintTop_toTopOf="@+id/tv_count" />
         <!--        <View-->
 <!--            android:id="@+id/view_animated_counter"-->
 <!--            android:layout_width="0dp"-->
