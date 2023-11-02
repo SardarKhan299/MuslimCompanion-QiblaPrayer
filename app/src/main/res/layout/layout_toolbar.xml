@@ -186,4 +186,43 @@
         tv_toolbar_title_next_prayer,view_bell_notification_icon,
 img_notification_icon"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_navigate_back"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:src="@drawable/ic_navigate_back"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_add_more"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:src="@drawable/ic_more"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_navigate_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_navigate_back" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title_counter"
+        style="@style/title_toolbar_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tasbih_counter"
+        app:layout_constraintBottom_toBottomOf="@+id/img_navigate_back"
+        app:layout_constraintEnd_toStartOf="@+id/img_add_more"
+        app:layout_constraintStart_toEndOf="@+id/img_navigate_back"
+        app:layout_constraintTop_toTopOf="@+id/img_navigate_back" />
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_toolbar_tasbih_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="title_counter,img_add_more,img_navigate_back"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

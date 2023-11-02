@@ -12,6 +12,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_signup_bg"
     tools:context=".presentation.views.login.LoginFragment">
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_login_left"

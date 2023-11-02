@@ -13,7 +13,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.R
 
 class QiblaAdapter(
     context: Context, private val qiblaData: List<QiblaData>,
-    val itemClickListenerCallback: (QiblaData) -> Unit
+    private val itemClickListenerCallback: (QiblaData) -> Unit
 ) : RecyclerView.Adapter<QiblaAdapter.QiblaViewHolder>() {
 
 

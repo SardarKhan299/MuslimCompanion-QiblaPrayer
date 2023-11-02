@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    >
+
+    <View
+        android:id="@+id/view_counter"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_140sdp"
+        android:background="@drawable/counter_type_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_digital_tasbih"
+        style="@style/ayat_translation_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/digital_tasbih"
+        app:layout_constraintStart_toStartOf="@+id/view_counter"
+        app:layout_constraintTop_toTopOf="@+id/view_counter" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_set_counter"
+        style="@style/ayat_translation_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="@string/set_counter"
+        app:layout_constraintStart_toStartOf="@+id/tv_digital_tasbih"
+        app:layout_constraintTop_toBottomOf="@+id/tv_digital_tasbih" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_show_history"
+        style="@style/ayat_translation_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/show_history"
+        app:layout_constraintStart_toStartOf="@+id/tv_set_counter"
+        app:layout_constraintTop_toBottomOf="@+id/tv_set_counter" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_overflow"
+        style="@style/ayat_translation_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/overflow"
+        app:layout_constraintStart_toStartOf="@+id/tv_show_history"
+        app:layout_constraintTop_toBottomOf="@+id/tv_show_history" />
+
+    <CheckBox
+        android:id="@+id/checkBox_show_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/primary_color"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_show_history"
+        app:layout_constraintEnd_toEndOf="@+id/view_counter"
+        app:layout_constraintTop_toTopOf="@+id/tv_show_history" />
+
+    <CheckBox
+        android:id="@+id/checkBox_over_flow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/primary_color"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_overflow"
+        app:layout_constraintEnd_toEndOf="@+id/view_counter"
+        app:layout_constraintTop_toTopOf="@+id/tv_overflow" />
+
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_counter_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="checkBox_over_flow,checkBox_show_history,
+        tv_overflow,tv_show_history,tv_set_counter,tv_digital_tasbih,view_counter"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
