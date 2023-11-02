@@ -161,28 +161,3 @@ class TasbihCounterFragment :
     }
 
 }
-//        motionLayout.setOnClickListener {
-//            Log.d("TasbihCounterFragment", "onViewCreated: ")
-////            if (counter < maxCounter) {
-////                counter++
-////                counterTextView.text = counter.toString()
-////                Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
-////            } else {
-////                Log.d("TasbihCounterFragment", "Maximum count reached.")
-////            }
-//        }
-//        motionLayout.setOnTouchListener { view, motionEvent ->
-//            Log.d("TasbihCounterFragment", "onViewCreated: Motion layout onTouchListener ")
-//            if (counter < maxCounter) {
-//                counter++
-//                counterTextView.text = counter.toString()
-//                Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
-//            } else {
-//                Log.d("TasbihCounterFragment", "Maximum count reached.")
-//            }
-//            false
-//        }
-
-//view1.setOnClickListener {
-//
-//}
