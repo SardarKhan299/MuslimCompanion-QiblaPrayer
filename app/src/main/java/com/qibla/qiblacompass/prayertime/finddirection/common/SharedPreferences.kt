@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.preference.PreferenceManager
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.BIOMETRIC_ENABLE
+import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.SELECTED_IMAGE
 
 class SharedPreferences {
     companion object {
@@ -15,6 +16,7 @@ class SharedPreferences {
             }
             return mSharedPreferences
         }
+
         fun enableBiometricLogin(context: Context, enableBiometric: Boolean) {
             Log.d(SharedPreferences::class.simpleName, "enableBiometricLogin: $enableBiometric")
             val editor: SharedPreferences.Editor = initShardPreference(context)!!.edit()
@@ -29,5 +31,23 @@ class SharedPreferences {
             }
             return false
         }
+
+        fun saveImageValue(context: Context, imageName: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            if (msharedPreferences != null) {
+
+                mSharedPreferences?.edit()?.putString(SELECTED_IMAGE, imageName)?.apply()
+            }
+        }
+
+        fun retrieveImageValue(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            if (msharedPreferences != null) {
+                return mSharedPreferences?.getString(SELECTED_IMAGE, null)
+            }
+            return ""
+        }
+
+
     }
 }

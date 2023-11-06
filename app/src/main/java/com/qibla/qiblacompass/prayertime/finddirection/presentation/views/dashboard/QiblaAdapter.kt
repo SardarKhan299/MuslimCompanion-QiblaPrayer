@@ -13,7 +13,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.R
 
 class QiblaAdapter(
     context: Context, private val qiblaData: List<QiblaData>,
-    private val itemClickListenerCallback: (QiblaData) -> Unit
+    private val onItemClick: (Int) -> Unit
 ) : RecyclerView.Adapter<QiblaAdapter.QiblaViewHolder>() {
 
 
@@ -26,8 +26,9 @@ class QiblaAdapter(
 
     override fun onBindViewHolder(holder: QiblaViewHolder, position: Int) {
         val dataQibla = qiblaData[position]
+        // Handle item click
         holder.itemView.setOnClickListener {
-            itemClickListenerCallback.invoke(dataQibla)
+            onItemClick.invoke(position)
         }
         holder.bgImage.setImageResource(dataQibla.imgBackground)
         holder.titleName.text = dataQibla.nameTitle

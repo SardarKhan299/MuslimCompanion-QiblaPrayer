@@ -1,6 +1,5 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -14,11 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.ALHAMDULILLAH
+import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.ALLAHU_AKBAR
+import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.LA_ILAHA_ILLA_ALLAH
+import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.SUBHAN_ALLAH
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentTasbihCounterBinding
-import kotlin.math.log
-
 
 class TasbihCounterFragment :
     BaseFragment<FragmentTasbihCounterBinding>(R.layout.fragment_tasbih_counter) {
@@ -34,7 +36,6 @@ class TasbihCounterFragment :
     private var counter = 0
     private val maxCounter = 100
     lateinit var recyclerView: RecyclerView
-
     private val imageResources = listOf(
         R.drawable.ic_counter_one,
         R.drawable.ic_counter_two,
@@ -48,6 +49,8 @@ class TasbihCounterFragment :
         R.drawable.ic_counter_ten,
 
         )
+    private lateinit var imageView: ImageView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +58,6 @@ class TasbihCounterFragment :
         (activity as AppCompatActivity?)?.hideActionBar()
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
@@ -93,21 +95,29 @@ class TasbihCounterFragment :
         val view1 = motionLayout.findViewById<View>(R.id.view_animated_counter)
         recyclerView = binding.layoutTasbihCounterFragment.findViewById(R.id.recyclerView_tasbih_bg)
         counterTextView.text = counter.toString() // Set initial counter text
+        imageView = binding.layoutTasbihCounterFragment.findViewById(R.id.img_tasbih)
 
+        val selectedImageName = SharedPreferences.retrieveImageValue(requireContext())
+        Log.d("TasbihCounterFragment :selectedImageName", "Selected image name: $selectedImageName")
+           // Map the image name to the corresponding resource ID
+        val imageResource = TasbihZhikrUtil.getImageResource(selectedImageName ?: "")
+        Log.d("TasbihCounterFragment :imageResource ", "onViewCreated:$imageResource ")
+        // Set the image resource to the ImageView
+        imageView.setImageResource(imageResource)
 
 
         view1.setOnTouchListener { view, motionEvent ->
-           if( motionEvent.action == MotionEvent.ACTION_DOWN){
-               Log.d("TasbihCounterFragment", "onViewCreated: motionAction....... ")
-               Log.d("TasbihCounterFragment", "onViewCreated: view touch")
-               if (counter < maxCounter) {
-                   counter++
-                   counterTextView.text = counter.toString()
-                   Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
-               } else {
-                   Log.d("TasbihCounterFragment", "Maximum count reached.")
-               }
-           }
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+                Log.d("TasbihCounterFragment", "onViewCreated: motionAction....... ")
+                Log.d("TasbihCounterFragment", "onViewCreated: view touch")
+                if (counter < maxCounter) {
+                    counter++
+                    counterTextView.text = counter.toString()
+                    Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
+                } else {
+                    Log.d("TasbihCounterFragment", "Maximum count reached.")
+                }
+            }
 
             false
         }
@@ -160,4 +170,73 @@ class TasbihCounterFragment :
         recyclerView.adapter = adapter
     }
 
+    private fun displayImage(selectedImage: String?) {
+        when (selectedImage) {
+            "Subhan Allah" -> imageView.setImageResource(R.drawable.ic_subhan_allah)
+            "Alhamdulillah" -> imageView.setImageResource(R.drawable.allhamdulillah)
+            "la ilaha illa Allah" -> imageView.setImageResource(R.drawable.laillaha)
+            "Allahu Akbar" -> imageView.setImageResource(R.drawable.allahoakbar)
+            else -> R.drawable.ic_hathid
+        }
+    }
+
+    //    private fun getImageResource(imageName: String?): Int {
+//        return when (imageName) {
+//            ApplicationConstant.SUBHAN_ALLAH -> R.drawable.ic_subhan_allah
+//            ApplicationConstant.ALHAMDULILLAH -> R.drawable.allhamdulillah
+//            ApplicationConstant.LA_ILAHA_ILLA_ALLAH -> R.drawable.laillaha
+//            ApplicationConstant.ALLAHU_AKBAR -> R.drawable.allahoakbar
+//            else -> R.drawable.ic_hathid
+//
+//
+//        }
+//    }
+    object TasbihZhikrUtil {
+        fun getImageResource(imageName: String?): Int {
+            return when (imageName) {
+                SUBHAN_ALLAH -> R.drawable.ic_subhan_allah
+                ALHAMDULILLAH -> R.drawable.allhamdulillah
+                LA_ILAHA_ILLA_ALLAH -> R.drawable.laillaha
+                ALLAHU_AKBAR -> R.drawable.allahoakbar
+                else -> R.drawable.ic_hathid // Provide a default image resource ID
+            }
+
+        }
+
+
+    }
+
 }
+//        val selectedImageName = SharedPreferences.retrieveImageValue()
+//
+//        when (selectedImageName) {
+//            "Subhan Allah" -> selectedImage.setImageResource(R.drawable.ic_subhan_allah)
+//            "Alhamdulillah" -> selectedImage.setImageResource(R.drawable.allhamdulillah)
+//            "la ilaha illa Allah" -> selectedImage.setImageResource(R.drawable.laillaha)
+//            "Allahu Akbar" -> selectedImage.setImageResource(R.drawable.allahoakbar)
+//        }
+//        val selectedImage = SharedPreferences.retrieveImageValue()
+//        if (selectedImage != null) {
+//            val imageView = view.findViewById<ImageView>(R.id.img_tasbih)
+//            // Set the selected image to the ImageView
+//            val imageResource = getImageResource(selectedImage.toString())
+//            imageView.setImageResource(imageResource)
+//        }
+//        val selectedImage = SharedPreferences.retrieveImageValue()
+//        if (!selectedImage.isNullOrEmpty()) {
+//            val imageResource = getImageResource(selectedImage)
+//            imageView.setImageResource(imageResource)
+//            Log.d("TasbihCounterFragment", "onViewCreated:$selectedImage ")
+//        }
+
+//    companion object {
+//        fun newInstance(selectedImage: TasbihZhikrData) = TasbihFragment().apply {
+//            val sharedPrefHelper = SharedPreferences
+//            sharedPrefHelper.saveImageValue(selectedImage.tvZhikr)
+//        }
+//    }
+
+
+//        val selectedImage = SharedPreferences.retrieveImageValue()
+//        Log.d("TasbihCounterFragment", "onViewCreated: $selectedImage")
+//        displayImage(selectedImage)
