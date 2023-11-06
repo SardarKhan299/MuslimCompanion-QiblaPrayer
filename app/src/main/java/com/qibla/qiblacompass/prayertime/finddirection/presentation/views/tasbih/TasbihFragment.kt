@@ -38,23 +38,6 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
         }
         recyclerView = binding.layoutTasbihFragment.findViewById(R.id.recycler_view_zhikr)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-////        val data = ArrayList<TasbihZhikrData>()
-////        data.add(TasbihZhikrData("Subhan Allah", R.drawable.ic_subhan_allah))
-////        data.add(TasbihZhikrData("Alhamdulillah", R.drawable.allhamdulillah))
-////        data.add(TasbihZhikrData("la ilaha illa Allah", R.drawable.laillaha))
-////        data.add(TasbihZhikrData("Allahu Akbar", R.drawable.allahoakbar))
-//
-//
-////        val adapter = TasbihZhikrAdapter(data)
-////        recyclerView.adapter = adapter
-//
-//        val adapter = TasbihZhikrAdapter() { selectedImageName ->
-//            SharedPreferences.saveImageValue(selectedImageName.toString())
-//            Navigation.findNavController(requireView()).navigate(R.id.tasbihCounterFragment)
-//        }
-
-//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-//        recyclerView.adapter = adapter
 
         val data = ArrayList<TasbihZhikrData>()
         data.add(TasbihZhikrData(SUBHAN_ALLAH, R.drawable.ic_subhan_allah))

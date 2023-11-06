@@ -8,8 +8,8 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_start"
         style="@style/heading_style"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_30sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/unselected_btn_bg"

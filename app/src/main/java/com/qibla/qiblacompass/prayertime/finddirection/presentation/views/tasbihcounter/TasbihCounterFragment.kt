@@ -36,21 +36,22 @@ class TasbihCounterFragment :
     private var counter = 0
     private val maxCounter = 100
     lateinit var recyclerView: RecyclerView
-    private val imageResources = listOf(
-        R.drawable.ic_counter_one,
-        R.drawable.ic_counter_two,
-        R.drawable.ic_counter_three,
-        R.drawable.ic_counter_four,
-        R.drawable.ic_counter_five,
-        R.drawable.ic_counter_six,
-        R.drawable.ic_counter_seven,
-        R.drawable.ic_counter_eight,
-        R.drawable.ic_counter_nine,
-        R.drawable.ic_counter_ten,
-
-        )
     private lateinit var imageView: ImageView
-
+    private val imageResources = listOf(
+        R.drawable.m1,
+        R.drawable.m2,
+        R.drawable.m3,
+        R.drawable.m4,
+        R.drawable.m5,
+        R.drawable.m7,
+        R.drawable.m8,
+        R.drawable.m9,
+        R.drawable.m10,
+        R.drawable.m11,
+        R.drawable.m12,
+        R.drawable.m13,
+        R.drawable.m14,
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,7 +100,7 @@ class TasbihCounterFragment :
 
         val selectedImageName = SharedPreferences.retrieveImageValue(requireContext())
         Log.d("TasbihCounterFragment :selectedImageName", "Selected image name: $selectedImageName")
-           // Map the image name to the corresponding resource ID
+        // Map the image name to the corresponding resource ID
         val imageResource = TasbihZhikrUtil.getImageResource(selectedImageName ?: "")
         Log.d("TasbihCounterFragment :imageResource ", "onViewCreated:$imageResource ")
         // Set the image resource to the ImageView
@@ -170,27 +171,6 @@ class TasbihCounterFragment :
         recyclerView.adapter = adapter
     }
 
-    private fun displayImage(selectedImage: String?) {
-        when (selectedImage) {
-            "Subhan Allah" -> imageView.setImageResource(R.drawable.ic_subhan_allah)
-            "Alhamdulillah" -> imageView.setImageResource(R.drawable.allhamdulillah)
-            "la ilaha illa Allah" -> imageView.setImageResource(R.drawable.laillaha)
-            "Allahu Akbar" -> imageView.setImageResource(R.drawable.allahoakbar)
-            else -> R.drawable.ic_hathid
-        }
-    }
-
-    //    private fun getImageResource(imageName: String?): Int {
-//        return when (imageName) {
-//            ApplicationConstant.SUBHAN_ALLAH -> R.drawable.ic_subhan_allah
-//            ApplicationConstant.ALHAMDULILLAH -> R.drawable.allhamdulillah
-//            ApplicationConstant.LA_ILAHA_ILLA_ALLAH -> R.drawable.laillaha
-//            ApplicationConstant.ALLAHU_AKBAR -> R.drawable.allahoakbar
-//            else -> R.drawable.ic_hathid
-//
-//
-//        }
-//    }
     object TasbihZhikrUtil {
         fun getImageResource(imageName: String?): Int {
             return when (imageName) {
@@ -200,43 +180,6 @@ class TasbihCounterFragment :
                 ALLAHU_AKBAR -> R.drawable.allahoakbar
                 else -> R.drawable.ic_hathid // Provide a default image resource ID
             }
-
         }
-
-
     }
-
 }
-//        val selectedImageName = SharedPreferences.retrieveImageValue()
-//
-//        when (selectedImageName) {
-//            "Subhan Allah" -> selectedImage.setImageResource(R.drawable.ic_subhan_allah)
-//            "Alhamdulillah" -> selectedImage.setImageResource(R.drawable.allhamdulillah)
-//            "la ilaha illa Allah" -> selectedImage.setImageResource(R.drawable.laillaha)
-//            "Allahu Akbar" -> selectedImage.setImageResource(R.drawable.allahoakbar)
-//        }
-//        val selectedImage = SharedPreferences.retrieveImageValue()
-//        if (selectedImage != null) {
-//            val imageView = view.findViewById<ImageView>(R.id.img_tasbih)
-//            // Set the selected image to the ImageView
-//            val imageResource = getImageResource(selectedImage.toString())
-//            imageView.setImageResource(imageResource)
-//        }
-//        val selectedImage = SharedPreferences.retrieveImageValue()
-//        if (!selectedImage.isNullOrEmpty()) {
-//            val imageResource = getImageResource(selectedImage)
-//            imageView.setImageResource(imageResource)
-//            Log.d("TasbihCounterFragment", "onViewCreated:$selectedImage ")
-//        }
-
-//    companion object {
-//        fun newInstance(selectedImage: TasbihZhikrData) = TasbihFragment().apply {
-//            val sharedPrefHelper = SharedPreferences
-//            sharedPrefHelper.saveImageValue(selectedImage.tvZhikr)
-//        }
-//    }
-
-
-//        val selectedImage = SharedPreferences.retrieveImageValue()
-//        Log.d("TasbihCounterFragment", "onViewCreated: $selectedImage")
-//        displayImage(selectedImage)

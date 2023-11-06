@@ -382,7 +382,7 @@
                 android:layout_height="@dimen/_100sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginBottom="@dimen/_20sdp"
-                android:background="@drawable/ic_qibla_direction"
+                android:background="@drawable/ic_dashboard_qibal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
