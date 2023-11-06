@@ -58,27 +58,35 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
     private fun setUpQibla() {
         val data = ArrayList<QiblaData>()
-        data.add(QiblaData(R.drawable.ic_compass_frame, "Qibal"))
-        data.add(QiblaData(R.drawable.ic_zakat_frame, "Zakat"))
-        data.add(QiblaData(R.drawable.ic_name_frame, "Names"))
-        data.add(QiblaData(R.drawable.ic_tasbih_frame, "Tasbih"))
-        data.add(QiblaData(R.drawable.ic_prayer_frame, "Prayer"))
-        data.add(QiblaData(R.drawable.ic_quran_frame, "Quran"))
-        data.add(QiblaData(R.drawable.ic_makkah_frame, "Makkah Live"))
-        data.add(QiblaData(R.drawable.ic_near_me_frame, "Near me"))
-        data.add(QiblaData(R.drawable.ic_calendar_frame, "Hijri Calendar"))
-        data.add(QiblaData(R.drawable.ic_hathid, "Hadith"))
+        data.add(QiblaData(R.drawable.qibla_icn, "Qibal"))
+        data.add(QiblaData(R.drawable.zakat_icn, "Zakat"))
+        data.add(QiblaData(R.drawable.names_icn, "Names"))
+        data.add(QiblaData(R.drawable.tasbeeh_icn, "Tasbih"))
+        data.add(QiblaData(R.drawable.prayer_icn, "Prayer"))
+        data.add(QiblaData(R.drawable.quran_icn, "Quran"))
+        data.add(QiblaData(R.drawable.makah_live_icn, "Makkah Live"))
+        data.add(QiblaData(R.drawable.near_me_icn, "Near me"))
+        data.add(QiblaData(R.drawable.hijri_calendar_icn, "Hijri Calendar"))
+        data.add(QiblaData(R.drawable.hadith_icn, "Hadith"))
 
 
-        val adapter = QiblaAdapter(requireContext(), data, itemClickListenerCallback())
+        val adapter = QiblaAdapter(requireContext(), data) { position ->
+            navigateToSpecificScreen(position)
+        }
         rView.adapter = adapter
 
     }
 
-    private fun itemClickListenerCallback(): (QiblaData) -> Unit {
-        return {
-            Log.d(DashBoardFragment::class.simpleName, "ok_btn_callback:")
+    private fun navigateToSpecificScreen(position: Int) {
+        // Navigate to specific screens based on position clicked
+        when (position) {
 
+            3 -> {
+                // Handle click on position 1
+                // Navigate to screen 1
+                Navigation.findNavController(requireView()).navigate(R.id.tasbihFragment)
+            }
+            // Add more cases for other positions
         }
     }
 
