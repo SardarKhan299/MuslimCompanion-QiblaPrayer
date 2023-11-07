@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_qibal_direction_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.views.qibaldirection.QibalDirectionFragment">
+
+    <include
+        android:id="@+id/toolbar_qibal_direction"
+        layout="@layout/layout_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left_qibal_direction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.02"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right_qibal_direction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_120sdp"
+        android:background="@drawable/map_background_qibal_direction"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_qibal_direction"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_qibal_direction"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_qibal_direction" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView_direction"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_view_qibal_direction"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_qibal_direction"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_qibal_direction"
+        tools:listitem="@layout/item_compass_layout" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_distance_heading"
+        style="@style/text_direction_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:text="@string/distance_text"
+        app:layout_constraintBottom_toTopOf="@+id/recycle_view_qibal_direction"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_qibal_direction" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_distance_number"
+        style="@style/side_menu_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/_1628_km_"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_distance_heading"
+        app:layout_constraintStart_toEndOf="@+id/tv_distance_heading"
+        app:layout_constraintTop_toTopOf="@+id/tv_distance_heading" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_angle"
+        style="@style/side_menu_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:text="@string/_265_"
+        app:layout_constraintBottom_toTopOf="@+id/recycle_view_qibal_direction"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_qibal_direction" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_angle_heading"
+        style="@style/text_direction_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:text="@string/angle"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_angle"
+        app:layout_constraintEnd_toStartOf="@+id/tv_angle"
+        app:layout_constraintTop_toTopOf="@+id/tv_angle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_location_country"
+        style="@style/login_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:text="@string/pakistan"
+        app:layout_constraintBottom_toTopOf="@+id/tv_distance_heading"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_qibal_direction"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_qibal_direction" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_location_city"
+        style="@style/city_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:text="@string/islamabad_city"
+        app:layout_constraintBottom_toTopOf="@+id/tv_location_country"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_qibal_direction"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_qibal_direction" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_8sdp"
+        android:src="@drawable/ic_drop_down"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_location_city"
+        app:layout_constraintStart_toEndOf="@+id/tv_location_city"
+        app:layout_constraintTop_toTopOf="@+id/tv_location_city"
+        app:layout_constraintVertical_bias="0.307" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_main_compass"
+        app:layout_constraintBottom_toTopOf="@+id/tv_location_city"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_qibal_direction"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_qibal_direction"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+</androidx.constraintlayout.widget.ConstraintLayout>

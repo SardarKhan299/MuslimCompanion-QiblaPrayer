@@ -110,4 +110,11 @@
     <string name="have_you_dikhr_today">Have you dikhr today?</string>
     <string name="_04_08_2023">04/08/2023</string>
     <string name="tasbih">Tasbih</string>
+    <string name="distance_text">Distance:</string>
+    <string name="_1628_km_">1628 km</string>
+    <string name="_265_">265°</string>
+    <string name="angle">Angle:</string>
+    <string name="pakistan">Pakistan</string>
+    <string name="islamabad_city">Islamabad</string>
+
 </resources>
