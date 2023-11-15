@@ -37,5 +37,6 @@
     <dimen name="dashboard_guideline_right">0.96</dimen>
     <dimen name="bmi_bar_size">@dimen/_15sdp</dimen>
     <dimen name="bmi_bar_size_selected">@dimen/_25sdp</dimen>
-
+    <dimen name="dial">250dp</dimen>
+    <dimen name="qibla">320dp</dimen>
 </resources>

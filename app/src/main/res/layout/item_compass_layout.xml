@@ -6,8 +6,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_compass_direction"
-        android:layout_width="@dimen/_65sdp"
-        android:layout_height="@dimen/_65sdp"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
         android:layout_marginStart="@dimen/_8sdp"
         android:src="@drawable/ic_compass_one"
         android:layout_marginBottom="@dimen/_8sdp"

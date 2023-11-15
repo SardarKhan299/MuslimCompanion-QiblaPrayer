@@ -1,5 +1,6 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,6 +17,8 @@ import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentDashBoardBinding
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.onboarding.OnboardingActivity
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.qibaldirection.CompassDirectionActivity
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.sidemenu.SideMenuFragment
 
 
@@ -37,7 +40,9 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         binding.toolbarBoard.groupToolbar.visibility = View.VISIBLE
         rView = binding.layoutBoardFragment.findViewById(R.id.rv_qibla)
         binding.tvAds.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.tasbihCounterFragment)
+            //Navigation.findNavController(requireView()).navigate(R.id.tasbihCounterFragment)
+            startActivity(Intent(mContext, CompassDirectionActivity::class.java))
+
         }
         binding.toolbarBoard.imgToolbar.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.sideMenuFragment)
@@ -80,6 +85,10 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     private fun navigateToSpecificScreen(position: Int) {
         // Navigate to specific screens based on position clicked
         when (position) {
+            0 -> {
+                Navigation.findNavController(requireView()).navigate(R.id.qibalDirectionFragment)
+
+            }
 
             3 -> {
                 // Handle click on position 1
