@@ -12,10 +12,10 @@ class TasbihCounterAdapter(
     private val imageList: List<Int>, private val onItemClick: (Int) -> Unit
 
 ) :
-    RecyclerView.Adapter<TasbihCounterAdapter.TasbihCounterViewModel>() {
+    RecyclerView.Adapter<TasbihCounterAdapter.TasbihCounterViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasbihCounterViewModel {
-        return TasbihCounterViewModel(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasbihCounterViewHolder {
+        return TasbihCounterViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_tasbih_counter_backround_layout, parent, false)
         )
@@ -23,13 +23,13 @@ class TasbihCounterAdapter(
 
     override fun getItemCount(): Int = imageList.size// Number of items
 
-    override fun onBindViewHolder(holder: TasbihCounterViewModel, position: Int) {
+    override fun onBindViewHolder(holder: TasbihCounterViewHolder, position: Int) {
         val image = imageList[position]
         holder.imageView.setImageResource(image)
 
     }
 
-    inner class TasbihCounterViewModel(val view: View) : RecyclerView.ViewHolder(view) {
+    inner class TasbihCounterViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = itemView.findViewById(R.id.img_tasbih_counter)
 
         init {

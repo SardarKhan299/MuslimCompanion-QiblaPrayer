@@ -39,4 +39,5 @@
     <color name="selected_isha_color">#83458E</color>
     <color name="selected_tahajjud_color">#83458E</color>
     <color name="close_icon_tasbih_color">#706A5D</color>
+    <color name="distance_text_color">#A3A29D</color>
 </resources>
