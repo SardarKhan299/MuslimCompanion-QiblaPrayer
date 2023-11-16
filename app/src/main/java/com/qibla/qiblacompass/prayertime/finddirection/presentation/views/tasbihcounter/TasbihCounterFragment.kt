@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -105,7 +106,11 @@ class TasbihCounterFragment :
         Log.d("TasbihCounterFragment :imageResource ", "onViewCreated:$imageResource ")
         // Set the image resource to the ImageView
         imageView.setImageResource(imageResource)
+val digitalCounter = binding.layoutCounterType
+        digitalCounter.viewDigitalTasbih.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.digitalTasbihFragment)
 
+        }
 
         view1.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
