@@ -75,7 +75,13 @@
     <fragment
         android:id="@+id/tasbihCounterFragment"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter.TasbihCounterFragment"
-        android:label="TasbihCounterFragment" />
+        android:label="TasbihCounterFragment"
+        tools:layout="@layout/fragment_tasbih_counter"
+        >
+        <action
+            android:id="@+id/action_tasbihCounterFragment_to_digitalTasbihFragment"
+            app:destination="@id/digitalTasbihFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tasbihFragment"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbih.TasbihFragment"
@@ -84,4 +90,9 @@
         android:id="@+id/qibalDirectionFragment"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.qibaldirection.QibalDirectionFragment"
         android:label="QibalDirectionFragment" />
+    <fragment
+        android:id="@+id/digitalTasbihFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.digitaltasbih.DigitalTasbihFragment"
+        android:label="fragment_digital_tasbih"
+        tools:layout="@layout/fragment_digital_tasbih" />
 </navigation>
