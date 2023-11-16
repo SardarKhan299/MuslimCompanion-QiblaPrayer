@@ -10,8 +10,16 @@
     <View
         android:id="@+id/view_counter"
         android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_140sdp"
+        android:layout_height="@dimen/_160sdp"
         android:background="@drawable/counter_type_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_digital_tasbih"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,58 +29,93 @@
         style="@style/ayat_translation_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
         android:text="@string/digital_tasbih"
-        app:layout_constraintStart_toStartOf="@+id/view_counter"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_digital_tasbih"
+        app:layout_constraintStart_toStartOf="@+id/view_digital_tasbih"
         app:layout_constraintTop_toTopOf="@+id/view_counter" />
+
+
+    <View
+        android:id="@+id/view_set_counter"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_digital_tasbih" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_set_counter"
         style="@style/ayat_translation_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
         android:text="@string/set_counter"
-        app:layout_constraintStart_toStartOf="@+id/tv_digital_tasbih"
-        app:layout_constraintTop_toBottomOf="@+id/tv_digital_tasbih" />
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_set_counter"
+        app:layout_constraintStart_toStartOf="@id/view_set_counter"
+        app:layout_constraintTop_toTopOf="@+id/view_set_counter" />
+
+    <View
+        android:id="@+id/view_show_history"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_set_counter" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_show_history"
         style="@style/ayat_translation_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
         android:text="@string/show_history"
-        app:layout_constraintStart_toStartOf="@+id/tv_set_counter"
-        app:layout_constraintTop_toBottomOf="@+id/tv_set_counter" />
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_show_history"
+        app:layout_constraintStart_toStartOf="@+id/view_show_history"
+        app:layout_constraintTop_toTopOf="@+id/view_show_history" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_overflow"
-        style="@style/ayat_translation_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:text="@string/overflow"
-        app:layout_constraintStart_toStartOf="@+id/tv_show_history"
-        app:layout_constraintTop_toBottomOf="@+id/tv_show_history" />
+
 
     <CheckBox
         android:id="@+id/checkBox_show_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/primary_color"
+        android:layout_marginEnd="@dimen/_8sdp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_show_history"
-        app:layout_constraintEnd_toEndOf="@+id/view_counter"
+        app:layout_constraintEnd_toEndOf="@+id/view_show_history"
         app:layout_constraintTop_toTopOf="@+id/tv_show_history" />
 
+    <View
+        android:id="@+id/view_show_overflow"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_counter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/_4sdp"
+        app:layout_constraintTop_toBottomOf="@+id/view_show_history"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_overflow"
+        style="@style/ayat_translation_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/overflow"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_show_overflow"
+        app:layout_constraintStart_toStartOf="@+id/view_show_overflow"
+        app:layout_constraintTop_toTopOf="@+id/view_show_overflow" />
     <CheckBox
         android:id="@+id/checkBox_over_flow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/primary_color"
+        android:layout_marginEnd="@dimen/_8sdp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_overflow"
-        app:layout_constraintEnd_toEndOf="@+id/view_counter"
+        app:layout_constraintEnd_toEndOf="@+id/view_show_overflow"
         app:layout_constraintTop_toTopOf="@+id/tv_overflow" />
 
 
