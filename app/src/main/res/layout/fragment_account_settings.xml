@@ -15,6 +15,7 @@
         android:id="@+id/layout_account_settings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/ic_side_menu"
         tools:context=".presentation.views.accountsettings.AccountSettingsFragment">
 
         <include
