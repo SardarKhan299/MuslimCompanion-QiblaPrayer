@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstan
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.LA_ILAHA_ILLA_ALLAH
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.SUBHAN_ALLAH
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.saveImageValue
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentTasbihCounterBinding
@@ -105,7 +107,16 @@ class TasbihCounterFragment :
         Log.d("TasbihCounterFragment :imageResource ", "onViewCreated:$imageResource ")
         // Set the image resource to the ImageView
         imageView.setImageResource(imageResource)
+        saveImageValue(requireContext(), selectedImageName.toString())
 
+
+
+
+        val digitalCounter = binding.layoutCounterType
+        digitalCounter.viewDigitalTasbih.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.digitalTasbihFragment)
+
+        }
 
         view1.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
