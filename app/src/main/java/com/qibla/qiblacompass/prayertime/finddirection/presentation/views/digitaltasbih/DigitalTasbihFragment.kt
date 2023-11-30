@@ -1,12 +1,7 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.digitaltasbih
 
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Im
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,19 +9,16 @@ import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant
-import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.retrieveImageValue
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentDigitalTasbihBinding
-import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter.TasbihCounterFragment
 
 
 class DigitalTasbihFragment :
     BaseFragment<FragmentDigitalTasbihBinding>(R.layout.fragment_digital_tasbih) {
 
     private lateinit var counterTextView: TextView
-    private lateinit var incrementButton: ImageView
     private lateinit var decrementButton: ImageView
     private lateinit var mainIncrementButton: ImageView
     private lateinit var resetButton: ImageView
@@ -52,7 +44,6 @@ class DigitalTasbihFragment :
             findNavController().closeCurrentScreen()
         }
         counterTextView = binding.tvDigitalCounter
-        incrementButton = binding.imgAddDigitalCounter
         decrementButton = binding.imgMinusDigitalCounter
         resetButton = binding.imgResetDigitalCounter
         mainIncrementButton = binding.imgIncrementDigitalCounter
@@ -66,9 +57,6 @@ class DigitalTasbihFragment :
 
         resetButton.setOnClickListener {
             resetCounter()
-        }
-        incrementButton.setOnClickListener {
-            incrementCounter()
         }
         mainIncrementButton.setOnClickListener {
             incrementCounter()
