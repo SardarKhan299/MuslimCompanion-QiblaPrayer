@@ -1,60 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_zakat"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    tools:context=".presentation.views.ZakatFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <include
-        android:id="@+id/toolbar_zakat"
-        layout="@layout/layout_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_left_zakat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.02"
-        app:layout_constraintStart_toStartOf="parent" />
+        <variable
+            name="zakat_fragment"
+            type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.zakat.ZakatFragment" />
+    </data>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_right_zakat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.98" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_zakat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        tools:context=".presentation.views.zakat.ZakatFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_zakat"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_120sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_zakat"
-        tools:listitem="@layout/item_zakat" />
+        <include
+            android:id="@+id/toolbar_zakat"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left_zakat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.02"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        style="@style/button_text_style"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_bg"
-        android:text="Calculate"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginBottom="@dimen/_16sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right_zakat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.98" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_zakat"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_120sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_zakat"
+            tools:listitem="@layout/item_zakat" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_calculate_zakat"
+            style="@style/button_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:background="@drawable/button_bg"
+            android:text="Calculate"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

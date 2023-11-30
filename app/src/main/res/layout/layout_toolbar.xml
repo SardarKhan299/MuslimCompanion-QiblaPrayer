@@ -112,9 +112,9 @@
         style="@style/toolbar_sub_screens_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_40sdp"
         android:text="@string/account_settings"
         app:layout_constraintBottom_toBottomOf="@+id/view_subScreen"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view_subScreen"
         app:layout_constraintTop_toTopOf="@+id/view_subScreen" />
 
@@ -191,19 +191,18 @@ img_notification_icon"
         android:id="@+id/img_navigate_back"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        android:src="@drawable/ic_navigate_back"
         android:layout_marginStart="@dimen/_6sdp"
         android:layout_marginTop="@dimen/_6sdp"
+        android:src="@drawable/ic_navigate_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_add_more"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        android:src="@drawable/ic_more"
         android:layout_marginEnd="@dimen/_8sdp"
+        android:src="@drawable/ic_more"
         app:layout_constraintBottom_toBottomOf="@+id/img_navigate_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/img_navigate_back" />
@@ -218,6 +217,7 @@ img_notification_icon"
         app:layout_constraintEnd_toStartOf="@+id/img_add_more"
         app:layout_constraintStart_toEndOf="@+id/img_navigate_back"
         app:layout_constraintTop_toTopOf="@+id/img_navigate_back" />
+
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_toolbar_tasbih_counter"
         android:layout_width="match_parent"
