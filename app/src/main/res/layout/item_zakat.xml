@@ -2,14 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="@dimen/_100sdp"
+    android:layout_height="@dimen/_110sdp">
 
     <View
         android:id="@+id/view_zakat"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_120sdp"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_100sdp"
         android:background="@drawable/zakat_background"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -17,8 +18,8 @@
         android:id="@+id/img_type_zakat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
         android:src="@drawable/ic_gold"
-        android:layout_marginTop="@dimen/_14sdp"
         app:layout_constraintEnd_toEndOf="@+id/view_zakat"
         app:layout_constraintStart_toStartOf="@id/view_zakat"
         app:layout_constraintTop_toTopOf="@+id/view_zakat" />
@@ -26,31 +27,31 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="@dimen/_12sdp"
         android:layout_height="@dimen/_12sdp"
-        android:src="@drawable/vector_info"
-        app:layout_constraintEnd_toEndOf="@+id/view_zakat"
-        app:layout_constraintTop_toTopOf="@+id/view_zakat"
         android:layout_marginTop="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_8sdp"
-        />
+        android:src="@drawable/vector_info"
+        app:layout_constraintEnd_toEndOf="@+id/view_zakat"
+        app:layout_constraintTop_toTopOf="@+id/view_zakat" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_zakat_type_name"
         style="@style/ayat_of_date_title_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gold"
         android:layout_marginTop="@dimen/_4sdp"
+        android:text="@string/gold"
+        android:textSize="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="@+id/img_type_zakat"
         app:layout_constraintStart_toStartOf="@+id/img_type_zakat"
         app:layout_constraintTop_toBottomOf="@+id/img_type_zakat" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_zakat"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/zakat_btn_bg"
         style="@style/zakat_btn_text_style"
-        android:text="10 Tola"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_25sdp"
+        android:background="@drawable/zakat_btn_bg"
+        android:text="@string/_10_tola"
         app:layout_constraintBottom_toBottomOf="@+id/view_zakat"
         app:layout_constraintEnd_toEndOf="@+id/view_zakat"
         app:layout_constraintStart_toStartOf="@+id/view_zakat" />

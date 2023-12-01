@@ -135,4 +135,17 @@
     <string name="dialog_message_sensor_not_exist" translatable="false">Your device doesn\'t have the required sensors</string>
     <string name="dialog_title" translatable="false">Alert</string>
     <string name="footer_image">Footer Image</string>
+    <string name="zakat_calculator">Zakat Calculator</string>
+    <string name="gold">Gold</string>
+    <string name="Silver">Silver</string>
+    <string name="Stones">Stones</string>
+    <string name="agriculture">Agriculture</string>
+    <string name="property">Property</string>
+    <string name="business">Business</string>
+    <string name="partnership">Partnership</string>
+    <string name="loan">Loan</string>
+    <string name="_10_tola">10 Tola</string>
+    <string name="calculate">Calculate</string>
+
+
 </resources>

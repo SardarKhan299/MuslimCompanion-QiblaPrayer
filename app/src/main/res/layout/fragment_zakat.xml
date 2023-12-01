@@ -11,7 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fragment_zakat"
+        android:id="@+id/layout_zakat_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg"
@@ -45,12 +45,15 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_zakat"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_120sdp"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_calculate_zakat"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_zakat"
+            app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/item_zakat" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -62,7 +65,7 @@
             android:layout_marginEnd="@dimen/_16sdp"
             android:layout_marginBottom="@dimen/_16sdp"
             android:background="@drawable/button_bg"
-            android:text="Calculate"
+            android:text="@string/calculate"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat" />
