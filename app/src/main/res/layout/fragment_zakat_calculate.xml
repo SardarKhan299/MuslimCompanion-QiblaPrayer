@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
-            android:text="Assets Eligible for Zakat"
+            android:text="@string/assets_eligible_for_zakat"
             app:layout_constraintBottom_toBottomOf="@+id/view_heading_zakat"
             app:layout_constraintStart_toStartOf="@+id/view_heading_zakat"
             app:layout_constraintTop_toTopOf="@+id/view_heading_zakat" />
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:text="1. Gold"
+            android:text="@string/_1_gold"
             app:layout_constraintStart_toStartOf="@+id/view_zakat_gold"
             app:layout_constraintTop_toTopOf="@+id/view_zakat_gold" />
 
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(1) Gold in your possession:"
+            android:text="@string/gold_in_your_possession"
             app:layout_constraintStart_toStartOf="@+id/tv_heading_gold"
             app:layout_constraintTop_toBottomOf="@+id/tv_heading_gold" />
 
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_2sdp"
-            android:text="(Whether in any form and for any purpose, write current value)"
+            android:text="@string/whether_in_any_form_and_for_any_purpose_write_current_value"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
             app:layout_constraintStart_toStartOf="@+id/tv_gold_subheading"
             app:layout_constraintTop_toBottomOf="@+id/tv_gold_subheading" />
@@ -133,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(2) Gold kept in trust somewhere:"
+            android:text="@string/gold_kept_in_trust_somewhere"
             app:layout_constraintStart_toStartOf="@+id/edt_gold_amount"
             app:layout_constraintTop_toBottomOf="@+id/edt_gold_amount" />
 
@@ -163,7 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="2.Silver"
+            android:text="@string/silver"
             app:layout_constraintStart_toStartOf="@+id/tv_heading_gold"
             app:layout_constraintTop_toBottomOf="@+id/edt_gold_trust" />
 
@@ -173,7 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(1) Silver in your possession:"
+            android:text="@string/silver_in_your_possession"
             app:layout_constraintStart_toStartOf="@+id/tv_heading_silver"
             app:layout_constraintTop_toBottomOf="@+id/tv_heading_silver" />
 
@@ -184,7 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_2sdp"
-            android:text="(Whether in any form and for any purpose, write current value)"
+            android:text="@string/whether_in_any_form_and_for_any_purpose_write_current_value"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
             app:layout_constraintStart_toStartOf="@+id/tv_silver_subheading"
             app:layout_constraintTop_toBottomOf="@+id/tv_silver_subheading" />
@@ -215,7 +215,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(2) Silver kept in trust somewhere:"
+            android:text="@string/silver_kept_in_trust_somewhere"
             app:layout_constraintStart_toStartOf="@+id/tv_silver_subheading"
             app:layout_constraintTop_toBottomOf="@+id/edt_silver" />
 
@@ -245,7 +245,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="3.Cash"
+            android:text="@string/cash"
             app:layout_constraintStart_toStartOf="@+id/tv_heading_silver"
             app:layout_constraintTop_toBottomOf="@+id/edt_silver_trust" />
 
@@ -255,7 +255,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(1) Domestic currency held by you:"
+            android:text="@string/domestic_currency_held_by_you"
             app:layout_constraintStart_toStartOf="@+id/tv_heading_cash"
             app:layout_constraintTop_toBottomOf="@+id/tv_heading_cash" />
 
@@ -285,7 +285,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(2) Foreign currency:"
+            android:text="@string/foreign_currency"
             app:layout_constraintStart_toStartOf="@+id/tv_cash_held"
             app:layout_constraintTop_toBottomOf="@+id/edt_cash_held_point_one" />
 
@@ -326,7 +326,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_4sdp"
-            android:text="(3) Money accumulated for any future purpose like Hajj or marriage or building a house:"
+            android:text="@string/money_accumulated_for_any_future_purpose_like_hajj_or_marriage_or_building_a_house"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
             app:layout_constraintStart_toStartOf="@+id/edt_foreign_currency"
             app:layout_constraintTop_toBottomOf="@+id/edt_foreign_currency" />
@@ -357,7 +357,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(4) Money deposited in the bank:"
+            android:text="@string/money_deposited_in_the_bank"
             app:layout_constraintStart_toStartOf="@+id/edt_cash_save_for_purpose"
             app:layout_constraintTop_toBottomOf="@+id/edt_cash_save_for_purpose" />
 
@@ -387,7 +387,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(5) Money entrusted to someone:"
+            android:text="@string/money_entrusted_to_someone"
             app:layout_constraintStart_toStartOf="@+id/edt_cash_deposit_bank"
             app:layout_constraintTop_toBottomOf="@+id/edt_cash_deposit_bank" />
 
@@ -397,7 +397,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(eg security etc.)"
+            android:text="@string/eg_security_etc"
             app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_five"
             app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_five" />
 
@@ -427,7 +427,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(6) Insurance:"
+            android:text="@string/insurance"
             app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_five"
             app:layout_constraintTop_toBottomOf="@+id/edt_trusted_money" />
 
@@ -437,7 +437,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(Your deposit in the insurance policy)"
+            android:text="@string/your_deposit_in_the_insurance_policy"
             app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_six"
             app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_six" />
 
@@ -467,7 +467,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(7) A loan given to someone:"
+            android:text="@string/a_loan_given_to_someone"
             app:layout_constraintStart_toStartOf="@+id/edt_insurance"
             app:layout_constraintTop_toBottomOf="@+id/edt_insurance" />
 
@@ -477,7 +477,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(which is likely to be found)"
+            android:text="@string/which_is_likely_to_be_found"
             app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_seven"
             app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_seven" />
 
@@ -507,7 +507,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(8) Refundable security deposit of any kind:"
+            android:text="@string/refundable_security_deposit_of_any_kind"
             app:layout_constraintStart_toStartOf="@+id/edt_loan"
             app:layout_constraintTop_toBottomOf="@+id/edt_loan" />
 
@@ -537,7 +537,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(9) Money invested, mutual or partnership and profit derived therefrom:"
+            android:text="@string/money_invested_mutual_or_partnership_and_profit_derived_therefrom"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
             app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_eight"
             app:layout_constraintTop_toBottomOf="@+id/edt_security_deposit" />
@@ -568,7 +568,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(10) Savings certificates:"
+            android:text="@string/savings_certificates"
             app:layout_constraintStart_toStartOf="@+id/edt_money_invest"
             app:layout_constraintTop_toBottomOf="@+id/edt_money_invest" />
 
@@ -579,7 +579,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_4sdp"
-            android:text="(E.g. NIT, NDFC, FEBC (Zakat will be payable only on the original amount, although it is not permissible to purchase them under current circumstances))"
+            android:text="@string/e_g_nit_ndfc_febc_zakat_will_be_payable_only_on_the_original_amount_although_it_is_not_permissible_to_purchase_them_under_current_circumstances"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
             app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_ten"
             app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_ten" />
@@ -610,7 +610,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(11) Financial documents or contributions converted into cash:"
+            android:text="@string/financial_documents_or_contributions_converted_into_cash"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
             app:layout_constraintStart_toStartOf="@+id/edt_saving_certificates"
             app:layout_constraintTop_toBottomOf="@+id/edt_saving_certificates" />
@@ -641,7 +641,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(12) Cashable Financial Documents or Contributions:"
+            android:text="@string/cashable_financial_documents_or_contributions"
             app:layout_constraintStart_toStartOf="@+id/edt_financial_documents"
             app:layout_constraintTop_toBottomOf="@+id/edt_financial_documents" />
 
@@ -651,7 +651,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(eg draft, cheque, bill of exchange, all types of bonds, government securities etc.)"
+            android:text="@string/eg_draft_cheque_bill_of_exchange_all_types_of_bonds_government_securities_etc"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
             app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_twelve"
             app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_twelve" />
@@ -682,7 +682,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(13) Amounts received or contained in any other modern procedure (alternative to cash):"
+            android:text="@string/amounts_received_or_contained_in_any_other_modern_procedure_alternative_to_cash"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
             app:layout_constraintStart_toStartOf="@+id/edt_cashable_financial_documents"
             app:layout_constraintTop_toBottomOf="@+id/edt_cashable_financial_documents" />
@@ -713,7 +713,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(14) The installments of the Committee (BC) which have been deposited so far and which have not been received by the Committee:"
+            android:text="@string/the_installments_of_the_committee_bc_which_have_been_deposited_so_far_and_which_have_not_been_received_by_the_committee"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
             app:layout_constraintStart_toStartOf="@+id/edt_amounts_received"
             app:layout_constraintTop_toBottomOf="@+id/edt_amounts_received" />
@@ -744,7 +744,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="4.Goods trading"
+            android:text="@string/goods_trading"
             app:layout_constraintStart_toStartOf="@+id/edt_installments_committee"
             app:layout_constraintTop_toBottomOf="@+id/edt_installments_committee" />
 
@@ -754,7 +754,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(1) Raw materials in any form:"
+            android:text="@string/raw_materials_in_any_form"
             app:layout_constraintStart_toStartOf="@+id/tv_heading_trading"
             app:layout_constraintTop_toBottomOf="@+id/tv_heading_trading" />
 
@@ -813,7 +813,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(3) Amount receivable for goods sold:"
+            android:text="@string/amount_receivable_for_goods_sold"
             app:layout_constraintStart_toStartOf="@+id/edt_goods_for_sale"
             app:layout_constraintTop_toBottomOf="@+id/edt_goods_for_sale" />
 
@@ -843,7 +843,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(4) Store stock held for sale:"
+            android:text="@string/store_stock_held_for_sale"
             app:layout_constraintStart_toStartOf="@+id/edt_receivable_goods_sold"
             app:layout_constraintTop_toBottomOf="@+id/edt_receivable_goods_sold" />
 
@@ -873,7 +873,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:text="(5) Shares of companies:"
+            android:text="@string/shares_of_companies"
             app:layout_constraintStart_toStartOf="@+id/edt_stock_for_sale"
             app:layout_constraintTop_toBottomOf="@+id/edt_stock_for_sale" />
 
