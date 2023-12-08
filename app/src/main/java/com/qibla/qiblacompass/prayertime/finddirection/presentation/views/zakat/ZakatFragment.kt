@@ -3,6 +3,7 @@ package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.zakat
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,13 +33,22 @@ class ZakatFragment : BaseFragment<FragmentZakatBinding>(R.layout.fragment_zakat
         binding.toolbarZakat.viewSubScreen.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
+        binding.btnCalculateZakat.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.zakatCalculateFragment)
+        }
         recyclerView = binding.layoutZakatFragment.findViewById(R.id.recycler_view_zakat)
         val gridLayoutManager =
             GridLayoutManager(mContext, 3) // Adjust the number of columns as needed
         recyclerView.layoutManager = gridLayoutManager
 
         val data = ArrayList<ZakatData>()
-        data.add(ZakatData(R.drawable.ic_gold, getString(R.string.gold), getString(R.string._10_tola)))
+        data.add(
+            ZakatData(
+                R.drawable.ic_gold,
+                getString(R.string.gold),
+                getString(R.string._10_tola)
+            )
+        )
         data.add(ZakatData(R.drawable.ic_silver, getString(R.string.Silver), "5 Tola"))
         data.add(ZakatData(R.drawable.ic_stones, getString(R.string.Stones), "0.9 million"))
         data.add(ZakatData(R.drawable.ic_agriculture, getString(R.string.agriculture), "2.3 million"))

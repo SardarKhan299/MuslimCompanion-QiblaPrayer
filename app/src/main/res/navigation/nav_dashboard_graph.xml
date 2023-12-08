@@ -101,5 +101,14 @@
     <fragment
         android:id="@+id/zakatFragment"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.zakat.ZakatFragment"
-        android:label="ZakatFragment" />
+        android:label="ZakatFragment" >
+        <action
+            android:id="@+id/action_zakatFragment_to_zakatCalculateFragment"
+            app:destination="@id/zakatCalculateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/zakatCalculateFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.ZakatCalculateFragment"
+        android:label="fragment_zakat_calculate"
+        tools:layout="@layout/fragment_zakat_calculate" />
 </navigation>

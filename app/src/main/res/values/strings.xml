@@ -146,6 +146,32 @@
     <string name="loan">Loan</string>
     <string name="_10_tola">10 Tola</string>
     <string name="calculate">Calculate</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rs">Rs</string>
+    <string name="further_guidance">For further guidance see: (1) Zakat form by Jamia Darul Uloom Karachi. (2) Zakat Farm by Jamia Ashrafia Lahore</string>
+    <string name="amount_of_zakat_rs">Amount of Zakat: Rs.</string>
+    <string name="amount_zakat_is_due">The amount on which Zakat is due.: Rs.</string>
+    <string name="amount_to_be_deducted">Amount to be deducted: Rs.</string>
+    <string name="wealth_zakat_value">Total wealth Zakat value: Rs.</string>
+    <string name="answer">Answer</string>
+    <string name="zakat_is_obligatory">To find out whether Zakat is obligatory on you or not, find out the current price of one tola of silver from a goldsmith and enter it.</string>
+    <string name="price_of_a_tola_of_silver">Price of a tola of silver:</string>
+    <string name="amount_zakat_of_previous_years">(7) The amount of Zakat of previous years which you have not yet paid:</string>
+    <string name="electricity_phone_gas_water_milk_and_newspaper_etc">(Electricity, phone, gas, water, milk and newspaper etc.)</string>
+    <string name="due_taxes_and_utility_bills">(6) Due Taxes and Utility Bills:</string>
+    <string name="_5_the_commission_which_you_have_received_and_the_total_amount_of_the_remaining_installments_thereof_which_you_have_paid">(5) The commission which you have received, and the total amount of the remaining installments thereof which you have paid:</string>
+    <string name="_4_prices_of_goods_purchased_on_credit">(4) Prices of goods purchased on credit:</string>
+    <string name="whether_domestic_worker_or_entrepreneur">(Whether domestic worker or entrepreneur)</string>
+    <string name="salary_of_employees">(3) Salary of employees:</string>
+    <string name="shop_house_warehouse_factory_etc">(shop, house, warehouse, factory etc.)</string>
+    <string name="obligatory_payment_rent">(2) Obligatory Payment Rent</string>
+    <string name="obligation_to_repay_a_loan">(1) I have an obligation to repay a loan:</string>
+    <string name="obligatory_discharge">1. Obligatory Discharge</string>
+    <string name="financial_responsibilities">Financial Responsibilities:</string>
+    <string name="such_items_and_property_plots_etc_which_have_been_purchased_with_the_intention_of_selling_at_a_profit_and_this_intention_is_still_maintained">(Such items and property plots etc. which have been purchased with the intention of selling at a profit and this intention is still maintained)</string>
+    <string name="goods_and_property_purchased_for_the_purpose_of_trade">(7) Goods and property purchased for the purpose of trade:</string>
+    <string name="sale_price_of_zakatable_item_acquired_in_exchange_for_trade_in_goods">(6) Sale price of Zakatable item acquired in exchange for trade in goods:</string>
 
 
 </resources>
