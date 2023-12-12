@@ -151,7 +151,7 @@
     <string name="rs">Rs</string>
     <string name="further_guidance">For further guidance see: (1) Zakat form by Jamia Darul Uloom Karachi. (2) Zakat Farm by Jamia Ashrafia Lahore</string>
     <string name="amount_of_zakat_rs">Amount of Zakat: Rs.</string>
-    <string name="amount_zakat_is_due">The amount on which Zakat is due.: Rs.</string>
+    <string name="amount_zakat_is_due">The amount on which Zakat is due: Rs.</string>
     <string name="amount_to_be_deducted">Amount to be deducted: Rs.</string>
     <string name="wealth_zakat_value">Total wealth Zakat value: Rs.</string>
     <string name="answer">Answer</string>
@@ -205,6 +205,11 @@
     <string name="gold_in_your_possession">(1) Gold in your possession:</string>
     <string name="_1_gold">1. Gold</string>
     <string name="assets_eligible_for_zakat">Assets Eligible for Zakat</string>
+    <string name="your_amount_on_which_zakat_is_due_is_less_than_that_so_you_do_not_owe_zakat">Your amount on which Zakat is due is less than that, so you do not owe Zakat</string>
+    <string name="current_price_in_local_currency_should_be_written">(Current price in local currency should be written)</string>
+    <string name="_2_manufactured_goods_for_sale">(2) Manufactured goods for sale:</string>
+    <string name="the_amount_of_zakat_is_52_5_tolas_of_silver_which_is_worth">The amount of Zakat is 52.5 tolas of silver, which is worth</string>
+    <string name="zero">0</string>
 
 
 </resources>

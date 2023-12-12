@@ -108,7 +108,7 @@
     </fragment>
     <fragment
         android:id="@+id/zakatCalculateFragment"
-        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.ZakatCalculateFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.zakatcalculate.ZakatCalculateFragment"
         android:label="fragment_zakat_calculate"
         tools:layout="@layout/fragment_zakat_calculate" />
 </navigation>
