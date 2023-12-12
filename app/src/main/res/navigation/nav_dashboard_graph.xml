@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_boardFragment_to_qibalDirectionFragment"
             app:destination="@id/qibalDirectionFragment" />
+        <action
+            android:id="@+id/action_boardFragment_to_zakatFragment"
+            app:destination="@id/zakatFragment" />
     </fragment>
     <fragment
         android:id="@+id/sideMenuFragment"
@@ -95,4 +98,17 @@
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.digitaltasbih.DigitalTasbihFragment"
         android:label="fragment_digital_tasbih"
         tools:layout="@layout/fragment_digital_tasbih" />
+    <fragment
+        android:id="@+id/zakatFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.zakat.ZakatFragment"
+        android:label="ZakatFragment" >
+        <action
+            android:id="@+id/action_zakatFragment_to_zakatCalculateFragment"
+            app:destination="@id/zakatCalculateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/zakatCalculateFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.zakatcalculate.ZakatCalculateFragment"
+        android:label="fragment_zakat_calculate"
+        tools:layout="@layout/fragment_zakat_calculate" />
 </navigation>

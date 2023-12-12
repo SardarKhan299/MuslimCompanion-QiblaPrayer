@@ -86,13 +86,17 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         // Navigate to specific screens based on position clicked
         when (position) {
             0 -> {
+                // Handle click on position 0
+                // Navigate to screen 0
                 Navigation.findNavController(requireView()).navigate(R.id.qibalDirectionFragment)
 
             }
+            1 -> {
 
+                Navigation.findNavController(requireView()).navigate(R.id.zakatFragment)
+            }
             3 -> {
-                // Handle click on position 1
-                // Navigate to screen 1
+
                 Navigation.findNavController(requireView()).navigate(R.id.tasbihFragment)
             }
             // Add more cases for other positions

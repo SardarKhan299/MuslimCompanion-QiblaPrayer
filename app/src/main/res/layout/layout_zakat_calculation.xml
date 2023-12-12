@@ -1,0 +1,1591 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left_zakat_calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.02"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right_zakat_calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.98" />
+
+        <View
+            android:id="@+id/view_heading_zakat"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/zakat_bg_heading"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat_calculate"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_zakat_heading"
+            style="@style/zakat_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="@string/assets_eligible_for_zakat"
+            app:layout_constraintBottom_toBottomOf="@+id/view_heading_zakat"
+            app:layout_constraintStart_toStartOf="@+id/view_heading_zakat"
+            app:layout_constraintTop_toTopOf="@+id/view_heading_zakat" />
+
+        <View
+            android:id="@+id/view_zakat_gold"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/zakat_detail_bg"
+            app:layout_constraintBottom_toTopOf="@id/separator_view"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat_calculate"
+            app:layout_constraintTop_toBottomOf="@+id/view_heading_zakat" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_heading_gold"
+            style="@style/zakat_point_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@string/_1_gold"
+            app:layout_constraintStart_toStartOf="@+id/view_zakat_gold"
+            app:layout_constraintTop_toTopOf="@+id/view_zakat_gold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_gold_subheading"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/gold_in_your_possession"
+            app:layout_constraintStart_toStartOf="@+id/tv_heading_gold"
+            app:layout_constraintTop_toBottomOf="@+id/tv_heading_gold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_zakat_gold_detail"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:text="@string/whether_in_any_form_and_for_any_purpose_write_current_value"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/tv_gold_subheading"
+            app:layout_constraintTop_toBottomOf="@+id/tv_gold_subheading" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_gold_amount"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingStart="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_zakat_gold_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tv_zakat_gold_detail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_gold_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_gold_amount"
+            app:layout_constraintStart_toEndOf="@+id/edt_gold_amount"
+            app:layout_constraintTop_toTopOf="@+id/edt_gold_amount" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_gold_trust"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/gold_kept_in_trust_somewhere"
+            app:layout_constraintStart_toStartOf="@+id/edt_gold_amount"
+            app:layout_constraintTop_toBottomOf="@+id/edt_gold_amount" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_gold_trust"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_gold_trust"
+            app:layout_constraintTop_toBottomOf="@+id/tv_gold_trust" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_gold_trust_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_gold_trust"
+            app:layout_constraintStart_toEndOf="@+id/edt_gold_trust"
+            app:layout_constraintTop_toTopOf="@+id/edt_gold_trust" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_heading_silver"
+            style="@style/zakat_point_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/silver"
+            app:layout_constraintStart_toStartOf="@+id/tv_heading_gold"
+            app:layout_constraintTop_toBottomOf="@+id/edt_gold_trust" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_silver_subheading"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/silver_in_your_possession"
+            app:layout_constraintStart_toStartOf="@+id/tv_heading_silver"
+            app:layout_constraintTop_toBottomOf="@+id/tv_heading_silver" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_silver_detail"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:text="@string/whether_in_any_form_and_for_any_purpose_write_current_value"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/tv_silver_subheading"
+            app:layout_constraintTop_toBottomOf="@+id/tv_silver_subheading" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_silver"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_silver_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tv_silver_detail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_silver_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_silver"
+            app:layout_constraintStart_toEndOf="@+id/edt_silver"
+            app:layout_constraintTop_toTopOf="@+id/edt_silver" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_silver_trust"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/silver_kept_in_trust_somewhere"
+            app:layout_constraintStart_toStartOf="@+id/tv_silver_subheading"
+            app:layout_constraintTop_toBottomOf="@+id/edt_silver" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_silver_trust"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_silver_trust"
+            app:layout_constraintTop_toBottomOf="@+id/tv_silver_trust" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_silver_trust_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_silver_trust"
+            app:layout_constraintStart_toEndOf="@+id/edt_silver_trust"
+            app:layout_constraintTop_toTopOf="@+id/edt_silver_trust" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_heading_cash"
+            style="@style/zakat_point_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/cash"
+            app:layout_constraintStart_toStartOf="@+id/tv_heading_silver"
+            app:layout_constraintTop_toBottomOf="@+id/edt_silver_trust" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_held"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/domestic_currency_held_by_you"
+            app:layout_constraintStart_toStartOf="@+id/tv_heading_cash"
+            app:layout_constraintTop_toBottomOf="@+id/tv_heading_cash" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_cash_held_point_one"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingStart="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_held"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_held" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_held_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_cash_held_point_one"
+            app:layout_constraintStart_toEndOf="@+id/edt_cash_held_point_one"
+            app:layout_constraintTop_toTopOf="@+id/edt_cash_held_point_one" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_foreign_currency"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/foreign_currency"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_held"
+            app:layout_constraintTop_toBottomOf="@+id/edt_cash_held_point_one" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_foreign_currency_detail"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/current_price_in_local_currency_should_be_written"
+            app:layout_constraintStart_toStartOf="@+id/edt_cash_held_point_one"
+            app:layout_constraintTop_toBottomOf="@+id/tv_foreign_currency" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_foreign_currency"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_foreign_currency_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tv_foreign_currency_detail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_foreign_currency_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_foreign_currency"
+            app:layout_constraintStart_toEndOf="@+id/edt_foreign_currency"
+            app:layout_constraintTop_toTopOf="@+id/edt_foreign_currency" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_save_for_purpose"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:text="@string/money_accumulated_for_any_future_purpose_like_hajj_or_marriage_or_building_a_house"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/edt_foreign_currency"
+            app:layout_constraintTop_toBottomOf="@+id/edt_foreign_currency" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_cash_save_for_purpose"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_save_for_purpose"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_save_for_purpose" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_save_for_purpose_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_cash_save_for_purpose"
+            app:layout_constraintStart_toEndOf="@+id/edt_cash_save_for_purpose"
+            app:layout_constraintTop_toTopOf="@+id/edt_cash_save_for_purpose" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_deposit_bank"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/money_deposited_in_the_bank"
+            app:layout_constraintStart_toStartOf="@+id/edt_cash_save_for_purpose"
+            app:layout_constraintTop_toBottomOf="@+id/edt_cash_save_for_purpose" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_cash_deposit_bank"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_deposit_bank"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_deposit_bank" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_deposit_bank_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_cash_deposit_bank"
+            app:layout_constraintStart_toEndOf="@+id/edt_cash_deposit_bank"
+            app:layout_constraintTop_toTopOf="@+id/edt_cash_deposit_bank" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_heading_five"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/money_entrusted_to_someone"
+            app:layout_constraintStart_toStartOf="@+id/edt_cash_deposit_bank"
+            app:layout_constraintTop_toBottomOf="@+id/edt_cash_deposit_bank" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_detail"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/eg_security_etc"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_five"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_five" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_trusted_money"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_detail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_trusted_money_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_trusted_money"
+            app:layout_constraintStart_toEndOf="@+id/edt_trusted_money"
+            app:layout_constraintTop_toTopOf="@+id/edt_trusted_money" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_heading_six"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/insurance"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_five"
+            app:layout_constraintTop_toBottomOf="@+id/edt_trusted_money" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_insurance_detail"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/your_deposit_in_the_insurance_policy"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_six"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_six" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_insurance"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_insurance_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tv_insurance_detail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_insurance_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_insurance"
+            app:layout_constraintStart_toEndOf="@+id/edt_insurance"
+            app:layout_constraintTop_toTopOf="@+id/edt_insurance" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_heading_seven"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/a_loan_given_to_someone"
+            app:layout_constraintStart_toStartOf="@+id/edt_insurance"
+            app:layout_constraintTop_toBottomOf="@+id/edt_insurance" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_loan_detail"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/which_is_likely_to_be_found"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_seven"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_seven" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_loan"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_loan_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tv_loan_detail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_loan_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_loan"
+            app:layout_constraintStart_toEndOf="@+id/edt_loan"
+            app:layout_constraintTop_toTopOf="@+id/edt_loan" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_heading_eight"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/refundable_security_deposit_of_any_kind"
+            app:layout_constraintStart_toStartOf="@+id/edt_loan"
+            app:layout_constraintTop_toBottomOf="@+id/edt_loan" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_security_deposit"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_eight"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_eight" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_security_deposit_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_security_deposit"
+            app:layout_constraintStart_toEndOf="@+id/edt_security_deposit"
+            app:layout_constraintTop_toTopOf="@+id/edt_security_deposit" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_heading_nine"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/money_invested_mutual_or_partnership_and_profit_derived_therefrom"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_eight"
+            app:layout_constraintTop_toBottomOf="@+id/edt_security_deposit" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_money_invest"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_nine"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_nine" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_money_invest_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_money_invest"
+            app:layout_constraintStart_toEndOf="@+id/edt_money_invest"
+            app:layout_constraintTop_toTopOf="@+id/edt_money_invest" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_heading_ten"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/savings_certificates"
+            app:layout_constraintStart_toStartOf="@+id/edt_money_invest"
+            app:layout_constraintTop_toBottomOf="@+id/edt_money_invest" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_saving_certificates_detail"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:text="@string/e_g_nit_ndfc_febc_zakat_will_be_payable_only_on_the_original_amount_although_it_is_not_permissible_to_purchase_them_under_current_circumstances"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_ten"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_ten" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_saving_certificates"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_saving_certificates_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tv_saving_certificates_detail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_saving_certificates_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_saving_certificates"
+            app:layout_constraintStart_toEndOf="@+id/edt_saving_certificates"
+            app:layout_constraintTop_toTopOf="@+id/edt_saving_certificates" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_heading_eleven"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/financial_documents_or_contributions_converted_into_cash"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/edt_saving_certificates"
+            app:layout_constraintTop_toBottomOf="@+id/edt_saving_certificates" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_financial_documents"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_eleven"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_eleven" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_documents_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_financial_documents"
+            app:layout_constraintStart_toEndOf="@+id/edt_financial_documents"
+            app:layout_constraintTop_toTopOf="@+id/edt_financial_documents" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_heading_twelve"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/cashable_financial_documents_or_contributions"
+            app:layout_constraintStart_toStartOf="@+id/edt_financial_documents"
+            app:layout_constraintTop_toBottomOf="@+id/edt_financial_documents" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cashable_financial_documents"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/eg_draft_cheque_bill_of_exchange_all_types_of_bonds_government_securities_etc"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_twelve"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_twelve" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_cashable_financial_documents"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_cashable_financial_documents"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cashable_financial_documents" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cashable_financial_documents_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_cashable_financial_documents"
+            app:layout_constraintStart_toEndOf="@+id/edt_cashable_financial_documents"
+            app:layout_constraintTop_toTopOf="@+id/edt_cashable_financial_documents" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_cash_thirteen"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/amounts_received_or_contained_in_any_other_modern_procedure_alternative_to_cash"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/edt_cashable_financial_documents"
+            app:layout_constraintTop_toBottomOf="@+id/edt_cashable_financial_documents" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_amounts_received"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_cash_thirteen"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_cash_thirteen" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_amounts_received_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_amounts_received"
+            app:layout_constraintStart_toEndOf="@+id/edt_amounts_received"
+            app:layout_constraintTop_toTopOf="@+id/edt_amounts_received" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_cash_heading_fourteen"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/the_installments_of_the_committee_bc_which_have_been_deposited_so_far_and_which_have_not_been_received_by_the_committee"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/edt_amounts_received"
+            app:layout_constraintTop_toBottomOf="@+id/edt_amounts_received" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_installments_committee"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_cash_heading_fourteen"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cash_heading_fourteen" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_installments_committee_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_installments_committee"
+            app:layout_constraintStart_toEndOf="@+id/edt_installments_committee"
+            app:layout_constraintTop_toTopOf="@+id/edt_installments_committee" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_heading_trading"
+            style="@style/zakat_point_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/goods_trading"
+            app:layout_constraintStart_toStartOf="@+id/edt_installments_committee"
+            app:layout_constraintTop_toBottomOf="@+id/edt_installments_committee" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_trading_heading_one"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/raw_materials_in_any_form"
+            app:layout_constraintStart_toStartOf="@+id/tv_heading_trading"
+            app:layout_constraintTop_toBottomOf="@+id/tv_heading_trading" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_trading_goods"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_trading_heading_one"
+            app:layout_constraintTop_toBottomOf="@+id/tv_trading_heading_one" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_trading_goods_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_trading_goods"
+            app:layout_constraintStart_toEndOf="@+id/edt_trading_goods"
+            app:layout_constraintTop_toTopOf="@+id/edt_trading_goods" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_trading_heading_two"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/_2_manufactured_goods_for_sale"
+            app:layout_constraintStart_toStartOf="@+id/edt_trading_goods"
+            app:layout_constraintTop_toBottomOf="@+id/edt_trading_goods" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_goods_for_sale"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_trading_heading_two"
+            app:layout_constraintTop_toBottomOf="@+id/tv_trading_heading_two" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_goods_for_sale_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_goods_for_sale"
+            app:layout_constraintStart_toEndOf="@+id/edt_goods_for_sale"
+            app:layout_constraintTop_toTopOf="@+id/edt_goods_for_sale" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_trading_heading_three"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/amount_receivable_for_goods_sold"
+            app:layout_constraintStart_toStartOf="@+id/edt_goods_for_sale"
+            app:layout_constraintTop_toBottomOf="@+id/edt_goods_for_sale" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_receivable_goods_sold"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_trading_heading_three"
+            app:layout_constraintTop_toBottomOf="@+id/tv_trading_heading_three" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_receivable_goods_sold_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_receivable_goods_sold"
+            app:layout_constraintStart_toEndOf="@+id/edt_receivable_goods_sold"
+            app:layout_constraintTop_toTopOf="@+id/edt_receivable_goods_sold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_trading_heading_four"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/store_stock_held_for_sale"
+            app:layout_constraintStart_toStartOf="@+id/edt_receivable_goods_sold"
+            app:layout_constraintTop_toBottomOf="@+id/edt_receivable_goods_sold" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_stock_for_sale"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_trading_heading_four"
+            app:layout_constraintTop_toBottomOf="@+id/tv_trading_heading_four" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_stock_for_sale_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_stock_for_sale"
+            app:layout_constraintStart_toEndOf="@+id/edt_stock_for_sale"
+            app:layout_constraintTop_toTopOf="@+id/edt_stock_for_sale" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_trading_heading_five"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/shares_of_companies"
+            app:layout_constraintStart_toStartOf="@+id/edt_stock_for_sale"
+            app:layout_constraintTop_toBottomOf="@+id/edt_stock_for_sale" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_shares_companies"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_trading_heading_five"
+            app:layout_constraintTop_toBottomOf="@+id/tv_trading_heading_five" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_shares_companies_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_shares_companies"
+            app:layout_constraintStart_toEndOf="@+id/edt_shares_companies"
+            app:layout_constraintTop_toTopOf="@+id/edt_shares_companies" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_trading_heading_six"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:text="@string/sale_price_of_zakatable_item_acquired_in_exchange_for_trade_in_goods"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/edt_shares_companies"
+            app:layout_constraintTop_toBottomOf="@+id/edt_shares_companies" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_zakatable_item"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_trading_heading_six"
+            app:layout_constraintTop_toBottomOf="@+id/tv_trading_heading_six" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_zakatable_item_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_zakatable_item"
+            app:layout_constraintStart_toEndOf="@+id/edt_zakatable_item"
+            app:layout_constraintTop_toTopOf="@+id/edt_zakatable_item" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_trading_heading_seven"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/goods_and_property_purchased_for_the_purpose_of_trade"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/edt_zakatable_item"
+            app:layout_constraintTop_toBottomOf="@+id/edt_zakatable_item" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_trading_heading_seven_detail"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/such_items_and_property_plots_etc_which_have_been_purchased_with_the_intention_of_selling_at_a_profit_and_this_intention_is_still_maintained"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/tv_trading_heading_seven"
+            app:layout_constraintTop_toBottomOf="@+id/tv_trading_heading_seven" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_property_items"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:background="@drawable/zakat_edittext_bg"
+            android:inputType="number"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_trading_heading_seven_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tv_trading_heading_seven_detail"
+            app:layout_constraintVertical_bias="0.046" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_property_items_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_property_items"
+            app:layout_constraintStart_toEndOf="@+id/edt_property_items"
+            app:layout_constraintTop_toTopOf="@+id/edt_property_items" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_zakat_gold"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:constraint_referenced_ids="view_zakat_gold,
+        tv_trading_heading_seven,tv_trading_heading_seven_detail,
+edt_property_items,tv_property_items_rs,tv_trading_heading_five,edt_shares_companies,tv_shares_companies_rs,
+tv_trading_heading_six,edt_zakatable_item,tv_zakatable_item_rs,
+tv_trading_heading_three,edt_receivable_goods_sold,tv_receivable_goods_sold_rs,tv_trading_heading_four,edt_stock_for_sale,
+tv_stock_for_sale_rs,tv_trading_heading_five,edt_shares_companies,
+tv_heading_trading,tv_trading_heading_one,edt_trading_goods,tv_trading_goods_rs,
+tv_trading_heading_two,edt_goods_for_sale,tv_goods_for_sale_rs,tv_cash_heading_twelve,tv_cashable_financial_documents,
+edt_cashable_financial_documents,tv_cashable_financial_documents_rs,
+tv_cash_cash_thirteen,edt_amounts_received,tv_amounts_received_rs,
+tv_cash_heading_fourteen,edt_installments_committee,tv_installments_committee_rs,
+edt_loan,tv_loan_rs,tv_cash_heading_eight,edt_security_deposit,tv_security_deposit_rs,
+tv_cash_heading_nine,edt_money_invest,tv_money_invest_rs,tv_cash_heading_ten,tv_saving_certificates_detail,
+edt_saving_certificates,tv_saving_certificates_rs,tv_cash_heading_eleven,edt_financial_documents,tv_financial_documents_rs,
+tv_heading_gold,tv_gold_subheading,tv_zakat_gold_detail,edt_gold_amount,tv_gold_rs,tv_gold_trust,
+edt_gold_trust,tv_gold_trust_rs, tv_heading_silver, tv_silver_subheading, tv_silver_detail, edt_silver,tv_silver_rs,tv_silver_trust,edt_silver_trust,tv_silver_trust_rs,
+tv_heading_cash,tv_cash_held,edt_cash_held_point_one,tv_cash_held_rs,tv_foreign_currency,
+tv_foreign_currency_detail,edt_foreign_currency,tv_foreign_currency_rs,
+tv_cash_save_for_purpose,edt_cash_save_for_purpose, tv_cash_save_for_purpose_rs,
+tv_cash_deposit_bank,edt_cash_deposit_bank,tv_cash_deposit_bank_rs,tv_cash_heading_five,
+tv_cash_detail,edt_trusted_money,tv_trusted_money_rs,tv_cash_heading_six,tv_insurance_detail,edt_insurance,tv_insurance_rs,
+tv_cash_heading_seven,  tv_loan_detail,
+" />
+
+        <View
+            android:id="@+id/separator_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat_calculate"
+            app:layout_constraintTop_toBottomOf="@+id/edt_property_items" />
+
+
+        <View
+            android:id="@+id/gold_view_separator"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:background="@drawable/zakat_bg_heading"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat_calculate"
+            app:layout_constraintTop_toBottomOf="@id/separator_view"
+            tools:layout_editor_absoluteY="4394dp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/zakat_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="@string/financial_responsibilities"
+            app:layout_constraintBottom_toBottomOf="@+id/gold_view_separator"
+            app:layout_constraintStart_toStartOf="@+id/gold_view_separator"
+            app:layout_constraintTop_toTopOf="@+id/gold_view_separator" />
+
+        <View
+            android:id="@+id/view_financial_responsibilities"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/financial_responsibilities_bg"
+            app:layout_constraintBottom_toTopOf="@+id/view_financial_separator"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat_calculate"
+            app:layout_constraintTop_toBottomOf="@+id/gold_view_separator" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_one"
+            style="@style/zakat_point_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@string/obligatory_discharge"
+            app:layout_constraintStart_toStartOf="@+id/view_financial_responsibilities"
+            app:layout_constraintTop_toTopOf="@+id/view_financial_responsibilities" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_obligation_detail"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/obligation_to_repay_a_loan"
+            app:layout_constraintStart_toStartOf="@+id/tv_financial_heading_one"
+            app:layout_constraintTop_toBottomOf="@+id/tv_financial_heading_one" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_obligation"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_obligation_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tv_obligation_detail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_obligation_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_obligation"
+            app:layout_constraintStart_toEndOf="@+id/edt_obligation"
+            app:layout_constraintTop_toTopOf="@+id/edt_obligation" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_two"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/obligatory_payment_rent"
+            app:layout_constraintStart_toStartOf="@id/edt_obligation"
+            app:layout_constraintTop_toBottomOf="@+id/edt_obligation" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_two_detail"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/shop_house_warehouse_factory_etc"
+            app:layout_constraintStart_toStartOf="@id/tv_financial_heading_two"
+            app:layout_constraintTop_toBottomOf="@id/tv_financial_heading_two" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_obligation_payment_rent"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="@+id/tv_financial_heading_two_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tv_financial_heading_two_detail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_obligation_payment_rent_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_obligation_payment_rent"
+            app:layout_constraintStart_toEndOf="@+id/edt_obligation_payment_rent"
+            app:layout_constraintTop_toTopOf="@+id/edt_obligation_payment_rent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_three"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/salary_of_employees"
+            app:layout_constraintStart_toStartOf="@id/edt_obligation_payment_rent"
+            app:layout_constraintTop_toBottomOf="@id/edt_obligation_payment_rent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_three_detail"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/whether_domestic_worker_or_entrepreneur"
+            app:layout_constraintStart_toStartOf="@id/tv_financial_heading_three"
+            app:layout_constraintTop_toBottomOf="@id/tv_financial_heading_three" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_salary_employees"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_financial_heading_three_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tv_financial_heading_three_detail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_salary_employees_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_salary_employees"
+            app:layout_constraintStart_toEndOf="@+id/edt_salary_employees"
+            app:layout_constraintTop_toTopOf="@+id/edt_salary_employees" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_four"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/_4_prices_of_goods_purchased_on_credit"
+            app:layout_constraintStart_toStartOf="@+id/edt_salary_employees"
+            app:layout_constraintTop_toBottomOf="@+id/edt_salary_employees" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_financial_heading_four"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:background="@drawable/zakat_edittext_bg"
+            android:inputType="number"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_financial_heading_four"
+            app:layout_constraintTop_toBottomOf="@+id/tv_financial_heading_four" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_four_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_financial_heading_four"
+            app:layout_constraintStart_toEndOf="@+id/edt_financial_heading_four"
+            app:layout_constraintTop_toTopOf="@+id/edt_financial_heading_four" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_five"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/_5_the_commission_which_you_have_received_and_the_total_amount_of_the_remaining_installments_thereof_which_you_have_paid"
+            app:layout_constraintEnd_toEndOf="@+id/view_financial_responsibilities"
+            app:layout_constraintStart_toStartOf="@+id/edt_financial_heading_four"
+            app:layout_constraintTop_toBottomOf="@+id/edt_financial_heading_four" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_financial_heading_five"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="@+id/tv_financial_heading_five"
+            app:layout_constraintTop_toBottomOf="@+id/tv_financial_heading_five" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_five_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_financial_heading_five"
+            app:layout_constraintStart_toEndOf="@+id/edt_financial_heading_five"
+            app:layout_constraintTop_toTopOf="@+id/edt_financial_heading_five" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_six"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/due_taxes_and_utility_bills"
+            app:layout_constraintEnd_toEndOf="@+id/view_financial_responsibilities"
+            app:layout_constraintStart_toStartOf="@+id/edt_financial_heading_five"
+            app:layout_constraintTop_toBottomOf="@+id/edt_financial_heading_five" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_six_detail"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/electricity_phone_gas_water_milk_and_newspaper_etc"
+            app:layout_constraintEnd_toEndOf="@+id/view_financial_responsibilities"
+            app:layout_constraintStart_toStartOf="@id/tv_financial_heading_six"
+            app:layout_constraintTop_toBottomOf="@id/tv_financial_heading_six" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_financial_heading_six"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:background="@drawable/zakat_edittext_bg"
+            android:inputType="number"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_financial_heading_six_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tv_financial_heading_six_detail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_six_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_financial_heading_six"
+            app:layout_constraintStart_toEndOf="@+id/edt_financial_heading_six"
+            app:layout_constraintTop_toTopOf="@+id/edt_financial_heading_six" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_seven"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/amount_zakat_of_previous_years"
+            app:layout_constraintEnd_toEndOf="@+id/view_financial_responsibilities"
+            app:layout_constraintStart_toStartOf="@+id/edt_financial_heading_six"
+            app:layout_constraintTop_toBottomOf="@+id/edt_financial_heading_six" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_financial_heading_seven"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:background="@drawable/zakat_edittext_bg"
+            android:inputType="number"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_financial_heading_seven"
+            app:layout_constraintTop_toBottomOf="@+id/tv_financial_heading_seven" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_financial_heading_seven_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_financial_heading_seven"
+            app:layout_constraintStart_toEndOf="@+id/edt_financial_heading_seven"
+            app:layout_constraintTop_toTopOf="@+id/edt_financial_heading_seven" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_zakat_silver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="view_financial_responsibilities,tv_financial_heading_five,edt_financial_heading_five,tv_financial_heading_five_rs,
+            tv_financial_heading_six,tv_financial_heading_six_detail,edt_financial_heading_six,tv_financial_heading_six_rs,tv_financial_heading_seven,
+            edt_financial_heading_seven,tv_financial_heading_seven_rs,
+            tv_financial_heading_one,tv_obligation_detail,edt_obligation,tv_obligation_rs,tv_financial_heading_two,tv_financial_heading_two_detail,edt_obligation_payment_rent,tv_obligation_payment_rent_rs,
+            tv_financial_heading_three,tv_financial_heading_three_detail,edt_salary_employees,
+            tv_salary_employees_rs,tv_financial_heading_four,edt_financial_heading_four,tv_financial_heading_four_rs," />
+
+        <View
+            android:id="@+id/view_financial_separator"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_financial_heading_seven" />
+
+        <View
+            android:id="@+id/view_silver"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/silver_background"
+            app:layout_constraintBottom_toTopOf="@+id/view_silver_separator"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat_calculate"
+            app:layout_constraintTop_toBottomOf="@+id/view_financial_separator" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_silver_heading_one"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/price_of_a_tola_of_silver"
+            app:layout_constraintStart_toStartOf="@+id/view_silver"
+            app:layout_constraintTop_toTopOf="@+id/view_silver" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_silver_heading_two"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@string/zakat_is_obligatory"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/tv_silver_heading_one"
+            app:layout_constraintTop_toBottomOf="@+id/tv_silver_heading_one" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_silver_heading"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:inputType="number"
+            android:background="@drawable/zakat_edittext_bg"
+            android:paddingLeft="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_silver_heading_two"
+            app:layout_constraintTop_toBottomOf="@+id/tv_silver_heading_two" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_silver_heading_rs"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_silver_heading"
+            app:layout_constraintStart_toEndOf="@+id/edt_silver_heading"
+            app:layout_constraintTop_toTopOf="@+id/edt_silver_heading" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_answer_heading"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@string/answer"
+            app:layout_constraintStart_toStartOf="@+id/edt_silver_heading"
+            app:layout_constraintTop_toBottomOf="@+id/edt_silver_heading" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_silver_zakat_worth"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/the_amount_of_zakat_is_52_5_tolas_of_silver_which_is_worth"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/tv_answer_heading"
+            app:layout_constraintTop_toBottomOf="@+id/tv_answer_heading" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_silver_amount"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/primary_color"
+            app:layout_constraintStart_toStartOf="@+id/tv_silver_zakat_worth"
+            app:layout_constraintTop_toBottomOf="@+id/tv_silver_zakat_worth" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_zakat_guidance"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/your_amount_on_which_zakat_is_due_is_less_than_that_so_you_do_not_owe_zakat"
+            android:textColor="@color/delete_account_text_color"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@id/tv_silver_amount"
+
+            app:layout_constraintTop_toBottomOf="@+id/tv_silver_amount" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_silver_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tv_silver_amount,tv_silver_zakat_worth,tv_zakat_guidance" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_wealth_zakat_value"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/wealth_zakat_value"
+            app:layout_constraintStart_toStartOf="@+id/tv_answer_heading"
+            app:layout_constraintTop_toBottomOf="@+id/tv_zakat_guidance" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_updated_wealth_amount"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zero"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_wealth_zakat_value"
+            app:layout_constraintStart_toEndOf="@+id/tv_wealth_zakat_value"
+            app:layout_constraintTop_toTopOf="@+id/tv_wealth_zakat_value" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_amount_deducted"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/amount_to_be_deducted"
+            app:layout_constraintStart_toStartOf="@+id/tv_wealth_zakat_value"
+            app:layout_constraintTop_toBottomOf="@+id/tv_wealth_zakat_value" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_updated_deduct_amount"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zero"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_amount_deducted"
+            app:layout_constraintStart_toEndOf="@+id/tv_amount_deducted"
+            app:layout_constraintTop_toTopOf="@+id/tv_amount_deducted" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_zakat_amount_due"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/amount_zakat_is_due"
+            app:layout_constraintStart_toStartOf="@+id/tv_amount_deducted"
+            app:layout_constraintTop_toBottomOf="@+id/tv_amount_deducted" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_updated_due_amount"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zero"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_zakat_amount_due"
+            app:layout_constraintStart_toEndOf="@+id/tv_zakat_amount_due"
+            app:layout_constraintTop_toTopOf="@+id/tv_zakat_amount_due" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_total_zakat_amount"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:text="@string/amount_of_zakat_rs"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintStart_toStartOf="@+id/tv_zakat_amount_due"
+            app:layout_constraintTop_toBottomOf="@+id/tv_zakat_amount_due" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_updated_zakat_amount_calculated"
+            style="@style/zakat_sub_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/zero"
+            android:textColor="@color/primary_color"
+            android:maxLines="2"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_total_zakat_amount"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toEndOf="@+id/tv_total_zakat_amount"
+            app:layout_constraintTop_toTopOf="@+id/tv_total_zakat_amount" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_guidance_zakat"
+            style="@style/zakat_sub_further_heading_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/further_guidance"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintStart_toStartOf="@+id/tv_total_zakat_amount"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_zakat_amount" />
+
+        <View
+            android:id="@+id/view_silver_separator"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_guidance_zakat" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
