@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_boardFragment_to_zakatFragment"
             app:destination="@id/zakatFragment" />
+        <action
+            android:id="@+id/action_boardFragment_to_makkahLiveFragment"
+            app:destination="@id/makkahLiveFragment" />
     </fragment>
     <fragment
         android:id="@+id/sideMenuFragment"
@@ -111,4 +114,8 @@
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.zakatcalculate.ZakatCalculateFragment"
         android:label="fragment_zakat_calculate"
         tools:layout="@layout/fragment_zakat_calculate" />
+    <fragment
+        android:id="@+id/makkahLiveFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.livestreaming.MakkahLiveFragment"
+        android:label="MakkahLiveFragment" />
 </navigation>

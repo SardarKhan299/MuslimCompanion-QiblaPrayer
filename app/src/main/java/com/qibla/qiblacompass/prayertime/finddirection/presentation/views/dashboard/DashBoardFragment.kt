@@ -99,6 +99,10 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
                 Navigation.findNavController(requireView()).navigate(R.id.tasbihFragment)
             }
+            6->{
+                Navigation.findNavController(requireView()).navigate(R.id.makkahLiveFragment)
+
+            }
             // Add more cases for other positions
         }
     }

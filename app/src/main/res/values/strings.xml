@@ -210,6 +210,9 @@
     <string name="_2_manufactured_goods_for_sale">(2) Manufactured goods for sale:</string>
     <string name="the_amount_of_zakat_is_52_5_tolas_of_silver_which_is_worth">The amount of Zakat is 52.5 tolas of silver, which is worth</string>
     <string name="zero">0</string>
-
+    <string name="view_2">View 2</string>
+    <string name="view_3">View 3</string>
+    <string name="view_1">View 1</string>
+<string name="makkah_live">Makkah Live</string>
 
 </resources>

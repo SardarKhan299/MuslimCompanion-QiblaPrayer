@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="makkahLiveFragment"
+            type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.livestreaming.MakkahLiveFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.views.livestreaming.MakkahLiveFragment">
+
+        <include
+            android:id="@+id/toolbar_makkah_live"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left_makkah_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.02"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right_makkah_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.98" />
+
+        <View
+            android:id="@+id/view_makkah"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_80sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_makkah_live"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_makkah_live" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_makkah_view_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:src="@drawable/ic_makkah"
+            app:layout_constraintStart_toStartOf="@+id/view_makkah"
+            app:layout_constraintTop_toTopOf="@+id/view_makkah" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_makkah_view_one"
+            style="@style/makkah_view_text_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_1"
+            app:layout_constraintEnd_toEndOf="@+id/img_makkah_view_one"
+            app:layout_constraintStart_toStartOf="@+id/img_makkah_view_one"
+            app:layout_constraintTop_toBottomOf="@+id/img_makkah_view_one" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_makkah_view_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            android:src="@drawable/ic_makkah"
+            app:layout_constraintEnd_toEndOf="@+id/view_makkah"
+            app:layout_constraintTop_toTopOf="@+id/view_makkah" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_makkah_view_three"
+            style="@style/makkah_view_text_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_3"
+            app:layout_constraintEnd_toEndOf="@+id/img_makkah_view_three"
+            app:layout_constraintStart_toStartOf="@+id/img_makkah_view_three"
+            app:layout_constraintTop_toBottomOf="@+id/img_makkah_view_three" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_makkah_view_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_makkah"
+            app:layout_constraintBottom_toTopOf="@+id/tv_makkah_view_one"
+            app:layout_constraintEnd_toStartOf="@+id/img_makkah_view_three"
+            app:layout_constraintStart_toEndOf="@+id/img_makkah_view_one"
+            app:layout_constraintTop_toTopOf="@+id/img_makkah_view_one" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_makkah_view_two"
+            style="@style/makkah_view_text_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_2"
+            app:layout_constraintEnd_toEndOf="@+id/img_makkah_view_two"
+            app:layout_constraintStart_toStartOf="@+id/img_makkah_view_two"
+            app:layout_constraintTop_toBottomOf="@+id/img_makkah_view_two" />
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintBottom_toTopOf="@+id/view_makkah"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_makkah_live"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_makkah_live"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_makkah_live" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
