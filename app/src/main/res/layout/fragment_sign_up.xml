@@ -2,15 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="signUpFragment"
             type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.signup.SignUpFragment" />
     </data>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_signUp_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/ic_signup_bg"
         tools:context=".signUp.SignUpFragment">
 
@@ -42,7 +47,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:src="@drawable/ic_compass"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
-            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,8 +66,8 @@
             style="@style/heading_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_18sdp"
             android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_18sdp"
             android:text="@string/sign_up"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toBottomOf="@+id/tv_signUp_qibla_compass" />
@@ -71,12 +76,12 @@
             android:id="@+id/layoutTextInputMobileSignUp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toBottomOf="@+id/tv_signUp">
@@ -98,11 +103,11 @@
             android:id="@+id/layoutTextInputEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toBottomOf="@+id/layoutTextInputMobileSignUp">
@@ -124,11 +129,11 @@
             android:id="@+id/layoutTextInputPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
             app:endIconDrawable="@drawable/ic_password_toggle"
             app:endIconMode="password_toggle"
             app:errorEnabled="true"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toBottomOf="@+id/layoutTextInputEmail">
@@ -153,11 +158,11 @@
             android:id="@+id/layoutTextInputConfirmPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
             app:endIconDrawable="@drawable/ic_password_toggle"
             app:endIconMode="password_toggle"
             app:errorEnabled="true"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
             app:layout_constraintTop_toBottomOf="@+id/layoutTextInputPassword">
@@ -216,39 +221,50 @@
             style="@style/forgot_password_text_style"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_2sdp"
             android:gravity="center"
             android:text="@string/google"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/img_sign_up_google_logo"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
-            app:layout_constraintHorizontal_bias="0.028"
+            app:layout_constraintHorizontal_bias="0.027"
             app:layout_constraintStart_toEndOf="@+id/img_sign_up_google_logo"
-            app:layout_constraintTop_toTopOf="@+id/img_sign_up_google_logo"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="@+id/img_sign_up_google_logo" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_sign_up_google_logo"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginStart="@dimen/_100sdp"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/google_logo"
             app:layout_constraintBottom_toBottomOf="@+id/view_sign_up"
             app:layout_constraintStart_toStartOf="@+id/view_sign_up"
             app:layout_constraintTop_toTopOf="@+id/view_sign_up"
-            app:layout_constraintVertical_bias="0.769" />
+            app:layout_constraintVertical_bias="0.615" />
+
+        <View
+            android:id="@+id/view_navigate_login"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
+            app:layout_constraintTop_toBottomOf="@+id/view_sign_up" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_already_account"
             style="@style/login_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_34sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_30sdp"
             android:text="@string/already_have_an_account"
-            app:layout_constraintBottom_toTopOf="@+id/guideline_signUp_bottom"
-            app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
-            app:layout_constraintTop_toBottomOf="@+id/view_sign_up" />
+            app:layout_constraintBottom_toBottomOf="@+id/view_navigate_login"
+            app:layout_constraintStart_toStartOf="@+id/view_navigate_login"
+            app:layout_constraintTop_toTopOf="@+id/view_navigate_login" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_account_loginIn"
@@ -261,4 +277,5 @@
             app:layout_constraintStart_toEndOf="@+id/tv_already_account"
             app:layout_constraintTop_toTopOf="@+id/tv_already_account" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 </layout>

@@ -202,18 +202,27 @@
         app:layout_constraintTop_toTopOf="@+id/view_login"
         app:layout_constraintVertical_bias="0.769" />
 
+    <View
+        android:id="@+id/view_navigate_signup"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_login_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
+        app:layout_constraintTop_toBottomOf="@+id/view_login" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+
+        <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_have_another_account"
         style="@style/login_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_34sdp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="@dimen/_30sdp"
         android:text="@string/don_t_have_an_account_sign_up"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_login_bottom"
-        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
-        app:layout_constraintTop_toBottomOf="@+id/view_login" />
+            app:layout_constraintStart_toStartOf="@+id/view_navigate_signup"
+            app:layout_constraintTop_toTopOf="@+id/view_navigate_signup"
+            app:layout_constraintBottom_toBottomOf="@+id/view_navigate_signup"
+      />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_account_signUp"

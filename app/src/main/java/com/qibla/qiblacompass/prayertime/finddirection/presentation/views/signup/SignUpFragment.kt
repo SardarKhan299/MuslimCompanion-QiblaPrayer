@@ -22,7 +22,7 @@ class SignUpFragment :BaseFragment<FragmentSignUpBinding>(R.layout.fragment_sign
         binding.tvAccountLoginIn.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.loginFragment)
         }
-        binding.btnSignUp.setOnClickListener {
+        binding.viewNavigateLogin.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.loginFragment)
         }
     }
