@@ -2,237 +2,242 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="sideMenuFragment"
             type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.sidemenu.SideMenuFragment" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.views.sidemenu.SideMenuFragment">
 
-    <include
-        android:id="@+id/toolbar_side_menu"
-        layout="@layout/layout_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_6sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_side_menu"
+        tools:context=".presentation.views.sidemenu.SideMenuFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_menu_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left"
-        app:layout_constraintStart_toStartOf="parent" />
+        <include
+            android:id="@+id/toolbar_side_menu"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_right_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_menu_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_bottom_side_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_bottom_side_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
-    <View
-        android:id="@+id/view_profile"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_side_menu" />
+        <View
+            android:id="@+id/view_profile"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_side_menu" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_profile"
-        android:layout_width="@dimen/_24sdp"
-        android:layout_height="@dimen/_24sdp"
-        android:src="@drawable/ic_profile"
-        app:layout_constraintBottom_toBottomOf="@+id/view_profile"
-        app:layout_constraintStart_toStartOf="@+id/view_profile"
-        app:layout_constraintTop_toTopOf="@+id/view_profile"
-        app:layout_constraintVertical_bias="0.487" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_profile"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/ic_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/view_profile"
+            app:layout_constraintStart_toStartOf="@+id/view_profile"
+            app:layout_constraintTop_toTopOf="@+id/view_profile"
+            app:layout_constraintVertical_bias="0.487" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_profile"
-        style="@style/side_menu_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:text="@string/profile"
-        app:layout_constraintBottom_toBottomOf="@+id/img_profile"
-        app:layout_constraintStart_toEndOf="@+id/img_profile"
-        app:layout_constraintTop_toTopOf="@+id/img_profile" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_profile"
+            style="@style/side_menu_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:text="@string/profile"
+            app:layout_constraintBottom_toBottomOf="@+id/img_profile"
+            app:layout_constraintStart_toEndOf="@+id/img_profile"
+            app:layout_constraintTop_toTopOf="@+id/img_profile" />
 
-    <View
-        android:id="@+id/view_account_setting"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:onClick="@{()->sideMenuFragment.gotoUpdateAccountSettings()}"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
-        app:layout_constraintTop_toBottomOf="@+id/view_profile" />
+        <View
+            android:id="@+id/view_account_setting"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:onClick="@{()->sideMenuFragment.gotoUpdateAccountSettings()}"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
+            app:layout_constraintTop_toBottomOf="@+id/view_profile" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_account"
-        android:layout_width="@dimen/_24sdp"
-        android:layout_height="@dimen/_24sdp"
-        android:src="@drawable/ic_account_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/view_account_setting"
-        app:layout_constraintStart_toStartOf="@+id/view_account_setting"
-        app:layout_constraintTop_toTopOf="@+id/view_account_setting"
-        app:layout_constraintVertical_bias="0.487" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_account"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/ic_account_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/view_account_setting"
+            app:layout_constraintStart_toStartOf="@+id/view_account_setting"
+            app:layout_constraintTop_toTopOf="@+id/view_account_setting"
+            app:layout_constraintVertical_bias="0.487" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_account_setting"
-        style="@style/side_menu_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:text="@string/account_settings"
-        app:layout_constraintBottom_toBottomOf="@+id/img_account"
-        app:layout_constraintStart_toEndOf="@+id/img_account"
-        app:layout_constraintTop_toTopOf="@+id/img_account" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_account_setting"
+            style="@style/side_menu_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:text="@string/account_settings"
+            app:layout_constraintBottom_toBottomOf="@+id/img_account"
+            app:layout_constraintStart_toEndOf="@+id/img_account"
+            app:layout_constraintTop_toTopOf="@+id/img_account" />
 
-    <View
-        android:id="@+id/view_about_us"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:onClick="@{()->sideMenuFragment.gotoUpdateAboutUsScreen()}"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
-        app:layout_constraintTop_toBottomOf="@+id/view_account_setting" />
+        <View
+            android:id="@+id/view_about_us"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:onClick="@{()->sideMenuFragment.gotoUpdateAboutUsScreen()}"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
+            app:layout_constraintTop_toBottomOf="@+id/view_account_setting" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_about_us"
-        android:layout_width="@dimen/_24sdp"
-        android:layout_height="@dimen/_24sdp"
-        android:src="@drawable/ic_about_us"
-        app:layout_constraintBottom_toBottomOf="@+id/view_about_us"
-        app:layout_constraintStart_toStartOf="@+id/view_about_us"
-        app:layout_constraintTop_toTopOf="@+id/view_about_us"
-        app:layout_constraintVertical_bias="0.487" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_about_us"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/ic_about_us"
+            app:layout_constraintBottom_toBottomOf="@+id/view_about_us"
+            app:layout_constraintStart_toStartOf="@+id/view_about_us"
+            app:layout_constraintTop_toTopOf="@+id/view_about_us"
+            app:layout_constraintVertical_bias="0.487" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_about_us"
-        style="@style/side_menu_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:text="@string/about_us"
-        app:layout_constraintBottom_toBottomOf="@+id/img_about_us"
-        app:layout_constraintStart_toEndOf="@+id/img_about_us"
-        app:layout_constraintTop_toTopOf="@+id/img_about_us" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_about_us"
+            style="@style/side_menu_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:text="@string/about_us"
+            app:layout_constraintBottom_toBottomOf="@+id/img_about_us"
+            app:layout_constraintStart_toEndOf="@+id/img_about_us"
+            app:layout_constraintTop_toTopOf="@+id/img_about_us" />
 
-    <View
-        android:id="@+id/view_share_app"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
-        app:layout_constraintTop_toBottomOf="@+id/view_about_us" />
+        <View
+            android:id="@+id/view_share_app"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
+            app:layout_constraintTop_toBottomOf="@+id/view_about_us" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_share_app"
-        android:layout_width="@dimen/_24sdp"
-        android:layout_height="@dimen/_24sdp"
-        android:src="@drawable/ic_share_app"
-        app:layout_constraintBottom_toBottomOf="@+id/view_share_app"
-        app:layout_constraintStart_toStartOf="@+id/view_share_app"
-        app:layout_constraintTop_toTopOf="@+id/view_share_app"
-        app:layout_constraintVertical_bias="0.487" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_share_app"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/ic_share_app"
+            app:layout_constraintBottom_toBottomOf="@+id/view_share_app"
+            app:layout_constraintStart_toStartOf="@+id/view_share_app"
+            app:layout_constraintTop_toTopOf="@+id/view_share_app"
+            app:layout_constraintVertical_bias="0.487" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_share_app"
-        style="@style/side_menu_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:text="@string/share_app"
-        app:layout_constraintBottom_toBottomOf="@+id/img_share_app"
-        app:layout_constraintStart_toEndOf="@+id/img_share_app"
-        app:layout_constraintTop_toTopOf="@+id/img_share_app" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_share_app"
+            style="@style/side_menu_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:text="@string/share_app"
+            app:layout_constraintBottom_toBottomOf="@+id/img_share_app"
+            app:layout_constraintStart_toEndOf="@+id/img_share_app"
+            app:layout_constraintTop_toTopOf="@+id/img_share_app" />
 
-    <View
-        android:id="@+id/view_rate_us"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
-        app:layout_constraintTop_toBottomOf="@+id/view_share_app" />
+        <View
+            android:id="@+id/view_rate_us"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
+            app:layout_constraintTop_toBottomOf="@+id/view_share_app" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_rate_us"
-        android:layout_width="@dimen/_24sdp"
-        android:layout_height="@dimen/_24sdp"
-        android:src="@drawable/ic_rate"
-        app:layout_constraintBottom_toBottomOf="@+id/view_rate_us"
-        app:layout_constraintStart_toStartOf="@+id/view_rate_us"
-        app:layout_constraintTop_toTopOf="@+id/view_rate_us"
-        app:layout_constraintVertical_bias="0.487" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_rate_us"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/ic_rate"
+            app:layout_constraintBottom_toBottomOf="@+id/view_rate_us"
+            app:layout_constraintStart_toStartOf="@+id/view_rate_us"
+            app:layout_constraintTop_toTopOf="@+id/view_rate_us"
+            app:layout_constraintVertical_bias="0.487" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_rate_us"
-        style="@style/side_menu_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:text="@string/rate_us"
-        app:layout_constraintBottom_toBottomOf="@+id/img_rate_us"
-        app:layout_constraintStart_toEndOf="@+id/img_rate_us"
-        app:layout_constraintTop_toTopOf="@+id/img_rate_us" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_rate_us"
+            style="@style/side_menu_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:text="@string/rate_us"
+            app:layout_constraintBottom_toBottomOf="@+id/img_rate_us"
+            app:layout_constraintStart_toEndOf="@+id/img_rate_us"
+            app:layout_constraintTop_toTopOf="@+id/img_rate_us" />
 
-    <View
-        android:id="@+id/view_logout"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
-        app:layout_constraintTop_toBottomOf="@+id/view_rate_us" />
+        <View
+            android:id="@+id/view_logout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:onClick="@{()->sideMenuFragment.logoutMethod()}"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
+            app:layout_constraintTop_toBottomOf="@+id/view_rate_us" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_logout"
-        android:layout_width="@dimen/_24sdp"
-        android:layout_height="@dimen/_24sdp"
-        android:src="@drawable/ic_logout"
-        app:layout_constraintBottom_toBottomOf="@+id/view_logout"
-        app:layout_constraintStart_toStartOf="@+id/view_logout"
-        app:layout_constraintTop_toTopOf="@+id/view_logout"
-        app:layout_constraintVertical_bias="0.487" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_logout"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/ic_logout"
+            app:layout_constraintBottom_toBottomOf="@+id/view_logout"
+            app:layout_constraintStart_toStartOf="@+id/view_logout"
+            app:layout_constraintTop_toTopOf="@+id/view_logout"
+            app:layout_constraintVertical_bias="0.487" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_logout"
-        style="@style/side_menu_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:text="@string/logout"
-        app:layout_constraintBottom_toBottomOf="@+id/img_logout"
-        app:layout_constraintStart_toEndOf="@+id/img_logout"
-        app:layout_constraintTop_toTopOf="@+id/img_logout" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_logout"
+            style="@style/side_menu_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:text="@string/logout"
+            app:layout_constraintBottom_toBottomOf="@+id/img_logout"
+            app:layout_constraintStart_toEndOf="@+id/img_logout"
+            app:layout_constraintTop_toTopOf="@+id/img_logout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

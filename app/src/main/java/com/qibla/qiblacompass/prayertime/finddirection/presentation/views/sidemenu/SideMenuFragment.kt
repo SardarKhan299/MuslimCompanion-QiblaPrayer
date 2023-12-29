@@ -45,4 +45,9 @@ class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment
         findNavController().navigate(R.id.aboutUsFragment)
 
     }
+
+    fun logoutMethod() {
+        findNavController().navigate(R.id.loginFragment)
+
+    }
 }
