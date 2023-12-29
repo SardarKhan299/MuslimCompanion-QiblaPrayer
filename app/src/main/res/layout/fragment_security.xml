@@ -19,7 +19,7 @@
         layout="@layout/layout_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.96" />
+        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_security_bottom"

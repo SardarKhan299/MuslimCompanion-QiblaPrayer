@@ -12,8 +12,8 @@
     <string name="mobile_number">Mobile Number</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="forgot_password_">Forgot Password</string>
-    <string name="remember_me">Remember me</string>
+    <string name="forgot_password_">Forgot Password?</string>
+    <string name="remember_me">  Remember me</string>
     <string name="log_in_with">or log in with</string>
     <string name="sign_up_with">or sign up with</string>
     <string name="google">Google</string>
@@ -30,7 +30,7 @@
     <string name="rate_us">Rate Us</string>
     <string name="logout">Logout</string>
     <string name="prayer_notifications">Prayer Notifications</string>
-    <string name="bio_metric">Bio-metric</string>
+    <string name="bio_metric">Biometric</string>
     <string name="security">Security</string>
     <string name="reset_password">Reset Password</string>
     <string name="new_password">New Password</string>
@@ -214,5 +214,7 @@
     <string name="view_3">View 3</string>
     <string name="view_1">View 1</string>
 <string name="makkah_live">Makkah Live</string>
+    <string name="warning">Warning</string>
+    <string name="exit">Are you sure you want to exit</string>
 
 </resources>

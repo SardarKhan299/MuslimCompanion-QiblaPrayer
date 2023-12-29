@@ -19,7 +19,7 @@
         layout="@layout/layout_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,15 +30,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left"
-        app:layout_constraintStart_toStartOf="parent" />
+       />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_about_us_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.96" />
+        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_about_us_bottom"
@@ -90,7 +89,7 @@
         style="@style/side_menu_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_6sdp"
         android:text="@string/privacy_policy"
         app:layout_constraintBottom_toBottomOf="@+id/img_privacy_policy"
         app:layout_constraintStart_toEndOf="@+id/img_privacy_policy"
@@ -119,7 +118,7 @@
         style="@style/side_menu_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_6sdp"
         android:text="@string/terms_and_conditions"
         app:layout_constraintBottom_toBottomOf="@+id/img_terms_conditions"
         app:layout_constraintStart_toEndOf="@+id/img_terms_conditions"
@@ -147,7 +146,7 @@
         style="@style/side_menu_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_6sdp"
         android:text="@string/facebook"
         app:layout_constraintBottom_toBottomOf="@+id/img_facebook"
         app:layout_constraintStart_toEndOf="@+id/img_facebook"
@@ -175,7 +174,7 @@
         style="@style/side_menu_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_6sdp"
         android:text="@string/linkedin"
         app:layout_constraintBottom_toBottomOf="@+id/img_linked_in"
         app:layout_constraintStart_toEndOf="@+id/img_linked_in"
@@ -204,7 +203,7 @@
         style="@style/side_menu_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_6sdp"
         android:text="@string/twitter"
         app:layout_constraintBottom_toBottomOf="@+id/img_twitter"
         app:layout_constraintStart_toEndOf="@+id/img_twitter"
@@ -235,7 +234,7 @@
         style="@style/side_menu_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_6sdp"
         android:layout_marginBottom="@dimen/_8sdp"
         android:text="@string/check_for_updates"
         app:layout_constraintBottom_toBottomOf="@+id/img_security_updates"

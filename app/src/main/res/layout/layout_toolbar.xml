@@ -64,7 +64,7 @@
         style="@style/toolbar_title_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_6sdp"
         android:text="@string/profile_name"
         android:textSize="@dimen/_14sdp"
         app:layout_constraintBottom_toBottomOf="@+id/img_profile_image"
@@ -115,7 +115,7 @@
         android:text="@string/account_settings"
         app:layout_constraintBottom_toBottomOf="@+id/view_subScreen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view_subScreen"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view_subScreen" />
 
     <androidx.constraintlayout.widget.Group

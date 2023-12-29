@@ -23,7 +23,7 @@
             layout="@layout/layout_toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,8 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.02"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left"  />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_right_next_prayer"
@@ -42,7 +41,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_percent="0.98" />
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_location_city"

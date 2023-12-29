@@ -20,7 +20,7 @@
             layout="@layout/layout_toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,16 +30,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.02"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left"
+            />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_right_makkah_live"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_percent="0.98" />
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right"  />
 
         <View
             android:id="@+id/view_makkah"
@@ -117,6 +116,18 @@
             app:layout_constraintBottom_toTopOf="@+id/view_makkah"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_makkah_live"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_makkah_live"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_makkah_live" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_makkah_live" >
+
+        </WebView>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_120sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
