@@ -41,6 +41,9 @@
     <string name="cancel">Cancel</string>
     <string name="account_to_delete">Deleting your account will do the \n following:</string>
     <string name="deleting_your_account">\u2022Log you out on all devices\n \u2022Delete all of your account information</string>
+    <string name="deleting_your_account_logout_devices">\u2022 Log you out on all devices</string>
+    <string name="deleting_your_account_info">\u2022 Delete all of your account information</string>
+
     <string name="delete">Delete</string>
     <string name="account_deleted">Your account is deleted!</string>
     <string name="thank_you_for_using_our_application">Thank you for using our Application</string>
