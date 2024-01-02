@@ -86,7 +86,7 @@
             android:id="@+id/view_face_id"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_account_settings_right"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline_account_settings_left"

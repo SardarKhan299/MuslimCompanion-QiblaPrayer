@@ -7,10 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.PopUpDialog
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentSideMenuBinding
@@ -38,6 +40,7 @@ class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment
             findNavController().closeCurrentScreen()
         }
 
+
     }
 
     fun gotoUpdateAccountSettings() {
@@ -50,8 +53,20 @@ class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment
     }
 
     fun logoutMethod() {
-        val intent = Intent(requireContext(), LoginActivity::class.java)
-        startActivity(intent)
+                PopUpDialog(
+                    getString(R.string.warning),
+                    getString(R.string.logout_dialog),
+                    ok_btn_callback(),
+                    R.drawable.ic_warning
+                ).show(requireActivity().supportFragmentManager, "")
 
+    }
+
+    fun ok_btn_callback(): (String) -> Unit {
+        return {
+            Log.d("MakkahLiveFragment"::class.simpleName, "ok_btn_callback: ")
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
