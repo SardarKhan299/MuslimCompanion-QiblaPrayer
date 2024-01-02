@@ -51,7 +51,7 @@
                 android:id="@+id/view_auto_detect"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_30sdp"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
+                app:layout_constraintStart_toStartOf="@+id/toolbar_board"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_board" />
 
             <androidx.appcompat.widget.AppCompatTextView

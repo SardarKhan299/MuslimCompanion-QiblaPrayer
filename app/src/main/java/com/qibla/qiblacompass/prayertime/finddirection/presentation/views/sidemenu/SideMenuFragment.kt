@@ -1,5 +1,6 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.sidemenu
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +14,8 @@ import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentSideMenuBinding
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardActivity
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login.LoginActivity
 
 
 class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment_side_menu) {
@@ -47,7 +50,8 @@ class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment
     }
 
     fun logoutMethod() {
-        findNavController().navigate(R.id.loginFragment)
+        val intent = Intent(requireContext(), LoginActivity::class.java)
+        startActivity(intent)
 
     }
 }

@@ -456,6 +456,17 @@
     <style name="CustomSwitchStyle" parent="Widget.AppCompat.CompoundButton.Switch">
         <item name="android:thumb">@drawable/toggle_account_setting</item>
     </style>
+
+
+
+
+
+
+
+
+
+
+
     <!--    <style name="counter_type_text_style" parent="@android:style/TextAppearance">-->
     <!--        <item name="android:textSize">@dimen/_14sdp</item>-->
     <!--        <item name="android:textColor">@color/black</item>-->

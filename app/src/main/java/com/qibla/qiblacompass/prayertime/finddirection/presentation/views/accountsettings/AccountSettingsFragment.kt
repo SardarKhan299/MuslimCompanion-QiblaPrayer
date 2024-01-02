@@ -11,7 +11,6 @@ import android.util.Log
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -50,20 +49,13 @@ class AccountSettingsFragment :
         }
         setupBiometricAuth()
 
-//        binding.switchPrayerNotification.setOnCheckedChangeListener { _: CompoundButton?, isChecked ->
-//            if (isChecked)
-//                binding.switchPrayerNotification.setButtonDrawable(R.drawable.toggle_off)
-//            else
-//                binding.switchPrayerNotification.setButtonDrawable(R.drawable.toggle_on)
-//        }
-
-        binding.switchBioMetric.isChecked = SharedPreferences.isBiometricEnabled(requireContext())
+        binding.switchBioMetric.isChecked = SharedPreferences.isBiometricEnabled(mContext)
         binding.switchBioMetric.setOnCheckedChangeListener { buttonView, isChecked ->
             Log.d(AccountSettingsFragment::class.simpleName, "onViewCreated: $isChecked")
             if (isChecked) {
                 checkBiometricFeatureState()
             } else {
-                SharedPreferences.enableBiometricLogin(requireContext(), false)
+                SharedPreferences.enableBiometricLogin(mContext, false)
             }
         }
 
