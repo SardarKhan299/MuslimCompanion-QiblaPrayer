@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
+import com.qibla.qiblacompass.prayertime.finddirection.common.visible
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentDashBoardBinding
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.onboarding.OnboardingActivity
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.qibaldirection.CompassDirectionActivity
@@ -43,6 +44,13 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             //Navigation.findNavController(requireView()).navigate(R.id.tasbihCounterFragment)
             startActivity(Intent(mContext, CompassDirectionActivity::class.java))
 
+        }
+        binding.viewAutoDetect.setOnClickListener {
+            if(binding.includeAutoDetect.layoutDialog.visibility == View.VISIBLE){
+                binding.includeAutoDetect.layoutDialog.visibility = View.INVISIBLE
+            }else{
+                binding.includeAutoDetect.layoutDialog.visibility = View.VISIBLE
+            }
         }
         binding.toolbarBoard.imgToolbar.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.sideMenuFragment)

@@ -451,6 +451,17 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_heading_location"
                 app:layout_constraintStart_toEndOf="@+id/tv_heading_location"
                 app:layout_constraintTop_toTopOf="@+id/tv_heading_location" />
+
+            <include
+                android:id="@+id/include_auto_detect"
+                layout="@layout/auto_detect_alert_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/view_ads"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

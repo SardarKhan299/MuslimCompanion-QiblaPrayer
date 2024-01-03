@@ -1,15 +1,10 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.livestreaming
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.webkit.WebChromeClient
-import android.webkit.WebSettings
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import android.widget.ProgressBar
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -20,18 +15,18 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.PopUpDialog
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentMakkahLiveBinding
-import java.lang.System.exit
 
 
 class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.fragment_makkah_live) {
     lateinit var webView: WebView
     lateinit var progressBar: ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)?.hideActionBar()
 
     }
-
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
@@ -44,17 +39,37 @@ class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.frag
         binding.toolbarMakkahLive.viewSubScreen.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
-        //binding.webView.loadUrl("https://www.youtube-nocookie.com/embed/PEmRPDJ9I8M?autoplay=1&playsinline=1")
-        binding.imgMakkahViewOne.setOnClickListener {
+
+        binding.webView.loadUrl("https://www.youtube-nocookie.com/embed/PEmRPDJ9I8M?autoplay=1&playsinline=1")
+        binding.viewMainFirst.setOnClickListener {
             loadUrl("https://www.youtube-nocookie.com/embed/PEmRPDJ9I8M?autoplay=1&playsinline=1")
         }
-        binding.imgMakkahViewTwo.setOnClickListener {
+        binding.viewMainTwo.setOnClickListener {
             loadUrl("https://www.youtube-nocookie.com/embed/Cy3hsDtzfOE?autoplay=1&playsinline=1")
         }
-        binding.imgMakkahViewThree.setOnClickListener {
+        binding.viewMainThree.setOnClickListener {
             loadUrl("https://www.youtube-nocookie.com/embed/xZtG7Bn2B5c?autoplay=1&playsinline=1")
 
         }
+        webView.settings.javaScriptEnabled = true
+
+        webView.webChromeClient = object : WebChromeClient() {
+            // Handle full-screen video playback here if needed
+        }
+
+        webView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                view?.loadUrl("https://www.youtube-nocookie.com/embed/xZtG7Bn2B5c?autoplay=1&playsinline=1")
+                return true
+            }
+        }
+
+        // Load the HTML content with an embedded video
+        val videoHtml =
+            "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/VIDEO_ID\" frameborder=\"0\" allowfullscreen></iframe>"
+        webView.loadData(videoHtml, "text/html", "UTF-8")
+
+
         requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 PopUpDialog(
@@ -65,7 +80,7 @@ class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.frag
                 ).show(requireActivity().supportFragmentManager, "")
             }
         })
-        // Set up the WebChromeClient to enable video playback and track loading progress
+         //Set up the WebChromeClient to enable video playback and track loading progress
         webView.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 super.onProgressChanged(view, newProgress)
@@ -106,15 +121,18 @@ class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.frag
     }
 
     private fun initializeWebView() {
-        val webSettings: WebSettings = webView.settings
-        webSettings.javaScriptEnabled = true
 
+        webView.settings.apply {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            mediaPlaybackRequiresUserGesture = false // Allow autoplay
+            cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+        }
+        //  val webSettings: WebSettings = webView.settings
+        //  webSettings.javaScriptEnabled = true
         webView.webChromeClient = WebChromeClient()
 
         val videoUrl = "https://www.youtube.com/embed/xZtG7Bn2B5c"
-        // val videoUrl = "https://www.youtube.com/embed/xZtG7Bn2B5c"
-        // val videoUrl = "   https://makkahlive.net/tvcamera.aspx"
-        //val videoUrl = "https://youtu.be/PEmRPDJ9I8M"
 
         val html =
             "<html><body><iframe width=\"100%\" height=\"100%\" src=\"$videoUrl\" frameborder=\"0\" allowfullscreen></iframe></body></html>"

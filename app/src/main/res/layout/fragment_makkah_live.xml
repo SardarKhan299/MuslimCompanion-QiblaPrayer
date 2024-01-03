@@ -30,15 +30,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left"
-            />
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_right_makkah_live"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right"  />
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
         <View
             android:id="@+id/view_makkah"
@@ -46,16 +45,26 @@
             android:layout_height="@dimen/_80sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_makkah_live"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_makkah_live" />
+
+
+        <View
+            android:id="@+id/view_main_first"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_makkah_live"
+            app:layout_constraintTop_toTopOf="@+id/view_makkah" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_makkah_view_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_14sdp"
             android:layout_marginTop="@dimen/_14sdp"
             android:src="@drawable/ic_makkah"
-            app:layout_constraintStart_toStartOf="@+id/view_makkah"
+            app:layout_constraintEnd_toEndOf="@id/view_main_first"
+            app:layout_constraintStart_toStartOf="@+id/view_main_first"
             app:layout_constraintTop_toTopOf="@+id/view_makkah" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -68,14 +77,23 @@
             app:layout_constraintStart_toStartOf="@+id/img_makkah_view_one"
             app:layout_constraintTop_toBottomOf="@+id/img_makkah_view_one" />
 
+        <View
+            android:id="@+id/view_main_three"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_makkah_live"
+            app:layout_constraintStart_toEndOf="@+id/view_main_two"
+            app:layout_constraintTop_toTopOf="@+id/view_makkah" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_makkah_view_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_14sdp"
-            android:layout_marginEnd="@dimen/_14sdp"
             android:src="@drawable/ic_makkah"
-            app:layout_constraintEnd_toEndOf="@+id/view_makkah"
+            app:layout_constraintStart_toStartOf="@id/view_main_three"
+            app:layout_constraintEnd_toEndOf="@+id/view_main_three"
             app:layout_constraintTop_toTopOf="@+id/view_makkah" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -88,14 +106,24 @@
             app:layout_constraintStart_toStartOf="@+id/img_makkah_view_three"
             app:layout_constraintTop_toBottomOf="@+id/img_makkah_view_three" />
 
+        <View
+            android:id="@+id/view_main_two"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view_main_first"
+            app:layout_constraintTop_toTopOf="@+id/view_makkah"
+            app:layout_constraintVertical_bias="0.0" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_makkah_view_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_makkah"
             app:layout_constraintBottom_toTopOf="@+id/tv_makkah_view_one"
-            app:layout_constraintEnd_toStartOf="@+id/img_makkah_view_three"
-            app:layout_constraintStart_toEndOf="@+id/img_makkah_view_one"
+            app:layout_constraintEnd_toEndOf="@id/view_main_two"
+            app:layout_constraintStart_toStartOf="@id/view_main_two"
             app:layout_constraintTop_toTopOf="@+id/img_makkah_view_one" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -108,26 +136,40 @@
             app:layout_constraintStart_toStartOf="@+id/img_makkah_view_two"
             app:layout_constraintTop_toBottomOf="@+id/img_makkah_view_two" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="center"
+            style="@style/side_menu_text_style"
+            android:background="@drawable/button_bg"
+            android:text="Player Video"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_makkah_live"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_makkah_live"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_makkah_live" />
+
         <WebView
             android:id="@+id/webView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@+id/view_makkah"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_makkah_live"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_makkah_live"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_makkah_live" >
+            app:layout_constraintTop_toBottomOf="@+id/title">
 
         </WebView>
+
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="@dimen/_120sdp"
             android:layout_height="@dimen/_120sdp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:visibility="gone" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
