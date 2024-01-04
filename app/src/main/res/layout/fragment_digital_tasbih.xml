@@ -114,10 +114,10 @@
             android:text="0"
             app:layout_constraintBottom_toBottomOf="@+id/img_main"
             app:layout_constraintEnd_toEndOf="@+id/img_main"
-            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintHorizontal_bias="@dimen/bias_horizontal_tasbih"
             app:layout_constraintStart_toStartOf="@+id/img_main"
             app:layout_constraintTop_toTopOf="@+id/img_main"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintVertical_bias="@dimen/bias_vertical_tasbih" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_reset"
@@ -128,10 +128,10 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/img_main"
             app:layout_constraintEnd_toEndOf="@+id/img_main"
-            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintHorizontal_bias="@dimen/bias_horizontal_tasbih"
             app:layout_constraintStart_toStartOf="@+id/img_main"
             app:layout_constraintTop_toBottomOf="@+id/tv_digital_counter"
-            app:layout_constraintVertical_bias="0.09" />
+            app:layout_constraintVertical_bias="@dimen/bias_tasbih" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_minus_digital_counter"
@@ -141,7 +141,7 @@
             android:src="@drawable/ic_minus_btn"
             app:layout_constraintBottom_toBottomOf="@+id/img_increment_digital_counter"
             app:layout_constraintEnd_toEndOf="@+id/img_main"
-            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintHorizontal_bias="@dimen/bias_vertical_tasbih"
             app:layout_constraintStart_toEndOf="@+id/img_increment_digital_counter"
             app:layout_constraintTop_toBottomOf="@+id/img_reset" />
 
@@ -152,10 +152,10 @@
             android:src="@drawable/ic_increment_btn"
             app:layout_constraintBottom_toBottomOf="@+id/img_main"
             app:layout_constraintEnd_toEndOf="@id/img_main"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="@dimen/bias_zero_point_five_tasbih"
             app:layout_constraintStart_toStartOf="@+id/img_main"
             app:layout_constraintTop_toTopOf="@+id/img_main"
-            app:layout_constraintVertical_bias="0.85" />
+            app:layout_constraintVertical_bias="@dimen/bias_tasbih_zero_point_eight" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_reset_digital_counter"
@@ -165,10 +165,10 @@
             android:src="@drawable/ic_reset_btn"
             app:layout_constraintBottom_toBottomOf="@+id/img_minus_digital_counter"
             app:layout_constraintEnd_toStartOf="@+id/img_increment_digital_counter"
-            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintHorizontal_bias="@dimen/bias_tasbih_zero_point_nine"
             app:layout_constraintStart_toStartOf="@+id/img_main"
             app:layout_constraintTop_toTopOf="@+id/img_minus_digital_counter"
-            app:layout_constraintVertical_bias="0.2" />
+            app:layout_constraintVertical_bias="@dimen/bias_tasbih_zero_point_two" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

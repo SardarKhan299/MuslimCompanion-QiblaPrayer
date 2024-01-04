@@ -39,13 +39,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_about_us_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_about_us_compass"
@@ -72,7 +65,7 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_20sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="@dimen/bias_zero"
         app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
         app:layout_constraintTop_toBottomOf="@+id/tv_version" />
     <androidx.appcompat.widget.AppCompatImageView
@@ -83,7 +76,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_about_us_privacy"
         app:layout_constraintStart_toStartOf="@+id/view_about_us_privacy"
         app:layout_constraintTop_toTopOf="@+id/view_about_us_privacy"
-        app:layout_constraintVertical_bias="0.487" />
+        app:layout_constraintVertical_bias="@dimen/bias_about_vertical" />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_privacy_policy"
         style="@style/side_menu_text_style"
@@ -101,7 +94,7 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:onClick="@{()->aboutUsFragment.gotoUpdateAccountSettings()}"
         app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="@dimen/bias_zero"
         app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
         app:layout_constraintTop_toBottomOf="@+id/view_about_us_privacy" />
     <androidx.appcompat.widget.AppCompatImageView
@@ -112,7 +105,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_about_us_terms_conditions"
         app:layout_constraintStart_toStartOf="@+id/view_about_us_terms_conditions"
         app:layout_constraintTop_toTopOf="@+id/view_about_us_terms_conditions"
-        app:layout_constraintVertical_bias="0.487" />
+        app:layout_constraintVertical_bias="@dimen/bias_about_vertical" />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_terms_conditions"
         style="@style/side_menu_text_style"
@@ -129,7 +122,7 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="@dimen/bias_zero"
         app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
         app:layout_constraintTop_toBottomOf="@+id/view_about_us_terms_conditions" />
     <androidx.appcompat.widget.AppCompatImageView
@@ -140,7 +133,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_about_us_facebook"
         app:layout_constraintStart_toStartOf="@+id/view_about_us_facebook"
         app:layout_constraintTop_toTopOf="@+id/view_about_us_facebook"
-        app:layout_constraintVertical_bias="0.487" />
+        app:layout_constraintVertical_bias="@dimen/bias_about_vertical" />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_facebook"
         style="@style/side_menu_text_style"
@@ -157,7 +150,7 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="@dimen/bias_zero"
         app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
         app:layout_constraintTop_toBottomOf="@+id/view_about_us_facebook" />
     <androidx.appcompat.widget.AppCompatImageView
@@ -168,7 +161,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_about_us_linked_in"
         app:layout_constraintStart_toStartOf="@+id/view_about_us_linked_in"
         app:layout_constraintTop_toTopOf="@+id/view_about_us_linked_in"
-        app:layout_constraintVertical_bias="0.487" />
+        app:layout_constraintVertical_bias="@dimen/bias_about_vertical" />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_linked_in"
         style="@style/side_menu_text_style"
@@ -186,7 +179,7 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="@dimen/bias_zero"
         app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
         app:layout_constraintTop_toBottomOf="@+id/view_about_us_linked_in" />
     <androidx.appcompat.widget.AppCompatImageView
@@ -197,7 +190,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_about_us_twitter"
         app:layout_constraintStart_toStartOf="@+id/view_about_us_twitter"
         app:layout_constraintTop_toTopOf="@+id/view_about_us_twitter"
-        app:layout_constraintVertical_bias="0.487" />
+        app:layout_constraintVertical_bias="@dimen/bias_about_vertical" />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_twitter"
         style="@style/side_menu_text_style"
@@ -215,7 +208,7 @@
         android:layout_height="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="@dimen/bias_zero"
         app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"
         app:layout_constraintTop_toBottomOf="@+id/view_about_us_twitter" />
     <androidx.appcompat.widget.AppCompatImageView
@@ -227,7 +220,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_about_us_security_updates"
         app:layout_constraintStart_toStartOf="@+id/view_about_us_security_updates"
         app:layout_constraintTop_toTopOf="@+id/view_about_us_security_updates"
-        app:layout_constraintVertical_bias="0.487" />
+        app:layout_constraintVertical_bias="@dimen/bias_about_vertical" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_security_updates"
@@ -248,9 +241,9 @@
         android:text="@string/update_available"
         android:textSize="@dimen/_10sdp"
         android:includeFontPadding="false"
-        android:textColor="#59000000"
+        android:textColor="@color/about_us_text_color"
         app:layout_constraintEnd_toEndOf="@+id/tv_security_updates"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="@dimen/bias_zero"
         app:layout_constraintStart_toStartOf="@+id/tv_security_updates"
         app:layout_constraintTop_toBottomOf="@+id/tv_security_updates" />
 

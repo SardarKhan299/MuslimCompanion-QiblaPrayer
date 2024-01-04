@@ -41,5 +41,5 @@
     <color name="close_icon_tasbih_color">#706A5D</color>
     <color name="distance_text_color">#A3A29D</color>
     <color name="zakat_point_heading_text_color">#670707</color>
-
+<color name="about_us_text_color">#59000000</color>
 </resources>

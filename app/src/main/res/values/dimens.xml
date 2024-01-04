@@ -45,5 +45,17 @@
     <dimen name="bias_logo_vertical">0.769</dimen>
     <dimen name="bias_text_horizontal">0.027</dimen>
     <dimen name="bias_img_vertical">0.615</dimen>
+    <dimen name="bias_zero">0.0</dimen>
+    <dimen name="bias_about_vertical">0.487</dimen>
+    <dimen name="bias_one">1.0</dimen>
+    <dimen name="bias_zero_point_five">0.555</dimen>
+    <dimen name="bias_dashboard_horizontal">0.662</dimen>
+<dimen name="bias_horizontal_tasbih">0.8</dimen>
+    <dimen name="bias_vertical_tasbih">0.3</dimen>
+    <dimen name="bias_tasbih">0.09</dimen>
+    <dimen name="bias_zero_point_five_tasbih">0.5</dimen>
+    <dimen name="bias_tasbih_zero_point_eight">0.85</dimen>
+    <dimen name="bias_tasbih_zero_point_nine">0.9</dimen>
+    <dimen name="bias_tasbih_zero_point_two">0.2</dimen>
 
 </resources>
