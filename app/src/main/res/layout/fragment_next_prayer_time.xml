@@ -94,7 +94,7 @@
             android:text="@string/_11_august_2023"
             app:layout_constraintBottom_toTopOf="@+id/layout_next_prayer_background"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_next_prayer"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="@dimen/bias_zero"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_next_prayer" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="1.0"
+            app:layout_constraintGuide_percent="@dimen/bias_one"
             app:layout_constraintStart_toStartOf="parent" />
 
 
@@ -57,7 +57,7 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_20sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="@dimen/bias_zero"
             app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_side_menu" />
 
@@ -69,7 +69,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/view_profile"
             app:layout_constraintStart_toStartOf="@+id/view_profile"
             app:layout_constraintTop_toTopOf="@+id/view_profile"
-            app:layout_constraintVertical_bias="0.487" />
+            app:layout_constraintVertical_bias="@dimen/bias_about_vertical" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_profile"
@@ -89,7 +89,7 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:onClick="@{()->sideMenuFragment.gotoUpdateAccountSettings()}"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="@dimen/bias_zero"
             app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
             app:layout_constraintTop_toBottomOf="@+id/view_profile" />
 
@@ -101,7 +101,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/view_account_setting"
             app:layout_constraintStart_toStartOf="@+id/view_account_setting"
             app:layout_constraintTop_toTopOf="@+id/view_account_setting"
-            app:layout_constraintVertical_bias="0.487" />
+            app:layout_constraintVertical_bias="@dimen/bias_about_vertical" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_account_setting"
@@ -121,7 +121,7 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:onClick="@{()->sideMenuFragment.gotoUpdateAboutUsScreen()}"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="@dimen/bias_zero"
             app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
             app:layout_constraintTop_toBottomOf="@+id/view_account_setting" />
 
@@ -133,7 +133,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/view_about_us"
             app:layout_constraintStart_toStartOf="@+id/view_about_us"
             app:layout_constraintTop_toTopOf="@+id/view_about_us"
-            app:layout_constraintVertical_bias="0.487" />
+            app:layout_constraintVertical_bias="@dimen/bias_about_vertical" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_about_us"
@@ -164,7 +164,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/view_share_app"
             app:layout_constraintStart_toStartOf="@+id/view_share_app"
             app:layout_constraintTop_toTopOf="@+id/view_share_app"
-            app:layout_constraintVertical_bias="0.487" />
+            app:layout_constraintVertical_bias="@dimen/bias_about_vertical" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_share_app"
@@ -183,7 +183,7 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="@dimen/bias_zero"
             app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
             app:layout_constraintTop_toBottomOf="@+id/view_share_app" />
 
@@ -195,7 +195,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/view_rate_us"
             app:layout_constraintStart_toStartOf="@+id/view_rate_us"
             app:layout_constraintTop_toTopOf="@+id/view_rate_us"
-            app:layout_constraintVertical_bias="0.487" />
+            app:layout_constraintVertical_bias="@dimen/bias_about_vertical" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_rate_us"
@@ -215,7 +215,7 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:onClick="@{()->sideMenuFragment.logoutMethod()}"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_menu"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="@dimen/bias_zero"
             app:layout_constraintStart_toStartOf="@+id/guideline_menu_left"
             app:layout_constraintTop_toBottomOf="@+id/view_rate_us" />
 
@@ -227,7 +227,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/view_logout"
             app:layout_constraintStart_toStartOf="@+id/view_logout"
             app:layout_constraintTop_toTopOf="@+id/view_logout"
-            app:layout_constraintVertical_bias="0.487" />
+            app:layout_constraintVertical_bias="@dimen/bias_about_vertical" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_logout"

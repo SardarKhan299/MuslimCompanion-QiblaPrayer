@@ -48,10 +48,10 @@
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@+id/btn_calculate_zakat"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="@dimen/bias_zero"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_zakat"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="@dimen/bias_zero"
             tools:listitem="@layout/item_zakat" />
 
         <androidx.appcompat.widget.AppCompatButton

@@ -18,14 +18,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.06" />
+        app:layout_constraintGuide_percent="@dimen/dialog_guideline_left" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_notification_dialog_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.92" />
+        app:layout_constraintGuide_percent="@dimen/dialog_guideline_right" />
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_dialog"
         android:layout_width="@dimen/_100sdp"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
-        android:text="Warning"
+        android:text="@string/warning"
         app:layout_constraintEnd_toStartOf="@+id/guideline_notification_dialog_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_notification_dialog_left"
         app:layout_constraintTop_toBottomOf="@+id/iv_dialog" />
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
-        android:text="Are you sure you want to exit"
+        android:text="@string/are_you_sure_you_want_to_exit"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/guideline_notification_dialog_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_notification_dialog_left"
@@ -65,7 +65,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:background="@drawable/button_bg"
-        android:text="Yes"
+        android:text="@string/yes"
         app:layout_constraintEnd_toStartOf="@+id/guideline_notification_dialog_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_notification_dialog_left"
         app:layout_constraintTop_toBottomOf="@+id/tv_dialog_detail" />
@@ -79,12 +79,12 @@
         android:layout_marginTop="@dimen/_4sdp"
         android:paddingEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:text="No"
+        android:text="@string/no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btn_dialog_yes"
-        app:layout_constraintHorizontal_bias="0.597"
+        app:layout_constraintHorizontal_bias="@dimen/bias_dialog"
         app:layout_constraintStart_toStartOf="@+id/btn_dialog_yes"
         app:layout_constraintTop_toBottomOf="@+id/btn_dialog_yes"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="@dimen/bias_zero" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

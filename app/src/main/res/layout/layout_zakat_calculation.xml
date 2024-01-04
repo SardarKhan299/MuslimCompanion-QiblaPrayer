@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.02"
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_percent="0.98" />
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
         <View
             android:id="@+id/view_heading_zakat"
@@ -39,6 +39,16 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat_calculate"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_arrow_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_drop_down"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_zakat_heading"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintTop_toTopOf="@+id/tv_zakat_heading" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_zakat_heading"
@@ -59,7 +69,7 @@
             android:background="@drawable/zakat_detail_bg"
             app:layout_constraintBottom_toTopOf="@id/separator_view"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="@dimen/bias_zero"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat_calculate"
             app:layout_constraintTop_toBottomOf="@+id/view_heading_zakat" />
 
@@ -661,6 +671,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
             android:text="@string/cashable_financial_documents_or_contributions"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
             app:layout_constraintStart_toStartOf="@+id/edt_financial_documents"
             app:layout_constraintTop_toBottomOf="@+id/edt_financial_documents" />
 
@@ -1063,8 +1074,18 @@ tv_cash_heading_seven,  tv_loan_detail,
             app:layout_constraintTop_toBottomOf="@id/separator_view"
             tools:layout_editor_absoluteY="4394dp" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_financial_drop_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_drop_down"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat_calculate"
+            app:layout_constraintTop_toTopOf="@+id/appCompatTextView5" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView5"
             style="@style/zakat_heading_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -1549,7 +1570,7 @@ tv_cash_heading_seven,  tv_loan_detail,
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_6sdp"
             android:text="@string/amount_of_zakat_rs"
-            android:textColor="@color/primary_color"
+            android:textColor="@color/text_zakat_color"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintStart_toStartOf="@+id/tv_zakat_amount_due"
             app:layout_constraintTop_toBottomOf="@+id/tv_zakat_amount_due" />
@@ -1560,7 +1581,7 @@ tv_cash_heading_seven,  tv_loan_detail,
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/zero"
-            android:textColor="@color/primary_color"
+            android:textColor="@color/text_zakat_color"
             android:maxLines="2"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_total_zakat_amount"
