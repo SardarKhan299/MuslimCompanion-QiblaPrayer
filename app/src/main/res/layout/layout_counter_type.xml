@@ -92,11 +92,11 @@
         android:layout_height="@dimen/_40sdp"
         app:layout_constraintBottom_toBottomOf="@+id/view_counter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="@dimen/bias_zero"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="@dimen/_4sdp"
         app:layout_constraintTop_toBottomOf="@+id/view_show_history"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="@dimen/bias_zero" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_overflow"

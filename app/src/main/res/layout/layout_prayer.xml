@@ -18,7 +18,7 @@
       android:scaleType="fitXY"
       android:src="@drawable/ic_fajr_dashboard"
       app:layout_constraintEnd_toStartOf="@+id/img_zuhr_screen"
-      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintHorizontal_bias="@dimen/bias_zero_point_five_tasbih"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,10 +52,10 @@
       android:src="@drawable/ic_zuhr_dashboard"
       app:layout_constraintBottom_toBottomOf="@+id/img_fajr_screen"
       app:layout_constraintEnd_toStartOf="@+id/img_asr_screen"
-      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintHorizontal_bias="@dimen/bias_zero_point_five_tasbih"
       app:layout_constraintStart_toEndOf="@+id/img_fajr_screen"
       app:layout_constraintTop_toTopOf="@+id/img_fajr_screen"
-      app:layout_constraintVertical_bias="0.0" />
+      app:layout_constraintVertical_bias="@dimen/bias_zero" />
 
   <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/tv_time_zuhr_prayer"
@@ -87,7 +87,7 @@
       android:src="@drawable/ic_asr_dashboard"
       app:layout_constraintBottom_toBottomOf="@+id/img_zuhr_screen"
       app:layout_constraintEnd_toStartOf="@+id/img_maghrib_screen"
-      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintHorizontal_bias="@dimen/bias_zero_point_five_tasbih"
       app:layout_constraintStart_toEndOf="@+id/img_zuhr_screen"
       app:layout_constraintTop_toTopOf="@+id/img_zuhr_screen" />
 
@@ -121,10 +121,10 @@
       android:src="@drawable/ic_maghrib_dashboard"
       app:layout_constraintBottom_toBottomOf="@+id/img_asr_screen"
       app:layout_constraintEnd_toStartOf="@+id/img_isha_screen"
-      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintHorizontal_bias="@dimen/bias_zero_point_five_tasbih"
       app:layout_constraintStart_toEndOf="@+id/img_asr_screen"
       app:layout_constraintTop_toTopOf="@+id/img_asr_screen"
-      app:layout_constraintVertical_bias="1.0" />
+      app:layout_constraintVertical_bias="@dimen/bias_one" />
 
   <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/tv_time_maghrib_prayer"
@@ -156,7 +156,7 @@
       android:src="@drawable/ic_isha_dashboard"
       app:layout_constraintBottom_toBottomOf="@+id/img_maghrib_screen"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintHorizontal_bias="@dimen/bias_zero_point_five_tasbih"
       app:layout_constraintStart_toEndOf="@+id/img_maghrib_screen"
       app:layout_constraintTop_toTopOf="@+id/img_maghrib_screen" />
 
