@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_270sdp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_8sdp"
+    android:layout_marginBottom="@dimen/_8sdp"
+    android:layout_marginEnd="@dimen/_8sdp"
+    android:background="@color/close_icon_tasbih_color"
+    app:cardCornerRadius="@dimen/_12sdp"
+    >
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="@dimen/_270sdp"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_notification_dialog_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.06" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_notification_dialog_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.92" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_dialog"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:src="@drawable/ic_warning"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_notification_dialog_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_notification_dialog_left"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_dialog_title"
+        style="@style/dialog_title_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="Warning"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_notification_dialog_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_notification_dialog_left"
+        app:layout_constraintTop_toBottomOf="@+id/iv_dialog" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_dialog_detail"
+        style="@style/dialog_message_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="Are you sure you want to exit"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_notification_dialog_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_notification_dialog_left"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dialog_title" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_dialog_yes"
+        style="@style/button_style"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:background="@drawable/button_bg"
+        android:text="Yes"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_notification_dialog_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_notification_dialog_left"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dialog_detail" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_dialog_cancel"
+        style="@style/cancel_button_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:text="No"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_dialog_yes"
+        app:layout_constraintHorizontal_bias="0.597"
+        app:layout_constraintStart_toStartOf="@+id/btn_dialog_yes"
+        app:layout_constraintTop_toBottomOf="@+id/btn_dialog_yes"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

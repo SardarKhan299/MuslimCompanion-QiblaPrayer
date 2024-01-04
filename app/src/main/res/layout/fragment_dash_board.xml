@@ -27,7 +27,7 @@
                 layout="@layout/layout_toolbar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_6sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,20 +37,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.02"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left"
+                 />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_right_dashboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_percent="0.98" />
+                app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
             <View
                 android:id="@+id/view_auto_detect"
-                android:layout_width="@dimen/_75sdp"
+                android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_30sdp"
                 app:layout_constraintStart_toStartOf="@+id/toolbar_board"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_board" />
@@ -182,15 +181,16 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
                 android:background="@drawable/button_bg"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/view_dashboard"
                 app:layout_constraintHorizontal_bias="0.662"
                 app:layout_constraintStart_toEndOf="@+id/tv_islamic_month"
                 app:layout_constraintTop_toTopOf="@+id/view_dashboard" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:src="@drawable/ic_bell_icon"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:src="@drawable/ic_dashboard_notification"
                 app:layout_constraintBottom_toBottomOf="@+id/view_bell_icon"
                 app:layout_constraintEnd_toEndOf="@+id/view_bell_icon"
                 app:layout_constraintStart_toStartOf="@+id/view_bell_icon"
@@ -451,6 +451,17 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_heading_location"
                 app:layout_constraintStart_toEndOf="@+id/tv_heading_location"
                 app:layout_constraintTop_toTopOf="@+id/tv_heading_location" />
+
+            <include
+                android:id="@+id/include_auto_detect"
+                layout="@layout/auto_detect_alert_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/view_ads"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

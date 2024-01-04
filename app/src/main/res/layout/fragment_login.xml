@@ -39,7 +39,7 @@
         android:id="@+id/img_login_compass"
         android:layout_width="@dimen/_70sdp"
         android:layout_height="@dimen/_70sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:src="@drawable/ic_compass"
         app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
         app:layout_constraintHorizontal_bias="0.498"
@@ -97,10 +97,11 @@
         android:id="@+id/layoutTextInputPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:endIconDrawable="@drawable/ic_password_toggle"
+        app:endIconDrawable="@drawable/password_toggle_btn"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
         android:layout_marginStart="@dimen/_4sdp"
+        app:endIconTint="@color/primary_color"
         android:layout_marginEnd="@dimen/_4sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
@@ -139,7 +140,7 @@
         style="@style/forgot_password_text_style"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
-        android:text="@string/remember_me"
+        android:text=" Remember me"
         android:button="@drawable/check_box_custom_bg"
         app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
         app:layout_constraintTop_toBottomOf="@+id/layoutTextInputPassword" />
@@ -149,7 +150,7 @@
         style="@style/button_text_style"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_30sdp"
         android:background="@drawable/button_bg"
         android:text="@string/login"
         app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
@@ -202,18 +203,27 @@
         app:layout_constraintTop_toTopOf="@+id/view_login"
         app:layout_constraintVertical_bias="0.769" />
 
+    <View
+        android:id="@+id/view_navigate_signup"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_login_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
+        app:layout_constraintTop_toBottomOf="@+id/view_login" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+
+        <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_have_another_account"
         style="@style/login_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_34sdp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="@dimen/_30sdp"
         android:text="@string/don_t_have_an_account_sign_up"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_login_bottom"
-        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
-        app:layout_constraintTop_toBottomOf="@+id/view_login" />
+            app:layout_constraintStart_toStartOf="@+id/view_navigate_signup"
+            app:layout_constraintTop_toTopOf="@+id/view_navigate_signup"
+            app:layout_constraintBottom_toBottomOf="@+id/view_navigate_signup"
+      />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_account_signUp"

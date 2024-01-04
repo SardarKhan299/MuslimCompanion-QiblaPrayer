@@ -23,7 +23,7 @@
             layout="@layout/layout_toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,16 +33,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_account_settings_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_percent="0.96" />
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_account_settings_bottom"
@@ -76,13 +74,44 @@
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_prayer_notification"
             android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_marginEnd="@dimen/_8sdp"
+            app:trackTint="@drawable/switch_track_selector"
+            app:thumbTint="@drawable/switch_thumb_selector"
             app:layout_constraintBottom_toBottomOf="@+id/tv_account_setting"
             app:layout_constraintEnd_toEndOf="@+id/view_notification_prayer"
             app:layout_constraintTop_toTopOf="@+id/tv_account_setting"
-            app:thumbTint="@color/primary_color" />
-
+            />
+        <View
+            android:id="@+id/view_face_id"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_account_settings_right"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_account_settings_left"
+            app:layout_constraintTop_toBottomOf="@+id/view_notification_prayer" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_face_id"
+            style="@style/toolbar_sub_screens_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/face_id"
+            app:layout_constraintBottom_toBottomOf="@+id/view_face_id"
+            app:layout_constraintStart_toStartOf="@+id/view_face_id"
+            app:layout_constraintTop_toTopOf="@+id/view_face_id" />
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_face_id"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:trackTint="@drawable/switch_track_selector"
+            app:thumbTint="@drawable/switch_thumb_selector"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_face_id"
+            app:layout_constraintEnd_toEndOf="@+id/view_face_id"
+            app:layout_constraintTop_toTopOf="@+id/tv_face_id"
+            />
         <View
             android:id="@+id/view_bio_metric"
             android:layout_width="0dp"
@@ -91,7 +120,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline_account_settings_right"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline_account_settings_left"
-            app:layout_constraintTop_toBottomOf="@+id/view_notification_prayer" />
+            app:layout_constraintTop_toBottomOf="@+id/view_face_id" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_bio_metric"
@@ -107,12 +136,13 @@
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_bio_metric"
             android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:trackTint="@drawable/switch_track_selector"
+            app:thumbTint="@drawable/switch_thumb_selector"
             android:layout_marginEnd="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_bio_metric"
             app:layout_constraintEnd_toStartOf="@+id/guideline_account_settings_right"
             app:layout_constraintTop_toTopOf="@+id/tv_bio_metric"
-            app:thumbTint="@color/primary_color"
             />
 
         <View

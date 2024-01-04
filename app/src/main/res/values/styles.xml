@@ -420,6 +420,52 @@
         <item name="android:includeFontPadding">false</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
+    <style name="makkah_view_text_text_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+    <style name="dialog_title_style"  parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+    <style name="dialog_message_text_style"  parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="button_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name= "android:textAlignment">center</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/button_bg</item>
+        <item name= "android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+    <style name="cancel_btn_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textColor">@color/delete_account_text_color</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+    <style name="CustomSwitchStyle" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:thumb">@drawable/toggle_account_setting</item>
+    </style>
+
+
+
+
+
+
+
+
+
+
 
     <!--    <style name="counter_type_text_style" parent="@android:style/TextAppearance">-->
     <!--        <item name="android:textSize">@dimen/_14sdp</item>-->

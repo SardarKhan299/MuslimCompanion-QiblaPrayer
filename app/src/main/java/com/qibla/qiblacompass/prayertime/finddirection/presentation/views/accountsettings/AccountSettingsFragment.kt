@@ -48,60 +48,78 @@ class AccountSettingsFragment :
             findNavController().closeCurrentScreen()
         }
         setupBiometricAuth()
-        binding.switchBioMetric.isChecked = SharedPreferences.isBiometricEnabled(requireContext())
+
+        binding.switchBioMetric.isChecked = SharedPreferences.isBiometricEnabled(mContext)
         binding.switchBioMetric.setOnCheckedChangeListener { buttonView, isChecked ->
             Log.d(AccountSettingsFragment::class.simpleName, "onViewCreated: $isChecked")
-            if(isChecked){
+            if (isChecked) {
                 checkBiometricFeatureState()
-            }else{
-                SharedPreferences.enableBiometricLogin(requireContext(),false)
+            } else {
+                SharedPreferences.enableBiometricLogin(mContext, false)
             }
         }
 
     }
-    fun gotoSecurityScreen(){
+
+    fun gotoSecurityScreen() {
         findNavController().navigate(R.id.securityFragment)
     }
+
     private fun setupBiometricAuth() {
         Log.d(AccountSettingsFragment::class.simpleName, "setupBiometricAuth: ")
         biometricManager = BiometricManager.from(requireContext())
         val executor = ContextCompat.getMainExecutor(requireContext())
-        biometricPrompt = BiometricPrompt(this@AccountSettingsFragment,executor, biometricCallback)
+        biometricPrompt = BiometricPrompt(this@AccountSettingsFragment, executor, biometricCallback)
 
     }
+
     private val biometricCallback = object : BiometricPrompt.AuthenticationCallback() {
         override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
             super.onAuthenticationSucceeded(result)
             Log.d(AccountSettingsFragment::class.simpleName, "onAuthenticationSucceeded: ")
-            SharedPreferences.enableBiometricLogin(requireContext(),true)
+            SharedPreferences.enableBiometricLogin(requireContext(), true)
         }
 
         override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
             super.onAuthenticationError(errorCode, errString)
-            Log.d(AccountSettingsFragment::class.simpleName, "onAuthenticationError: $errorCode ... $errString..")
+            Log.d(
+                AccountSettingsFragment::class.simpleName,
+                "onAuthenticationError: $errorCode ... $errString.."
+            )
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun checkBiometricFeatureState() {
         Log.d(SecurityFragment::class.simpleName, "checkBiometricFeatureState: ")
         when (biometricManager.canAuthenticate()) {
             BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
-                Log.d(AccountSettingsFragment::class.simpleName, "checkBiometricFeatureState: No hardware")
+                Log.d(
+                    AccountSettingsFragment::class.simpleName,
+                    "checkBiometricFeatureState: No hardware"
+                )
                 binding.switchBioMetric.isEnabled = false
             }
             BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
-                Log.d(AccountSettingsFragment::class.simpleName, "checkBiometricFeatureState: Biometric Feature Unavailable")
+                Log.d(
+                    AccountSettingsFragment::class.simpleName,
+                    "checkBiometricFeatureState: Biometric Feature Unavailable"
+                )
                 binding.switchBioMetric.isEnabled = false
             }
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
-                Log.d(AccountSettingsFragment::class.simpleName, "checkBiometricFeatureState: Biometric UnEnrolled")
+                Log.d(
+                    AccountSettingsFragment::class.simpleName,
+                    "checkBiometricFeatureState: Biometric UnEnrolled"
+                )
                 binding.switchBioMetric.isEnabled = true
                 // Prompts the user to create credentials that your app accepts.
                 val enrollIntent = Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
                     putExtra(
                         Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
                         android.hardware.biometrics.BiometricManager.Authenticators.BIOMETRIC_STRONG
-                                or android.hardware.biometrics.BiometricManager.Authenticators.DEVICE_CREDENTIAL)
+                                or android.hardware.biometrics.BiometricManager.Authenticators.DEVICE_CREDENTIAL
+                    )
                 }
                 resultLauncher.launch(enrollIntent)
             }
@@ -124,14 +142,15 @@ class AccountSettingsFragment :
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
-    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            // There are no request codes
-            val data: Intent? = result.data
-            Log.d(AccountSettingsFragment::class.simpleName, ": Activity Result ${data}")
-            checkBiometricFeatureState()
-        }else{
-            Log.d(AccountSettingsFragment::class.simpleName, ": User cancelled the Settings.")
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // There are no request codes
+                val data: Intent? = result.data
+                Log.d(AccountSettingsFragment::class.simpleName, ": Activity Result ${data}")
+                checkBiometricFeatureState()
+            } else {
+                Log.d(AccountSettingsFragment::class.simpleName, ": User cancelled the Settings.")
+            }
         }
-    }
 }

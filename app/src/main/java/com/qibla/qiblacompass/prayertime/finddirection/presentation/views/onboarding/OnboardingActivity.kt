@@ -43,7 +43,8 @@ class OnboardingActivity : BaseActivity() {
                 findViewById<TextView>(R.id.tv_onboard_title).text = getString(R.string.holy_quran)
                 findViewById<TextView>(R.id.tv_onboard_desc).text = getString(R.string.test)
                 findViewById<ImageView>(R.id.iv_onboard_indicator).setImageResource(R.drawable.indicator3)
-            }else->{
+            }
+            else->{
             Log.d(OnboardingActivity::class.simpleName, "showNextScreenValues: Value Not Matched...")
             }
         }

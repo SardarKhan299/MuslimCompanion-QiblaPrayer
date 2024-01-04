@@ -32,7 +32,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             val intent = Intent(requireContext(), DashBoardActivity::class.java)
             startActivity(intent)
         }
-        binding.tvAccountSignUp.setOnClickListener {
+        binding.viewNavigateSignup.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.signUpFragment)
 
         }
