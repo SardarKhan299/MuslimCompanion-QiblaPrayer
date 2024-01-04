@@ -35,8 +35,15 @@
     <dimen name="login_guideline_top">0.12</dimen>
     <dimen name="dashboard_guideline_left">0.04</dimen>
     <dimen name="dashboard_guideline_right">0.96</dimen>
+    <dimen name="guideline_bottom">0.96</dimen>
     <dimen name="bmi_bar_size">@dimen/_15sdp</dimen>
     <dimen name="bmi_bar_size_selected">@dimen/_25sdp</dimen>
     <dimen name="dial">250dp</dimen>
     <dimen name="qibla">320dp</dimen>
+    <dimen name="bias_horizontal">0.498</dimen>
+    <dimen name="bias_vertical">0.529</dimen>
+    <dimen name="bias_logo_vertical">0.769</dimen>
+    <dimen name="bias_text_horizontal">0.027</dimen>
+    <dimen name="bias_img_vertical">0.615</dimen>
+
 </resources>

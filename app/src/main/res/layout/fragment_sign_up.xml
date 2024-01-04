@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.96" />
+                app:layout_constraintGuide_percent="@dimen/guideline_bottom" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_signUp_compass"
@@ -49,7 +49,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:src="@drawable/ic_compass"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
-                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintHorizontal_bias="@dimen/bias_horizontal"
                 app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -231,7 +231,7 @@
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="@+id/img_sign_up_google_logo"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
-                app:layout_constraintHorizontal_bias="0.027"
+                app:layout_constraintHorizontal_bias="@dimen/bias_text_horizontal"
                 app:layout_constraintStart_toEndOf="@+id/img_sign_up_google_logo"
                 app:layout_constraintTop_toTopOf="@+id/img_sign_up_google_logo" />
 
@@ -246,7 +246,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/view_sign_up"
                 app:layout_constraintStart_toStartOf="@+id/view_sign_up"
                 app:layout_constraintTop_toTopOf="@+id/view_sign_up"
-                app:layout_constraintVertical_bias="0.615" />
+                app:layout_constraintVertical_bias="@dimen/bias_img_vertical" />
 
             <View
                 android:id="@+id/view_navigate_login"
