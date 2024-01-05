@@ -220,4 +220,15 @@
     <string name="are_you_sure_you_want_to_exit">Are you sure you want to exit</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="qibal">Qibal</string>
+    <string name="zakat">Zakat</string>
+    <string name="Names">Names</string>
+    <string name="tasbih_">Tasbih</string>
+    <string name="prayer">Prayer</string>
+    <string name="quran">Quran</string>
+    <string name="makkah_live_">Makkah Live</string>
+    <string name="near_me">Near me</string>
+    <string name="hijri_calendar">Hijri Calendar</string>
+    <string name="hadith">Hadith</string>
+
 </resources>
