@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
@@ -48,6 +49,24 @@ class DigitalTasbihFragment :
         resetButton = binding.imgResetDigitalCounter
         mainIncrementButton = binding.imgIncrementDigitalCounter
         imageView = binding.imgTasbihDigitalCounter
+
+
+        binding.layoutDigitalCounterType.tvDigitalTasbih.text = getString(R.string.analog_tasbih)
+        binding.layoutDigitalCounterType.viewDigitalTasbih.setOnClickListener {
+          //  Navigation.findNavController(requireView()).navigate(R.id.tasbihCounterFragment)
+            findNavController().closeCurrentScreen()
+
+        }
+        toolbar.imgAddMore.setOnClickListener {
+            val view = binding.layoutDigitalCounterType.groupCounterType
+            if (view.visibility == View.VISIBLE) {
+                binding.layoutDigitalCounterType.groupCounterType.visibility = View.GONE
+            } else {
+                binding.layoutDigitalCounterType.groupCounterType.visibility = View.VISIBLE
+            }
+        }
+
+
         val retrievedImageName = retrieveImageValue(requireContext())
 // Map the image name to the corresponding resource ID using TasbihZhikrUtil
         val imageResource = TasbihZhikrUtil.getImageResource(retrievedImageName)
@@ -64,6 +83,8 @@ class DigitalTasbihFragment :
         decrementButton.setOnClickListener {
             decrementCounter()
         }
+
+
     }
 
     private fun incrementCounter() {

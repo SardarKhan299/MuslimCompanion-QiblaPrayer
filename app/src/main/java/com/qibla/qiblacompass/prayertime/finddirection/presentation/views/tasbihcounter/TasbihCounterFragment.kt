@@ -1,11 +1,13 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.navigation.Navigation
@@ -61,6 +63,7 @@ class TasbihCounterFragment :
         (activity as AppCompatActivity?)?.hideActionBar()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
