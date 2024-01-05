@@ -9,233 +9,275 @@
             name="LoginFragment"
             type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login.LoginFragment" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/ic_signup_bg"
-    tools:context=".presentation.views.login.LoginFragment">
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_login_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_login_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_signup_bg"
+        tools:context=".presentation.views.login.LoginFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_login_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@dimen/guideline_bottom" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_login_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_login_compass"
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_70sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:src="@drawable/ic_compass"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
-        app:layout_constraintHorizontal_bias="@dimen/bias_horizontal"
-        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_login_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_login_qibla_compass"
-        style="@style/qibla_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/qibla_compass"
-        app:layout_constraintEnd_toEndOf="@+id/img_login_compass"
-        app:layout_constraintStart_toStartOf="@+id/img_login_compass"
-        app:layout_constraintTop_toBottomOf="@+id/img_login_compass" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_login_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="@dimen/guideline_bottom" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_login"
-        style="@style/heading_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_18sdp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:text="@string/login"
-        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_qibla_compass" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_login_compass"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:src="@drawable/ic_compass"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
+            app:layout_constraintHorizontal_bias="@dimen/bias_horizontal"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutTextInputMobile"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_12sdp"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:helperTextEnabled="true"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_login_qibla_compass"
+            style="@style/qibla_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qibla_compass"
+            app:layout_constraintEnd_toEndOf="@+id/img_login_compass"
+            app:layout_constraintStart_toStartOf="@+id/img_login_compass"
+            app:layout_constraintTop_toBottomOf="@+id/img_login_compass" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_mobile_number"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background_transparent"
-            android:ems="10"
-            android:hint="@string/mobile_number"
-            android:importantForAutofill="no"
-            android:inputType="numberDecimal"
-            android:maxLength="20" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_login"
+            style="@style/heading_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:text="@string/login"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_qibla_compass" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutTextInputPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:endIconDrawable="@drawable/password_toggle_btn"
-        app:endIconMode="password_toggle"
-        app:errorEnabled="true"
-        android:layout_marginStart="@dimen/_4sdp"
-        app:endIconTint="@color/primary_color"
-        android:layout_marginEnd="@dimen/_4sdp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
-        app:layout_constraintTop_toBottomOf="@+id/layoutTextInputMobile">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutTextInputMobile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_password"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background_transparent"
-            android:drawablePadding="@dimen/_4sdp"
-            android:ems="10"
-            android:hint="@string/password"
-            android:imeOptions="actionDone"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:maxLength="20"
-            android:textAlignment="viewStart" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_mobile_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_transparent"
+                android:ems="10"
+                android:hint="@string/mobile_number"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:maxLength="20" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutTextInputPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            app:endIconDrawable="@drawable/password_toggle_btn"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/primary_color"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTextInputMobile">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_forgot_password"
-        style="@style/forgot_password_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="@string/forgot_password_"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/checkBox_login"
-        app:layout_constraintEnd_toEndOf="@+id/layoutTextInputPassword"
-        app:layout_constraintTop_toTopOf="@+id/checkBox_login" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_transparent"
+                android:drawablePadding="@dimen/_4sdp"
+                android:ems="10"
+                android:hint="@string/password"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:textAlignment="viewStart" />
 
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/checkBox_login"
-        style="@style/forgot_password_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:text=" Remember me"
-        android:button="@drawable/check_box_custom_bg"
-        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
-        app:layout_constraintTop_toBottomOf="@+id/layoutTextInputPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_login"
-        style="@style/button_text_style"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:background="@drawable/button_bg"
-        android:text="@string/login"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox_login" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_forgot_password"
+            style="@style/forgot_password_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/forgot_password_"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/checkBox_login"
+            app:layout_constraintEnd_toEndOf="@+id/layoutTextInputPassword"
+            app:layout_constraintTop_toTopOf="@+id/checkBox_login" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_login_log_in_with"
-        style="@style/log_in_with_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:text="@string/log_in_with"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkBox_login"
+            style="@style/forgot_password_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:button="@drawable/check_box_custom_bg"
+            android:text=" Remember me"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTextInputPassword" />
 
-    <View
-        android:id="@+id/view_login"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:background="@drawable/button_backgrund"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_log_in_with" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            style="@style/button_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:background="@drawable/button_bg"
+            android:text="@string/login"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox_login" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_google"
-        style="@style/forgot_password_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:gravity="center"
-        android:text="@string/google"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/img_google_logo"
-        app:layout_constraintStart_toEndOf="@+id/img_google_logo"
-        app:layout_constraintTop_toTopOf="@+id/img_google_logo"
-        app:layout_constraintVertical_bias="@dimen/bias_vertical" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_login_log_in_with"
+            style="@style/log_in_with_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@string/log_in_with"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_google_logo"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_marginStart="136dp"
-        android:src="@drawable/google_logo"
-        app:layout_constraintBottom_toBottomOf="@+id/view_login"
-        app:layout_constraintStart_toStartOf="@+id/view_login"
-        app:layout_constraintTop_toTopOf="@+id/view_login"
-        app:layout_constraintVertical_bias="@dimen/bias_logo_vertical" />
 
-    <View
-        android:id="@+id/view_navigate_signup"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_4sdp"
-        app:layout_constraintEnd_toEndOf="@+id/guideline_login_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
-        app:layout_constraintTop_toBottomOf="@+id/view_login" />
+        <View
+            android:id="@+id/view_login"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_backgrund"
+            app:layout_constraintEnd_toStartOf="@+id/view_login_facebook"
+            app:layout_constraintHorizontal_bias="@dimen/bias_zero_point_five_tasbih"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_log_in_with" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_google"
+            style="@style/forgot_password_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:gravity="center"
+            android:text="@string/google"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/img_google_logo"
+            app:layout_constraintStart_toEndOf="@+id/img_google_logo"
+            app:layout_constraintTop_toTopOf="@+id/img_google_logo"
+            app:layout_constraintVertical_bias="@dimen/bias_vertical" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_google_logo"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:src="@drawable/google_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/view_login"
+            app:layout_constraintStart_toStartOf="@+id/view_login"
+            app:layout_constraintTop_toTopOf="@+id/view_login" />
+
+
+        <View
+            android:id="@+id/view_login_facebook"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:background="@drawable/button_backgrund"
+            app:layout_constraintBottom_toBottomOf="@+id/view_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
+            app:layout_constraintHorizontal_bias="@dimen/bias_zero_point_five_tasbih"
+            app:layout_constraintStart_toEndOf="@+id/view_login"
+            app:layout_constraintTop_toTopOf="@+id/view_login" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_facebook_logo"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:src="@drawable/facebook_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/view_login_facebook"
+            app:layout_constraintStart_toStartOf="@+id/view_login_facebook"
+            app:layout_constraintTop_toTopOf="@+id/view_login_facebook" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_facebook"
+            style="@style/forgot_password_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:gravity="center"
+            android:text="@string/facebook"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/img_facebook_logo"
+            app:layout_constraintStart_toEndOf="@+id/img_facebook_logo"
+            app:layout_constraintTop_toTopOf="@+id/img_facebook_logo"
+            app:layout_constraintVertical_bias="@dimen/bias_vertical" />
+
+
+        <View
+            android:id="@+id/view_navigate_signup"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_login_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
+            app:layout_constraintTop_toBottomOf="@+id/view_login" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_have_another_account"
-        style="@style/login_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_30sdp"
-        android:text="@string/don_t_have_an_account_sign_up"
-            app:layout_constraintStart_toStartOf="@+id/view_navigate_signup"
-            app:layout_constraintTop_toTopOf="@+id/view_navigate_signup"
+            android:id="@+id/tv_have_another_account"
+            style="@style/login_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:text="@string/don_t_have_an_account_sign_up"
             app:layout_constraintBottom_toBottomOf="@+id/view_navigate_signup"
-      />
+            app:layout_constraintStart_toStartOf="@+id/view_navigate_signup"
+            app:layout_constraintTop_toTopOf="@+id/view_navigate_signup" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_account_signUp"
-        style="@style/skip_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:text="@string/sign_up"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_have_another_account"
-        app:layout_constraintStart_toEndOf="@+id/tv_have_another_account"
-        app:layout_constraintTop_toTopOf="@+id/tv_have_another_account" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_account_signUp"
+            style="@style/skip_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@string/sign_up"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_have_another_account"
+            app:layout_constraintStart_toEndOf="@+id/tv_have_another_account"
+            app:layout_constraintTop_toTopOf="@+id/tv_have_another_account" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
