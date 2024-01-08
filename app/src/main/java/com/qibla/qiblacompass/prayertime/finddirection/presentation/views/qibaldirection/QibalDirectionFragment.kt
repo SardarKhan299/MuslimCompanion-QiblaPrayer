@@ -87,7 +87,7 @@ class QibalDirectionFragment :
         requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         mLocationManager = MyLocationManager(requireContext(), locationCallback())
         compass = Compass(requireContext())
-       setupCompass()
+        setupCompass()
         toolbar.imgNavigateBack.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
@@ -120,33 +120,33 @@ class QibalDirectionFragment :
 
     }
 
-//    override fun onResume() {
+    //    override fun onResume() {
 //        super.onResume()
 //        compass?.start(requireContext())
 //    }
-@Suppress("DEPRECATION")
-override fun onResume() {
-    super.onResume()
+    @Suppress("DEPRECATION")
+    override fun onResume() {
+        super.onResume()
 
-    if (ContextCompat.checkSelfPermission(
-            requireContext(),
-            ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-    ) {
-        // Location permission granted, start compass updates
-        compass?.start(requireContext())
-        fetch_GPS()
-    } else {
-        // Location permission not granted, request permission
-        requestPermissions(
-            arrayOf(
-                ACCESS_FINE_LOCATION,
-                ACCESS_COARSE_LOCATION
-            ),
-            RC_Permission
-        )
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            // Location permission granted, start compass updates
+            compass?.start(requireContext())
+            fetch_GPS()
+        } else {
+            // Location permission not granted, request permission
+            requestPermissions(
+                arrayOf(
+                    ACCESS_FINE_LOCATION,
+                    ACCESS_COARSE_LOCATION
+                ),
+                RC_Permission
+            )
+        }
     }
-}
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -164,6 +164,7 @@ override fun onResume() {
         super.onDetach()
         isFragmentAttached = false
     }
+
     @Suppress("DEPRECATION")
     private fun setupCompass() {
         Log.d(QibalDirectionFragment::class.simpleName, "setupCompass: ")
@@ -208,7 +209,7 @@ override fun onResume() {
         if (isFragmentAttached) {
             val resources = requireContext().resources
             if ((qiblaAngel - 30.0) <= currentAzimuth && (qiblaAngel + 30.0) >= currentAzimuth) {
-                tvIndication.visibility =VISIBLE
+                tvIndication.visibility = VISIBLE
                 if ((qiblaAngel - 3.0) <= currentAzimuth && (qiblaAngel + 3.0) >= currentAzimuth) {
                     Log.d(QibalDirectionFragment::class.simpleName, "adjustGambarDial: Reached")
                     tvIndication.text = "Reached"
@@ -238,13 +239,15 @@ override fun onResume() {
             } else if ((qiblaAngel - 80.0) <= currentAzimuth && (qiblaAngel + 80.0) >= currentAzimuth) {
 
                 bgShade?.setImageDrawable(getDrawable(resources, R.drawable.shade_orange, null))
-                tvIndication.visibility = GONE
+                tvIndication.visibility = VISIBLE
+                tvIndication.text = "Away"
 
 
             } else {
 
                 bgShade?.setImageDrawable(getDrawable(resources, R.drawable.shade_red, null))
-                tvIndication.visibility = GONE
+                tvIndication.visibility = VISIBLE
+                tvIndication.text = "Far away"
             }
 
             //imageNeedle!!.startAnimation(an)
@@ -306,8 +309,7 @@ override fun onResume() {
                     requireContext(),
                     ACCESS_FINE_LOCATION
                 ) == PackageManager.PERMISSION_GRANTED
-            )
-            {
+            ) {
                 // permission was granted, yay! Do the
                 Log.d(
                     QibalDirectionFragment::class.simpleName,
@@ -316,11 +318,10 @@ override fun onResume() {
                 SaveBoolean("permission_granted", true)
                 qiblatIndicator!!.visibility = INVISIBLE
                 qiblatIndicator!!.visibility = GONE
-             //   setupCompass()
+                //   setupCompass()
                 compass?.start(requireContext())
                 fetch_GPS()
-            }
-            else {
+            } else {
                 Toast.makeText(
                     requireContext(),
                     resources.getString(R.string.toast_permission_required),

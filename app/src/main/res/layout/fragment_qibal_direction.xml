@@ -42,23 +42,41 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
-        <View
-            android:id="@+id/view_direction_map"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_80sdp"
-            android:background="@drawable/map_background_qibal_direction"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_right_direction"
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_location_city_compass"
+            style="@style/city_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@string/islamabad_city"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_direction"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_qibal_direction" />
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView_direction"
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_location_drop_down"
+            android:layout_width="@dimen/_30sdp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/view_direction_map"
-            app:layout_constraintEnd_toEndOf="@+id/view_direction_map"
-            app:layout_constraintStart_toStartOf="@+id/view_direction_map"
-            app:layout_constraintTop_toTopOf="@+id/view_direction_map" />
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_drop_down"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_location_city_compass"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_direction"
+            app:layout_constraintHorizontal_bias="0.028"
+            app:layout_constraintStart_toEndOf="@+id/tv_location_city_compass"
+            app:layout_constraintTop_toTopOf="@+id/tv_location_city_compass"
+            app:layout_constraintVertical_bias="@dimen/bias_zero" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_location_country_compass"
+            style="@style/login_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pakistan"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_location_city_compass"
+            app:layout_constraintStart_toStartOf="@+id/tv_location_city_compass"
+            app:layout_constraintTop_toBottomOf="@+id/tv_location_city_compass" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view_qibal_direction"
@@ -120,6 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_20sdp"
             android:text="@string/pakistan"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/tv_distance_heading"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_direction"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_direction" />
@@ -129,17 +148,18 @@
             style="@style/city_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_80sdp"
             android:layout_marginBottom="@dimen/_4sdp"
-            android:text="@string/islamabad_city"
+            android:text="Too much far"
             app:layout_constraintBottom_toTopOf="@+id/tv_location_country"
-            app:layout_constraintStart_toStartOf="@+id/guideline_left_direction" />
+            app:layout_constraintEnd_toEndOf="@+id/tv_location_country"
+            app:layout_constraintStart_toStartOf="@+id/tv_location_country" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/_20sdp"
             android:layout_height="0dp"
             android:padding="@dimen/_4sdp"
             android:src="@drawable/ic_drop_down"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/tv_location_city"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_direction"
             app:layout_constraintHorizontal_bias="0.046"
@@ -182,7 +202,7 @@
             app:layout_constraintBottom_toTopOf="@+id/tv_location_city"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_direction"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_direction"
-            app:layout_constraintTop_toBottomOf="@+id/view_direction_map" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_location_country_compass" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/bg_shade"
