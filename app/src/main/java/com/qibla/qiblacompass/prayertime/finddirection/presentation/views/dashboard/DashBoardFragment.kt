@@ -160,7 +160,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         val data = ArrayList<QiblaData>()
         data.add(QiblaData(R.drawable.qibla_icn, getString(R.string.qibla)))
         data.add(QiblaData(R.drawable.zakat_icn, getString(R.string.zakat)))
-        data.add(QiblaData(R.drawable.names_icn, getString(R.string.Names)))
+        data.add(QiblaData(R.drawable.names_icn, getString(R.string.names)))
         data.add(QiblaData(R.drawable.tasbeeh_icn, getString(R.string.tasbih_)))
         data.add(QiblaData(R.drawable.prayer_icn, getString(R.string.prayer)))
         data.add(QiblaData(R.drawable.quran_icn, getString(R.string.quran)))
