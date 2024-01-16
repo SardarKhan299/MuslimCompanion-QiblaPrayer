@@ -48,6 +48,18 @@ class SharedPreferences {
             return ""
         }
 
+        fun saveSelectedPrayerPosition(context: Context, position: Int) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences?.edit()?.putInt("selectedPrayerPosition", position)?.apply()
+        }
+
+        fun getSelectedPrayerPosition(context: Context): Int {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            if (msharedPreferences != null) {
+                return msharedPreferences.getInt("selectedPrayerPosition", 0)
+            }
+            return 0
+        }
 
     }
 }

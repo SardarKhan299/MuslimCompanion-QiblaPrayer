@@ -136,28 +136,16 @@
             app:layout_constraintStart_toStartOf="@+id/img_makkah_view_two"
             app:layout_constraintTop_toBottomOf="@+id/img_makkah_view_two" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:gravity="center"
-            style="@style/side_menu_text_style"
-            android:background="@drawable/button_bg"
-            android:text="Player Video"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_right_makkah_live"
-            app:layout_constraintStart_toStartOf="@+id/guideline_left_makkah_live"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_makkah_live" />
 
         <WebView
             android:id="@+id/webView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_4sdp"
             app:layout_constraintBottom_toTopOf="@+id/view_makkah"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_makkah_live"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_makkah_live"
-            app:layout_constraintTop_toBottomOf="@+id/title">
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_makkah_live">
 
         </WebView>
 

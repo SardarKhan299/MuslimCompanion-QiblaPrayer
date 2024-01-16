@@ -82,7 +82,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/dashboard_next_prayer_bg"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="@dimen/bias_zero"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
                 app:layout_constraintTop_toBottomOf="@+id/view_auto_detect" />
 
@@ -106,7 +106,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_dashboard_date_time"
                 app:layout_constraintStart_toEndOf="@+id/tv_dashboard_date_time"
                 app:layout_constraintTop_toTopOf="@+id/tv_dashboard_date_time"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="@dimen/bias_zero" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_islamic_month"
@@ -118,7 +118,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_dashboard_date_time"
                 app:layout_constraintStart_toEndOf="@+id/separator"
                 app:layout_constraintTop_toTopOf="@+id/tv_dashboard_date_time"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="@dimen/bias_one" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_next_prayer_time"
@@ -160,7 +160,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_prayer_time"
                 app:layout_constraintStart_toEndOf="@+id/tv_prayer_time"
                 app:layout_constraintTop_toTopOf="@+id/tv_prayer_time"
-                app:layout_constraintVertical_bias="0.555" />
+                app:layout_constraintVertical_bias="@dimen/bias_zero_point_five" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView4"
@@ -183,7 +183,7 @@
                 android:background="@drawable/button_bg"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/view_dashboard"
-                app:layout_constraintHorizontal_bias="0.662"
+                app:layout_constraintHorizontal_bias="@dimen/bias_dashboard_horizontal"
                 app:layout_constraintStart_toEndOf="@+id/tv_islamic_month"
                 app:layout_constraintTop_toTopOf="@+id/view_dashboard" />
 
@@ -204,7 +204,7 @@
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:background="@drawable/dashboard_view_border_bg"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="@dimen/bias_zero"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
                 app:layout_constraintTop_toBottomOf="@+id/view4" />
 
@@ -331,7 +331,7 @@
                 android:layout_height="@dimen/_80sdp"
                 android:background="@drawable/button_bg"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="@dimen/bias_zero"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
                 app:layout_constraintTop_toBottomOf="@+id/rv_qibla" />
 
@@ -421,7 +421,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_heading_qibla" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView3"
+                android:id="@+id/tv_distance_value"
                 style="@style/toolbar_title_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

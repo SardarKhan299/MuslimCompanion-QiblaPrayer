@@ -130,8 +130,11 @@ class ZakatCalculateFragment :
         binding.includeZakatCalculateForm.viewHeadingZakat.setOnClickListener {
             if (groupGold.visibility == View.GONE) {
                 groupGold.visibility = View.VISIBLE
+                binding.includeZakatCalculateForm.imgArrowDown.setImageResource(R.drawable.ic_arrow_drop_up)
+
             } else {
                 groupGold.visibility = View.GONE
+                binding.includeZakatCalculateForm.imgArrowDown.setImageResource(R.drawable.ic_arrow_drop_down)
 
             }
         }
@@ -165,8 +168,11 @@ class ZakatCalculateFragment :
         binding.includeZakatCalculateForm.goldViewSeparator.setOnClickListener {
             if (groupSilver.visibility == View.GONE) {
                 groupSilver.visibility = View.VISIBLE
+               binding.includeZakatCalculateForm.imgFinancialDropDown.setImageResource(R.drawable.ic_arrow_drop_up)
             } else {
                 groupSilver.visibility = View.GONE
+                binding.includeZakatCalculateForm.imgFinancialDropDown.setImageResource(R.drawable.ic_arrow_drop_down)
+
             }
         }
         // TextWatcher to calculate sum dynamically

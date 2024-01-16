@@ -147,10 +147,10 @@
             android:text="@string/_100"
             app:layout_constraintBottom_toBottomOf="@+id/tv_incremental_counter"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_tasbih_counter"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="@dimen/bias_zero"
             app:layout_constraintStart_toEndOf="@+id/tv_incremental_counter"
             app:layout_constraintTop_toTopOf="@+id/tv_incremental_counter"
-            app:layout_constraintVertical_bias="0.461" />
+            app:layout_constraintVertical_bias="@dimen/bias_vertical_counter" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_reset"
