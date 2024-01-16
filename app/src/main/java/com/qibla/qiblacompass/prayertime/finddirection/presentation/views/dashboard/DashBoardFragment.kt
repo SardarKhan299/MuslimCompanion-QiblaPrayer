@@ -1,7 +1,13 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,10 +15,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants
@@ -29,7 +39,7 @@ import kotlin.math.log
 class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragment_dash_board) {
     private lateinit var rView: RecyclerView
     private lateinit var sharedPreferences: SharedPreferences
-
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(DashBoardFragment::class.simpleName, "onCreate: ")
@@ -50,13 +60,20 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             startActivity(Intent(mContext, CompassDirectionActivity::class.java))
 
         }
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mContext)
         binding.viewAutoDetect.setOnClickListener {
-            if (binding.includeAutoDetect.layoutDialog.visibility == View.VISIBLE) {
-                binding.includeAutoDetect.layoutDialog.visibility = View.INVISIBLE
-            } else {
-                binding.includeAutoDetect.layoutDialog.visibility = View.VISIBLE
-            }
+            getCurrentLocation()
         }
+//
+//        binding.viewAutoDetect.setOnClickListener {
+//
+//            getCurrentLocation()
+////            if (binding.includeAutoDetect.layoutDialog.visibility == View.VISIBLE) {
+////                binding.includeAutoDetect.layoutDialog.visibility = View.INVISIBLE
+////            } else {
+////                binding.includeAutoDetect.layoutDialog.visibility = View.VISIBLE
+////            }
+//        }
         binding.toolbarBoard.imgToolbar.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.sideMenuFragment)
         }
@@ -178,6 +195,108 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             }
             // Add more cases for other positions
         }
+    }
+
+    private fun getCurrentLocation() {
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+           // final latitude and longitude here...
+                if (ActivityCompat.checkSelfPermission(
+                        mContext,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        mContext,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    requestPermission()
+                    return
+                }
+                fusedLocationProviderClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
+                    val location: Location? = task.result
+                    if (location == null) {
+                        Log.d("MyFragment", "getCurrentLocation: Didn't receive any location")
+                    } else {
+                        Log.d(
+                            "MyFragment",
+                            "getCurrentLocation: Get receive location ${"" + location.latitude} + ${"" + location.longitude}"
+                        )
+//                        textOne.text = "" + location.latitude
+//                        textTwo.text = "" + location.longitude
+                    }
+                }
+
+            } else {
+                //settings open here
+                Log.d("DashBoardFragment", "getCurrentLocation:...Ture on Location.... ")
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+
+        } else {
+            //request permission here
+            requestPermission()
+
+        }
+
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager =
+            requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    companion object {
+        private const val PERMISSION_REQUEST_ACCESS_LOCATION = 100
+    }
+
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            requireActivity(), arrayOf(
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ),
+            PERMISSION_REQUEST_ACCESS_LOCATION
+        )
+
+    }
+
+    private fun checkPermissions(): Boolean {
+
+        if (ActivityCompat.checkSelfPermission(
+                mContext,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                mContext,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            )
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_REQUEST_ACCESS_LOCATION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.d("DashBoardFragment", "onRequestPermissionsResult:....Granted..... ")
+                getCurrentLocation()
+            } else {
+                Log.d("DashBoardFragment", "onRequestPermissionsResult:....Denied..... ")
+
+            }
+        }
+
     }
 
 }
