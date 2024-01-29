@@ -80,6 +80,7 @@
         app:layout_constraintTop_toBottomOf="@+id/qibla_indicator"
         tools:text="Distance "
         android:layout_marginStart="8dp"
+
         />
 
     <TextView

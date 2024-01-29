@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary_color">#2D6D5F</color>
+    <color name="secondary_color">#ECE9DB</color>
+    <color name="log_text_color">#4B5768</color>
+    <color name="toolbar_image_color">#402D6D5F</color>
+    <color name="delete_account_text_color">#FF4747</color>
+    <color name="bottom_bar_bg">#FFFFFF</color>
+    <color name="border_color">#592D6D5F</color>
+    <color name="ayat_name_color">#59000000</color>
+    <color name="alert_dialog_color">#FAF7EC</color>
+    <color name="heading_qibla_direction_text_color">#59000000</color>
+    <color name="fajr_prayer_bg_color">#873B96</color>
+    <color name="selected_prayer_time_color">#9257A3</color>
+    <color name="unselect_text">#C29DCA</color>
+    <color name="toolbar_prayer_close_color">#BB87FF</color>
+    <color name="zuhar_bg">#754A96</color>
+    <color name="asr_bg_color">#8C4173</color>
+    <color name="maghrib_bg_color">#963A7B</color>
+    <color name="isha_bg_color">#6D247A</color>
+    <color name="maghrib_selected_color">#963A7B</color>
+    <color name="isha_selected_color">#6D247A</color>
+    <color name="tahajjud_selected_color">#6D247A</color>
+    <color name="toolbar_zuhar_bg_color">#9DDCFB</color>
+    <color name="toolbar_asr_bg_color">#E4C89B</color>
+    <color name="toolbar_maghrib_bg_color">#FF8686</color>
+    <color name="toolbar_isha_bg_color">#7E61A3</color>
+    <color name="toolbar_tahajjud_bg_color">#865B89</color>
+    <color name="selected_zuhar_color">#8864A5</color>
+    <color name="selected_asr_color">#9D5D88</color>
+    <color name="selected_maghrib_color">#A6588F</color>
+    <color name="selected_isha_color">#83458E</color>
+    <color name="selected_tahajjud_color">#83458E</color>
+    <color name="close_icon_tasbih_color">#706A5D</color>
+    <color name="distance_text_color">#A3A29D</color>
+    <color name="zakat_point_heading_text_color">#670707</color>
+    <color name="about_us_text_color">#59000000</color>
+    <color name="text_zakat_color">#009C06</color>
+
+</resources>
