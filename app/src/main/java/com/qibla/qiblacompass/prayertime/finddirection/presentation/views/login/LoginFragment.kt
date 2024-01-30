@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.Constants
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentLoginBinding
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardActivity
 import java.util.regex.Pattern
@@ -33,9 +34,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     var password = ""
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var firebaseAuth: FirebaseAuth
+
     companion object {
         private const val RC_SIGN_IN = 9001
     }
+
+    lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var auth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
@@ -88,7 +92,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
         } catch (e: ApiException) {
             Log.e("LoginFragment", "Google sign-in failed: ${e.message}", e)
-            Toast.makeText(requireContext(), "Google sign in failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "Google sign in failed: ${e.message}",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -100,16 +108,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
                     saveUserToDatabase(user)
-                    Toast.makeText(requireContext(), "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
+                    // Save user information in SharedPreferences
+                    saveUserInfoInSharedPreferences(user)
+                    Toast.makeText(
+                        requireContext(),
+                        "Signed in as ${user?.displayName}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     // Navigate to DashboardActivity
-                    startActivity(Intent(requireContext(),DashBoardActivity::class.java))
+                    startActivity(Intent(requireContext(), DashBoardActivity::class.java))
                     requireActivity().finish()
                 } else {
-                    Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
     }
-        private fun saveUserToDatabase(user: FirebaseUser?) {
+
+    private fun saveUserToDatabase(user: FirebaseUser?) {
         // Save user information to the Firebase Realtime Database
         user?.let {
             val userId = it.uid
@@ -121,11 +137,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 "userName" to userName,
                 "userEmail" to userEmail,
 
-            )
+                )
 
             databaseReference.child(userId).setValue(userMap)
         }
     }
+
+    private fun saveUserInfoInSharedPreferences(user: FirebaseUser?) {
+        SharedPreferences.saveUserDetails(mContext, user?.displayName ?: "", user?.email ?: "",
+            (user?.photoUrl ?: "").toString()
+        )
+    }
+
     private fun validateNumberAndPassword(): Boolean {
         Log.d(LoginFragment::class.simpleName, "validateNumberAndPassword: ")
         mobileNumber = binding.edtMobileNumber.text.toString()
