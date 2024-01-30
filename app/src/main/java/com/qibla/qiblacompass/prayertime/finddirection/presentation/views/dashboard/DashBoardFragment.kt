@@ -257,7 +257,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 location?.let {
                     updateLocationText(it)
                 } ?: run {
-                    locationTextView.text = "Location not available"
+                    locationTextView.text = getString(R.string.location_not_available)
                 }
             }
             .addOnFailureListener { e ->
@@ -283,11 +283,11 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
             if (addresses.isNotEmpty()) {
                 val city = addresses[0].locality
-                return city ?: "Unknown City"
+                return city ?: getString(R.string.unknown_city)
             }
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        return "Unknown City"
+        return getString(R.string.unknown_city)
     }
 }

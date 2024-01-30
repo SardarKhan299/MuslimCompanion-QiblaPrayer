@@ -61,5 +61,23 @@ class SharedPreferences {
             return 0
         }
 
+        fun saveMobileNumberAndPassword(context: Context, mobileNumber: String, password: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString("saved_mobile_number", mobileNumber)
+                putString("saved_password", password)
+                apply()
+            }
+        }
+
+        fun getSavedMobileNumber(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString("saved_mobile_number", null)
+        }
+
+        fun getSavedPassword(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return mSharedPreferences!!.getString("saved_password", null)
+        }
     }
 }
