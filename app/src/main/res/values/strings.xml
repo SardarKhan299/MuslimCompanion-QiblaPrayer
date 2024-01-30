@@ -242,6 +242,6 @@
     <string name="confirm_password_match_error">Password do not match</string>
     <string name="user_id_invalid">Invalid format</string>
     <string name="min_password_limit">Minimum 8 characters required</string>
-    <!--    <string name="default_web_client_id" translatable="false">683587854955-b5adplkuolgpe8lvl0f3le979gmrcmuk.apps.googleusercontent.com</string>-->
+    <string name="default_web_client_id" translatable="false">683587854955-b5adplkuolgpe8lvl0f3le979gmrcmuk.apps.googleusercontent.com</string>
 
 </resources>
