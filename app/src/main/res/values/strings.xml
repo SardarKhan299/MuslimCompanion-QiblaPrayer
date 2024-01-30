@@ -233,4 +233,15 @@
     <string name="hijri_calendar">Hijri Calendar</string>
     <string name="hadith">Hadith</string>
     <string name="analog_tasbih">Analog Tasbih</string>
+    <string name="location_not_available">Location not available</string>
+    <string name="unknown_city">Unknown City</string>
+    <string name="mobile_number_error">Mobile Number is required</string>
+    <string name="invalid_format">Invalid format</string>
+    <string name="user_pass_error">Enter Password</string>
+    <string name="user_confirm_pass_error"> Enter Confirm Password</string>
+    <string name="confirm_password_match_error">Password do not match</string>
+    <string name="user_id_invalid">Invalid format</string>
+    <string name="min_password_limit">Minimum 8 characters required</string>
+    <!--    <string name="default_web_client_id" translatable="false">683587854955-b5adplkuolgpe8lvl0f3le979gmrcmuk.apps.googleusercontent.com</string>-->
+
 </resources>
