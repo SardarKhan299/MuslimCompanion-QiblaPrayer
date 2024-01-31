@@ -11,11 +11,11 @@ import com.qibla.qiblacompass.prayertime.finddirection.R
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class LoginActivity : BaseActivity() {
     private lateinit var navController: NavController
-    @Inject
-    lateinit var auth: FirebaseAuth
+//    @Inject
+//    lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)

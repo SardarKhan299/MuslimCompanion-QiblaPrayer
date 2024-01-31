@@ -24,16 +24,10 @@ class DashBoardActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         setupActionBarWithNavController(navController)
 
-        mAuth = FirebaseAuth.getInstance()
+   //     mAuth = FirebaseAuth.getInstance()
 
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
+//
     }
 
     override fun onSupportNavigateUp(): Boolean {

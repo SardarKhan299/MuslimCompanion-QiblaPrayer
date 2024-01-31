@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_boardFragment_to_makkahLiveFragment"
             app:destination="@id/makkahLiveFragment" />
+        <action
+            android:id="@+id/action_boardFragment_to_namesFragment"
+            app:destination="@id/namesFragment" />
     </fragment>
     <fragment
         android:id="@+id/sideMenuFragment"
@@ -118,4 +121,8 @@
         android:id="@+id/makkahLiveFragment"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.livestreaming.MakkahLiveFragment"
         android:label="MakkahLiveFragment" />
+    <fragment
+        android:id="@+id/namesFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.names.NamesFragment"
+        android:label="NamesFragment" />
 </navigation>

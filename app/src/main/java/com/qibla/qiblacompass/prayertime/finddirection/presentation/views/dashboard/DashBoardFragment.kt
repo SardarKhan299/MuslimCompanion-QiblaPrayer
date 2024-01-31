@@ -190,6 +190,10 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
                 Navigation.findNavController(requireView()).navigate(R.id.zakatFragment)
             }
+            2->{
+                Navigation.findNavController(requireView()).navigate(R.id.namesFragment)
+
+            }
             3 -> {
 
                 Navigation.findNavController(requireView()).navigate(R.id.tasbihFragment)

@@ -54,100 +54,105 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         binding.apply {
             loginFragment = this@LoginFragment
         }
-        auth = FirebaseAuth.getInstance()
-        databaseReference = FirebaseDatabase.getInstance().reference.child("Login Info")
+       // auth = FirebaseAuth.getInstance()
+       // databaseReference = FirebaseDatabase.getInstance().reference.child("Login Info")
+        binding.btnLogin.setOnClickListener {
+            val intent = Intent(mContext, DashBoardActivity::class.java)
+            startActivity(intent)
+        }
         binding.viewLogin.setOnClickListener {
-            signInWithGoogle()
+           // signInWithGoogle()
         }
     }
 
-    private fun signInWithGoogle() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == RC_SIGN_IN) {
-            handleGoogleSignInResult(data)
-        }
-    }
-
-    private fun handleGoogleSignInResult(data: Intent?) {
-        try {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            val account = task.getResult(ApiException::class.java)
-
-            if (account != null) {
-                firebaseAuthWithGoogle(account)
-            } else {
-                Toast.makeText(requireContext(), "Google sign in failed", Toast.LENGTH_SHORT).show()
-            }
-        } catch (e: ApiException) {
-            Log.e("LoginFragment", "Google sign-in failed: ${e.message}", e)
-            Toast.makeText(
-                requireContext(),
-                "Google sign in failed: ${e.message}",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
-
-    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    val user = auth.currentUser
-                    saveUserToDatabase(user)
-                    // Save user information in SharedPreferences
-                    saveUserInfoInSharedPreferences(user)
-                    Toast.makeText(
-                        requireContext(),
-                        "Signed in as ${user?.displayName}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    // Navigate to DashboardActivity
-                    startActivity(Intent(requireContext(), DashBoardActivity::class.java))
-                    requireActivity().finish()
-                } else {
-                    Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-    }
-
-    private fun saveUserToDatabase(user: FirebaseUser?) {
-        // Save user information to the Firebase Realtime Database
-        user?.let {
-            val userId = it.uid
-            val userName = it.displayName
-            val userEmail = it.email
-
-            val userMap = hashMapOf(
-                "userId" to userId,
-                "userName" to userName,
-                "userEmail" to userEmail,
-
-                )
-
-            databaseReference.child(userId).setValue(userMap)
-        }
-    }
-
-    private fun saveUserInfoInSharedPreferences(user: FirebaseUser?) {
-        SharedPreferences.saveUserDetails(mContext, user?.displayName ?: "", user?.email ?: "",
-            (user?.photoUrl ?: "").toString()
-        )
-    }
+//    private fun signInWithGoogle() {
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken(getString(R.string.default_web_client_id))
+//            .requestEmail()
+//            .build()
+//
+//        val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+//        val signInIntent = googleSignInClient.signInIntent
+//        startActivityForResult(signInIntent, RC_SIGN_IN)
+//    }
+//
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == RC_SIGN_IN) {
+//            handleGoogleSignInResult(data)
+//        }
+//    }
+//
+//    private fun handleGoogleSignInResult(data: Intent?) {
+//        try {
+//            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+//            val account = task.getResult(ApiException::class.java)
+//
+//            if (account != null) {
+//                firebaseAuthWithGoogle(account)
+//            } else {
+//                Toast.makeText(requireContext(), "Google sign in failed", Toast.LENGTH_SHORT).show()
+//            }
+//        } catch (e: ApiException) {
+//            Log.e("LoginFragment", "Google sign-in failed: ${e.message}", e)
+//            Toast.makeText(
+//                requireContext(),
+//                "Google sign in failed: ${e.message}",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        }
+//    }
+//
+//    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
+//        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+//        auth.signInWithCredential(credential)
+//            .addOnCompleteListener(requireActivity()) { task ->
+//                if (task.isSuccessful) {
+//                    // Sign in success, update UI with the signed-in user's information
+//                    val user = auth.currentUser
+//                    saveUserToDatabase(user)
+//                    // Save user information in SharedPreferences
+//                    saveUserInfoInSharedPreferences(user)
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "Signed in as ${user?.displayName}",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                    // Navigate to DashboardActivity
+//                    startActivity(Intent(requireContext(), DashBoardActivity::class.java))
+//                    requireActivity().finish()
+//                } else {
+//                    Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//            }
+//    }
+//
+//    private fun saveUserToDatabase(user: FirebaseUser?) {
+//        // Save user information to the Firebase Realtime Database
+//        user?.let {
+//            val userId = it.uid
+//            val userName = it.displayName
+//            val userEmail = it.email
+//
+//            val userMap = hashMapOf(
+//                "userId" to userId,
+//                "userName" to userName,
+//                "userEmail" to userEmail,
+//
+//                )
+//
+//            databaseReference.child(userId).setValue(userMap)
+//        }
+//    }
+//
+//    private fun saveUserInfoInSharedPreferences(user: FirebaseUser?) {
+//        SharedPreferences.saveUserDetails(
+//            mContext, user?.displayName ?: "", user?.email ?: "",
+//            (user?.photoUrl ?: "").toString()
+//        )
+//    }
 
     private fun validateNumberAndPassword(): Boolean {
         Log.d(LoginFragment::class.simpleName, "validateNumberAndPassword: ")

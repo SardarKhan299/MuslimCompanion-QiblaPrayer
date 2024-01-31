@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="namesFragment"
+            type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.names.NamesFragment" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".presentation.views.names.NamesFragment">
+
+    <include
+        android:id="@+id/toolbar_names"
+        layout="@layout/layout_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left_names"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right_names"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view_names"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:background="@drawable/search_bg"
+        android:queryHint="Search"
+        android:textColorHint="@color/search_text_color"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_names"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_names"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_names" />
+
+    <View
+        android:id="@+id/view_main_names"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/search_bg"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_names"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_names"
+        app:layout_constraintTop_toBottomOf="@+id/search_view_names" />
+
+    <View
+        android:id="@+id/viewAllahNames"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:background="@drawable/button_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/view_main_names"
+        app:layout_constraintStart_toStartOf="@+id/view_main_names"
+        app:layout_constraintTop_toTopOf="@+id/view_main_names" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAllahNames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/allah_names"
+        style="@style/advertisement_text_style"
+        app:layout_constraintBottom_toBottomOf="@+id/viewAllahNames"
+        app:layout_constraintEnd_toEndOf="@+id/viewAllahNames"
+        app:layout_constraintStart_toStartOf="@+id/viewAllahNames"
+        app:layout_constraintTop_toTopOf="@+id/viewAllahNames" />
+
+
+    <View
+        android:id="@+id/viewRasoolNames"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:background="@drawable/button_bg"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/viewAllahNames"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_names"
+        app:layout_constraintTop_toTopOf="@+id/viewAllahNames" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvRasoolNames"
+        style="@style/forgot_password_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rasool_names"
+        app:layout_constraintBottom_toBottomOf="@+id/viewRasoolNames"
+        app:layout_constraintEnd_toEndOf="@+id/viewRasoolNames"
+        app:layout_constraintStart_toStartOf="@+id/viewRasoolNames"
+        app:layout_constraintTop_toTopOf="@+id/viewRasoolNames" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_names"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_names"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_names"
+        app:layout_constraintTop_toBottomOf="@+id/view_main_names"
+        tools:listitem="@layout/items_names_layout" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
