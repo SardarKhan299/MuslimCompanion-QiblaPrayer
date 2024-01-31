@@ -1,20 +1,18 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login
 
 import android.content.Intent
+import android.content.IntentSender
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.google.android.gms.auth.api.identity.Identity
+import com.google.android.gms.auth.api.identity.SignInClient
+import com.google.android.gms.auth.api.identity.SignInCredential
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -32,9 +30,10 @@ import java.util.regex.Pattern
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
     var mobileNumber = ""
     var password = ""
-    private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var firebaseAuth: FirebaseAuth
 
+    private lateinit var oneTapClient: SignInClient
+    private lateinit var signInRequest: BeginSignInRequest
     companion object {
         private const val RC_SIGN_IN = 9001
     }
@@ -54,42 +53,86 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         binding.apply {
             loginFragment = this@LoginFragment
         }
+        oneTapClient = Identity.getSignInClient(mContext)
+        signInRequest = BeginSignInRequest.builder()
+            .setGoogleIdTokenRequestOptions(
+                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                    .setSupported(true)
+                    // Your server's client ID, not your Android client ID.
+                    .setServerClientId(getString(R.string.your_web_client_id))
+                    // Only show accounts previously used to sign in.
+                    .setFilterByAuthorizedAccounts(false)
+                    .build())
+            // Automatically sign in when exactly one credential is retrieved.
+            .setAutoSelectEnabled(true)
+            .build()
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().reference.child("Login Info")
         binding.viewLogin.setOnClickListener {
+            Log.d(LoginFragment::class.simpleName, "onViewCreated: CLicked")
             signInWithGoogle()
         }
     }
 
     private fun signInWithGoogle() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        oneTapClient.beginSignIn(signInRequest)
+            .addOnSuccessListener(requireActivity()) { result ->
+                try {
+                    startIntentSenderForResult(
+                        result.pendingIntent.intentSender, RC_SIGN_IN,
+                        null, 0, 0, 0, null)
+                } catch (e: IntentSender.SendIntentException) {
+                    Log.e("LoginFragment", "Couldn't start One Tap UI: ${e.localizedMessage}")
+                }
+            }
+            .addOnFailureListener(requireActivity()) { e ->
+                // No saved credentials found. Launch the One Tap sign-up flow, or
+                // do nothing and continue presenting the signed-out UI.
+                Log.d(LoginFragment::class.simpleName, "signInWithGoogle: Failed ${e.message}")
+            }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == RC_SIGN_IN) {
-            handleGoogleSignInResult(data)
+        try{
+        val credential = oneTapClient.getSignInCredentialFromIntent(data)
+        val idToken = credential.googleIdToken
+        val username = credential.id
+        when {
+            idToken != null -> {
+                // Got an ID token from Google. Use it to authenticate
+                // with your backend.
+                Log.d("LoginFragment", "Got ID token.")
+                firebaseAuthWithGoogle(credential)
+            }
+            else -> {
+                // Shouldn't happen.
+                Log.d("LoginFragment", "No ID token or password!")
+            }
+        }
+        } catch (e: Exception) {
+            Log.e("LoginFragment", "Google sign-in failed: ${e.message}", e)
+            Toast.makeText(
+                requireContext(),
+                "Google sign in failed: ${e.message}",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
     private fun handleGoogleSignInResult(data: Intent?) {
         try {
+            Log.d(LoginFragment::class.simpleName, "handleGoogleSignInResult: ")
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             val account = task.getResult(ApiException::class.java)
 
-            if (account != null) {
-                firebaseAuthWithGoogle(account)
-            } else {
-                Toast.makeText(requireContext(), "Google sign in failed", Toast.LENGTH_SHORT).show()
-            }
+            Log.d(LoginFragment::class.simpleName, "handleGoogleSignInResult: Done")
+
+//            if (account != null) {
+//                firebaseAuthWithGoogle(account)
+//            } else {
+//                Toast.makeText(requireContext(), "Google sign in failed", Toast.LENGTH_SHORT).show()
+//            }
         } catch (e: ApiException) {
             Log.e("LoginFragment", "Google sign-in failed: ${e.message}", e)
             Toast.makeText(
@@ -100,8 +143,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         }
     }
 
-    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+    private fun firebaseAuthWithGoogle(account: SignInCredential) {
+        val credential = GoogleAuthProvider.getCredential(account.googleIdToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
