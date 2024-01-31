@@ -243,5 +243,6 @@
     <string name="user_id_invalid">Invalid format</string>
     <string name="min_password_limit">Minimum 8 characters required</string>
     <string name="your_web_client_id">683587854955-kkaih5h3eml45dtk6eei6nro3fgsoilr.apps.googleusercontent.com</string>
+    <string name="please_wait">Please Wait...</string>
 
 </resources>
