@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -22,8 +23,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.Constants
+import com.qibla.qiblacompass.prayertime.finddirection.common.NetworkConnectivity
+import com.qibla.qiblacompass.prayertime.finddirection.common.PopUpDialog
 import com.qibla.qiblacompass.prayertime.finddirection.common.ProgressBar
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
+import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentLoginBinding
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardActivity
 import java.util.regex.Pattern
@@ -72,9 +76,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         databaseReference = FirebaseDatabase.getInstance().reference.child("Login Info")
         binding.viewLogin.setOnClickListener {
             Log.d(LoginFragment::class.simpleName, "onViewCreated: CLicked")
-            ProgressBar.showProgressBar(mContext, getString(R.string.please_wait))
-            binding.viewLogin.isEnabled = false
-            signInWithGoogle()
+            if(NetworkConnectivity.isOnline(mContext)) {
+                ProgressBar.showProgressBar(mContext, getString(R.string.please_wait))
+                binding.viewLogin.isEnabled = false
+                signInWithGoogle()
+            }else{
+                Log.d(LoginFragment::class.simpleName, "onViewCreated: Internet Not Connected")
+                PopUpDialog(
+                    getString(R.string.network_error),
+                    getString(R.string.please_check_your_network_connectivity),
+                    ok_btn_callback(),
+                    R.drawable.ic_warning
+                ).show(requireActivity().supportFragmentManager, "")
+            }
         }
     }
 
@@ -222,6 +236,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         }
 
         return true
+    }
+
+    fun ok_btn_callback(): (String) -> Unit {
+        return {
+            Log.d("MakkahLiveFragment"::class.simpleName, "ok_btn_callback: ")
+        }
     }
 
 }

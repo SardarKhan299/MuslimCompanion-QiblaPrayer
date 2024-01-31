@@ -69,7 +69,8 @@ class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.frag
                     getString(R.string.warning),
                     getString(R.string.exit),
                     ok_btn_callback(),
-                    R.drawable.ic_warning
+                    R.drawable.ic_warning,
+                    true
                 ).show(requireActivity().supportFragmentManager, "")
             }
         })
