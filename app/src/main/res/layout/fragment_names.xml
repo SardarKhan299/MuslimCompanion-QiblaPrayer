@@ -87,8 +87,7 @@
         android:layout_width="@dimen/_120sdp"
         android:layout_height="@dimen/_32sdp"
         android:layout_marginEnd="@dimen/_8sdp"
-        android:background="@drawable/button_bg"
-        android:visibility="invisible"
+        android:background="@drawable/name_transparent_bg"
         app:layout_constraintBottom_toBottomOf="@+id/viewAllahNames"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_names"
         app:layout_constraintTop_toTopOf="@+id/viewAllahNames" />

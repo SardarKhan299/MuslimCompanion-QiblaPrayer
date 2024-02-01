@@ -124,5 +124,14 @@
     <fragment
         android:id="@+id/namesFragment"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.names.NamesFragment"
-        android:label="NamesFragment" />
+        android:label="NamesFragment" >
+        <action
+            android:id="@+id/action_namesFragment_to_nameDetailFragment"
+            app:destination="@id/nameDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nameDetailFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.nameDetail.NameDetailFragment"
+        android:label="fragment_name_detail"
+        tools:layout="@layout/fragment_name_detail" />
 </navigation>

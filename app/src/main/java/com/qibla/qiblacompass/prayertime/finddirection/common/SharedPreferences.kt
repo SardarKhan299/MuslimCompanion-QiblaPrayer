@@ -15,7 +15,8 @@ class SharedPreferences {
         private const val USER_NAME_KEY = "user_name"
         private const val USER_EMAIL_KEY = "user_email"
         private const val USER_PROFILE = "profile"
-
+        private val PREFS_KEY = "selected_data"
+        private val PREFS_SELECTED_KEY = "isAllahNamesSelected"
         var mSharedPreferences: SharedPreferences? = null
         private fun initShardPreference(context: Context): SharedPreferences? {
             if (mSharedPreferences == null) {
@@ -54,6 +55,7 @@ class SharedPreferences {
             }
             return ""
         }
+
 
         fun saveSelectedPrayerPosition(context: Context, position: Int) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
