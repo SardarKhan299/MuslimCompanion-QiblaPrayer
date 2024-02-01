@@ -243,8 +243,6 @@
     <string name="user_id_invalid">Invalid format</string>
     <string name="min_password_limit">Minimum 8 characters required</string>
     <string name="default_web_client_id" translatable="false">683587854955-b5adplkuolgpe8lvl0f3le979gmrcmuk.apps.googleusercontent.com</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="allah_names">Allah Names</string>
     <string name="rasool_names">Rasool Names</string>
     <string name="urdu_translation">Urdu Translation</string>

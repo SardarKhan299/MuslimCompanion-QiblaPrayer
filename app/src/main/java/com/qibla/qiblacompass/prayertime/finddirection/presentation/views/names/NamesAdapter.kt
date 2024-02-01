@@ -9,7 +9,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter.TasbihCounterAdapter
 
 class NamesAdapter(
-    private var imageList: List<Int>, private val onItemClick: (Int) -> Unit
+    private var imageList: ArrayList<NamesData>, private val onItemClick: (NamesData) -> Unit
 
 ) :
     RecyclerView.Adapter<NamesAdapter.NamesViewHolder>() {
@@ -24,23 +24,29 @@ class NamesAdapter(
 
     override fun onBindViewHolder(holder: NamesViewHolder, position: Int) {
         val image = imageList[position]
-        holder.imageView.setImageResource(image)
+        holder.imageViewName.setImageResource(image.nameImage)
+        holder.imageViewNameNumber.setImageResource(image.nameNumberImage)
+
     }
 
     override fun getItemCount(): Int = imageList.size// Number of items
 
-    fun setData(newImageList: List<Int>) {
+    fun setData(newImageList: ArrayList<NamesData>) {
         imageList = newImageList
         notifyDataSetChanged()
     }
 
     inner class NamesViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = itemView.findViewById(R.id.img_names)
+        val imageViewName: ImageView = itemView.findViewById(R.id.img_names_item)
+        val imageViewNameNumber :ImageView = itemView.findViewById(R.id.img_name_number_item)
+        val mainbg :View = itemView.findViewById(R.id.view_names)
 
         init {
-            imageView.setOnClickListener {
+            mainbg.setOnClickListener {
                 val position = adapterPosition
                 onItemClick(imageList[position])
+//                val position = adapterPosition
+//                onItemClick(imageList[position])
             }
         }
     }

@@ -78,6 +78,10 @@ class SharedPreferences {
                 apply()
             }
         }
+        fun saveSelectedPositionToSharedPreferences(context: Context,position: Int) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences?.edit()?.putInt("selected_position", position)?.apply()
+        }
 
         fun getSavedMobileNumber(context: Context): String? {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
