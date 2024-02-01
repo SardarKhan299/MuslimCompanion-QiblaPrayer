@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 <!--    <androidx.appcompat.widget.AppCompatImageView-->
 <!--        android:id="@+id/view_item_background"-->
@@ -29,23 +29,25 @@
         android:id="@+id/img_item_frame"
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_60sdp"
-        android:src="@drawable/ic_compass_frame"
-        android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:src="@drawable/qibal_icn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/_4sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_title_item"
-        style="@style/version_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/qibla"
-        android:textSize="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_4sdp"
-        app:layout_constraintEnd_toEndOf="@+id/img_item_frame"
-        app:layout_constraintStart_toStartOf="@+id/img_item_frame"
-        app:layout_constraintTop_toBottomOf="@+id/img_item_frame" />
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/tv_title_item"-->
+<!--        style="@style/version_text_style"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/qibla"-->
+<!--        android:textSize="@dimen/_12sdp"-->
+<!--        android:layout_marginTop="@dimen/_4sdp"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/img_item_frame"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/img_item_frame"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/img_item_frame" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

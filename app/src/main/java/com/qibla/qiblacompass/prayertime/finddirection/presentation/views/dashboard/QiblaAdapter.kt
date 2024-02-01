@@ -31,14 +31,14 @@ class QiblaAdapter(
             onItemClick.invoke(position)
         }
         holder.bgImage.setImageResource(dataQibla.imgBackground)
-        holder.titleName.text = dataQibla.nameTitle
+       // holder.titleName.text = dataQibla.nameTitle
     }
 
     override fun getItemCount() = qiblaData.size
 
     class QiblaViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val bgImage: ImageView = view.findViewById(R.id.img_item_frame)
-        val titleName: TextView = view.findViewById(R.id.tv_title_item)
+      //  val titleName: TextView = view.findViewById(R.id.tv_title_item)
 
     }
 }

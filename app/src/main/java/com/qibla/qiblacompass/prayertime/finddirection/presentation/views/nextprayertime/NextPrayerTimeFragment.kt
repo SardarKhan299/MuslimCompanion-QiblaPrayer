@@ -71,6 +71,7 @@ class NextPrayerTimeFragment :
             3 -> asarBg()
             4 -> maghribBg()
             5 -> ishaBg()
+            6 -> tahajjudBg()
         }
 
     }
@@ -229,6 +230,10 @@ class NextPrayerTimeFragment :
         when (selectedPrayerType) {
             PrayerConstants.FAJR -> fajrBg()
             PrayerConstants.ZUHAR -> zuhrBg()
+            PrayerConstants.ASR -> asarBg()
+            PrayerConstants.MAGHRIB -> maghribBg()
+            PrayerConstants.ISHA -> ishaBg()
+            PrayerConstants.TAHAJJUD -> tahajjudBg()
         }
 
     }

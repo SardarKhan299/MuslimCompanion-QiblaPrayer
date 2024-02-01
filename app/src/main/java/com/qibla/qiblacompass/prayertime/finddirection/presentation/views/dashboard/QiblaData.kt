@@ -2,5 +2,5 @@ package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashb
 
 data class QiblaData(
     val imgBackground: Int,
-    val nameTitle: String
+  //  val nameTitle: String
 )
