@@ -37,7 +37,7 @@ class OnboardingActivity : BaseActivity() {
         )
         data.add(
             OnboardingItem(
-                R.drawable.img_pray,
+                R.drawable.img_prayer,
                 getString(R.string.prayer_timing),
                 getString(R.string.prayer_timing_detail),
                 R.drawable.indicator2
@@ -74,7 +74,7 @@ class OnboardingActivity : BaseActivity() {
                 findViewById<ImageView>(R.id.iv_onboard).setImageDrawable(
                     ContextCompat.getDrawable(
                         this,
-                        R.drawable.img_pray
+                        R.drawable.img_prayer
                     )
                 )
                 findViewById<TextView>(R.id.tv_onboard_title).text =

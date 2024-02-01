@@ -21,11 +21,14 @@ class NamesFragment : BaseFragment<FragmentNamesBinding>(R.layout.fragment_names
     private val imageResource = listOf(
         R.drawable.ic_name_one,
         R.drawable.ic_name_two,
-        R.drawable.ic_name_three
+        R.drawable.ic_name_three,
+
+
     )
     private val imageResourceRasool = listOf(
-        R.drawable.ic_rasool_name_one,
         R.drawable.ic_rasool_name_two,
+        R.drawable.ic_rasool_name_one,
+
     )
     private lateinit var adapter: NamesAdapter
 
