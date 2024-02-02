@@ -1,4 +1,4 @@
-package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.qibaldirection
+package com.qibla.qiblacompass.prayertime.finddirection.common
 
 import android.annotation.SuppressLint
 import android.content.Context

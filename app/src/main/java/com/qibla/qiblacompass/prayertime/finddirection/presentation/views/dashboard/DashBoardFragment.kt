@@ -2,44 +2,31 @@ package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashb
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.*
-import android.location.LocationListener
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
-import com.google.android.gms.tasks.OnSuccessListener
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
-import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
-import com.qibla.qiblacompass.prayertime.finddirection.common.visible
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentDashBoardBinding
-import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.onboarding.OnboardingActivity
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.qibaldirection.CompassDirectionActivity
-import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.sidemenu.SideMenuFragment
 import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.log
 
 
 class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragment_dash_board) {
@@ -75,12 +62,9 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
         }
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
+        checkLocationPermissions()
         binding.viewAutoDetect.setOnClickListener {
-            if (checkLocationPermission()) {
-                fetchLocation()
-            } else {
-                requestLocationPermission()
-            }
+            checkLocationPermissions()
         }
 
         binding.toolbarBoard.imgToolbar.setOnClickListener {
@@ -119,6 +103,14 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             RecyclerView.HORIZONTAL, false
         )
         setUpQibla()
+    }
+
+    private fun checkLocationPermissions() {
+        if (checkLocationPermission()) {
+            fetchLocation()
+        } else {
+            requestLocationPermission()
+        }
     }
 
     private fun onViewOneClick(view: View) {
@@ -209,38 +201,32 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     private fun checkLocationPermission(): Boolean {
         return (ContextCompat.checkSelfPermission(
             mContext,
-            android.Manifest.permission.ACCESS_FINE_LOCATION
+            Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED)
     }
 
     private fun requestLocationPermission() {
-        ActivityCompat.requestPermissions(
-            mContext as Activity,
-            arrayOf(
-                android.Manifest.permission.ACCESS_FINE_LOCATION,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ),
-            LOCATION_PERMISSION_REQUEST_CODE
-        )
+        Log.d(DashBoardFragment::class.simpleName, "requestLocationPermission: ")
+        permReqLauncher.launch(arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ))
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    private val permReqLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val granted = permissions.entries.all {
+                it.value
+            }
+            if (granted) {
+                Log.d(DashBoardFragment::class.simpleName, ": Permission Granted")
                 fetchLocation()
+            }else{
+                Log.d(DashBoardFragment::class.simpleName, ": Permission Not Granted")
             }
         }
-    }
 
     private fun fetchLocation() {
-        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
-
+        Log.d(DashBoardFragment::class.simpleName, "fetchLocation: ")
         if (ActivityCompat.checkSelfPermission(
                 mContext,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -249,12 +235,13 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-
+            Log.d(DashBoardFragment::class.simpleName, "fetchLocation: Permission not granted")
             return
         }
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 location?.let {
+                    getPrayerTimings(it)
                     updateLocationText(it)
                 } ?: run {
                     locationTextView.text = getString(R.string.location_not_available)
@@ -266,11 +253,15 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             }
     }
 
+    private fun getPrayerTimings(location: Location) {
+        Log.d(DashBoardFragment::class.simpleName, "getPrayerTimings: ${location.latitude} - ${location.longitude}")
+    }
+
     private fun updateLocationText(location: Location) {
         val latitude = location.latitude
         val longitude = location.longitude
         val city = getCityFromLocation(latitude, longitude)
-
+        Log.d(DashBoardFragment::class.simpleName, "updateLocationText: $city")
         val locationText = "City: $city"
         locationTextView.text = locationText
     }

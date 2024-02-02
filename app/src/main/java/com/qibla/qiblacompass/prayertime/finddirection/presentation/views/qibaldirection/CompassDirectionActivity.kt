@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.gms.location.LocationResult
 import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.common.MyLocationManager
 import java.util.*
 
 class CompassDirectionActivity : AppCompatActivity() {
