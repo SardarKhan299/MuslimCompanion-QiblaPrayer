@@ -36,10 +36,6 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     private lateinit var locationTextView: TextView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    companion object {
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 1001
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(DashBoardFragment::class.simpleName, "onCreate: ")

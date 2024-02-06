@@ -153,9 +153,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
 
     private fun firebaseAuthWithGoogle(account: SignInCredential) {
-        // Navigate to DashboardActivity
-        startActivity(Intent(requireContext(), DashBoardActivity::class.java))
-        requireActivity().finish()
+
         val credential = GoogleAuthProvider.getCredential(account.googleIdToken, null)
         auth.signInWithCredential(credential)
             .addOnFailureListener {
@@ -173,6 +171,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                         "Signed in as ${user?.displayName}",
                         Toast.LENGTH_SHORT
                     ).show()
+                    // Navigate to DashboardActivity
+                    startActivity(Intent(requireContext(), DashBoardActivity::class.java))
+                    requireActivity().finish()
 
                 } else {
                     Log.d(LoginFragment::class.simpleName, "firebaseAuthWithGoogle: ")
