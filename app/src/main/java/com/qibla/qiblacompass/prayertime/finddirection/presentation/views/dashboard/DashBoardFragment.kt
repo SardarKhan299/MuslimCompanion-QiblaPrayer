@@ -2,15 +2,21 @@ package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashb
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.*
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -20,13 +26,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.MyLocationManager
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentDashBoardBinding
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.qibaldirection.CompassDirectionActivity
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.qibaldirection.QibalDirectionFragment
 import java.io.IOException
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragment_dash_board) {
@@ -34,7 +41,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     private lateinit var rView: RecyclerView
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var locationTextView: TextView
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var mLocationManager: MyLocationManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +64,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             startActivity(Intent(mContext, CompassDirectionActivity::class.java))
 
         }
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
+        mLocationManager = MyLocationManager(requireContext(), locationCallback())
         checkLocationPermissions()
         binding.viewAutoDetect.setOnClickListener {
             checkLocationPermissions()
@@ -209,6 +216,15 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         ))
     }
 
+    var settingsLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { result ->
+        if(mLocationManager.isLocationEnabled()){
+            fetchLocation()
+        }else{
+            Log.d(DashBoardFragment::class.simpleName, ": Tell user to why they need location.")
+        }
+    }
+
     private val permReqLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             val granted = permissions.entries.all {
                 it.value
@@ -234,19 +250,37 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             Log.d(DashBoardFragment::class.simpleName, "fetchLocation: Permission not granted")
             return
         }
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-                location?.let {
-                    getPrayerTimings(it)
-                    updateLocationText(it)
-                } ?: run {
-                    locationTextView.text = getString(R.string.location_not_available)
+        if(!mLocationManager.isLocationEnabled()){
+            Log.d(DashBoardFragment::class.simpleName, "fetchLocation: Location Not enabled..")
+            AlertDialog.Builder(mContext)
+                .setMessage(R.string.gps_network_not_enabled)
+                .setPositiveButton(R.string.open_location_settings) { paramDialogInterface, paramInt ->
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    settingsLauncher.launch(intent)
                 }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
+            return
+        }
+        mLocationManager.startLocationTracking()
+    }
+
+    private fun locationCallback(): (LocationResult) -> Unit {
+        return { location ->
+            Log.d(
+                QibalDirectionFragment::class.simpleName,
+                "locationCallback: ${location.lastLocation}"
+            )
+            if (location.lastLocation != null) {
+                getPrayerTimings(location.lastLocation!!)
+                updateLocationText(location.lastLocation!!)
+                mLocationManager.stopLocationTracking()
+            } else {
+                Log.d(MyLocationManager::class.simpleName, "onLocationResult: Location is null")
+                locationTextView.text = getString(R.string.location_not_available)
+                mLocationManager.stopLocationTracking()
             }
-            .addOnFailureListener { e ->
-                // Handle failure
-                locationTextView.text = "Error fetching location: ${e.message}"
-            }
+        }
     }
 
     private fun getPrayerTimings(location: Location) {

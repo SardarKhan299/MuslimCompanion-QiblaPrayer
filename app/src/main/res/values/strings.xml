@@ -246,5 +246,7 @@
     <string name="please_wait">Please Wait...</string>
     <string name="network_error">Network Error</string>
     <string name="please_check_your_network_connectivity">Please Check Your Network Connectivity</string>
+    <string name="gps_network_not_enabled">Your Location is not enabled. Kindly click on Goto Settings and Enable the Location.</string>
+    <string name="open_location_settings">Go To Settings\n</string>
 
 </resources>

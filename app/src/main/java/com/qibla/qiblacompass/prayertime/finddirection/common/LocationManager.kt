@@ -1,9 +1,16 @@
 package com.qibla.qiblacompass.prayertime.finddirection.common
 
+import android.R
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.location.Location
+import android.location.LocationManager
 import android.os.Looper
+import android.util.Log
 import com.google.android.gms.location.*
+
 
 @SuppressLint("MissingPermission")
 class MyLocationManager(
@@ -14,6 +21,7 @@ class MyLocationManager(
 
     private var request: LocationRequest
     private var locationClient: FusedLocationProviderClient
+    private var context:Context = context
 
     init {
         // getting the location client
@@ -48,4 +56,14 @@ class MyLocationManager(
     override fun onLocationAvailability(availability: LocationAvailability) {
         // TODO: react on the availability change
     }
+
+     fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager =
+            context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+
 }

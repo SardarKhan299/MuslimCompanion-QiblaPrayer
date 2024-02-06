@@ -99,8 +99,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     startIntentSenderForResult(
                         result.pendingIntent.intentSender, RC_SIGN_IN,
                         null, 0, 0, 0, null)
-                    ProgressBar.hideProgressBar()
-                    binding.viewLogin.isEnabled = true
                 } catch (e: IntentSender.SendIntentException) {
                     Log.e("LoginFragment", "Couldn't start One Tap UI: ${e.localizedMessage}")
                 }
@@ -109,9 +107,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 // No saved credentials found. Launch the One Tap sign-up flow, or
                 // do nothing and continue presenting the signed-out UI.
                 Log.d(LoginFragment::class.simpleName, "signInWithGoogle: Failed ${e.message}")
-                ProgressBar.hideProgressBar()
-                binding.viewLogin.isEnabled = true
+                enableButtonAndHideProgress()
             }
+    }
+
+    private fun enableButtonAndHideProgress() {
+        ProgressBar.hideProgressBar()
+        binding.viewLogin.isEnabled = true
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -130,10 +132,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             else -> {
                 // Shouldn't happen.
                 Log.d("LoginFragment", "No ID token or password!")
+                enableButtonAndHideProgress()
             }
         }
         } catch (e: ApiException) {
             Log.e("LoginFragment", "Google sign-in failed: ${e.message}", e)
+            enableButtonAndHideProgress()
             when (e.statusCode) {
                 CommonStatusCodes.CANCELED -> {
                     Log.d(LoginFragment::class.simpleName, "onActivityResult: Dialog Cancelled")
@@ -158,9 +162,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         auth.signInWithCredential(credential)
             .addOnFailureListener {
                 Log.d(LoginFragment::class.simpleName, "firebaseAuthWithGoogle Failer: ${it.message}")
+                enableButtonAndHideProgress()
             }
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
+                    enableButtonAndHideProgress()
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
                     saveUserToDatabase(user)
@@ -177,6 +183,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
                 } else {
                     Log.d(LoginFragment::class.simpleName, "firebaseAuthWithGoogle: ")
+                    enableButtonAndHideProgress()
                     Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT)
                         .show()
                 }
