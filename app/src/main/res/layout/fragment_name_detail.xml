@@ -94,9 +94,10 @@
         android:id="@+id/tv_name_translation_english"
         style="@style/translation_text_style"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/_8sdp"
         android:text="@string/merciful"
+        app:layout_constraintBottom_toTopOf="@+id/view_player"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_names_detail"
         app:layout_constraintStart_toStartOf="@+id/tv_english_translation"
         app:layout_constraintTop_toBottomOf="@+id/tv_english_translation" />

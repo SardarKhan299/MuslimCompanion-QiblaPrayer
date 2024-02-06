@@ -96,7 +96,11 @@ class NamesFragment : BaseFragment<FragmentNamesBinding>(R.layout.fragment_names
         "الْوَاجِبُ" to "The All-Perceiving"
     )
 
-
+val rasoolNamesTranslation = arrayListOf<Pair<String, String>>(
+    "زیادہ تعریف کیا گیا۔ تعریف والا" to "Highly praised",
+    "سب سے ذیادہ حمد کرنے والا" to "Highly commendable",
+    "بہت تعریف کرنےوالا، سراہنے والا" to "Praising, One who Praise",
+)
 
     // Flag to determine which set of data to display
     private val PREFS_SELECTED_KEY_ALLAH = "isAllahNamesSelected"
@@ -190,9 +194,20 @@ class NamesFragment : BaseFragment<FragmentNamesBinding>(R.layout.fragment_names
 
     private fun onItemClick(namesData: NamesData) {
 
-        val position = imageResource.indexOf(namesData) // Find the position of the clicked item
-        val translation =
-            allahNamesTranslations[position] // Get the translation for the clicked item
+//        val position = imageResource.indexOf(namesData) // Find the position of the clicked item
+//        val translation =
+//            allahNamesTranslations[position] // Get the translation for the clicked item
+//        saveSelectedDataToSharedPreferences(namesData, translation)
+        val position = if (isAllahNamesSelected) {
+            imageResource.indexOf(namesData)
+        } else {
+            imageResourceRasool.indexOf(namesData)
+        }
+        val translation = if (isAllahNamesSelected) {
+            allahNamesTranslations[position]
+        } else {
+            rasoolNamesTranslation[position]
+        }
         saveSelectedDataToSharedPreferences(namesData, translation)
         // Navigate to the detail screen
         findNavController().navigate(R.id.nameDetailFragment)
