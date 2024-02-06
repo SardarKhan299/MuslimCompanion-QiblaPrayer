@@ -7,6 +7,8 @@ import android.util.Log
 import androidx.preference.PreferenceManager
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.BIOMETRIC_ENABLE
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.SELECTED_IMAGE
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.names.NamesData
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.names.NamesFragment
 
 class SharedPreferences {
 
@@ -17,6 +19,14 @@ class SharedPreferences {
         private const val USER_PROFILE = "profile"
         private val PREFS_KEY = "selected_data"
         private val PREFS_SELECTED_KEY = "isAllahNamesSelected"
+
+
+        // Flag to determine which set of data to display
+        private val PREFS_SELECTED_KEY_ALLAH = "isAllahNamesSelected"
+        private val PREFS_SELECTED_KEY_RASOOL = "isRasoolNamesSelected"
+
+        private var isAllahNamesSelected = false
+        private var isRasoolNamesSelected = false
         var mSharedPreferences: SharedPreferences? = null
         private fun initShardPreference(context: Context): SharedPreferences? {
             if (mSharedPreferences == null) {
@@ -78,7 +88,8 @@ class SharedPreferences {
                 apply()
             }
         }
-        fun saveSelectedPositionToSharedPreferences(context: Context,position: Int) {
+
+        fun saveSelectedPositionToSharedPreferences(context: Context, position: Int) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             msharedPreferences?.edit()?.putInt("selected_position", position)?.apply()
         }
@@ -124,5 +135,37 @@ class SharedPreferences {
             return msharedPreferences?.getString(USER_EMAIL_KEY, null)
         }
 
+        fun saveSelectedPositionToSharedPreferences(
+            context: Context,
+            namesData: NamesData
+        ) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putInt("selected_name_image", namesData.nameImage)
+                putInt("selected_name_number_image", namesData.nameNumberImage)
+                apply()
+            }
+        }
+        //store whether the user clicked on "viewAllahNames" or "viewRasoolNames" in SharedPreferences
+        fun saveSelectionToSharedPreferences(context: Context,isAllahNames: Boolean) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().putBoolean(PREFS_SELECTED_KEY, isAllahNames).apply()
+        }
+
+        fun getSelectionFromSharedPreferences(context: Context,key: String): Boolean {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getBoolean(key, false)
+        }
+
+        fun saveSelectionToSharedPreferences(context: Context,key: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().putBoolean(key, true).apply()
+        }
+
+        fun getSelectionFromSharedPreferencesDetail(context: Context): Boolean {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getBoolean(PREFS_SELECTED_KEY, true)
+        }
+
     }
-}
+    }

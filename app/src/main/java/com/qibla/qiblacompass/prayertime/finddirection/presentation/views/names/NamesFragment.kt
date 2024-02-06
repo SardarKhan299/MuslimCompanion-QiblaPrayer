@@ -19,27 +19,19 @@ import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentNames
 class NamesFragment : BaseFragment<FragmentNamesBinding>(R.layout.fragment_names) {
     lateinit var recyclerView: RecyclerView
 
-    //    private val imageResource = listOf(
-//        R.drawable.ic_name_two,
-//        R.drawable.ic_name_three,
-//        R.drawable.ic_name_one
-//
-//    )
     // Lists to store data
     private lateinit var imageResource: ArrayList<NamesData>
     private lateinit var imageResourceRasool: ArrayList<NamesData>
 
-    //    private val imageResourceRasool = listOf(
-//        R.drawable.ic_rasool_name_two,
-//        R.drawable.ic_rasool_name_one,
-//
-//    )
     private lateinit var adapter: NamesAdapter
 
     // SharedPreferences key
     private val PREFS_KEY = "selected_data"
     private val PREFS_SELECTED_KEY = "isAllahNamesSelected"
-
+    val allahNamesTranslations = arrayListOf<Pair<String, String>>(
+        "انتہائی مہربان" to "The Most Gracious",
+        "انتہائی رحم کرنے والا" to "The Most Merciful"
+    )
     // Flag to determine which set of data to display
     private val PREFS_SELECTED_KEY_ALLAH = "isAllahNamesSelected"
     private val PREFS_SELECTED_KEY_RASOOL = "isRasoolNamesSelected"
@@ -76,8 +68,12 @@ class NamesFragment : BaseFragment<FragmentNamesBinding>(R.layout.fragment_names
         imageResourceRasool.add(NamesData(R.drawable.ic_rasool_name_two, R.drawable.ic_one_number))
         imageResourceRasool.add(NamesData(R.drawable.ic_rasool_name_one, R.drawable.ic_two_number))
 
-        isAllahNamesSelected = getSelectionFromSharedPreferences(PREFS_SELECTED_KEY_ALLAH)
-        isRasoolNamesSelected = getSelectionFromSharedPreferences(PREFS_SELECTED_KEY_RASOOL)
+       // isAllahNamesSelected = getSelectionFromSharedPreferences(PREFS_SELECTED_KEY_ALLAH)
+      //  isRasoolNamesSelected = getSelectionFromSharedPreferences(PREFS_SELECTED_KEY_RASOOL)
+
+
+        isAllahNamesSelected = SharedPreferences.getSelectionFromSharedPreferences(mContext,PREFS_SELECTED_KEY_ALLAH)
+         isRasoolNamesSelected = SharedPreferences.getSelectionFromSharedPreferences(mContext,PREFS_SELECTED_KEY_RASOOL)
         // Set the initial data based on the stored preference
         if (isAllahNamesSelected) {
             adapter.setData(imageResource)
@@ -99,22 +95,12 @@ class NamesFragment : BaseFragment<FragmentNamesBinding>(R.layout.fragment_names
             isAllahNamesSelected = true
             isRasoolNamesSelected = false
             adapter.setData(imageResource)
-            saveSelectionToSharedPreferences(PREFS_SELECTED_KEY_ALLAH)
+           // saveSelectionToSharedPreferences(true) // Save the selection type
+            SharedPreferences.saveSelectionToSharedPreferences(mContext,false)
+            SharedPreferences.saveSelectionToSharedPreferences(mContext,PREFS_SELECTED_KEY_ALLAH)
+
+            //saveSelectionToSharedPreferences(PREFS_SELECTED_KEY_ALLAH)
             updateViewStyles()
-//            isAllahNamesSelected = true
-//            adapter.setData(imageResource)
-//            saveSelectionToSharedPreferences()
-//            // Change the text style for Allah Names
-//            binding.viewAllahNames.setBackgroundResource(R.drawable.button_bg)
-//            binding.viewRasoolNames.setBackgroundResource(R.drawable.name_transparent_bg)
-//            binding.tvAllahNames.setTextAppearance(
-//                requireContext(),
-//                R.style.advertisement_text_style
-//            )
-//            binding.tvRasoolNames.setTextAppearance(
-//                requireContext(),
-//                R.style.forgot_password_text_style
-//            )
         }
 
         binding.viewRasoolNames.setOnClickListener {
@@ -122,79 +108,54 @@ class NamesFragment : BaseFragment<FragmentNamesBinding>(R.layout.fragment_names
             isAllahNamesSelected = false
             isRasoolNamesSelected = true
             adapter.setData(imageResourceRasool)
-            saveSelectionToSharedPreferences(PREFS_SELECTED_KEY_RASOOL)
+           // saveSelectionToSharedPreferences(false) // Save the selection type
+            SharedPreferences.saveSelectionToSharedPreferences(mContext,false)
+          //  saveSelectionToSharedPreferences(PREFS_SELECTED_KEY_RASOOL)
+            SharedPreferences.saveSelectionToSharedPreferences(mContext,PREFS_SELECTED_KEY_RASOOL)
             updateViewStyles()
-            //findNavController().navigate(R.id.rasoolDetailFragment)
-//            isAllahNamesSelected = false
-//            adapter.setData(imageResourceRasool)
-//            saveSelectionToSharedPreferences()
-//            // Change the text style for Rasool Names
-//            binding.tvAllahNames.setTextAppearance(
-//                requireContext(),
-//                R.style.forgot_password_text_style
-//            )
-//            binding.tvRasoolNames.setTextAppearance(
-//                requireContext(),
-//                R.style.advertisement_text_style
-//            )
-//            binding.viewAllahNames.setBackgroundResource(R.drawable.name_transparent_bg)
-//            binding.viewRasoolNames.setBackgroundResource(R.drawable.button_bg)
         }
-
-
     }
+
     private fun getSelectionFromSharedPreferences(key: String): Boolean {
-        val sharedPreferences = requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
+        val sharedPreferences =
+            requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean(key, false)
     }
 
     private fun saveSelectionToSharedPreferences(key: String) {
-        val sharedPreferences = requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
+        val sharedPreferences =
+            requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
         sharedPreferences.edit().putBoolean(key, true).apply()
     }
+
     private fun onItemClick(namesData: NamesData) {
         // Save selected position to SharedPreferences
-        saveSelectedPositionToSharedPreferences(namesData)
+      //  saveSelectedPositionToSharedPreferences(namesData)
+        SharedPreferences.saveSelectedPositionToSharedPreferences(mContext,namesData)
 
         // Navigate to the detail screen
         findNavController().navigate(R.id.nameDetailFragment)
     }
 
-    private fun saveSelectedPositionToSharedPreferences(namesData: NamesData) {
-        val sharedPreferences = requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putInt("selected_name_image", namesData.nameImage)
-        editor.putInt("selected_name_number_image", namesData.nameNumberImage)
-        editor.apply()
-    }
-    private fun saveSelectedPositionToSharedPreferences(position: Int) {
-        val sharedPreferences =
-            requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
-        sharedPreferences.edit().putInt("selected_position", position).apply()
-    }
-
-    private fun saveSelectionToSharedPreferences() {
+    //store whether the user clicked on "viewAllahNames" or "viewRasoolNames" in SharedPreferences
+    private fun saveSelectionToSharedPreferences(isAllahNames: Boolean) {
         Log.d(
             NamesFragment::class.java.simpleName,
             "saveSelectionToSharedPreferences: saveSelectionToSharedPreferences "
         )
         val sharedPreferences =
             requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
-        sharedPreferences.edit().putBoolean(PREFS_SELECTED_KEY, isAllahNamesSelected).apply()
+        sharedPreferences.edit().putBoolean(PREFS_SELECTED_KEY, isAllahNames).apply()
     }
 
-    private fun getSelectionFromSharedPreferences(): Boolean {
-        Log.d(
-            NamesFragment::class.java.simpleName,
-            "getSelectionFromSharedPreferences: getSelectionFromSharedPreferences"
-        )
+    private fun saveSelectedPositionToSharedPreferences(namesData: NamesData) {
         val sharedPreferences =
             requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean(PREFS_SELECTED_KEY, true)
+        val editor = sharedPreferences.edit()
+        editor.putInt("selected_name_image", namesData.nameImage)
+        editor.putInt("selected_name_number_image", namesData.nameNumberImage)
+        editor.apply()
     }
-
-
-
 
     private fun updateViewStyles() {
         if (isAllahNamesSelected) {

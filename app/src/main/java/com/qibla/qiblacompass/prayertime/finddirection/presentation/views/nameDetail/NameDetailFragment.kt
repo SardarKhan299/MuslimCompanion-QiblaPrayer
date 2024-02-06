@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentNameDetailBinding
@@ -45,12 +46,13 @@ class NameDetailFragment : BaseFragment<FragmentNameDetailBinding>(R.layout.frag
             sharedPreferences.getInt("selected_name_image", 0) // Default value 0 if not found
         val selectedNameNumberImage = sharedPreferences.getInt("selected_name_number_image", 0)
 
-// Set the retrieved values to your ImageViews
+           // Set the retrieved values to your ImageViews
         binding.imgMainName.setImageResource(selectedNameImage)
         binding.imgNameNumber.setImageResource(selectedNameNumberImage)
 
         // Retrieve the stored selection type
-        val isAllahNamesSelected = getSelectionFromSharedPreferences()
+      //  val isAllahNamesSelected = getSelectionFromSharedPreferences()
+        val isAllahNamesSelected = SharedPreferences.getSelectionFromSharedPreferencesDetail(mContext)
 
         // Set the text based on the selection
         if (isAllahNamesSelected) {
@@ -72,4 +74,5 @@ class NameDetailFragment : BaseFragment<FragmentNameDetailBinding>(R.layout.frag
             requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean(PREFS_SELECTED_KEY, true)
     }
+
 }

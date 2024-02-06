@@ -45,8 +45,6 @@ class NamesAdapter(
             mainbg.setOnClickListener {
                 val position = adapterPosition
                 onItemClick(imageList[position])
-//                val position = adapterPosition
-//                onItemClick(imageList[position])
             }
         }
     }
