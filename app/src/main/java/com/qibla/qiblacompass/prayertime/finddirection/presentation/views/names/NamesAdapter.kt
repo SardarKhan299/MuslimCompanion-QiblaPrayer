@@ -9,7 +9,8 @@ import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter.TasbihCounterAdapter
 
 class NamesAdapter(
-    private var imageList: ArrayList<NamesData>, private val onItemClick: (NamesData) -> Unit
+    private var imageList: ArrayList<NamesData>,
+    private val onItemClick: (NamesData) -> Unit
 
 ) :
     RecyclerView.Adapter<NamesAdapter.NamesViewHolder>() {

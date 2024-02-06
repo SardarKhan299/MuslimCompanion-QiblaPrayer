@@ -8,7 +8,6 @@ import androidx.preference.PreferenceManager
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.BIOMETRIC_ENABLE
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.SELECTED_IMAGE
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.names.NamesData
-import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.names.NamesFragment
 
 class SharedPreferences {
 
@@ -20,7 +19,10 @@ class SharedPreferences {
         private val PREFS_KEY = "selected_data"
         private val PREFS_SELECTED_KEY = "isAllahNamesSelected"
 
-
+        val allahNamesTranslations = arrayListOf<Pair<String, String>>(
+            "انتہائی مہربان" to "The Most Gracious",
+            "انتہائی رحم کرنے والا" to "The Most Merciful"
+        )
         // Flag to determine which set of data to display
         private val PREFS_SELECTED_KEY_ALLAH = "isAllahNamesSelected"
         private val PREFS_SELECTED_KEY_RASOOL = "isRasoolNamesSelected"
@@ -166,6 +168,14 @@ class SharedPreferences {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getBoolean(PREFS_SELECTED_KEY, true)
         }
-
+        //translation data
+        fun saveTranslationToSharedPreferences(context: Context, urduTranslation: String, englishTranslation: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString("urdu_translation", urduTranslation)
+                putString("english_translation", englishTranslation)
+                apply()
+            }
+        }
     }
     }

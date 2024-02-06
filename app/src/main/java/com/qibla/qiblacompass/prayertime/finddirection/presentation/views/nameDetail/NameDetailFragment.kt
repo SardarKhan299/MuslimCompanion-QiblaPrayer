@@ -50,8 +50,13 @@ class NameDetailFragment : BaseFragment<FragmentNameDetailBinding>(R.layout.frag
         binding.imgMainName.setImageResource(selectedNameImage)
         binding.imgNameNumber.setImageResource(selectedNameNumberImage)
 
-        // Retrieve the stored selection type
-      //  val isAllahNamesSelected = getSelectionFromSharedPreferences()
+        val urduTranslation = sharedPreferences.getString("selected_translation_urdu", "")
+        val englishTranslation = sharedPreferences.getString("selected_translation_english", "")
+
+        // Set the translations to the TextViews
+        binding.tvNameTranslationUrdu.text = urduTranslation
+        binding.tvNameTranslationEnglish.text = englishTranslation
+        //  val isAllahNamesSelected = getSelectionFromSharedPreferences()
         val isAllahNamesSelected = SharedPreferences.getSelectionFromSharedPreferencesDetail(mContext)
 
         // Set the text based on the selection
