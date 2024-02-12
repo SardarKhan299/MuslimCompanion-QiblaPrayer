@@ -77,6 +77,8 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     val currentYear = c.get(Calendar.YEAR)
     val currentMonth = c.get(Calendar.MONTH)+1
     val currentDay = c.get(Calendar.DAY_OF_MONTH)
+    var currentLat = 0.0
+    var currentLng = 0.0
 
     private var index = 0
     private val viewModel: DashboardViewModel by viewModels()
@@ -254,6 +256,10 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 SharedPreferences.saveTimerEndTime(mContext,seconds)
                 viewModel.setCounterValue(seconds)
                 delay(1000)
+                if(seconds<=3){
+                    Log.d(DashBoardFragment::class.simpleName, "startCountdown: Time Ends")
+                    viewModel.getPrayerTimes(currentYear,currentMonth,currentLat,currentLng,1)
+                }
             }
         }
     }
@@ -459,6 +465,8 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
     private fun getPrayerTimings(location: Location) {
         Log.d(DashBoardFragment::class.simpleName, "getPrayerTimings: ${location.latitude} - ${location.longitude}")
+        currentLat = location.latitude
+        currentLng = location.longitude
         viewModel.getPrayerTimes(currentYear,currentMonth,location.latitude,location.longitude,1)
     }
 
