@@ -85,6 +85,19 @@ class SharedPreferences {
             }
         }
 
+        fun saveUserVisit(context: Context,isFirstTimeLogin:Boolean){
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putBoolean(PrayerConstants.FIRST_TIME_LOGIN, isFirstTimeLogin)
+                apply()
+            }
+        }
+
+        fun isFirstTimeLogin(context: Context): Boolean {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getBoolean(PrayerConstants.FIRST_TIME_LOGIN, true)
+        }
+
         fun getSavedMobileNumber(context: Context): String? {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getString("saved_mobile_number", null)

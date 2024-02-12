@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseActivity
 import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login.LoginActivity
 
 class OnboardingActivity : BaseActivity() {
@@ -25,6 +26,7 @@ class OnboardingActivity : BaseActivity() {
         btnNext = findViewById(R.id.btn_next)
         findViewById<TextView>(R.id.tv_skip).setOnClickListener {
             Log.d(OnboardingActivity::class.simpleName, "onCreate: ")
+
             gotoLoginActivity()
         }
         data.add(
@@ -103,6 +105,7 @@ class OnboardingActivity : BaseActivity() {
     }
 
     private fun gotoLoginActivity() {
+        SharedPreferences.saveUserVisit(this,false)
         startActivity(Intent(this@OnboardingActivity, LoginActivity::class.java))
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         finish()
