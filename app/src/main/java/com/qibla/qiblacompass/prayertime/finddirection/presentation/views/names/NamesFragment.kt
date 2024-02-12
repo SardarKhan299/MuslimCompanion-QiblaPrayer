@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.allahNamesTranslations
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentNamesBinding
@@ -29,78 +30,78 @@ class NamesFragment : BaseFragment<FragmentNamesBinding>(R.layout.fragment_names
     // SharedPreferences key
     private val PREFS_KEY = "selected_data"
     private val PREFS_SELECTED_KEY = "isAllahNamesSelected"
-    val allahNamesTranslations = arrayListOf<Pair<String, String>>(
-        "انتہائی مہربانُ" to "The Most Gracious",
-        "انتہائی رحم کرنے والاُ" to "The Most Merciful",
-        "مالک، بادشاہُ" to "The Owner, The King, The Ruler",
-        "مقدس، پاک، عیبوں سے پاکُ" to "The Absolutely Pure, The most Holy, The Most sacred",
-        "السَّلَامُ" to "The Source of Peace",
-        "الْمُؤْمِنُ" to "The Inspirer of Faith",
-        "الْمُهَيْمِنُ" to "The Guardian",
-        "الْعَزِيزُ" to "The Victorious",
-        "الْجَبَّارُ" to "The Compeller",
-        "الْمُتَكَبِّرُ" to "The Greatest",
-        "الْخَالِقُ" to "The Creator",
-        "الْبَارِئُ" to "The Maker of Order",
-        "الْمُصَوِّرُ" to "The Shaper of Beauty",
-        "الْغَفَّارُ" to "The Forgiving",
-        "الْقَهَّارُ" to "The Subduer",
-        "الْوَهَّابُ" to "The Giver of All",
-        "الرَّزَّاقُ" to "The Sustainer",
-        "الْفَتَّاحُ" to "The Opener",
-        "اَلْعَلِيْمُ" to "The Knower of All",
-        "الْقَابِضُ" to "The Constrictor",
-        "الْبَاسِطُ" to "The Reliever",
-        "الْخَافِضُ" to "The Abaser",
-        "الرَّافِعُ" to "The Exalter",
-        "الْمُعِزُّ" to "The Bestower of Honors",
-        "المُذِلُّ" to "The Humiliator",
-        "السَّمِيعُ" to "The Hearer of All",
-        "الْبَصِيرُ" to "The Seer of All",
-        "الْحَكَمُ" to "The Judge",
-        "الْعَدْلُ" to "The Just",
-        "اللَّطِيفُ" to "The Subtle One",
-        "الْخَبِيرُ" to "The All-Aware",
-        "الْحَلِيمُ" to "The Forbearing",
-        "الْعَظِيمُ" to "The Magnificent",
-        "الْغَفُورُ" to "The Forgiver and Hider of Faults",
-        "الشَّكُورُ" to "The Rewarder of Thankfulness",
-        "الْعَلِيُّ" to "The Highest",
-        "الْكَبِيرُ" to "The Greatest",
-        "الْحَفِيظُ" to "The Preserver",
-        "الْمُقِيتُ" to "The Nourisher",
-        "الْحَسِيبُ" to "The Accounter",
-        "الْجَلِيلُ" to "The Mighty",
-        "الْكَرِيمُ" to "The Generous",
-        "الرَّقِيبُ" to "The Watchful One",
-        "الْمُجِيبُ" to "The Responsive",
-        "الْوَاسِعُ" to "The Vast",
-        "الْحَكِيمُ" to "The Wise",
-        "الْوَدُودُ" to "The Loving",
-        "الْمَجِيدُ" to "The Majestic",
-        "الْبَاعِثُ" to "The Resurrector",
-        "الشَّهِيدُ" to "The Witness",
-        "الْحَقُّ" to "The Truth",
-        "الْوَكِيلُ" to "The Trustee",
-        "الْقَوِيُّ" to "The Possessor of All Strength",
-        "الْمَتِينُ" to "The Forceful One",
-        "الْوَلِيُّ" to "The Governor",
-        "الْحَمِيدُ" to "The Praised One",
-        "الْمُحْصِي" to "The Appraiser",
-        "الْمُبْدِئُ" to "The Originator",
-        "الْمُعِيدُ" to "The Restorer",
-        "الْمُحْيِي" to "The Giver of Life",
-        "الْمُمِيتُ" to "The Taker of Life",
-        "الْحَيُّ" to "The Ever-Living",
-        "الْقَيُّومُ" to "The Self-Existing",
-        "الْوَاجِبُ" to "The All-Perceiving"
-    )
+  //  private val allahNamesTranslations = arrayListOf<Pair<String, String>>(
+//        "انتہائی مہربانُ" to "The Most Gracious",
+//        "انتہائی رحم کرنے والاُ" to "The Most Merciful",
+//        "مالک، بادشاہُ" to "The Owner, The King, The Ruler",
+//        "مقدس، پاک، عیبوں سے پاکُ" to "The Absolutely Pure, The most Holy, The Most sacred",
+//        "السَّلَامُ" to "The Source of Peace",
+//        "الْمُؤْمِنُ" to "The Inspirer of Faith",
+//        "الْمُهَيْمِنُ" to "The Guardian",
+//        "الْعَزِيزُ" to "The Victorious",
+//        "الْجَبَّارُ" to "The Compeller",
+//        "الْمُتَكَبِّرُ" to "The Greatest",
+//        "الْخَالِقُ" to "The Creator",
+//        "الْبَارِئُ" to "The Maker of Order",
+//        "الْمُصَوِّرُ" to "The Shaper of Beauty",
+//        "الْغَفَّارُ" to "The Forgiving",
+//        "الْقَهَّارُ" to "The Subduer",
+//        "الْوَهَّابُ" to "The Giver of All",
+//        "الرَّزَّاقُ" to "The Sustainer",
+//        "الْفَتَّاحُ" to "The Opener",
+//        "اَلْعَلِيْمُ" to "The Knower of All",
+//        "الْقَابِضُ" to "The Constrictor",
+//        "الْبَاسِطُ" to "The Reliever",
+//        "الْخَافِضُ" to "The Abaser",
+//        "الرَّافِعُ" to "The Exalter",
+//        "الْمُعِزُّ" to "The Bestower of Honors",
+//        "المُذِلُّ" to "The Humiliator",
+//        "السَّمِيعُ" to "The Hearer of All",
+//        "الْبَصِيرُ" to "The Seer of All",
+//        "الْحَكَمُ" to "The Judge",
+//        "الْعَدْلُ" to "The Just",
+//        "اللَّطِيفُ" to "The Subtle One",
+//        "الْخَبِيرُ" to "The All-Aware",
+//        "الْحَلِيمُ" to "The Forbearing",
+//        "الْعَظِيمُ" to "The Magnificent",
+//        "الْغَفُورُ" to "The Forgiver and Hider of Faults",
+//        "الشَّكُورُ" to "The Rewarder of Thankfulness",
+//        "الْعَلِيُّ" to "The Highest",
+//        "الْكَبِيرُ" to "The Greatest",
+//        "الْحَفِيظُ" to "The Preserver",
+//        "الْمُقِيتُ" to "The Nourisher",
+//        "الْحَسِيبُ" to "The Accounter",
+//        "الْجَلِيلُ" to "The Mighty",
+//        "الْكَرِيمُ" to "The Generous",
+//        "الرَّقِيبُ" to "The Watchful One",
+//        "الْمُجِيبُ" to "The Responsive",
+//        "الْوَاسِعُ" to "The Vast",
+//        "الْحَكِيمُ" to "The Wise",
+//        "الْوَدُودُ" to "The Loving",
+//        "الْمَجِيدُ" to "The Majestic",
+//        "الْبَاعِثُ" to "The Resurrector",
+//        "الشَّهِيدُ" to "The Witness",
+//        "الْحَقُّ" to "The Truth",
+//        "الْوَكِيلُ" to "The Trustee",
+//        "الْقَوِيُّ" to "The Possessor of All Strength",
+//        "الْمَتِينُ" to "The Forceful One",
+//        "الْوَلِيُّ" to "The Governor",
+//        "الْحَمِيدُ" to "The Praised One",
+//        "الْمُحْصِي" to "The Appraiser",
+//        "الْمُبْدِئُ" to "The Originator",
+//        "الْمُعِيدُ" to "The Restorer",
+//        "الْمُحْيِي" to "The Giver of Life",
+//        "الْمُمِيتُ" to "The Taker of Life",
+//        "الْحَيُّ" to "The Ever-Living",
+//        "الْقَيُّومُ" to "The Self-Existing",
+//        "الْوَاجِبُ" to "The All-Perceiving"
+//    )
 
-val rasoolNamesTranslation = arrayListOf<Pair<String, String>>(
-    "زیادہ تعریف کیا گیا۔ تعریف والا" to "Highly praised",
-    "سب سے ذیادہ حمد کرنے والا" to "Highly commendable",
-    "بہت تعریف کرنےوالا، سراہنے والا" to "Praising, One who Praise",
-)
+//private val rasoolNamesTranslation = arrayListOf<Pair<String, String>>(
+//    "زیادہ تعریف کیا گیا۔ تعریف والا" to "Highly praised",
+//    "سب سے ذیادہ حمد کرنے والا" to "Highly commendable",
+//    "بہت تعریف کرنےوالا، سراہنے والا" to "Praising, One who Praise",
+//)
 
     // Flag to determine which set of data to display
     private val PREFS_SELECTED_KEY_ALLAH = "isAllahNamesSelected"
@@ -194,20 +195,20 @@ val rasoolNamesTranslation = arrayListOf<Pair<String, String>>(
 
     private fun onItemClick(namesData: NamesData) {
 
-//        val position = imageResource.indexOf(namesData) // Find the position of the clicked item
-//        val translation =
-//            allahNamesTranslations[position] // Get the translation for the clicked item
-//        saveSelectedDataToSharedPreferences(namesData, translation)
         val position = if (isAllahNamesSelected) {
             imageResource.indexOf(namesData)
+
         } else {
             imageResourceRasool.indexOf(namesData)
         }
         val translation = if (isAllahNamesSelected) {
             allahNamesTranslations[position]
         } else {
-            rasoolNamesTranslation[position]
+            SharedPreferences.rasoolNamesTranslation[position]
         }
+        //save player click position.
+        SharedPreferences.saveSelectedPlayerPosition(requireContext(), position)
+
         saveSelectedDataToSharedPreferences(namesData, translation)
         // Navigate to the detail screen
         findNavController().navigate(R.id.nameDetailFragment)
@@ -261,36 +262,5 @@ val rasoolNamesTranslation = arrayListOf<Pair<String, String>>(
     }
 }
 
-
-//private fun getSelectionFromSharedPreferences(key: String): Boolean {
-//    val sharedPreferences =
-//        requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
-//    return sharedPreferences.getBoolean(key, false)
-//}
-//
-//private fun saveSelectionToSharedPreferences(key: String) {
-//    val sharedPreferences =
-//        requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
-//    sharedPreferences.edit().putBoolean(key, true).apply()
-//}
-////store whether the user clicked on "viewAllahNames" or "viewRasoolNames" in SharedPreferences
-//private fun saveSelectionToSharedPreferences(isAllahNames: Boolean) {
-//    Log.d(
-//        NamesFragment::class.java.simpleName,
-//        "saveSelectionToSharedPreferences: saveSelectionToSharedPreferences "
-//    )
-//    val sharedPreferences =
-//        requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
-//    sharedPreferences.edit().putBoolean(PREFS_SELECTED_KEY, isAllahNames).apply()
-//}
-//
-//private fun saveSelectedPositionToSharedPreferences(namesData: NamesData) {
-//    val sharedPreferences =
-//        requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
-//    val editor = sharedPreferences.edit()
-//    editor.putInt("selected_name_image", namesData.nameImage)
-//    editor.putInt("selected_name_number_image", namesData.nameNumberImage)
-//    editor.apply()
-//}
 
 

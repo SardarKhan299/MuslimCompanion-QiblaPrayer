@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import androidx.preference.PreferenceManager
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.BIOMETRIC_ENABLE
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.SELECTED_IMAGE
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.names.NamesData
@@ -17,17 +19,28 @@ class SharedPreferences {
         private const val USER_EMAIL_KEY = "user_email"
         private const val USER_PROFILE = "profile"
         private val PREFS_KEY = "selected_data"
+        private const val PREFS_NAMES_DATA_KEY = "names_data_key"
+
         private val PREFS_SELECTED_KEY = "isAllahNamesSelected"
 
         val allahNamesTranslations = arrayListOf<Pair<String, String>>(
-            "انتہائی مہربان" to "The Most Gracious",
-            "انتہائی رحم کرنے والا" to "The Most Merciful"
+            "انتہائی مہربانُ" to "The Most Gracious",
+            "انتہائی رحم کرنے والاُ" to "The Most Merciful",
+            "مالک، بادشاہُ" to "The Owner, The King, The Ruler",
+            "مقدس، پاک، عیبوں سے پاکُ" to "The Absolutely Pure, The most Holy, The Most sacred",
+            "السَّلَامُ" to "The Source of Peace",
         )
+        val rasoolNamesTranslation = arrayListOf<Pair<String, String>>(
+            "زیادہ تعریف کیا گیا۔ تعریف والا" to "Highly praised",
+            "سب سے ذیادہ حمد کرنے والا" to "Highly commendable",
+            "بہت تعریف کرنےوالا، سراہنے والا" to "Praising, One who Praise",
+        )
+
         // Flag to determine which set of data to display
         private val PREFS_SELECTED_KEY_ALLAH = "isAllahNamesSelected"
         private val PREFS_SELECTED_KEY_RASOOL = "isRasoolNamesSelected"
 
-        private var isAllahNamesSelected = false
+        var isAllahNamesSelected = false
         private var isRasoolNamesSelected = false
         var mSharedPreferences: SharedPreferences? = null
         private fun initShardPreference(context: Context): SharedPreferences? {
@@ -148,18 +161,19 @@ class SharedPreferences {
                 apply()
             }
         }
+
         //store whether the user clicked on "viewAllahNames" or "viewRasoolNames" in SharedPreferences
-        fun saveSelectionToSharedPreferences(context: Context,isAllahNames: Boolean) {
+        fun saveSelectionToSharedPreferences(context: Context, isAllahNames: Boolean) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             msharedPreferences!!.edit().putBoolean(PREFS_SELECTED_KEY, isAllahNames).apply()
         }
 
-        fun getSelectionFromSharedPreferences(context: Context,key: String): Boolean {
+        fun getSelectionFromSharedPreferences(context: Context, key: String): Boolean {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getBoolean(key, false)
         }
 
-        fun saveSelectionToSharedPreferences(context: Context,key: String) {
+        fun saveSelectionToSharedPreferences(context: Context, key: String) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             msharedPreferences!!.edit().putBoolean(key, true).apply()
         }
@@ -168,8 +182,13 @@ class SharedPreferences {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getBoolean(PREFS_SELECTED_KEY, true)
         }
+
         //translation data
-        fun saveTranslationToSharedPreferences(context: Context, urduTranslation: String, englishTranslation: String) {
+        fun saveTranslationToSharedPreferences(
+            context: Context,
+            urduTranslation: String,
+            englishTranslation: String
+        ) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             msharedPreferences!!.edit().apply {
                 putString("urdu_translation", urduTranslation)
@@ -177,5 +196,87 @@ class SharedPreferences {
                 apply()
             }
         }
+
+        fun saveSelectedPlayerPosition(context: Context, position: Int) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences?.edit()?.putInt("selectedPlayerPosition", position)?.apply()
+        }
+
+        fun getSelectedPlayerPosition(context: Context): Int {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            if (msharedPreferences != null) {
+                return msharedPreferences.getInt("selectedPlayerPosition", 0)
+            }
+            return 0
+        }
+
+        fun saveTranslations(
+            context: Context,
+            allahTranslations: ArrayList<Pair<String, String>>,
+            rasoolTranslations: ArrayList<Pair<String, String>>
+        ) {
+            val gson = Gson()
+            val allahJson = gson.toJson(allahTranslations)
+            val rasoolJson = gson.toJson(rasoolTranslations)
+
+            val sharedPreferences = context.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putString("allah_translations", allahJson)
+            editor.putString("rasool_translations", rasoolJson)
+            editor.apply()
+        }
+
+        fun getAllahTranslations(context: Context): ArrayList<Pair<String, String>> {
+            val sharedPreferences = context.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
+            val allahJson = sharedPreferences.getString("allah_translations", "")
+            return if (allahJson.isNullOrEmpty()) {
+                ArrayList()
+            } else {
+                val gson = Gson()
+                val type = object : TypeToken<ArrayList<Pair<String, String>>>() {}.type
+                gson.fromJson(allahJson, type)
+            }
+        }
+
+        fun getRasoolTranslations(context: Context): ArrayList<Pair<String, String>> {
+            val sharedPreferences = context.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
+            val rasoolJson = sharedPreferences.getString("rasool_translations", "")
+            return if (rasoolJson.isNullOrEmpty()) {
+                ArrayList()
+            } else {
+                val gson = Gson()
+                val type = object : TypeToken<ArrayList<Pair<String, String>>>() {}.type
+                gson.fromJson(rasoolJson, type)
+            }
+        }
+
+        private fun saveSelectedDataToSharedPreferences(
+            context: Context,
+            namesData: NamesData,
+            translation: Pair<String, String>
+        ) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                // Access the integer values from namesData:
+                putInt("selected_name_image", namesData.nameImage)  // Use namesData.nameImage
+                putInt(
+                    "selected_name_number_image",
+                    namesData.nameNumberImage
+                )  // Use namesData.nameNumberImage
+                putString("selected_translation_urdu", translation.first)
+                putString("selected_translation_english", translation.second)
+                apply()
+            }
+
+        }
+        // Function to retrieve the list of NamesData objects from SharedPreferences
+        // Function to retrieve the list of NamesData objects from SharedPreferences
+        fun getNamesDataList(context: Context): List<NamesData> {
+            val sharedPreferences = context.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
+            val gson = Gson()
+            val json = sharedPreferences.getString(PREFS_NAMES_DATA_KEY, null)
+            val type = object : TypeToken<List<NamesData>>() {}.type
+            return gson.fromJson(json, type) ?: emptyList()
+        }
     }
-    }
+        }
