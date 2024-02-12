@@ -101,6 +101,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         binding.toolbarBoard.groupToolbarProfile.visibility = View.GONE
         binding.toolbarBoard.groupToolbar.visibility = View.VISIBLE
         rView = binding.layoutBoardFragment.findViewById(R.id.rv_qibla)
+        binding.tvDashboardDateTime.text = CommonMethods.getCurrentDateFormatted()
         initObserver()
         binding.tvAds.setOnClickListener {
             //Navigation.findNavController().navigate(R.id.tasbihCounterFragment)
@@ -238,7 +239,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         Log.d(DashBoardFragment::class.simpleName, "startCountdown: $totalSeconds")
         job = CoroutineScope(Dispatchers.Main).launch {
             for (seconds in totalSeconds downTo 0) {
-                Log.d(DashBoardFragment::class.simpleName, "startCountdown: $seconds")
+                //Log.d(DashBoardFragment::class.simpleName, "startCountdown: $seconds")
                 SharedPreferences.saveTimerEndTime(mContext,seconds)
                 viewModel.setCounterValue(seconds)
                 delay(1000)
@@ -249,6 +250,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
 
     private fun nextPrayer(times: List<String>): Long {
+        Log.d(DashBoardFragment::class.simpleName, "nextPrayer: ")
         val currentTime = Calendar.getInstance().time
         val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
         val formattedTime = dateFormat.format(currentTime)

@@ -1,6 +1,8 @@
 package com.qibla.qiblacompass.prayertime.finddirection.common
 
 import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class CommonMethods {
@@ -21,6 +23,12 @@ class CommonMethods {
             val minutes = (seconds % 3600) / 60
             val secondsRemaining = seconds % 60
             return String.format("%02d hr %02d min %02d sec", hours, minutes, secondsRemaining)
+        }
+
+        fun getCurrentDateFormatted():String{
+            val formatter = SimpleDateFormat("E, d MMMM ")
+            val current = formatter.format(Date())
+            return current
         }
     }
 }
