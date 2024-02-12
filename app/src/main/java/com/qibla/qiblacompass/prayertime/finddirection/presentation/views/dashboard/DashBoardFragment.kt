@@ -169,6 +169,12 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                                 prayTime.Isha.formatTimeTo12Hour()
                             )
                             viewModel.setPrayerTimes(prayerTimeList)
+                            val hijriMonth = it.data[currentDay-1].date.hijri.month.en
+                            val hijriYear = it.data[currentDay-1].date.hijri.year
+                            val hijriDay = it.data[currentDay-1].date.hijri.day
+                            val hijriDate = hijriDay +"_"+hijriMonth +"_"+ hijriYear
+                            binding.tvIslamicMonth.text = hijriDate
+
 //                            updateUI(it)
 //                            viewModel.deleteAll()
 //                            viewModel.saveAllPrayersTimes(it)
@@ -201,6 +207,11 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             // handle count down value
             viewModel.counter.observe(viewLifecycleOwner){
                 binding.tvCounterNextPrayerTime.text = "$it"
+            }
+
+            // set next prayer time
+            viewModel.nextPrayerTime.observe(viewLifecycleOwner){
+                binding.tvNextPrayerTimeVal.text = "$it"
             }
 
             // to handle count down
@@ -262,6 +273,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             if (newTime < x) {
                 val result = x - newTime
                 viewModel.setIndex(index)
+                viewModel.setPrayerTime(i)
                 return result
             }
         }

@@ -29,6 +29,10 @@ class DashboardViewModel @Inject constructor(val usecase: GetNamazTimeUsecase):V
     val index: LiveData<Int> = _index
 
     //livedata objects
+    private val _nextPrayerTime = MutableLiveData<String>()
+    val nextPrayerTime: LiveData<String> = _nextPrayerTime
+
+    //livedata objects
     private val _prayerTimes = MutableLiveData<List<String>>()
     val prayerTimes: LiveData<List<String>> = _prayerTimes
 
@@ -68,6 +72,11 @@ class DashboardViewModel @Inject constructor(val usecase: GetNamazTimeUsecase):V
     fun setIndex(index: Int) {
         _index.postValue(index)
     }
+
+    fun setPrayerTime(prayerTime: String) {
+        _nextPrayerTime.postValue(prayerTime)
+    }
+
 
     fun setCounterValue(counter: Long) {
         val formattedTime = formatTime(counter)
