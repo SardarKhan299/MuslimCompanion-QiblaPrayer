@@ -77,6 +77,14 @@ class SharedPreferences {
             }
         }
 
+        fun saveTimerEndTime(context: Context,endTime:Long){
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putLong(PrayerConstants.COUNTDOWN_TIME_KEY, endTime)
+                apply()
+            }
+        }
+
         fun getSavedMobileNumber(context: Context): String? {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getString("saved_mobile_number", null)
@@ -85,6 +93,11 @@ class SharedPreferences {
         fun getSavedPassword(context: Context): String? {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return mSharedPreferences!!.getString("saved_password", null)
+        }
+
+        fun getCounterEndTime(context: Context): Long {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return mSharedPreferences!!.getLong(PrayerConstants.COUNTDOWN_TIME_KEY, 0L)
         }
 
         fun saveUserDetails(

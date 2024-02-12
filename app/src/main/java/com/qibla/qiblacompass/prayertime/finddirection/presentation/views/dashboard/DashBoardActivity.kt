@@ -11,7 +11,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.qibla.qiblacompass.prayertime.finddirection.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DashBoardActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var mGoogleSignInClient: GoogleSignInClient
