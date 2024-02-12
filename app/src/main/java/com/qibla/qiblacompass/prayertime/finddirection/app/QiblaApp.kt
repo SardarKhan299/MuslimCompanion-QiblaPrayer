@@ -13,6 +13,9 @@ class QiblaApp : Application() {
         // Declare the static ArrayList to hold instances of AllahName
         val allahNamesImages: ArrayList<Int> = ArrayList()
         val allahNamesTranslations = arrayListOf<Pair<String, String>>()
+
+        val rasoolNamesImages: ArrayList<Int> = ArrayList()
+        val rasoolNamesTranslations = arrayListOf<Pair<String, String>>()
     }
 
     override fun onCreate() {
@@ -127,6 +130,119 @@ class QiblaApp : Application() {
 
 
         }
+        rasoolNamesImages.apply {
+
+            add(R.drawable.rasoolname1)
+            add(R.drawable.rasoolname2)
+            add(R.drawable.rasoolname3)
+            add(R.drawable.rasoolname4)
+            add(R.drawable.rasoolname5)
+            add(R.drawable.rasoolname6)
+            add(R.drawable.rasoolname7)
+            add(R.drawable.rasoolname8)
+            add(R.drawable.rasoolname9)
+            add(R.drawable.rasoolname10)
+
+            add(R.drawable.rasoolname11)
+            add(R.drawable.rasoolname12)
+            add(R.drawable.rasoolname13)
+            add(R.drawable.rasoolname14)
+            add(R.drawable.rasoolname15)
+            add(R.drawable.rasoolname16)
+            add(R.drawable.rasoolname17)
+            add(R.drawable.rasoolname18)
+            add(R.drawable.rasoolname19)
+            add(R.drawable.rasoolname20)
+
+            add(R.drawable.rasoolname21)
+            add(R.drawable.rasoolname22)
+            add(R.drawable.rasoolname23)
+            add(R.drawable.rasoolname24)
+            add(R.drawable.rasoolname25)
+            add(R.drawable.rasoolname26)
+            add(R.drawable.rasoolname27)
+            add(R.drawable.rasoolname28)
+            add(R.drawable.rasoolname29)
+            add(R.drawable.rasoolname30)
+
+            add(R.drawable.rasoolname31)
+            add(R.drawable.rasoolname32)
+            add(R.drawable.rasoolname33)
+            add(R.drawable.rasoolname34)
+            add(R.drawable.rasoolname35)
+            add(R.drawable.rasoolname36)
+            add(R.drawable.rasoolname37)
+            add(R.drawable.rasoolname38)
+            add(R.drawable.rasoolname39)
+            add(R.drawable.rasoolname40)
+
+            add(R.drawable.rasoolname41)
+            add(R.drawable.rasoolname42)
+            add(R.drawable.rasoolname43)
+            add(R.drawable.rasoolname44)
+            add(R.drawable.rasoolname45)
+            add(R.drawable.rasoolname46)
+            add(R.drawable.rasoolname47)
+            add(R.drawable.rasoolname48)
+            add(R.drawable.rasoolname49)
+            add(R.drawable.rasoolname50)
+
+            add(R.drawable.rasoolname51)
+            add(R.drawable.rasoolname52)
+            add(R.drawable.rasoolname53)
+            add(R.drawable.rasoolname54)
+            add(R.drawable.rasoolname55)
+            add(R.drawable.rasoolname56)
+            add(R.drawable.rasoolname57)
+            add(R.drawable.rasoolname58)
+            add(R.drawable.rasoolname59)
+            add(R.drawable.rasoolname60)
+
+            add(R.drawable.rasoolname61)
+            add(R.drawable.rasoolname62)
+            add(R.drawable.rasoolname63)
+            add(R.drawable.rasoolname64)
+            add(R.drawable.rasoolname65)
+            add(R.drawable.rasoolname66)
+            add(R.drawable.rasoolname67)
+            add(R.drawable.rasoolname68)
+            add(R.drawable.rasoolname69)
+            add(R.drawable.rasoolname70)
+
+            add(R.drawable.rasoolname71)
+            add(R.drawable.rasoolname72)
+            add(R.drawable.rasoolname73)
+            add(R.drawable.rasoolname74)
+            add(R.drawable.rasoolname75)
+            add(R.drawable.rasoolname76)
+            add(R.drawable.rasoolname77)
+            add(R.drawable.rasoolname78)
+            add(R.drawable.rasoolname79)
+            add(R.drawable.rasoolname80)
+
+            add(R.drawable.rasoolname81)
+            add(R.drawable.rasoolname82)
+            add(R.drawable.rasoolname83)
+            add(R.drawable.rasoolname84)
+            add(R.drawable.rasoolname85)
+            add(R.drawable.rasoolname86)
+            add(R.drawable.rasoolname87)
+            add(R.drawable.rasoolname88)
+            add(R.drawable.rasoolname89)
+            add(R.drawable.rasoolname90)
+
+            add(R.drawable.rasoolname91)
+            add(R.drawable.rasoolname92)
+            add(R.drawable.rasoolname93)
+            add(R.drawable.rasoolname94)
+            add(R.drawable.rasoolname95)
+            add(R.drawable.rasoolname96)
+            add(R.drawable.rasoolname97)
+            add(R.drawable.rasoolname98)
+            add(R.drawable.rasoolname99)
+
+
+        }
 
         // Initialize the allahNamesTranslations ArrayList here
         allahNamesTranslations.addAll(
@@ -232,5 +348,107 @@ class QiblaApp : Application() {
                 "صبر کرنے والا" to "The Forbearing, The Patient"
             )
         )
+       rasoolNamesTranslations.addAll(
+            listOf(
+                "زیادہ تعریف کیا گیا۔ تعریف والا" to "Highly praised",
+                "سب سے ذیادہ حمد کرنے والا" to "Highly commendable",
+                "بہت تعریف کرنےوالا، سراہنے والا" to "Praising, One who Praise",
+                "بہت تعریف کیا گیا، سراہا گیا" to "Praised",
+                "بانٹنے والا، تقسیم کرنے والا" to "Distributer",
+                "پیچھے آنے والا، آخری" to "Latest, Last",
+                "فاتح، کھولنے والا" to "Victor, Conqueror, Opener",
+                "گواہ" to "Witness",
+                "جگانے والا، اکٹھا کرنے وال" to "One who gather people, awakener",
+                "ہدایت یافتہ، شریف، نیک" to "Well guided",
+                "گواہی دیا گیا" to "Witnessed",
+                "خوشخبری/ بشارت دینے والا" to "Bringer of good news",
+                "ڈرانے والا" to "Warner",
+                "بلانے والا" to "Caller",
+                "شفاء دینے والا، شفاعت کرنے والا" to "Healer",
+                "سیدھی راہ دکھانے والا" to "One who guides right",
+                "ہداہت والا" to "One who is well guided",
+                "مٹا دینے والا" to "One who wipes Out",
+                "نجات والا" to "One who saves delivers",
+                "منع کرنے والا" to "Safe",
+                "پیغمبر، پیغام پہنچانے والا، رسالت لانے والا" to "Messenger",
+                "نبی۔ نبوت لانے والا" to "Prophet",
+                "جو کسی مکتب سے پڑھا ہوا نہ ہو" to "Unlettered",
+                "حجاز والا" to "From the Tihama",
+                "ہاشمی خاندان سے" to "Family of Hashim",
+                "بطحیٰ والا" to "Belonging to al-Batha",
+                "قریبی، شریف، غالب" to "Noble,Dear",
+                "آپ کے خیر خواہ، لوگوں کے ایمان کی حرص کرنے والا" to "Full of concern for you",
+                "ہلکا، دھیما، انکساری، نرم دل" to "Mild",
+                "رحم کرنے والا" to "Merciful",
+                "قران کی 20 ویں سورۃ کا آغاز" to "Beginning of Sura 20:1",
+                "چنا ہوا" to "Elect",
+                "قران کی 27 ویں سورۃ کا آغاز" to "Beginning of Sura 27:1",
+                "پسندیدہ، برگزیدہ" to "Content, worthier",
+                "قران کی 40 ویں مصد 46 ویں سورۃ کا آغاز" to "Beginning of surah 40 & 46",
+                "چنا ہوا" to "Chosen",
+                "قران کی 36 ویں سورۃ کا آغاز" to "Beginning of Sura 36:1",
+                "سب سے اعلیٰ" to "Worthier,Most Worthy",
+                "کپڑا اوڑہنے والا، کملی والا" to "Wrapped",
+                "دوست" to "Friend",
+                "چادر اوڑہنے والا" to "Covered",
+                "مضبوط" to "Firm",
+                "سچ کی تصدیق کرنے والا" to "Who Declares for True",
+                "پاک" to "Good, Pure",
+                "مدد کرنےوالا" to "Helper",
+                "مدد دیا گیا" to "Helped (by Allah),Victorious",
+                "چراغ" to "Lamp",
+                "حکم دینے والا" to "Prince, Commander",
+                "حجاز والا" to "From the Hijaz",
+                "مضر بن ںضار کی اولاد سے" to "From Muzir bin Nazari family",
+                "قریشی" to "From the Clan Quraish",
+                "قبیلہ مضر سے" to "From the Tribe Mudar",
+                "متوجہ ہونے والا نبی" to "The Prophet of Repentance",
+                "یاد رکھنے والا" to "Preserver",
+                "کامل۔ مکمل" to "Perfect",
+                "سچا" to "Sincere",
+                "امانت دار" to "Trustworthy",
+                "اللہ کا بندہ" to "Allah’s Servant",
+                "اللہ سے کلام کرنے والا" to "The Speaker with Allah",
+                "اللہ کا دوست، اللہ کا محبوب" to "Allah’s Beloved Friend",
+                "اللہ کا رازدار" to "Allah’s Intimate Friend",
+                "اللہ کا مخلص دوست" to "Allah’s Sincere Friend",
+                "نبیوں کا سلسہ ختم کرنے والا" to "Seal of the Prophets",
+                "کافی" to "Respected",
+                "قبول کرنے والا" to "Complying, Replying",
+                "شکر گزار" to "Most Grateful",
+                "میانہ روی پر چلنےوالا" to "Adopting a Middle Course",
+                "مہربانی والا رسول" to "The Messenger of Mercy",
+                "طاقت والا" to "Strong",
+                "خبر رکھنے والا" to "Well-Informed",
+                "امن والا" to "Trusted",
+                "علم والا" to "Well Known",
+                "حق" to "Truth",
+                "ظاہر" to "Clear, Obvious",
+                "تابعدار" to "Obedient",
+                "پہلا، اول" to "First",
+                "پیچھے" to "Last",
+                "زاہر" to "Outward, External",
+                "پوشیدہ، چھپا ہوا" to "Internal, Hidden,  Inner",
+                "یتیم" to "Orphan",
+                "سخی" to "Generous",
+                "حکمت والا" to "Wise",
+                "سردار" to "Lord",
+                "چراغ" to "Lamp",
+                "روشن" to "Radiant",
+                "قابل عزت" to "Respectable, Forbidden, Immune",
+                "عزت والا" to "Honored,Venerated",
+                "خوشخبری دینے والا" to "Bringer of Good News",
+                "نصیت کرنیوالے" to "Who makes Remember, Preacher",
+                "پاکیزہ" to "Purified",
+                "قریب" to "Near",
+                "ولی ، دوست" to "Good Friend",
+                "دعوت دینے والا" to "Who is Called",
+                "سخی" to "Generous, Magnanimous",
+                "ختم کرنے والا" to "Seal",
+                "انصاف کرنے والا، عدل کرنے والا" to "Justice",
+                "شہرت والا" to "Well Known, famous",
+                "گواہ، شہید" to "Witnessing, Martyr",
+                "رسول الملاحم" to "The Messenger of the Battles of the Last day",
+                ))
     }
 }
