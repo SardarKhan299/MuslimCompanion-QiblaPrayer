@@ -47,7 +47,7 @@
                 android:layout_width="@dimen/_70sdp"
                 android:layout_height="@dimen/_70sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:src="@drawable/ic_compass"
+                android:src="@drawable/app_icon"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_signUp_right"
                 app:layout_constraintHorizontal_bias="@dimen/bias_horizontal"
                 app:layout_constraintStart_toStartOf="@+id/guideline_signUp_left"

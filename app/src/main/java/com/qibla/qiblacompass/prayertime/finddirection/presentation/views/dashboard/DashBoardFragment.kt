@@ -199,11 +199,11 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 Log.d(DashBoardFragment::class.simpleName, "initObservation: Setting prayer times")
                 // set prayer times on Views..//
                 if(prayerTimesList!=null && prayerTimesList.size ==6) {
-                    binding.layoutPrayerTiming.tvTimePrayer.text = prayerTimesList.get(0)
-                    binding.layoutPrayerTiming.tvTimeZuhrPrayer.text = prayerTimesList.get(2)
-                    binding.layoutPrayerTiming.tvTimeAsrPrayer.text = prayerTimesList.get(3)
-                    binding.layoutPrayerTiming.tvTimeMaghribPrayer.text = prayerTimesList.get(4)
-                    binding.layoutPrayerTiming.tvTimeIshaPrayer.text = prayerTimesList.get(5)
+                    binding.layoutPrayerTiming.tvTimePrayer.text = prayerTimesList[0]
+                    binding.layoutPrayerTiming.tvTimeZuhrPrayer.text = prayerTimesList[2]
+                    binding.layoutPrayerTiming.tvTimeAsrPrayer.text = prayerTimesList[3]
+                    binding.layoutPrayerTiming.tvTimeMaghribPrayer.text = prayerTimesList[4]
+                    binding.layoutPrayerTiming.tvTimeIshaPrayer.text = prayerTimesList[5]
                 }
                 if(firstTime==0) {
                     firstTime++
