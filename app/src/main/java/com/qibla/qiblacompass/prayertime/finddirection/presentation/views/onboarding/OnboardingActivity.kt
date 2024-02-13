@@ -107,8 +107,8 @@ class OnboardingActivity : BaseActivity() {
 
     private fun gotoLoginActivity() {
         SharedPreferences.saveUserVisit(this,false)
-        startActivity(Intent(this, DashBoardActivity::class.java))
-        //startActivity(Intent(this@OnboardingActivity, LoginActivity::class.java))
+        //startActivity(Intent(this, DashBoardActivity::class.java))
+        startActivity(Intent(this@OnboardingActivity, LoginActivity::class.java))
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         finish()
     }

@@ -25,8 +25,8 @@ class SplashActivity : BaseActivity() {
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 finish()
             }else{
-                //startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
-                startActivity(Intent(this@SplashActivity, DashBoardActivity::class.java))
+                startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                //startActivity(Intent(this@SplashActivity, DashBoardActivity::class.java))
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 finish()
             }

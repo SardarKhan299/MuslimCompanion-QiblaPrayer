@@ -173,12 +173,11 @@
 
         <View
             android:id="@+id/view_login"
-            android:layout_width="@dimen/_100sdp"
+            android:layout_width="@dimen/_120sdp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/button_backgrund"
-            app:layout_constraintEnd_toStartOf="@+id/view_login_facebook"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="@dimen/bias_zero_point_five_tasbih"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_login_log_in_with" />
@@ -214,6 +213,7 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_marginStart="@dimen/_4sdp"
             android:background="@drawable/button_backgrund"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/view_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
@@ -227,6 +227,7 @@
             android:layout_height="@dimen/_20sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:src="@drawable/facebook_logo"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/view_login_facebook"
             app:layout_constraintStart_toStartOf="@+id/view_login_facebook"
             app:layout_constraintTop_toTopOf="@+id/view_login_facebook" />
@@ -240,6 +241,7 @@
             android:gravity="center"
             android:text="@string/facebook"
             android:textAlignment="center"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/img_facebook_logo"
             app:layout_constraintStart_toEndOf="@+id/img_facebook_logo"
             app:layout_constraintTop_toTopOf="@+id/img_facebook_logo"
