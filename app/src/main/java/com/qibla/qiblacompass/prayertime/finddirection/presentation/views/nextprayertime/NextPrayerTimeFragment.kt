@@ -9,14 +9,22 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.*
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentNextPrayerTimeBinding
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashboardViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NextPrayerTimeFragment :
     BaseFragment<FragmentNextPrayerTimeBinding>(R.layout.fragment_next_prayer_time) {
+
+    private val viewModel: DashboardViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +41,7 @@ class NextPrayerTimeFragment :
         binding.toolbarNextPrayerTiming.viewNextPrayerIcon.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
+        initObserver()
         updateBackgroundColor()
         binding.tvDateToday.text = CommonMethods.getCurrentDateFormatted()
         setUserCityFromStorage()
@@ -76,6 +85,33 @@ class NextPrayerTimeFragment :
             5 -> ishaBg()
         }
 
+    }
+
+    private fun initObserver() {
+        Log.d(NextPrayerTimeFragment::class.simpleName, "initObserver: ")
+        viewModel.prayerTimes.observe(viewLifecycleOwner) { prayerTimesList->
+            Log.d(NextPrayerTimeFragment::class.simpleName, "initObservation: Setting prayer times")
+            // set prayer times on Views..//
+            if(prayerTimesList!=null && prayerTimesList.size ==6) {
+                binding.layoutNextPrayerBackground.tvTimeFajr.text = prayerTimesList[0]
+                binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text = prayerTimesList[2]
+                binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text = prayerTimesList[3]
+                binding.layoutNextPrayerBackground.tvUnselectedMaghribTime.text = prayerTimesList[4]
+                binding.layoutNextPrayerBackground.tvUnselectedIshaTime.text = prayerTimesList[5]
+            }
+        }
+
+        // to handle count down
+        viewModel.index.observe(viewLifecycleOwner) { index ->
+            Log.d(DashBoardFragment::class.simpleName, "initObserver: next Prayer $index")
+            when (index) {
+                1 -> fajrBg()
+                3 -> zuhrBg()
+                4 -> asarBg()
+                5 -> maghribBg()
+                6 -> ishaBg()
+            }
+        }
     }
 
     private fun setUserCityFromStorage() {

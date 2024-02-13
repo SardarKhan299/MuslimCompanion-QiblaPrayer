@@ -81,7 +81,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     var currentLng = 0.0
 
     private var index = 0
-    private val viewModel: DashboardViewModel by viewModels()
+    private val viewModel: DashboardViewModel by activityViewModels()
     private var firstTime = 0
 
     lateinit var job:Job
