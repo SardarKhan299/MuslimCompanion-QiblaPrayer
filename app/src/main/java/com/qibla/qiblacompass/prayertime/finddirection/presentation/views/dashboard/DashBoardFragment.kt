@@ -105,6 +105,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         rView = binding.layoutBoardFragment.findViewById(R.id.rv_qibla)
         binding.tvDashboardDateTime.text = CommonMethods.getCurrentDateFormatted()
         initObserver()
+        setUserCityFromStorage()
         binding.tvAds.setOnClickListener {
             //Navigation.findNavController().navigate(R.id.tasbihCounterFragment)
             startActivity(Intent(mContext, CompassDirectionActivity::class.java))
@@ -152,6 +153,12 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             RecyclerView.HORIZONTAL, false
         )
         setUpQibla()
+    }
+
+    private fun setUserCityFromStorage() {
+        val city = SharedPreferences.getUserCity(mContext)
+        val locationText = "City: $city"
+        locationTextView.text = locationText
     }
 
     private fun initObserver() {
@@ -487,6 +494,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         Log.d(DashBoardFragment::class.simpleName, "updateLocationText: $city")
         val locationText = "City: $city"
         locationTextView.text = locationText
+        SharedPreferences.saveUserCity(mContext,city)
     }
 
     private fun getCityFromLocation(latitude: Double, longitude: Double): String {

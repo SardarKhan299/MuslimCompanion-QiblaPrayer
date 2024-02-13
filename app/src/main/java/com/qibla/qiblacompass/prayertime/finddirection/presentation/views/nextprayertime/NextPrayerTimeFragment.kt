@@ -2,6 +2,7 @@ package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.nextp
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -33,6 +34,8 @@ class NextPrayerTimeFragment :
             findNavController().closeCurrentScreen()
         }
         updateBackgroundColor()
+        binding.tvDateToday.text = CommonMethods.getCurrentDateFormatted()
+        setUserCityFromStorage()
         val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
         val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
         val mainLayoutBackground = binding.layoutNextPrayerFragment
@@ -73,6 +76,12 @@ class NextPrayerTimeFragment :
             5 -> ishaBg()
         }
 
+    }
+
+    private fun setUserCityFromStorage() {
+        Log.d(NextPrayerTimeFragment::class.simpleName, "setUserCityFromStorage: ")
+            val city = SharedPreferences.getUserCity(mContext)
+            binding.tvLocationCity.text = city
     }
 
     private fun fajrBg() {

@@ -17,5 +17,6 @@ object PrayerConstants {
 
     const val COUNTDOWN_TIME_KEY = "countdown_end_time"
     const val FIRST_TIME_LOGIN = "first_time_login"
+    const val USER_CITY = "user_city"
     const val SPLASH_VISIT_TIME = 4000L
 }

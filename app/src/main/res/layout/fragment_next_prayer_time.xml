@@ -69,7 +69,7 @@
             android:id="@+id/layout_next_prayer_background"
             layout="@layout/layout_next_prayer_background"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_200sdp"
+            android:layout_height="@dimen/_220sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -81,11 +81,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:text="@string/today"
-            app:layout_constraintBottom_toTopOf="@+id/appCompatTextView2"
+            app:layout_constraintBottom_toTopOf="@+id/tv_date_today"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_next_prayer" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView2"
+            android:id="@+id/tv_date_today"
             style="@style/button_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

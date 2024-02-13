@@ -42,8 +42,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_about_us_compass"
-        android:layout_width="@dimen/default_120sp"
-        android:layout_height="@dimen/default_120sp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_80sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:src="@drawable/app_icon"
         app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
@@ -63,7 +63,7 @@
         android:id="@+id/view_about_us_privacy"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_14sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
         app:layout_constraintHorizontal_bias="@dimen/bias_zero"
         app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"

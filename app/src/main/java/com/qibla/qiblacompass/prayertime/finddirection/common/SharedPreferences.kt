@@ -93,9 +93,22 @@ class SharedPreferences {
             }
         }
 
+        fun saveUserCity(context: Context,userCity:String){
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString(PrayerConstants.USER_CITY, userCity)
+                apply()
+            }
+        }
+
         fun isFirstTimeLogin(context: Context): Boolean {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getBoolean(PrayerConstants.FIRST_TIME_LOGIN, true)
+        }
+
+        fun getUserCity(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString(PrayerConstants.USER_CITY, "")
         }
 
         fun getSavedMobileNumber(context: Context): String? {
