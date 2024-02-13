@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
-import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter.TasbihCounterAdapter
+
 class NamesAdapter(
-    private var imageList: ArrayList<NamesData>,
-    private val onItemClick: (NamesData) -> Unit
+    private val namesImages: ArrayList<Int>,
+    private val numberImages: ArrayList<Int>,
+    private val onItemClick: (position: Int) -> Unit
 
 ) :
     RecyclerView.Adapter<NamesAdapter.NamesViewHolder>() {
@@ -23,16 +24,16 @@ class NamesAdapter(
     }
 
     override fun onBindViewHolder(holder: NamesViewHolder, position: Int) {
-        val image = imageList[position]
-        holder.imageViewName.setImageResource(image.nameImage)
-        holder.imageViewNameNumber.setImageResource(image.nameNumberImage)
+        val allahNameImage = namesImages[position]
+        val numberImage = numberImages[position]
+        holder.bind(allahNameImage, numberImage)
 
     }
 
-    override fun getItemCount(): Int = imageList.size// Number of items
-
-    fun setData(newImageList: ArrayList<NamesData>) {
-        imageList = newImageList
+    override fun getItemCount(): Int = namesImages.size
+    fun setData(newNamesImages: ArrayList<Int>) {
+        namesImages.clear()
+        namesImages.addAll(newNamesImages)
         notifyDataSetChanged()
     }
 
@@ -40,13 +41,19 @@ class NamesAdapter(
         val imageViewName: ImageView = itemView.findViewById(R.id.img_names_item)
         val imageViewNameNumber: ImageView = itemView.findViewById(R.id.img_name_number_item)
         val mainbg: View = itemView.findViewById(R.id.view_names)
-
         init {
-            mainbg.setOnClickListener {
-                val position = adapterPosition
-                onItemClick(imageList[position])
+            itemView.setOnClickListener {
+                onItemClick(adapterPosition)
             }
         }
+
+        fun bind(allahNameImage: Int, numberImage: Int) {
+            // Bind data to views
+            imageViewName.setImageResource(allahNameImage)
+            imageViewNameNumber.setImageResource(numberImage)
+
+        }
+
     }
 
 }

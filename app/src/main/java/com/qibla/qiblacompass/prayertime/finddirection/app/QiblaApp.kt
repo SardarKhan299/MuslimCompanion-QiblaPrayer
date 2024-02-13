@@ -20,6 +20,10 @@ class QiblaApp : Application() {
         val numberImages : ArrayList<Int> = ArrayList()
         val audioAllahResources = arrayListOf<Int>()
         val audioRasoolResources = arrayListOf<Int>()
+
+
+        var isAllahNamesSelected = true
+
     }
 
     override fun onCreate() {
