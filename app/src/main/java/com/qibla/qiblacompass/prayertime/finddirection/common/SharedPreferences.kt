@@ -181,7 +181,7 @@ class SharedPreferences {
 
         fun getUserEmail(context: Context): String? {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
-            return msharedPreferences?.getString(USER_EMAIL_KEY, null)
+            return msharedPreferences?.getString(USER_EMAIL_KEY, "")
         }
 
         fun saveSelectedPositionToSharedPreferences(
