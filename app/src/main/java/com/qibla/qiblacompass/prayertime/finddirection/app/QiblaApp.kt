@@ -13,6 +13,10 @@ import dagger.hilt.android.HiltAndroidApp
 @HiltAndroidApp
 class QiblaApp: Application() {
 
+    companion object{
+        var selectedPrayerPos = 0
+    }
+
     override fun onCreate() {
         super.onCreate()
         Log.d(QiblaApp::class.simpleName, "onCreate: ")

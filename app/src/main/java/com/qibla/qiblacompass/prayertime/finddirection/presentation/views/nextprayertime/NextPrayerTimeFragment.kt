@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.*
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentNextPrayerTimeBinding
@@ -77,7 +78,12 @@ class NextPrayerTimeFragment :
         }
         // Retrieve the selected prayer position from SharedPreferences
         // Change the background color of the corresponding view based on the selected position
-        when (SharedPreferences.getSelectedPrayerPosition(mContext)) {
+        val position = SharedPreferences.getSelectedPrayerPosition(mContext)
+        Log.d(NextPrayerTimeFragment::class.simpleName, "onViewCreated: $position")
+        when (position) {
+            0->{
+                Log.d(NextPrayerTimeFragment::class.simpleName, "onViewCreated: No option Selected")
+            }
             1 -> fajrBg()
             2 -> zuhrBg()
             3 -> asarBg()
@@ -104,12 +110,16 @@ class NextPrayerTimeFragment :
         // to handle count down
         viewModel.index.observe(viewLifecycleOwner) { index ->
             Log.d(DashBoardFragment::class.simpleName, "initObserver: next Prayer $index")
-            when (index) {
-                1 -> fajrBg()
-                3 -> zuhrBg()
-                4 -> asarBg()
-                5 -> maghribBg()
-                6 -> ishaBg()
+            if( QiblaApp.selectedPrayerPos ==0) {
+                when (index) {
+                    1 -> fajrBg()
+                    3 -> zuhrBg()
+                    4 -> asarBg()
+                    5 -> maghribBg()
+                    6 -> ishaBg()
+                }
+            }else{
+                Log.d(NextPrayerTimeFragment::class.simpleName, "initObserver: Background selected by user.")
             }
         }
     }

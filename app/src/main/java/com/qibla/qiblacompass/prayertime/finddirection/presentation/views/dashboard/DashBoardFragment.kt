@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
 import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToMilliseconds
@@ -317,6 +318,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
         // Save the selected prayer position in SharedPreferences
         SharedPreferences.saveSelectedPrayerPosition(mContext, 1)
+        QiblaApp.selectedPrayerPos = 1
         findNavController().navigate(R.id.nextPrayerTimeFragment)
     }
 
@@ -324,6 +326,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
         // Save the selected prayer position in SharedPreferences
         SharedPreferences.saveSelectedPrayerPosition(mContext, 2)
+        QiblaApp.selectedPrayerPos = 2
         findNavController().navigate(R.id.nextPrayerTimeFragment)
     }
 
@@ -331,6 +334,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
         // Save the selected prayer position in SharedPreferences
         SharedPreferences.saveSelectedPrayerPosition(mContext, 3)
+        QiblaApp.selectedPrayerPos = 3
         findNavController().navigate(R.id.nextPrayerTimeFragment)
     }
 
@@ -338,6 +342,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
         // Save the selected prayer position in SharedPreferences
         SharedPreferences.saveSelectedPrayerPosition(mContext, 4)
+        QiblaApp.selectedPrayerPos = 4
         findNavController().navigate(R.id.nextPrayerTimeFragment)
     }
 
@@ -345,6 +350,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
         // Save the selected prayer position in SharedPreferences
         SharedPreferences.saveSelectedPrayerPosition(mContext, 5)
+        QiblaApp.selectedPrayerPos = 5
         findNavController().navigate(R.id.nextPrayerTimeFragment)
     }
 
@@ -387,6 +393,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 findNavController().navigate(R.id.tasbihFragment)
             }
             4 -> {
+                QiblaApp.selectedPrayerPos = 0
                 findNavController().navigate(R.id.nextPrayerTimeFragment)
 
             }
