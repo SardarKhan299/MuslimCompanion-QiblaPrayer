@@ -89,6 +89,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 ).show(requireActivity().supportFragmentManager, "")
             }
         }
+
+        binding.viewLoginFacebook.setOnClickListener {
+            Log.d(LoginFragment::class.simpleName, "onViewCreated: ")
+            // Navigate to DashboardActivity
+            startActivity(Intent(requireContext(), DashBoardActivity::class.java))
+            requireActivity().finish()
+        }
     }
 
     private fun signInWithGoogle() {
