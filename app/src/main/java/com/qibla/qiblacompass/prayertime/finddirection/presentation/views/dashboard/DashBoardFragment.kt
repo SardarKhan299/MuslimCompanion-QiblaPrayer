@@ -6,52 +6,87 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.*
-import android.location.LocationListener
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.provider.Settings
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
-import com.google.android.gms.tasks.OnSuccessListener
 import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
-import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants
+import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods
+import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToMilliseconds
+import com.qibla.qiblacompass.prayertime.finddirection.common.MyLocationManager
+import com.qibla.qiblacompass.prayertime.finddirection.common.NetworkResult
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
+import com.qibla.qiblacompass.prayertime.finddirection.common.formatTimeTo12Hour
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
-import com.qibla.qiblacompass.prayertime.finddirection.common.visible
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentDashBoardBinding
-import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.onboarding.OnboardingActivity
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.qibaldirection.CompassDirectionActivity
-import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.sidemenu.SideMenuFragment
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.qibaldirection.QibalDirectionFragment
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.FragmentScoped
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.math.log
+import java.util.concurrent.TimeUnit
 
 
+@AndroidEntryPoint
 class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragment_dash_board) {
 
     private lateinit var rView: RecyclerView
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var locationTextView: TextView
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var mLocationManager: MyLocationManager
 
-    companion object {
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 1001
-    }
+    private lateinit var prayerTimeList: List<String>
+
+    val c = Calendar.getInstance()
+
+    val currentYear = c.get(Calendar.YEAR)
+    val currentMonth = c.get(Calendar.MONTH)+1
+    val currentDay = c.get(Calendar.DAY_OF_MONTH)
+    var currentLat = 0.0
+    var currentLng = 0.0
+
+    private var index = 0
+    private val viewModel: DashboardViewModel by activityViewModels()
+    private var firstTime = 0
+
+    lateinit var job:Job
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,22 +104,22 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         binding.toolbarBoard.groupToolbarProfile.visibility = View.GONE
         binding.toolbarBoard.groupToolbar.visibility = View.VISIBLE
         rView = binding.layoutBoardFragment.findViewById(R.id.rv_qibla)
+        binding.tvDashboardDateTime.text = CommonMethods.getCurrentDateFormatted()
+        initObserver()
+        setUserCityFromStorage()
         binding.tvAds.setOnClickListener {
-            //Navigation.findNavController(requireView()).navigate(R.id.tasbihCounterFragment)
+            //Navigation.findNavController().navigate(R.id.tasbihCounterFragment)
             startActivity(Intent(mContext, CompassDirectionActivity::class.java))
 
         }
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
+        mLocationManager = MyLocationManager(requireContext(), locationCallback())
+        checkLocationPermissions()
         binding.viewAutoDetect.setOnClickListener {
-            if (checkLocationPermission()) {
-                fetchLocation()
-            } else {
-                requestLocationPermission()
-            }
+            checkLocationPermissions()
         }
 
         binding.toolbarBoard.imgToolbar.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.sideMenuFragment)
+            findNavController().navigate(R.id.sideMenuFragment)
         }
 
         val dashBoardFajrScreen =
@@ -121,39 +156,202 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         setUpQibla()
     }
 
+    private fun setUserCityFromStorage() {
+        val city = SharedPreferences.getUserCity(mContext)
+        val locationText = "City: $city"
+        locationTextView.text = locationText
+    }
+
+    private fun initObserver() {
+        with(viewModel){
+            getPrayerTimeState.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is NetworkResult.Success -> {
+                        response.data?.let {
+                            Log.d(DashBoardFragment::class.simpleName, "initObservation: Receive Data ${it.data.size }")
+                            val prayTime = it.data[currentDay - 1].timings
+                            prayerTimeList = listOf(
+                                prayTime.Fajr.formatTimeTo12Hour(),
+                                prayTime.Sunrise.formatTimeTo12Hour(),
+                                prayTime.Dhuhr.formatTimeTo12Hour(),
+                                prayTime.Asr.formatTimeTo12Hour(),
+                                prayTime.Maghrib.formatTimeTo12Hour(),
+                                prayTime.Isha.formatTimeTo12Hour()
+                            )
+                            viewModel.setPrayerTimes(prayerTimeList)
+                            val hijriMonth = it.data[currentDay-1].date.hijri.month.en
+                            val hijriYear = it.data[currentDay-1].date.hijri.year
+                            val hijriDay = it.data[currentDay-1].date.hijri.day
+                            val hijriDate = hijriDay +"_"+hijriMonth +"_"+ hijriYear
+                            binding.tvIslamicMonth.text = hijriDate
+
+//                            updateUI(it)
+//                            viewModel.deleteAll()
+//                            viewModel.saveAllPrayersTimes(it)
+
+                        }
+                    }
+
+                    is NetworkResult.Error -> {
+                        Log.d(DashBoardFragment::class.simpleName, "initObserver: Error..")
+                    }
+
+                    is NetworkResult.Loading -> {
+                        Log.d(DashBoardFragment::class.simpleName, "initObserver: Show Spinner..")
+                    }
+
+                }
+            }
+
+            viewModel.prayerTimes.observe(viewLifecycleOwner) {prayerTimesList->
+                Log.d(DashBoardFragment::class.simpleName, "initObservation: Setting prayer times")
+                // set prayer times on Views..//
+                if(prayerTimesList!=null && prayerTimesList.size ==6) {
+                    binding.layoutPrayerTiming.tvTimePrayer.text = prayerTimesList[0]
+                    binding.layoutPrayerTiming.tvTimeZuhrPrayer.text = prayerTimesList[2]
+                    binding.layoutPrayerTiming.tvTimeAsrPrayer.text = prayerTimesList[3]
+                    binding.layoutPrayerTiming.tvTimeMaghribPrayer.text = prayerTimesList[4]
+                    binding.layoutPrayerTiming.tvTimeIshaPrayer.text = prayerTimesList[5]
+                }
+                if(firstTime==0) {
+                    firstTime++
+                    //get next prayer time
+                    val time = nextPrayer(prayerTimesList)
+                    SharedPreferences.saveTimerEndTime(mContext, time)
+                    startCountdown(time / 1000)
+                }
+            }
+
+            // handle count down value
+            viewModel.counter.observe(viewLifecycleOwner){
+                binding.tvCounterNextPrayerTime.text = "$it"
+            }
+
+            // set next prayer time
+            viewModel.nextPrayerTime.observe(viewLifecycleOwner){
+                binding.tvNextPrayerTimeVal.text = "$it"
+            }
+
+            // to handle count down
+            viewModel.index.observe(viewLifecycleOwner) { index ->
+                Log.d(DashBoardFragment::class.simpleName, "initObserver: next Prayer $index")
+                when (index) {
+                    1 -> {
+                        binding.tvPrayerTime.text = "Fajr"
+                    }
+
+                    2 -> {
+                        binding.tvPrayerTime.text = "Sunrise"
+                    }
+
+                    3 -> {
+                        binding.tvPrayerTime.text = "Duhr"
+                    }
+
+                    4 -> {
+                        binding.tvPrayerTime.text = "Asr"
+                    }
+
+                    5 -> {
+                        binding.tvPrayerTime.text = "Maghrib"
+                    }
+
+                    6 -> {
+                        binding.tvPrayerTime.text = "Isha"
+                    }
+                }
+            }
+        }
+    }
+
+    fun startCountdown(totalSeconds: Long) {
+        Log.d(DashBoardFragment::class.simpleName, "startCountdown: $totalSeconds")
+        job = CoroutineScope(Dispatchers.Main).launch {
+            for (seconds in totalSeconds downTo 0) {
+                //Log.d(DashBoardFragment::class.simpleName, "startCountdown: $seconds")
+                SharedPreferences.saveTimerEndTime(mContext,seconds)
+                viewModel.setCounterValue(seconds)
+                delay(1000)
+                if(seconds<=2){
+                    Log.d(DashBoardFragment::class.simpleName, "startCountdown: Time Ends")
+                    // reload api and values on dashboard.//
+                    firstTime = 0
+                    viewModel.getPrayerTimes(currentYear,currentMonth,currentLat,currentLng,1)
+                }
+            }
+        }
+    }
+
+
+
+    private fun nextPrayer(times: List<String>): Long {
+        Log.d(DashBoardFragment::class.simpleName, "nextPrayer: ")
+        val currentTime = Calendar.getInstance().time
+        val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        val formattedTime = dateFormat.format(currentTime)
+        val newTime = convertTimeToMilliseconds(formattedTime)
+        for (i in times) {
+            val x = convertTimeToMilliseconds(i)
+            index++
+
+            if (newTime < x) {
+                val result = x - newTime
+                viewModel.setIndex(index)
+                viewModel.setPrayerTime(i)
+                return result
+            }
+        }
+        return 0
+    }
+
+
+
+    private fun checkLocationPermissions() {
+        if (checkLocationPermission()) {
+            fetchLocation()
+        } else {
+            requestLocationPermission()
+        }
+    }
+
     private fun onViewOneClick(view: View) {
 
         // Save the selected prayer position in SharedPreferences
         SharedPreferences.saveSelectedPrayerPosition(mContext, 1)
-        Navigation.findNavController(requireView()).navigate(R.id.nextPrayerTimeFragment)
+        QiblaApp.selectedPrayerPos = 1
+        findNavController().navigate(R.id.nextPrayerTimeFragment)
     }
 
     private fun onViewTwoClick(view: View) {
 
         // Save the selected prayer position in SharedPreferences
         SharedPreferences.saveSelectedPrayerPosition(mContext, 2)
-        Navigation.findNavController(requireView()).navigate(R.id.nextPrayerTimeFragment)
+        QiblaApp.selectedPrayerPos = 2
+        findNavController().navigate(R.id.nextPrayerTimeFragment)
     }
 
     private fun onViewThreeClick(view: View) {
 
         // Save the selected prayer position in SharedPreferences
         SharedPreferences.saveSelectedPrayerPosition(mContext, 3)
-        Navigation.findNavController(requireView()).navigate(R.id.nextPrayerTimeFragment)
+        QiblaApp.selectedPrayerPos = 3
+        findNavController().navigate(R.id.nextPrayerTimeFragment)
     }
 
     private fun onViewFourClick(view: View) {
 
         // Save the selected prayer position in SharedPreferences
         SharedPreferences.saveSelectedPrayerPosition(mContext, 4)
-        Navigation.findNavController(requireView()).navigate(R.id.nextPrayerTimeFragment)
+        QiblaApp.selectedPrayerPos = 4
+        findNavController().navigate(R.id.nextPrayerTimeFragment)
     }
 
     private fun onViewFiveClick(view: View) {
 
         // Save the selected prayer position in SharedPreferences
         SharedPreferences.saveSelectedPrayerPosition(mContext, 5)
-        Navigation.findNavController(requireView()).navigate(R.id.nextPrayerTimeFragment)
+        QiblaApp.selectedPrayerPos = 5
+        findNavController().navigate(R.id.nextPrayerTimeFragment)
     }
 
     private fun setUpQibla() {
@@ -183,12 +381,12 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             0 -> {
                 // Handle click on position 0
                 // Navigate to screen 0
-                Navigation.findNavController(requireView()).navigate(R.id.qibalDirectionFragment)
+                findNavController().navigate(R.id.qibalDirectionFragment)
 
             }
             1 -> {
 
-                Navigation.findNavController(requireView()).navigate(R.id.zakatFragment)
+                findNavController().navigate(R.id.zakatFragment)
             }
             2->{
                 Navigation.findNavController(requireView()).navigate(R.id.namesFragment)
@@ -196,14 +394,15 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             }
             3 -> {
 
-                Navigation.findNavController(requireView()).navigate(R.id.tasbihFragment)
+                findNavController().navigate(R.id.tasbihFragment)
             }
             4 -> {
-                Navigation.findNavController(requireView()).navigate(R.id.nextPrayerTimeFragment)
+                QiblaApp.selectedPrayerPos = 0
+                findNavController().navigate(R.id.nextPrayerTimeFragment)
 
             }
             6 -> {
-                Navigation.findNavController(requireView()).navigate(R.id.makkahLiveFragment)
+                findNavController().navigate(R.id.makkahLiveFragment)
 
             }
             // Add more cases for other positions
@@ -213,38 +412,41 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     private fun checkLocationPermission(): Boolean {
         return (ContextCompat.checkSelfPermission(
             mContext,
-            android.Manifest.permission.ACCESS_FINE_LOCATION
+            Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED)
     }
 
     private fun requestLocationPermission() {
-        ActivityCompat.requestPermissions(
-            mContext as Activity,
-            arrayOf(
-                android.Manifest.permission.ACCESS_FINE_LOCATION,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ),
-            LOCATION_PERMISSION_REQUEST_CODE
-        )
+        Log.d(DashBoardFragment::class.simpleName, "requestLocationPermission: ")
+        permReqLauncher.launch(arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ))
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                fetchLocation()
-            }
+    var settingsLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { result ->
+        if(mLocationManager.isLocationEnabled()){
+            fetchLocation()
+        }else{
+            Log.d(DashBoardFragment::class.simpleName, ": Tell user to why they need location.")
         }
     }
 
-    private fun fetchLocation() {
-        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
+    private val permReqLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val granted = permissions.entries.all {
+                it.value
+            }
+            if (granted) {
+                Log.d(DashBoardFragment::class.simpleName, ": Permission Granted")
+                fetchLocation()
+            }else{
+                Log.d(DashBoardFragment::class.simpleName, ": Permission Not Granted")
+            }
+        }
 
+    private fun fetchLocation() {
+        Log.d(DashBoardFragment::class.simpleName, "fetchLocation: ")
         if (ActivityCompat.checkSelfPermission(
                 mContext,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -253,30 +455,57 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-
+            Log.d(DashBoardFragment::class.simpleName, "fetchLocation: Permission not granted")
             return
         }
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-                location?.let {
-                    updateLocationText(it)
-                } ?: run {
-                    locationTextView.text = getString(R.string.location_not_available)
+        if(!mLocationManager.isLocationEnabled()){
+            Log.d(DashBoardFragment::class.simpleName, "fetchLocation: Location Not enabled..")
+            AlertDialog.Builder(mContext)
+                .setMessage(R.string.gps_network_not_enabled)
+                .setPositiveButton(R.string.open_location_settings) { paramDialogInterface, paramInt ->
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    settingsLauncher.launch(intent)
                 }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
+            return
+        }
+        mLocationManager.startLocationTracking()
+    }
+
+    private fun locationCallback(): (LocationResult) -> Unit {
+        return { location ->
+            Log.d(
+                QibalDirectionFragment::class.simpleName,
+                "locationCallback: ${location.lastLocation}"
+            )
+            if (location.lastLocation != null) {
+                getPrayerTimings(location.lastLocation!!)
+                updateLocationText(location.lastLocation!!)
+                mLocationManager.stopLocationTracking()
+            } else {
+                Log.d(MyLocationManager::class.simpleName, "onLocationResult: Location is null")
+                locationTextView.text = getString(R.string.location_not_available)
+                mLocationManager.stopLocationTracking()
             }
-            .addOnFailureListener { e ->
-                // Handle failure
-                locationTextView.text = "Error fetching location: ${e.message}"
-            }
+        }
+    }
+
+    private fun getPrayerTimings(location: Location) {
+        Log.d(DashBoardFragment::class.simpleName, "getPrayerTimings: ${location.latitude} - ${location.longitude}")
+        currentLat = location.latitude
+        currentLng = location.longitude
+        viewModel.getPrayerTimes(currentYear,currentMonth,location.latitude,location.longitude,1)
     }
 
     private fun updateLocationText(location: Location) {
         val latitude = location.latitude
         val longitude = location.longitude
         val city = getCityFromLocation(latitude, longitude)
-
+        Log.d(DashBoardFragment::class.simpleName, "updateLocationText: $city")
         val locationText = "City: $city"
         locationTextView.text = locationText
+        SharedPreferences.saveUserCity(mContext,city)
     }
 
     private fun getCityFromLocation(latitude: Double, longitude: Double): String {
@@ -293,5 +522,21 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             e.printStackTrace()
         }
         return getString(R.string.unknown_city)
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(DashBoardFragment::class.simpleName, "onPause: ")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(DashBoardFragment::class.simpleName, "onStart: ")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(DashBoardFragment::class.simpleName, "onResume: ")
     }
 }

@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">Muslim Companion - Qibla Prayer</string>
-    <string name="app">Muslim Companion</string>
-    <string name="qibla_compass">Qibla Compass</string>
+    <string name="app_name">Muslim Companion </string>
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="test">Lorem ipsum dolor sit amet, consectetur adipiscing elit</string>
@@ -61,7 +59,7 @@
     <string name="auto_detect">Auto Detect</string>
     <string name="tuesday_17_august_28_muharram_1445">Tuesday, 17 August</string>
     <string name="next_prayer_in">Next Prayer in</string>
-    <string name="_00_25_20">- 00:25:20</string>
+    <string name="_00_25_20">00 hr 00 min 00 sec</string>
     <string name="muharram_1445">Muharram_1445</string>
     <string name="asar">Asar</string>
     <string name="_05_30_pm">05:30 PM</string>
@@ -242,6 +240,12 @@
     <string name="confirm_password_match_error">Password do not match</string>
     <string name="user_id_invalid">Invalid format</string>
     <string name="min_password_limit">Minimum 8 characters required</string>
+    <string name="your_web_client_id">683587854955-kkaih5h3eml45dtk6eei6nro3fgsoilr.apps.googleusercontent.com</string>
+    <string name="please_wait">Please Wait...</string>
+    <string name="network_error">Network Error</string>
+    <string name="please_check_your_network_connectivity">Please Check Your Network Connectivity</string>
+    <string name="gps_network_not_enabled">Your Location is not enabled. Kindly click on Goto Settings and Enable the Location.</string>
+    <string name="open_location_settings">Go To Settings\n</string>
     <string name="default_web_client_id" translatable="false">683587854955-b5adplkuolgpe8lvl0f3le979gmrcmuk.apps.googleusercontent.com</string>
     <string name="allah_names">Allah Names</string>
     <string name="rasool_names">Rasool Names</string>

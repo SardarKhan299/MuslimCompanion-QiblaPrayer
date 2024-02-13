@@ -6,15 +6,14 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.google.android.gms.auth.api.identity.Identity
+import com.google.android.gms.auth.api.identity.SignInClient
+import com.google.android.gms.auth.api.identity.SignInCredential
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
+import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -32,9 +31,10 @@ import java.util.regex.Pattern
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
     var mobileNumber = ""
     var password = ""
-    private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var firebaseAuth: FirebaseAuth
 
+    private lateinit var oneTapClient: SignInClient
+    private lateinit var signInRequest: BeginSignInRequest
     companion object {
         private const val RC_SIGN_IN = 9001
     }
@@ -54,105 +54,160 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         binding.apply {
             loginFragment = this@LoginFragment
         }
-       // auth = FirebaseAuth.getInstance()
-       // databaseReference = FirebaseDatabase.getInstance().reference.child("Login Info")
-        binding.btnLogin.setOnClickListener {
-            val intent = Intent(mContext, DashBoardActivity::class.java)
-            startActivity(intent)
-        }
+        oneTapClient = Identity.getSignInClient(mContext)
+        signInRequest = BeginSignInRequest.builder()
+            .setGoogleIdTokenRequestOptions(
+                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                    .setSupported(true)
+                    // Your server's client ID, not your Android client ID.
+                    .setServerClientId(getString(R.string.your_web_client_id))
+                    // Only show accounts previously used to sign in.
+                    .setFilterByAuthorizedAccounts(false)
+                    .build())
+            // Automatically sign in when exactly one credential is retrieved.
+            .setAutoSelectEnabled(true)
+            .build()
+        auth = FirebaseAuth.getInstance()
+        databaseReference = FirebaseDatabase.getInstance().reference.child("Login Info")
         binding.viewLogin.setOnClickListener {
-           // signInWithGoogle()
+            Log.d(LoginFragment::class.simpleName, "onViewCreated: CLicked")
+            if(NetworkConnectivity.isOnline(mContext)) {
+                ProgressBar.showProgressBar(mContext, getString(R.string.please_wait))
+                binding.viewLogin.isEnabled = false
+                signInWithGoogle()
+            }else{
+                Log.d(LoginFragment::class.simpleName, "onViewCreated: Internet Not Connected")
+                PopUpDialog(
+                    getString(R.string.network_error),
+                    getString(R.string.please_check_your_network_connectivity),
+                    ok_btn_callback(),
+                    R.drawable.ic_warning
+                ).show(requireActivity().supportFragmentManager, "")
+            }
         }
     }
 
-//    private fun signInWithGoogle() {
-//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//            .requestIdToken(getString(R.string.default_web_client_id))
-//            .requestEmail()
-//            .build()
-//
-//        val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-//        val signInIntent = googleSignInClient.signInIntent
-//        startActivityForResult(signInIntent, RC_SIGN_IN)
-//    }
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if (requestCode == RC_SIGN_IN) {
-//            handleGoogleSignInResult(data)
-//        }
-//    }
-//
-//    private fun handleGoogleSignInResult(data: Intent?) {
-//        try {
-//            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-//            val account = task.getResult(ApiException::class.java)
-//
-//            if (account != null) {
-//                firebaseAuthWithGoogle(account)
-//            } else {
-//                Toast.makeText(requireContext(), "Google sign in failed", Toast.LENGTH_SHORT).show()
-//            }
-//        } catch (e: ApiException) {
-//            Log.e("LoginFragment", "Google sign-in failed: ${e.message}", e)
-//            Toast.makeText(
-//                requireContext(),
-//                "Google sign in failed: ${e.message}",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//        }
-//    }
-//
-//    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
-//        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-//        auth.signInWithCredential(credential)
-//            .addOnCompleteListener(requireActivity()) { task ->
-//                if (task.isSuccessful) {
-//                    // Sign in success, update UI with the signed-in user's information
-//                    val user = auth.currentUser
-//                    saveUserToDatabase(user)
-//                    // Save user information in SharedPreferences
-//                    saveUserInfoInSharedPreferences(user)
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Signed in as ${user?.displayName}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                    // Navigate to DashboardActivity
-//                    startActivity(Intent(requireContext(), DashBoardActivity::class.java))
-//                    requireActivity().finish()
-//                } else {
-//                    Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//            }
-//    }
-//
-//    private fun saveUserToDatabase(user: FirebaseUser?) {
-//        // Save user information to the Firebase Realtime Database
-//        user?.let {
-//            val userId = it.uid
-//            val userName = it.displayName
-//            val userEmail = it.email
-//
-//            val userMap = hashMapOf(
-//                "userId" to userId,
-//                "userName" to userName,
-//                "userEmail" to userEmail,
-//
-//                )
-//
-//            databaseReference.child(userId).setValue(userMap)
-//        }
-//    }
-//
-//    private fun saveUserInfoInSharedPreferences(user: FirebaseUser?) {
-//        SharedPreferences.saveUserDetails(
-//            mContext, user?.displayName ?: "", user?.email ?: "",
-//            (user?.photoUrl ?: "").toString()
-//        )
-//    }
+    private fun signInWithGoogle() {
+        oneTapClient.beginSignIn(signInRequest)
+            .addOnSuccessListener(requireActivity()) { result ->
+                try {
+                    startIntentSenderForResult(
+                        result.pendingIntent.intentSender, RC_SIGN_IN,
+                        null, 0, 0, 0, null)
+                } catch (e: IntentSender.SendIntentException) {
+                    Log.e("LoginFragment", "Couldn't start One Tap UI: ${e.localizedMessage}")
+                }
+            }
+            .addOnFailureListener(requireActivity()) { e ->
+                // No saved credentials found. Launch the One Tap sign-up flow, or
+                // do nothing and continue presenting the signed-out UI.
+                Log.d(LoginFragment::class.simpleName, "signInWithGoogle: Failed ${e.message}")
+                enableButtonAndHideProgress()
+            }
+    }
+
+    private fun enableButtonAndHideProgress() {
+        ProgressBar.hideProgressBar()
+        binding.viewLogin.isEnabled = true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        try{
+        val credential = oneTapClient.getSignInCredentialFromIntent(data)
+        val idToken = credential.googleIdToken
+        val username = credential.id
+        when {
+            idToken != null -> {
+                // Got an ID token from Google. Use it to authenticate
+                // with your backend.
+                Log.d("LoginFragment", "Got ID token.")
+                firebaseAuthWithGoogle(credential)
+            }
+            else -> {
+                // Shouldn't happen.
+                Log.d("LoginFragment", "No ID token or password!")
+                enableButtonAndHideProgress()
+            }
+        }
+        } catch (e: ApiException) {
+            Log.e("LoginFragment", "Google sign-in failed: ${e.message}", e)
+            enableButtonAndHideProgress()
+            when (e.statusCode) {
+                CommonStatusCodes.CANCELED -> {
+                    Log.d(LoginFragment::class.simpleName, "onActivityResult: Dialog Cancelled")
+                    // Don't re-prompt the user.
+                }
+                CommonStatusCodes.NETWORK_ERROR -> {
+                    Log.d(LoginFragment::class.simpleName, "onActivityResult: Network Error")
+                    // Try again or just ignore.
+                }
+                else -> {
+                    Log.d(LoginFragment::class.simpleName, "Couldn't get credential from result." +
+                            " (${e.localizedMessage})")
+                }
+            }
+        }
+    }
+
+
+    private fun firebaseAuthWithGoogle(account: SignInCredential) {
+
+        val credential = GoogleAuthProvider.getCredential(account.googleIdToken, null)
+        auth.signInWithCredential(credential)
+            .addOnFailureListener {
+                Log.d(LoginFragment::class.simpleName, "firebaseAuthWithGoogle Failer: ${it.message}")
+                enableButtonAndHideProgress()
+            }
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    enableButtonAndHideProgress()
+                    // Sign in success, update UI with the signed-in user's information
+                    val user = auth.currentUser
+                    saveUserToDatabase(user)
+                    // Save user information in SharedPreferences
+                    saveUserInfoInSharedPreferences(user)
+                    Toast.makeText(
+                        requireContext(),
+                        "Signed in as ${user?.displayName}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    // Navigate to DashboardActivity
+                    startActivity(Intent(requireContext(), DashBoardActivity::class.java))
+                    requireActivity().finish()
+
+                } else {
+                    Log.d(LoginFragment::class.simpleName, "firebaseAuthWithGoogle: ")
+                    enableButtonAndHideProgress()
+                    Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+    }
+
+    private fun saveUserToDatabase(user: FirebaseUser?) {
+        // Save user information to the Firebase Realtime Database
+        user?.let {
+            val userId = it.uid
+            val userName = it.displayName
+            val userEmail = it.email
+
+            val userMap = hashMapOf(
+                "userId" to userId,
+                "userName" to userName,
+                "userEmail" to userEmail,
+
+                )
+
+            databaseReference.child(userId).setValue(userMap)
+        }
+    }
+
+    private fun saveUserInfoInSharedPreferences(user: FirebaseUser?) {
+        SharedPreferences.saveUserDetails(mContext, user?.displayName ?: "", user?.email ?: "",
+            (user?.photoUrl ?: "").toString()
+        )
+    }
 
     private fun validateNumberAndPassword(): Boolean {
         Log.d(LoginFragment::class.simpleName, "validateNumberAndPassword: ")
@@ -185,6 +240,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         }
 
         return true
+    }
+
+    fun ok_btn_callback(): (String) -> Unit {
+        return {
+            Log.d("MakkahLiveFragment"::class.simpleName, "ok_btn_callback: ")
+        }
     }
 
 }

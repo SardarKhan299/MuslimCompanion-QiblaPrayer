@@ -9,9 +9,15 @@ import android.widget.ProgressBar
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.get
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.PopUpDialog
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.MAKKAH_LIVE_URL1
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentMakkahLiveBinding
@@ -20,6 +26,9 @@ import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentMakka
 class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.fragment_makkah_live) {
     lateinit var webView: WebView
     lateinit var progressBar: ProgressBar
+    // [START get_remote_config_instance]
+    val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+    var makkahLiveUrl = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +42,7 @@ class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.frag
         binding.apply {
             makkahLiveFragment = this@MakkahLiveFragment
         }
+        callFirebaseRemoteConfig()
         binding.toolbarMakkahLive.groupToolbarSubScreenProfile.visibility = View.VISIBLE
         binding.toolbarMakkahLive.tvToolbarSubScreen.text = getString(R.string.makkah_live)
         webView = binding.webView
@@ -40,26 +50,23 @@ class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.frag
         binding.toolbarMakkahLive.viewSubScreen.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
-        configureWebViewForAutoPlay(
-            webView,
-            "https://www.youtube-nocookie.com/embed/PEmRPDJ9I8M?autoplay=1&playsinline=1"
-        )
+
         binding.viewMainFirst.setOnClickListener {
             configureWebViewForAutoPlay(
                 webView,
-                "https://www.youtube-nocookie.com/embed/PEmRPDJ9I8M?autoplay=1&playsinline=1"
+                makkahLiveUrl
             )
         }
         binding.viewMainTwo.setOnClickListener {
             configureWebViewForAutoPlay(
                 webView,
-                "https://www.youtube-nocookie.com/embed/Cy3hsDtzfOE?autoplay=1&playsinline=1"
+                makkahLiveUrl
             )
         }
         binding.viewMainThree.setOnClickListener {
             configureWebViewForAutoPlay(
                 webView,
-                "https://www.youtube-nocookie.com/embed/xZtG7Bn2B5c?autoplay=1&playsinline=1"
+                makkahLiveUrl
             )
 
         }
@@ -69,10 +76,49 @@ class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.frag
                     getString(R.string.warning),
                     getString(R.string.exit),
                     ok_btn_callback(),
-                    R.drawable.ic_warning
+                    R.drawable.ic_warning,
+                    true
                 ).show(requireActivity().supportFragmentManager, "")
             }
         })
+    }
+
+    private fun callFirebaseRemoteConfig() {
+        Log.d(MakkahLiveFragment::class.simpleName, "callFirebaseRemoteConfig: ")
+        // [START fetch_config_with_callback]
+        remoteConfig.fetchAndActivate().addOnFailureListener {
+            Log.d(MakkahLiveFragment::class.simpleName, "callFirebaseRemoteConfig: ${it.message}")
+            FirebaseCrashlytics.getInstance().log(it.message.toString())
+        }.addOnCompleteListener {
+            if(it.isSuccessful){
+                Log.d(MakkahLiveFragment::class.simpleName, "callFirebaseRemoteConfig: ")
+                fetchUrl()
+            }else{
+                Log.d(MakkahLiveFragment::class.simpleName, "callFirebaseRemoteConfig: Not Fetched any value")
+                FirebaseCrashlytics.getInstance().log(it.toString())
+            }
+
+        }
+        // [END fetch_config_with_callback]
+    }
+
+    private fun fetchUrl() {
+        Log.d(MakkahLiveFragment::class.simpleName, "fetchUrl: ")
+        val remoteConfig = Firebase.remoteConfig
+
+        // [START get_config_values]
+         makkahLiveUrl = remoteConfig[MAKKAH_LIVE_URL1].asString()
+        Log.d(MakkahLiveFragment::class.simpleName, "fetchUrl: $makkahLiveUrl")
+        if(makkahLiveUrl!="") {
+            configureWebViewForAutoPlay(
+                webView,
+                makkahLiveUrl
+            )
+        }else{
+            Log.d(MakkahLiveFragment::class.simpleName, "fetchUrl: Url is Empty")
+            FirebaseCrashlytics.getInstance().log("Remote Config Url is Empty")
+        }
+
     }
 
     private fun configureWebViewForAutoPlay(webView: WebView, url: String) {

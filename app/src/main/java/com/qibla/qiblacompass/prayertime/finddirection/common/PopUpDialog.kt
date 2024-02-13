@@ -15,7 +15,8 @@ import com.qibla.qiblacompass.prayertime.finddirection.R
 class PopUpDialog(var title : String,
                   var message : String,
                   val ok_btn_callback: (String) -> Unit,
-                  val error_icn: Int = 0
+                  val error_icn: Int = 0,
+                  val isSecondButtonRequired: Boolean = false,
                   ) : DialogFragment() {
     override fun onStart() {
         super.onStart()
@@ -36,6 +37,11 @@ class PopUpDialog(var title : String,
             false)
         rootView.findViewById<TextView>(R.id.tv_dialog_title).text = title
         rootView.findViewById<TextView>(R.id.tv_dialog_detail).text = message
+
+        if(!isSecondButtonRequired){
+            rootView.findViewById<TextView>(R.id.tv_dialog_cancel).visibility = View.GONE
+        }
+
         rootView.findViewById<Button>(R.id.btn_dialog_yes).setOnClickListener {
             dismiss()
             ok_btn_callback.invoke("okay")

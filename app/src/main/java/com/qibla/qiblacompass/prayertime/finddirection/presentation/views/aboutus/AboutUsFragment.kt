@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import com.qibla.qiblacompass.prayertime.finddirection.BuildConfig
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant
@@ -29,6 +30,7 @@ class AboutUsFragment : BaseFragment<FragmentAboutUsBinding>(R.layout.fragment_a
         }
         binding.toolbarAboutUs.groupToolbarSubScreenProfile.visibility = View.VISIBLE
         binding.toolbarAboutUs.tvToolbarSubScreen.text = getString(R.string.about_us)
+        binding.tvVersion.text = BuildConfig.VERSION_NAME +"_"+BuildConfig.VERSION_CODE
         binding.toolbarAboutUs.viewSubScreen.setOnClickListener {
             findNavController().closeCurrentScreen()
         }

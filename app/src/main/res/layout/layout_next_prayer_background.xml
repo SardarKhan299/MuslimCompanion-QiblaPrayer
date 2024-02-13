@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/sv_prayer_times"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bg_fragment"
@@ -193,7 +195,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="@dimen/bias_zero"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_maghrib" />
+            app:layout_constraintTop_toBottomOf="@+id/view_maghrib"
+            />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_isha_prayer"
@@ -235,7 +238,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="@dimen/bias_zero"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_isha" />
+            app:layout_constraintTop_toBottomOf="@+id/view_isha"
+            android:visibility="gone"
+            />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_tahajjud_prayer"
@@ -246,7 +251,9 @@
             android:text="@string/tahajjud"
             app:layout_constraintBottom_toBottomOf="@+id/view_tahajjud"
             app:layout_constraintStart_toStartOf="@+id/view_tahajjud"
-            app:layout_constraintTop_toTopOf="@+id/view_tahajjud" />
+            app:layout_constraintTop_toTopOf="@+id/view_tahajjud"
+            android:visibility="gone"
+            />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_unselected_isha_time"
@@ -268,6 +275,8 @@
             android:text="@string/_03_30_am"
             app:layout_constraintBottom_toBottomOf="@+id/img_unselected_tahajjud_icon"
             app:layout_constraintEnd_toStartOf="@+id/img_unselected_tahajjud_icon"
-            app:layout_constraintTop_toTopOf="@+id/img_unselected_tahajjud_icon" />
+            app:layout_constraintTop_toTopOf="@+id/img_unselected_tahajjud_icon"
+            android:visibility="gone"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

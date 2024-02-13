@@ -74,7 +74,8 @@ class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment
             getString(R.string.warning),
             getString(R.string.logout_dialog),
             ok_btn_callback(),
-            R.drawable.ic_warning
+            R.drawable.ic_warning,
+            true
         ).show(requireActivity().supportFragmentManager, "")
 
     }

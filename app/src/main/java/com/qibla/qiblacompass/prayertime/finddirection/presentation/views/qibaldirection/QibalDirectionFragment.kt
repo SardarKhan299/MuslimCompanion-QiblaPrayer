@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.LocationResult
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.MyLocationManager
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentQibalDirectionBinding
@@ -356,7 +357,7 @@ class QibalDirectionFragment :
 
     private fun fetch_GPS() {
         Log.d(QibalDirectionFragment::class.simpleName, "fetch_GPS: ")
-        if (isLocationEnabled()) {
+        if (mLocationManager.isLocationEnabled()) {
             Log.d(QibalDirectionFragment::class.simpleName, "fetch_GPS: Location is enabled.")
             mLocationManager.startLocationTracking()
         } else {
@@ -434,13 +435,7 @@ class QibalDirectionFragment :
     }
 
 
-    private fun isLocationEnabled(): Boolean {
-        val locationManager: LocationManager =
-            mContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
-    }
+
 
     private fun convertMeterToKilometer(meter: Float): Float {
         return (meter * 0.001).toFloat()

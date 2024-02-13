@@ -27,19 +27,19 @@ class MainViewModel @Inject constructor(val usecase: GetNamazTimeUsecase):ViewMo
     private val _state = MutableLiveData<MainActivityState>()
 
     private fun getNamazTimings(){
-        usecase().onEach { result->
-            when(result){
-                is NetworkResult.Success->{
-                    _state.value = MainActivityState(timings = result.data as List<ApiDto>)
-                }
-                is NetworkResult.Loading->{
-                    _state.value = MainActivityState(isLoading = true)
-                }
-                is NetworkResult.Error->{
-                    _state.value = MainActivityState(error = result.messageCode.toString())
-                }
-            }
-        }.launchIn(viewModelScope)
+//        usecase().onEach { result->
+//            when(result){
+//                is NetworkResult.Success->{
+//                    _state.value = MainActivityState(timings = result.data as List<ApiDto>)
+//                }
+//                is NetworkResult.Loading->{
+//                    _state.value = MainActivityState(isLoading = true)
+//                }
+//                is NetworkResult.Error->{
+//                    _state.value = MainActivityState(error = result.message!!)
+//                }
+//            }
+//        }.launchIn(viewModelScope)
     }
 
 

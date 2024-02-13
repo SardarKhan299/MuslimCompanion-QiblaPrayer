@@ -77,7 +77,6 @@ class SharedPreferences {
             return ""
         }
 
-
         fun saveSelectedPrayerPosition(context: Context, position: Int) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             msharedPreferences?.edit()?.putInt("selectedPrayerPosition", position)?.apply()
@@ -100,6 +99,40 @@ class SharedPreferences {
             }
         }
 
+        fun saveTimerEndTime(context: Context,endTime:Long){
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putLong(PrayerConstants.COUNTDOWN_TIME_KEY, endTime)
+                apply()
+            }
+        }
+
+        fun saveUserVisit(context: Context,isFirstTimeLogin:Boolean){
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putBoolean(PrayerConstants.FIRST_TIME_LOGIN, isFirstTimeLogin)
+                apply()
+            }
+        }
+
+        fun saveUserCity(context: Context,userCity:String){
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString(PrayerConstants.USER_CITY, userCity)
+                apply()
+            }
+        }
+
+        fun isFirstTimeLogin(context: Context): Boolean {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getBoolean(PrayerConstants.FIRST_TIME_LOGIN, true)
+        }
+
+        fun getUserCity(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString(PrayerConstants.USER_CITY, "")
+        }
+
         fun saveSelectedPositionToSharedPreferences(context: Context, position: Int) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             msharedPreferences?.edit()?.putInt("selected_position", position)?.apply()
@@ -113,6 +146,11 @@ class SharedPreferences {
         fun getSavedPassword(context: Context): String? {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return mSharedPreferences!!.getString("saved_password", null)
+        }
+
+        fun getCounterEndTime(context: Context): Long {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return mSharedPreferences!!.getLong(PrayerConstants.COUNTDOWN_TIME_KEY, 0L)
         }
 
         fun saveUserDetails(
