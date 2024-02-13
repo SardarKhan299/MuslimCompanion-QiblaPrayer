@@ -30,6 +30,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                def date = new Date()
+                def formattedDate = date.format('dd-MM-yy_HHmm')
+                outputFileName = "Muslim Companion_${variant.name}_v${variant.versionName}_${variant.versionCode}_D${formattedDate}.apk"
+            }
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
