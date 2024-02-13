@@ -32,7 +32,7 @@ class OnboardingActivity : BaseActivity() {
         data.add(
             OnboardingItem(
                 R.drawable.img_qibla,
-                getString(R.string.qibla_compass),
+                getString(R.string.app_name),
                 getString(R.string.test),
                 R.drawable.idicator1
             )

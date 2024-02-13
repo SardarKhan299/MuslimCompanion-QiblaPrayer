@@ -35,7 +35,7 @@ class WebViewUrlLoadFragment : BaseFragment<FragmentWebViewUrlLoadBinding>(R.lay
             webViewUrlLoadFragment = this@WebViewUrlLoadFragment
         }
         binding.toolbarWebview.groupToolbarSubScreenProfile.visible()
-       binding.toolbarWebview.tvToolbarSubScreen.text = getString(R.string.app)
+       binding.toolbarWebview.tvToolbarSubScreen.text = getString(R.string.app_name)
         binding.toolbarWebview.viewSubScreen.setOnClickListener {
             findNavController().closeCurrentScreen()
         }

@@ -42,7 +42,7 @@ class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.frag
         }
         configureWebViewForAutoPlay(
             webView,
-            "https://www.youtube-nocookie.com/embed/PEmRPDJ9I8M?autoplay=1&playsinline=1"
+            "https://www.youtube-nocookie.com/embed/xZtG7Bn2B5c?autoplay=1&playsinline=1"
         )
         binding.viewMainFirst.setOnClickListener {
             configureWebViewForAutoPlay(

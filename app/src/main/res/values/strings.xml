@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">Muslim Companion - Qibla Prayer</string>
-    <string name="app">Muslim Companion</string>
-    <string name="qibla_compass">Qibla Compass</string>
+    <string name="app_name">Muslim Companion </string>
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="test">Lorem ipsum dolor sit amet, consectetur adipiscing elit</string>
