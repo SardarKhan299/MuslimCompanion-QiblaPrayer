@@ -119,6 +119,11 @@ class NextPrayerTimeFragment :
                 Log.d(NextPrayerTimeFragment::class.simpleName, "initObserver: Background selected by user.")
             }
         }
+
+        // handle count down value
+        viewModel.counter.observe(viewLifecycleOwner){
+            binding.tvTime.text = "$it"
+        }
     }
 
     private fun setUserCityFromStorage() {
