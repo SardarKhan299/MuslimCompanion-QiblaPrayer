@@ -1,6 +1,7 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login
 
 import android.content.Intent
+import android.content.IntentSender
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -22,6 +23,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.Constants
+import com.qibla.qiblacompass.prayertime.finddirection.common.NetworkConnectivity
+import com.qibla.qiblacompass.prayertime.finddirection.common.PopUpDialog
+import com.qibla.qiblacompass.prayertime.finddirection.common.ProgressBar
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentLoginBinding
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardActivity
