@@ -13,6 +13,8 @@ object PrayerConstants {
     const val MAGHRIB = "MAGHRIB"
     const val ISHA = "ISHA"
     const val TAHAJJUD = "TAHAJJUD"
+    const val MAKKAH_LIVE_URL1 = "makkahLiveUrl1"
+
     const val COUNTDOWN_TIME_KEY = "countdown_end_time"
     const val FIRST_TIME_LOGIN = "first_time_login"
     const val SPLASH_VISIT_TIME = 4000L

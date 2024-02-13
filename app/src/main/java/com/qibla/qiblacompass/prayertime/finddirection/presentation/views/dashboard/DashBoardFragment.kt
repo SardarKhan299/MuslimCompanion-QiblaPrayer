@@ -264,8 +264,10 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 SharedPreferences.saveTimerEndTime(mContext,seconds)
                 viewModel.setCounterValue(seconds)
                 delay(1000)
-                if(seconds<=3){
+                if(seconds<=2){
                     Log.d(DashBoardFragment::class.simpleName, "startCountdown: Time Ends")
+                    // reload api and values on dashboard.//
+                    firstTime = 0
                     viewModel.getPrayerTimes(currentYear,currentMonth,currentLat,currentLng,1)
                 }
             }

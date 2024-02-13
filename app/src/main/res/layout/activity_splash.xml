@@ -8,8 +8,8 @@
     >
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="@dimen/_220sdp"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_width="@dimen/_160sdp"
+        android:layout_height="@dimen/_140sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
