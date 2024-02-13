@@ -264,6 +264,10 @@ class SharedPreferences {
                 false
             ) // Default to true if not found
         }
+
+        fun logoutUser(mContext: Context) {
+            saveUserDetails(mContext,"","","")
+        }
     }
 
 

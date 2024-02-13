@@ -83,6 +83,7 @@ class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment
     fun ok_btn_callback(): (String) -> Unit {
         return {
             Log.d("MakkahLiveFragment"::class.simpleName, "ok_btn_callback: ")
+            SharedPreferences.logoutUser(mContext)
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
