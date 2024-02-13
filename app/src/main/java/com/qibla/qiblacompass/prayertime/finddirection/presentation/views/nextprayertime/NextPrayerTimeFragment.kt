@@ -1,16 +1,13 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.nextprayertime
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
@@ -130,6 +127,15 @@ class NextPrayerTimeFragment :
             binding.tvLocationCity.text = city
     }
 
+    private fun scrollToEnd(){
+        binding.layoutNextPrayerBackground.svPrayerTimes.post{
+            binding.layoutNextPrayerBackground.svPrayerTimes.scrollTo(
+                0,
+                binding.layoutNextPrayerBackground.svPrayerTimes.bottom
+            )
+        }
+    }
+
     private fun fajrBg() {
 
         val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
@@ -226,6 +232,7 @@ class NextPrayerTimeFragment :
             maghribNotificationBell,
             layoutPrayerMainBackground
         )
+        scrollToEnd()
     }
 
     private fun ishaBg() {
@@ -250,6 +257,7 @@ class NextPrayerTimeFragment :
             ishaNotificationIcon,
             layoutPrayerMainBackground
         )
+        scrollToEnd()
     }
 
     private fun tahajjudBg() {
