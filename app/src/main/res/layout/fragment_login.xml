@@ -255,7 +255,9 @@
             android:layout_marginTop="@dimen/_4sdp"
             app:layout_constraintEnd_toEndOf="@+id/guideline_login_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
-            app:layout_constraintTop_toBottomOf="@+id/view_login" />
+            app:layout_constraintTop_toBottomOf="@+id/view_login"
+            android:visibility="gone"
+            />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -265,6 +267,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_30sdp"
             android:text="@string/don_t_have_an_account_sign_up"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/view_navigate_signup"
             app:layout_constraintStart_toStartOf="@+id/view_navigate_signup"
             app:layout_constraintTop_toTopOf="@+id/view_navigate_signup" />
@@ -276,6 +279,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_4sdp"
             android:text="@string/sign_up"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/tv_have_another_account"
             app:layout_constraintStart_toEndOf="@+id/tv_have_another_account"
             app:layout_constraintTop_toTopOf="@+id/tv_have_another_account" />
