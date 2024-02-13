@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseActivity
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardActivity
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login.LoginActivity
 
 class OnboardingActivity : BaseActivity() {
@@ -106,7 +107,8 @@ class OnboardingActivity : BaseActivity() {
 
     private fun gotoLoginActivity() {
         SharedPreferences.saveUserVisit(this,false)
-        startActivity(Intent(this@OnboardingActivity, LoginActivity::class.java))
+        startActivity(Intent(this, DashBoardActivity::class.java))
+        //startActivity(Intent(this@OnboardingActivity, LoginActivity::class.java))
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         finish()
     }

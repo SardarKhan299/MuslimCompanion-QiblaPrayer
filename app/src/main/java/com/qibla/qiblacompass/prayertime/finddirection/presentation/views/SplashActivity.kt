@@ -7,6 +7,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseActivity
 import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.SPLASH_VISIT_TIME
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardActivity
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login.LoginActivity
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.onboarding.OnboardingActivity
 import java.util.*
@@ -24,7 +25,8 @@ class SplashActivity : BaseActivity() {
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 finish()
             }else{
-                startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                //startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                startActivity(Intent(this@SplashActivity, DashBoardActivity::class.java))
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 finish()
             }
