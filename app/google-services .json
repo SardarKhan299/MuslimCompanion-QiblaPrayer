@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "683587854955",
+    "firebase_url": "https://muslim-companion-qibla-prayer-default-rtdb.firebaseio.com",
+    "project_id": "muslim-companion-qibla-prayer",
+    "storage_bucket": "muslim-companion-qibla-prayer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683587854955:android:4aadaea268649c4019072e",
+        "android_client_info": {
+          "package_name": "com.qibla.qiblacompass.prayertime.finddirection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683587854955-gmg05ieve5h3nvm0anslquttqblooi8f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qibla.qiblacompass.prayertime.finddirection",
+            "certificate_hash": "9d805754c470fc52b17672891ab15fffe02ede0c"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa4RG-DvoxrYnMHhva1L34wOasF__UeFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683587854955-kkaih5h3eml45dtk6eei6nro3fgsoilr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
