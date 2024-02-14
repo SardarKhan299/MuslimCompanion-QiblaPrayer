@@ -30,7 +30,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.LocationResult
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.CalibrationDialog
 import com.qibla.qiblacompass.prayertime.finddirection.common.MyLocationManager
+import com.qibla.qiblacompass.prayertime.finddirection.common.PopUpDialog
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentQibalDirectionBinding
@@ -88,6 +90,7 @@ class QibalDirectionFragment :
         requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         mLocationManager = MyLocationManager(requireContext(), locationCallback())
         compass = Compass(requireContext())
+        showCalibrationDialog()
         setupCompass()
         toolbar.imgNavigateBack.setOnClickListener {
             findNavController().closeCurrentScreen()
@@ -106,6 +109,11 @@ class QibalDirectionFragment :
         // Request location permission if not granted
 
 
+    }
+
+    private fun showCalibrationDialog() {
+        Log.d(QibalDirectionFragment::class.simpleName, "showCalibrationDialog: ")
+        CalibrationDialog().show(requireActivity().supportFragmentManager, "")
     }
 
     override fun onStart() {

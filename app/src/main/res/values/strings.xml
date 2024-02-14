@@ -254,5 +254,7 @@
     <string name="english_translation">English Translation</string>
     <string name="urdu_text_translation">رحم کرنے والا</string>
     <string name="guest_login">Guest Login</string>
+    <string name="compassCalibrationTitle">Calibrate your compass</string>
+    <string name="compassCalibrationSubTitle">Tilt and move your phone 3 times like this:</string>
 
 </resources>
