@@ -112,6 +112,12 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             startActivity(Intent(mContext, CompassDirectionActivity::class.java))
 
         }
+
+        binding.viewQiblaDirection.setOnClickListener {
+            Log.d(DashBoardFragment::class.simpleName, "onViewCreated: ")
+            findNavController().navigate(R.id.qibalDirectionFragment)
+        }
+
         mLocationManager = MyLocationManager(requireContext(), locationCallback())
         checkLocationPermissions()
         binding.viewAutoDetect.setOnClickListener {
