@@ -239,36 +239,7 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_title_ayat_of_day"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title_ayat_of_day" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_share_ayat"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:src="@drawable/ic_share"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_ayat_number"
-                app:layout_constraintEnd_toEndOf="@+id/view_dashboard_atay_day"
-                app:layout_constraintTop_toTopOf="@+id/tv_title_ayat_of_day"
-                app:layout_constraintVertical_bias="1.0" />
 
-            <View
-                android:id="@+id/view_separator_right"
-                android:layout_width="@dimen/_2sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:background="@drawable/view_separator"
-                app:layout_constraintBottom_toBottomOf="@+id/img_share_ayat"
-                app:layout_constraintEnd_toStartOf="@+id/img_share_ayat"
-                app:layout_constraintTop_toTopOf="@+id/img_share_ayat" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_download"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:src="@drawable/ic_download"
-                app:layout_constraintBottom_toBottomOf="@+id/img_share_ayat"
-                app:layout_constraintEnd_toStartOf="@+id/view_separator_right"
-                app:layout_constraintTop_toTopOf="@+id/img_share_ayat" />
 
             <View
                 android:id="@+id/view_separator_bottom"
