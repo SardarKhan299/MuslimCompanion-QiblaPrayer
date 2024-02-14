@@ -17,8 +17,6 @@ class CalibrationDialog : DialogFragment() {
         super.onStart()
         Log.d("CalibrationDialog"::class.simpleName, "onStart: ")
         dialog?.setCancelable(false)
-        val window: Window = dialog?.window!!
-        window.setBackgroundDrawableResource(android.R.color.transparent)
     }
 
     override fun onCreateView(
