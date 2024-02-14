@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods
 import com.qibla.qiblacompass.prayertime.finddirection.common.PopUpDialog
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
@@ -55,6 +56,14 @@ class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment
 
         binding.toolbarSideMenu.viewToolbar.setOnClickListener {
             findNavController().closeCurrentScreen()
+        }
+
+        binding.viewShareApp.setOnClickListener {
+            CommonMethods.shareApp(mContext)
+        }
+
+        binding.viewRateUs.setOnClickListener {
+            CommonMethods.rateApp(mContext)
         }
 
 
