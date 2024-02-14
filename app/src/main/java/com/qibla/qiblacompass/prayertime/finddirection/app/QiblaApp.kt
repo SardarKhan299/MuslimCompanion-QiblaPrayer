@@ -22,7 +22,7 @@ class QiblaApp : Application() {
         val rasoolNamesImages: ArrayList<Int> = ArrayList()
         val rasoolNamesTranslations = arrayListOf<Pair<String, String>>()
 
-        val numberImages : ArrayList<Int> = ArrayList()
+        val numberImages: ArrayList<Int> = ArrayList()
         val audioAllahResources = arrayListOf<Int>()
         val audioRasoolResources = arrayListOf<Int>()
 
@@ -37,7 +37,7 @@ class QiblaApp : Application() {
         FirebaseApp.initializeApp(this)
         val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {
-            minimumFetchIntervalInSeconds =  if (BuildConfig.DEBUG) {
+            minimumFetchIntervalInSeconds = if (BuildConfig.DEBUG) {
                 0 // fetch every time in debug mode
             } else {
                 300
@@ -304,7 +304,7 @@ class QiblaApp : Application() {
             add(R.drawable.number25)
             add(R.drawable.number26)
             add(R.drawable.number27)
-           // add(R.drawable.number28)
+            add(R.drawable.number28)
             add(R.drawable.number29)
             add(R.drawable.number30)
 
@@ -315,7 +315,7 @@ class QiblaApp : Application() {
             add(R.drawable.number35)
             add(R.drawable.number36)
             add(R.drawable.number37)
-            //add(R.drawable.number38)
+            add(R.drawable.number38)
             add(R.drawable.number39)
             add(R.drawable.number40)
 
@@ -326,7 +326,7 @@ class QiblaApp : Application() {
             add(R.drawable.number45)
             add(R.drawable.number46)
             add(R.drawable.number47)
-           // add(R.drawable.number48)
+            add(R.drawable.number48)
             add(R.drawable.number49)
             add(R.drawable.number50)
 
@@ -337,7 +337,7 @@ class QiblaApp : Application() {
             add(R.drawable.number55)
             add(R.drawable.number56)
             add(R.drawable.number57)
-          //  add(R.drawable.number58)
+            add(R.drawable.number58)
             add(R.drawable.number59)
             add(R.drawable.number60)
 
@@ -348,7 +348,7 @@ class QiblaApp : Application() {
             add(R.drawable.number65)
             add(R.drawable.number66)
             add(R.drawable.number67)
-          //  add(R.drawable.number68)
+            add(R.drawable.number68)
             add(R.drawable.number69)
             add(R.drawable.number70)
 
@@ -359,7 +359,7 @@ class QiblaApp : Application() {
             add(R.drawable.number75)
             add(R.drawable.number76)
             add(R.drawable.number77)
-          //  add(R.drawable.number78)
+            add(R.drawable.number78)
             add(R.drawable.number79)
             add(R.drawable.number80)
 
@@ -370,7 +370,7 @@ class QiblaApp : Application() {
             add(R.drawable.number85)
             add(R.drawable.number86)
             add(R.drawable.number87)
-         //   add(R.drawable.number88)
+            add(R.drawable.number88)
             add(R.drawable.number89)
             add(R.drawable.number90)
             add(R.drawable.number91)
@@ -380,7 +380,7 @@ class QiblaApp : Application() {
             add(R.drawable.number95)
             add(R.drawable.number96)
             add(R.drawable.number97)
-        //    add(R.drawable.number98)
+            add(R.drawable.number98)
             add(R.drawable.number99)
 
 
@@ -490,7 +490,7 @@ class QiblaApp : Application() {
                 "صبر کرنے والا" to "The Forbearing, The Patient"
             )
         )
-       rasoolNamesTranslations.addAll(
+        rasoolNamesTranslations.addAll(
             listOf(
                 "زیادہ تعریف کیا گیا۔ تعریف والا" to "Highly praised",
                 "سب سے ذیادہ حمد کرنے والا" to "Highly commendable",
@@ -591,7 +591,8 @@ class QiblaApp : Application() {
                 "شہرت والا" to "Well Known, famous",
                 "گواہ، شہید" to "Witnessing, Martyr",
                 "رسول الملاحم" to "The Messenger of the Battles of the Last day",
-                ))
+            )
+        )
         audioAllahResources.apply {
             add(R.raw.audio_allah_name_1)
             add(R.raw.audio_allah_name_2)
