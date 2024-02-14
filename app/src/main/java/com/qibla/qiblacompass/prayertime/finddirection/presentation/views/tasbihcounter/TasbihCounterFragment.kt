@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -14,6 +17,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.ALHAMDULILLAH
@@ -38,7 +42,7 @@ class TasbihCounterFragment :
     private lateinit var imgFirstBottom: ImageView
     private lateinit var counterTextView: TextView
     private var counter = 0
-    private val maxCounter = 100
+    private var maxCounter = 100
     lateinit var recyclerView: RecyclerView
     private lateinit var imageView: ImageView
     private val imageResources = listOf(
@@ -55,7 +59,7 @@ class TasbihCounterFragment :
         R.drawable.m12,
         R.drawable.m13,
         R.drawable.m14,
-        )
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,12 +117,12 @@ class TasbihCounterFragment :
         saveImageValue(requireContext(), selectedImageName.toString())
 
 
-
-
         val digitalCounter = binding.layoutCounterType
         digitalCounter.viewDigitalTasbih.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.digitalTasbihFragment)
-
+            digitalCounter.viewSetCounter.setOnClickListener {
+                showBottomSheetSetCounter()
+            }
         }
 
         view1.setOnTouchListener { view, motionEvent ->
@@ -126,19 +130,23 @@ class TasbihCounterFragment :
                 Log.d("TasbihCounterFragment", "onViewCreated: motionAction....... ")
                 Log.d("TasbihCounterFragment", "onViewCreated: view touch")
                 if (counter < maxCounter) {
-                    counter++
-                    counterTextView.text = counter.toString()
+                    updateIncrementalCounter()
                     Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
+                    if (counter == maxCounter) {
+                        stopMotionLayout()
+                        Log.d("TasbihCounterFragment", "MotionLayout interaction stopped.")
+                    }
                 } else {
                     Log.d("TasbihCounterFragment", "Maximum count reached.")
+                    Toast.makeText(mContext,"Maximum count reached.",Toast.LENGTH_LONG).show()
                 }
             }
 
             false
         }
+
         binding.imgReset.setOnClickListener {
-            counter = 0
-            counterTextView.text = "0"
+            showBottomSheetSetCounter()
         }
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {}
@@ -183,6 +191,40 @@ class TasbihCounterFragment :
             imageView2.setImageResource(selectedImage)
         }
         recyclerView.adapter = adapter
+    }
+    private fun stopMotionLayout() {
+        motionLayout.setInteractionEnabled(false)
+    }
+    private fun updateCount(value: Int) {
+        maxCounter = value
+        binding.tvCount.text = maxCounter.toString()
+    }
+
+    private fun updateIncrementalCounter() {
+        counter++
+        counterTextView.text = counter.toString()
+        // Save the counter value to SharedPreferences
+        SharedPreferences.saveIncrementalCounter(mContext,counter)
+    }
+
+    private fun showBottomSheetSetCounter() {
+        val bottomSheetView =
+            View.inflate(requireContext(), R.layout.bottom_sheet_set_counter, null)
+        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        val cancelButton: Button = bottomSheetView.findViewById(R.id.btn_set_counter_cancel)
+        val continueButton: Button = bottomSheetView.findViewById(R.id.btn_set_counter_continue)
+        val valueCounter: EditText = bottomSheetView.findViewById(R.id.edt_counter)
+        cancelButton.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+        continueButton.setOnClickListener {
+            val enteredValue = valueCounter.text.toString().toIntOrNull() ?: 0
+            updateCount(enteredValue)
+            bottomSheetDialog.dismiss()
+
+        }
+        bottomSheetDialog.show()
     }
 
     object TasbihZhikrUtil {

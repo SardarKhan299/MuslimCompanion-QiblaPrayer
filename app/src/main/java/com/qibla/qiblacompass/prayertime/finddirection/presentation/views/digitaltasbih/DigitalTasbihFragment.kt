@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.retrieveImageValue
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
@@ -24,12 +25,13 @@ class DigitalTasbihFragment :
     private lateinit var mainIncrementButton: ImageView
     private lateinit var resetButton: ImageView
     private lateinit var imageView: ImageView
-
+    private var counterInitialized: Boolean = false
 
     private var counterValue = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)?.hideActionBar()
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,12 +41,18 @@ class DigitalTasbihFragment :
         }
         val toolbar = binding.toolbarDigitalTasbih
         val toolbarText = toolbar.titleCounter
-        toolbarText.text = getString(R.string.tasbih_counter)
+        toolbarText.text = getString(R.string.digital_tasbih)
         toolbar.groupToolbarTasbihCounter.visibility = View.VISIBLE
         toolbar.imgNavigateBack.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
         counterTextView = binding.tvDigitalCounter
+        // Set the initial counter value only if it hasn't been initialized already
+        if (!counterInitialized) {
+            counterTextView.text = counterValue.toString()
+        }
+
+
         decrementButton = binding.imgMinusDigitalCounter
         resetButton = binding.imgResetDigitalCounter
         mainIncrementButton = binding.imgIncrementDigitalCounter
@@ -53,7 +61,7 @@ class DigitalTasbihFragment :
 
         binding.layoutDigitalCounterType.tvDigitalTasbih.text = getString(R.string.analog_tasbih)
         binding.layoutDigitalCounterType.viewDigitalTasbih.setOnClickListener {
-          //  Navigation.findNavController(requireView()).navigate(R.id.tasbihCounterFragment)
+            //  Navigation.findNavController(requireView()).navigate(R.id.tasbihCounterFragment)
             findNavController().closeCurrentScreen()
 
         }
@@ -84,11 +92,22 @@ class DigitalTasbihFragment :
             decrementCounter()
         }
 
+        // Retrieve the saved counter value from SharedPreferences only if it hasn't been initialized yet
+        if (!counterInitialized) {
+            counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext())
+            counterInitialized = true
+        }
+        // Update the counter TextView with the current counter value
+        counterTextView.text = counterValue.toString()
 
     }
 
     private fun incrementCounter() {
+       // counterValue++
         counterValue++
+        // Save the updated counter value to shared preferences
+     //   SharedPreferences.saveIncrementalCounter(requireContext(), counterValue)
+       // updateCounter()
         updateCounter()
     }
 
@@ -106,6 +125,8 @@ class DigitalTasbihFragment :
 
     private fun updateCounter() {
         counterTextView.text = counterValue.toString()
+        // Save the updated counter value to SharedPreferences
+        SharedPreferences.saveIncrementalCounter(requireContext(), counterValue)
     }
 
     object TasbihZhikrUtil {

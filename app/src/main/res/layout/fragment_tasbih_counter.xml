@@ -139,18 +139,24 @@
             app:layout_constraintTop_toBottomOf="@+id/include" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView2"
+            style="@style/counter_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_incremental_counter"
+            app:layout_constraintStart_toEndOf="@+id/tv_incremental_counter"
+            app:layout_constraintTop_toTopOf="@+id/tv_incremental_counter" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_count"
             style="@style/counter_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@string/_100"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_incremental_counter"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_right_tasbih_counter"
-            app:layout_constraintHorizontal_bias="@dimen/bias_zero"
-            app:layout_constraintStart_toEndOf="@+id/tv_incremental_counter"
-            app:layout_constraintTop_toTopOf="@+id/tv_incremental_counter"
-            app:layout_constraintVertical_bias="@dimen/bias_vertical_counter" />
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView2"
+            app:layout_constraintStart_toEndOf="@+id/appCompatTextView2"
+            app:layout_constraintTop_toTopOf="@+id/appCompatTextView2" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_reset"

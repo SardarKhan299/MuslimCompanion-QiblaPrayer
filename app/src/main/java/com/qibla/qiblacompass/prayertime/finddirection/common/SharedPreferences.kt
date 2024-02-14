@@ -9,6 +9,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.BIOMETRIC_ENABLE
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.SELECTED_IMAGE
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.KEY_INCREMENTAL_COUNTER
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.names.NamesData
 
 class SharedPreferences {
@@ -99,7 +100,7 @@ class SharedPreferences {
             }
         }
 
-        fun saveTimerEndTime(context: Context,endTime:Long){
+        fun saveTimerEndTime(context: Context, endTime: Long) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             msharedPreferences!!.edit().apply {
                 putLong(PrayerConstants.COUNTDOWN_TIME_KEY, endTime)
@@ -107,7 +108,7 @@ class SharedPreferences {
             }
         }
 
-        fun saveUserVisit(context: Context,isFirstTimeLogin:Boolean){
+        fun saveUserVisit(context: Context, isFirstTimeLogin: Boolean) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             msharedPreferences!!.edit().apply {
                 putBoolean(PrayerConstants.FIRST_TIME_LOGIN, isFirstTimeLogin)
@@ -115,7 +116,7 @@ class SharedPreferences {
             }
         }
 
-        fun saveUserCity(context: Context,userCity:String){
+        fun saveUserCity(context: Context, userCity: String) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             msharedPreferences!!.edit().apply {
                 putString(PrayerConstants.USER_CITY, userCity)
@@ -266,20 +267,14 @@ class SharedPreferences {
         }
 
         fun logoutUser(mContext: Context) {
-            saveUserDetails(mContext,"","","")
+            saveUserDetails(mContext, "", "", "")
         }
-    }
+
 
 
     fun getSelectionFromSharedPreferencesDetail(context: Context): Boolean {
-        val msharedPreferences: SharedPreferences? =
-            com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.initShardPreference(
-                context
-            )
-        return msharedPreferences!!.getBoolean(
-            com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.PREFS_SELECTED_KEY,
-            true
-        )
+        val msharedPreferences: SharedPreferences? = initShardPreference(context)
+        return msharedPreferences!!.getBoolean(PREFS_SELECTED_KEY, true)
     }
 
     //translation data
@@ -288,10 +283,7 @@ class SharedPreferences {
         urduTranslation: String,
         englishTranslation: String
     ) {
-        val msharedPreferences: SharedPreferences? =
-            com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.initShardPreference(
-                context
-            )
+        val msharedPreferences: SharedPreferences? = initShardPreference(context)
         msharedPreferences!!.edit().apply {
             putString("urdu_translation", urduTranslation)
             putString("english_translation", englishTranslation)
@@ -300,101 +292,30 @@ class SharedPreferences {
     }
 
     fun saveSelectedPlayerPosition(context: Context, position: Int) {
-        val msharedPreferences: SharedPreferences? =
-            com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.initShardPreference(
-                context
-            )
+        val msharedPreferences: SharedPreferences? = initShardPreference(context)
         msharedPreferences?.edit()?.putInt("selectedPlayerPosition", position)?.apply()
     }
 
     fun getSelectedPlayerPosition(context: Context): Int {
-        val msharedPreferences: SharedPreferences? =
-            com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.initShardPreference(
-                context
-            )
+        val msharedPreferences: SharedPreferences? = initShardPreference(context)
         if (msharedPreferences != null) {
             return msharedPreferences.getInt("selectedPlayerPosition", 0)
         }
         return 0
     }
 
+    fun saveIncrementalCounter(context: Context, counter: Int) {
+        val msharedPreferences: SharedPreferences? = initShardPreference(context)
+        msharedPreferences!!.edit().apply {
+            putInt(KEY_INCREMENTAL_COUNTER, counter)
+            apply()
+        }
+    }
 
+    fun retrieveIncrementalCounter(context: Context): Int {
+        val msharedPreferences: SharedPreferences? = initShardPreference(context)
+        return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER, 0)
+    }
 
-
+    }
 }
-//
-//   fun saveTranslations(
-//        context: Context,
-//        allahTranslations: ArrayList<Pair<String, String>>,
-//        rasoolTranslations: ArrayList<Pair<String, String>>
-//    ) {
-//        val gson = Gson()
-//        val allahJson = gson.toJson(allahTranslations)
-//        val rasoolJson = gson.toJson(rasoolTranslations)
-//
-//        val sharedPreferences = context.getSharedPreferences(
-//            com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.PREFS_KEY,
-//            Context.MODE_PRIVATE
-//        )
-//        val editor = sharedPreferences.edit()
-//        editor.putString("allah_translations", allahJson)
-//        editor.putString("rasool_translations", rasoolJson)
-//        editor.apply()
-//    }
-//   fun getAllahTranslations(context: Context): ArrayList<Pair<String, String>> {
-//        val sharedPreferences = context.getSharedPreferences(
-//            com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.PREFS_KEY,
-//            Context.MODE_PRIVATE
-//        )
-//        val allahJson = sharedPreferences.getString("allah_translations", "")
-//        return if (allahJson.isNullOrEmpty()) {
-//            ArrayList()
-//        } else {
-//            val gson = Gson()
-//            val type = object : TypeToken<ArrayList<Pair<String, String>>>() {}.type
-//            gson.fromJson(allahJson, type)
-//        }
-//    }
-//fun getRasoolTranslations(context: Context): ArrayList<Pair<String, String>> {
-//    val sharedPreferences = context.getSharedPreferences(com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.PREFS_KEY, Context.MODE_PRIVATE)
-//    val rasoolJson = sharedPreferences.getString("rasool_translations", "")
-//    return if (rasoolJson.isNullOrEmpty()) {
-//        ArrayList()
-//    } else {
-//        val gson = Gson()
-//        val type = object : TypeToken<ArrayList<Pair<String, String>>>() {}.type
-//        gson.fromJson(rasoolJson, type)
-//    }
-//}
-//
-//private fun saveSelectedDataToSharedPreferences(
-//    context: Context,
-//    namesData: NamesData,
-//    translation: Pair<String, String>
-//) {
-//    val msharedPreferences: SharedPreferences? =
-//        com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.initShardPreference(
-//            context
-//        )
-//    msharedPreferences!!.edit().apply {
-//        // Access the integer values from namesData:
-//        putInt("selected_name_image", namesData.nameImage)  // Use namesData.nameImage
-//        putInt(
-//            "selected_name_number_image",
-//            namesData.nameNumberImage
-//        )  // Use namesData.nameNumberImage
-//        putString("selected_translation_urdu", translation.first)
-//        putString("selected_translation_english", translation.second)
-//        apply()
-//    }
-//
-//}
-//
-//
-//fun saveSelectionToSharedPreferences(context: Context, isAllahSelected: Boolean) {
-//    val sharedPreferences = context.getSharedPreferences(com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.PREFS_NAME, Context.MODE_PRIVATE)
-//    val editor = sharedPreferences.edit()
-//    editor.putBoolean(com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.PREFS_SELECTED_KEY_ALLAH, isAllahSelected)
-//    editor.putBoolean(com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.PREFS_SELECTED_KEY_RASOOL, !isAllahSelected)
-//    editor.apply()
-//}

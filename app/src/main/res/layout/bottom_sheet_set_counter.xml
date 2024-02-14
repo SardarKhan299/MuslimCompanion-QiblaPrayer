@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_set_counter"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_bg"
+    >
+<androidx.appcompat.widget.AppCompatTextView
+    android:id="@+id/tv_title_set_counter"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="Set Tasbih Counter"
+    android:layout_marginStart="@dimen/_12sdp"
+    android:layout_marginTop="@dimen/_18sdp"
+    style="@style/side_menu_text_style"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tasbih_goal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Goal"
+        style="@style/side_menu_text_style"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_set_counter"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_set_counter"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edt_set_tasbih_counter"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary_color"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_set_counter"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tasbih_goal"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_counter"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_set_counter_cancel"
+        style="@style/cancel_button_style"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/cancel_button_bg"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_set_counter_continue"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_set_tasbih_counter" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_set_counter_continue"
+        android:background="@drawable/button_bg"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:text="@string/continue_btn"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_set_counter_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_set_counter_cancel"
+        app:layout_constraintTop_toTopOf="@+id/btn_set_counter_cancel"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,7 +39,7 @@
     <string name="deleting_account">Why are you deleting your account?</string>
     <string name="continue_btn">Continue</string>
     <string name="cancel">Cancel</string>
-    <string name="account_to_delete">Deleting your account will do the \n following:</string>
+    <string name="account_to_delete">Deleting your account will do the following:</string>
     <string name="deleting_your_account_logout_devices">\u2022 Log you out on all devices</string>
     <string name="deleting_your_account_info">\u2022 Delete all of your account information</string>
     <string name="delete">Delete</string>
@@ -103,7 +103,7 @@
     <string name="digital_tasbih">Digital Tasbih</string>
     <string name="set_counter">Set Counter</string>
     <string name="show_history">Show History</string>
-    <string name="_100">/100</string>
+    <string name="_100">100</string>
     <string name="_33">33</string>
     <string name="overflow">Overflow</string>
     <string name="start">Start</string>
