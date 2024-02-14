@@ -15,9 +15,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.al
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.numberImages
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.rasoolNamesImages
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
-import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
-import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
-import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
+import com.qibla.qiblacompass.prayertime.finddirection.common.*
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentNamesBinding
 
 
@@ -57,6 +55,7 @@ class NamesFragment : BaseFragment<FragmentNamesBinding>(R.layout.fragment_names
         toolbar.imgNavigateBack.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
+        toolbar.imgAddMore.invisible()
         //  adapter = NamesAdapter(ArrayList(), numberImages, ::onItemClick)
 
 

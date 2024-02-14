@@ -62,4 +62,6 @@
     <dimen name="bias_dialog">0.597</dimen>
     <dimen name="bias_vertical_counter">0.461</dimen>
     <dimen name="bias_horizontal_web">0.489</dimen>
+    <dimen name="arcView_start_margin">10</dimen>
+    <dimen name="arcView_margin_increment">10</dimen>
 </resources>

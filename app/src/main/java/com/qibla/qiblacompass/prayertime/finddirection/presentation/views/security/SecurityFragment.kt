@@ -46,19 +46,19 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>(R.layout.fragment
         binding.toolbarSecurity.viewSubScreen.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
-        binding.imgDownArrow.visible()
-        binding.viewResetPassword.setOnClickListener {
-            if (binding.groupSecurityResetPassword.visibility == View.VISIBLE) {
-                binding.groupSecurityResetPassword.gone()
-                binding.imgDownArrow.visible()
-                binding.imgUpArrow.gone()
-            } else if (binding.groupSecurityResetPassword.visibility == View.GONE) {
-                binding.groupSecurityResetPassword.visible()
-                binding.imgUpArrow.visible()
-                binding.imgDownArrow.gone()
-
-            }
-        }
+//        binding.imgDownArrow.visible()
+//        binding.viewResetPassword.setOnClickListener {
+//            if (binding.groupSecurityResetPassword.visibility == View.VISIBLE) {
+//                binding.groupSecurityResetPassword.gone()
+//                binding.imgDownArrow.visible()
+//                binding.imgUpArrow.gone()
+//            } else if (binding.groupSecurityResetPassword.visibility == View.GONE) {
+//                binding.groupSecurityResetPassword.visible()
+//                binding.imgUpArrow.visible()
+//                binding.imgDownArrow.gone()
+//
+//            }
+//        }
         binding.viewDeleteAccount.setOnClickListener {
             showBottomSheet()
         }

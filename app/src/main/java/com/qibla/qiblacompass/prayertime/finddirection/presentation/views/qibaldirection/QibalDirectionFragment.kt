@@ -59,10 +59,15 @@ class QibalDirectionFragment :
     private var currentAzimuth = 0f
     private val RC_Permission = 1221
     private val imageQibalCompass = listOf(
-        R.drawable.ic_compass_one, R.drawable.ic_compass_two, R.drawable.compass3,
-        R.drawable.compass7, R.drawable.compass8, R.drawable.compass9,
-        R.drawable.compass10, R.drawable.compass11, R.drawable.compass12,
-        R.drawable.compass13, R.drawable.compass14, R.drawable.compass15, R.drawable.compass16
+        R.drawable.compass3,
+        R.drawable.ic_compass_one,
+        R.drawable.ic_compass_two,
+        R.drawable.compass9,
+        R.drawable.compass10,
+        R.drawable.compass11,
+        R.drawable.compass17,
+        R.drawable.compass15,
+        R.drawable.compass16
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -433,8 +438,6 @@ class QibalDirectionFragment :
         tvAngle.text = strKaabaDirection
         qiblatIndicator!!.visibility = VISIBLE
     }
-
-
 
 
     private fun convertMeterToKilometer(meter: Float): Float {

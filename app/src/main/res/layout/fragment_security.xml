@@ -169,7 +169,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
-            app:constraint_referenced_ids="tv_reset_password,view_reset_password"/>
+            app:constraint_referenced_ids="tv_reset_password,view_reset_password,img_down_arrow,img_up_arrow"/>
         <androidx.constraintlayout.widget.Group
             android:id="@+id/group_security_reset_password"
             android:layout_width="match_parent"

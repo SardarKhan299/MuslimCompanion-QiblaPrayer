@@ -11,9 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
-import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
-import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
-import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
+import com.qibla.qiblacompass.prayertime.finddirection.common.*
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentNameDetailBinding
 
 
@@ -37,6 +35,7 @@ class NameDetailFragment : BaseFragment<FragmentNameDetailBinding>(R.layout.frag
         val toolbar = binding.toolbarNamesDetail
         toolbar.groupToolbarTasbihCounter.visibility = View.VISIBLE
         toolbar.titleCounter.text = getString(R.string.names)
+        toolbar.imgAddMore.invisible()
         toolbar.imgNavigateBack.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
