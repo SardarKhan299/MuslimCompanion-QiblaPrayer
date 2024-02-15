@@ -145,7 +145,7 @@ class TasbihCounterFragment :
             imageView2.setImageResource(selectedImage)
         }
         recyclerView.adapter = adapter
-
+        adapter.notifyDataSetChanged()
 
     digitalCounter.viewSetCounter.setOnClickListener {
             Log.d(

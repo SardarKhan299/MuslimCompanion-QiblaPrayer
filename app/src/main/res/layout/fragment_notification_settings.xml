@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.views.notificationsetting.NotificationSettingsFragment">
+
+    <include
+        android:id="@+id/toolbar_notification_settings"
+        layout="@layout/layout_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left_notification_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right_notification_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
+
+    <View
+        android:id="@+id/view_prayer_alerts"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_notification_settings"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_notification_settings"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_notification_settings" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_prayer_alerts"
+        style="@style/toolbar_sub_screens_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/prayer_alerts"
+        app:layout_constraintBottom_toBottomOf="@+id/view_prayer_alerts"
+        app:layout_constraintStart_toStartOf="@+id/view_prayer_alerts"
+        app:layout_constraintTop_toTopOf="@+id/view_prayer_alerts" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_bio_metric"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        app:trackTint="@drawable/switch_track_selector"
+        app:thumbTint="@drawable/switch_thumb_selector"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_prayer_alerts"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_notification_settings"
+        app:layout_constraintTop_toTopOf="@+id/tv_prayer_alerts"
+        />
+    <View
+        android:id="@+id/view_ayat"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_notification_settings"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_notification_settings"
+        app:layout_constraintTop_toBottomOf="@+id/view_prayer_alerts" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_ayat_of_day"
+        style="@style/toolbar_sub_screens_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/ayat_of_day_alert"
+        app:layout_constraintBottom_toBottomOf="@+id/view_ayat"
+        app:layout_constraintStart_toStartOf="@+id/view_ayat"
+        app:layout_constraintTop_toTopOf="@+id/view_ayat" />
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_ayat"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        app:trackTint="@drawable/switch_track_selector"
+        app:thumbTint="@drawable/switch_thumb_selector"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_ayat_of_day"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_notification_settings"
+        app:layout_constraintTop_toTopOf="@+id/tv_ayat_of_day"
+        />
+    <View
+        android:id="@+id/view_streak_reminder"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_notification_settings"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_notification_settings"
+        app:layout_constraintTop_toBottomOf="@+id/view_ayat" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_streak_reminder"
+        style="@style/toolbar_sub_screens_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/streak_reminder"
+        app:layout_constraintBottom_toBottomOf="@+id/view_streak_reminder"
+        app:layout_constraintStart_toStartOf="@+id/view_streak_reminder"
+        app:layout_constraintTop_toTopOf="@+id/view_streak_reminder" />
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_streak_reminder"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        app:trackTint="@drawable/switch_track_selector"
+        app:thumbTint="@drawable/switch_thumb_selector"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_streak_reminder"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_notification_settings"
+        app:layout_constraintTop_toTopOf="@+id/tv_streak_reminder"
+        />
+    <View
+        android:id="@+id/view_hijri_calendar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_notification_settings"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_notification_settings"
+        app:layout_constraintTop_toBottomOf="@+id/view_streak_reminder" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_hijri_calendar"
+        style="@style/toolbar_sub_screens_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="Hijri Calendar"
+        app:layout_constraintBottom_toBottomOf="@+id/view_hijri_calendar"
+        app:layout_constraintStart_toStartOf="@+id/view_hijri_calendar"
+        app:layout_constraintTop_toTopOf="@+id/view_hijri_calendar" />
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_hijri_calendar"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        app:trackTint="@drawable/switch_track_selector"
+        app:thumbTint="@drawable/switch_thumb_selector"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_hijri_calendar"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_notification_settings"
+        app:layout_constraintTop_toTopOf="@+id/tv_hijri_calendar"
+        />
+    <View
+        android:id="@+id/view_dhikr_reminder"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_notification_settings"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_notification_settings"
+        app:layout_constraintTop_toBottomOf="@+id/view_hijri_calendar" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_dhikr_reminder"
+        style="@style/toolbar_sub_screens_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/dhikr_reminder"
+        app:layout_constraintBottom_toBottomOf="@+id/view_dhikr_reminder"
+        app:layout_constraintStart_toStartOf="@+id/view_dhikr_reminder"
+        app:layout_constraintTop_toTopOf="@+id/view_dhikr_reminder" />
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_dhikr_reminder"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        app:trackTint="@drawable/switch_track_selector"
+        app:thumbTint="@drawable/switch_thumb_selector"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_dhikr_reminder"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_notification_settings"
+        app:layout_constraintTop_toTopOf="@+id/tv_dhikr_reminder"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
