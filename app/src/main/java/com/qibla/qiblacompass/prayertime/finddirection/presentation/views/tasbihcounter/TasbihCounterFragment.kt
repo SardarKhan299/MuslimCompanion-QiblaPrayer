@@ -43,6 +43,7 @@ class TasbihCounterFragment :
     private lateinit var counterTextView: TextView
     private var counter = 0
     private var maxCounter = 100
+    private var counterInitialized: Boolean = false
     lateinit var recyclerView: RecyclerView
     private lateinit var imageView: ImageView
     private val imageResources = listOf(
@@ -107,6 +108,12 @@ class TasbihCounterFragment :
         counterTextView.text = counter.toString() // Set initial counter text
         imageView = binding.layoutTasbihCounterFragment.findViewById(R.id.img_tasbih)
 
+//        // Retrieve the saved counter value from SharedPreferences
+//        val counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext())
+//        // Update the counter TextView with the saved counter value
+//        counterTextView.text = counterValue.toString()
+
+
         val selectedImageName = SharedPreferences.retrieveImageValue(requireContext())
         Log.d("TasbihCounterFragment :selectedImageName", "Selected image name: $selectedImageName")
         // Map the image name to the corresponding resource ID
@@ -115,39 +122,80 @@ class TasbihCounterFragment :
         // Set the image resource to the ImageView
         imageView.setImageResource(imageResource)
         saveImageValue(requireContext(), selectedImageName.toString())
+// Retrieve the saved counter value from SharedPreferences
+        val counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext())
 
+        // Update the increment text with the saved counter value
+        counterTextView.text = counterValue.toString()
 
         val digitalCounter = binding.layoutCounterType
         digitalCounter.viewDigitalTasbih.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.digitalTasbihFragment)
-            digitalCounter.viewSetCounter.setOnClickListener {
-                showBottomSheetSetCounter()
-            }
+        }
+        digitalCounter.viewSetCounter.setOnClickListener {
+            Log.d(
+                TasbihCounterFragment::class.java.simpleName,
+                "onViewCreated: viewSetCounter Clicked.."
+            )
+            showBottomSheetSetCounter()
+        }
+        binding.imgReset.setOnClickListener {
+            Log.d(TasbihCounterFragment::class.java.simpleName, "onViewCreated: imgReset Clicked..")
+            showBottomSheetSetCounter()
         }
 
+// Retrieve the stored entered value from SharedPreferences
+        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
+
+        // Update the counter TextView with the retrieved entered value
+        binding.tvCount.text = enteredValue.toString()
         view1.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TasbihCounterFragment", "onViewCreated: motionAction....... ")
-                Log.d("TasbihCounterFragment", "onViewCreated: view touch")
-                if (counter < maxCounter) {
+                // Retrieve the stored entered value from SharedPreferences
+                val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
+                if (counter < enteredValue) {
                     updateIncrementalCounter()
-                    Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
-                    if (counter == maxCounter) {
+                    if (counter == enteredValue) {
                         stopMotionLayout()
-                        Log.d("TasbihCounterFragment", "MotionLayout interaction stopped.")
+                        Toast.makeText(
+                            mContext,
+                            "You've reached the maximum count.",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 } else {
-                    Log.d("TasbihCounterFragment", "Maximum count reached.")
-                    Toast.makeText(mContext,"Maximum count reached.",Toast.LENGTH_LONG).show()
+                    // If equal or greater, disable interaction and show maximum count message
+                    stopMotionLayout()
+                    Toast.makeText(mContext, "You've reached the maximum count.", Toast.LENGTH_LONG)
+                        .show()
                 }
             }
-
             false
         }
 
-        binding.imgReset.setOnClickListener {
-            showBottomSheetSetCounter()
-        }
+//        view1.setOnTouchListener { view, motionEvent ->
+//            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+//                Log.d("TasbihCounterFragment", "onViewCreated: motionAction....... ")
+//                Log.d("TasbihCounterFragment", "onViewCreated: view touch")
+//                if (counter < maxCounter) {
+//                    updateIncrementalCounter()
+//                    Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
+//                    if (counter == maxCounter) {
+//                        stopMotionLayout()
+//                        Log.d("TasbihCounterFragment", "MotionLayout interaction stopped.")
+//                    }
+//                } else {
+//                    // If equal or greater, disable interaction and show maximum count message
+//                    stopMotionLayout()
+//                    Log.d("TasbihCounterFragment", "Maximum count reached.")
+//                    Toast.makeText(mContext, "Maximum count reached.", Toast.LENGTH_LONG).show()
+//                }
+//            }
+//
+//            false
+//        }
+
+
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {}
             override fun onTransitionChange(
@@ -192,9 +240,11 @@ class TasbihCounterFragment :
         }
         recyclerView.adapter = adapter
     }
+
     private fun stopMotionLayout() {
         motionLayout.setInteractionEnabled(false)
     }
+
     private fun updateCount(value: Int) {
         maxCounter = value
         binding.tvCount.text = maxCounter.toString()
@@ -204,7 +254,7 @@ class TasbihCounterFragment :
         counter++
         counterTextView.text = counter.toString()
         // Save the counter value to SharedPreferences
-        SharedPreferences.saveIncrementalCounter(mContext,counter)
+        SharedPreferences.saveIncrementalCounter(mContext, counter)
     }
 
     private fun showBottomSheetSetCounter() {
@@ -220,11 +270,24 @@ class TasbihCounterFragment :
         }
         continueButton.setOnClickListener {
             val enteredValue = valueCounter.text.toString().toIntOrNull() ?: 0
-            updateCount(enteredValue)
-            bottomSheetDialog.dismiss()
+            if (enteredValue != 0) {
+                // updateCount(enteredValue)
+                updateMaxCounter(enteredValue)
+                SharedPreferences.saveEnteredValue(mContext, enteredValue)
 
+                bottomSheetDialog.dismiss()
+            } else {
+                // Show a toast or an error message indicating that zero is not allowed
+                Toast.makeText(requireContext(), "Zero is not allowed", Toast.LENGTH_SHORT).show()
+            }
         }
         bottomSheetDialog.show()
+    }
+
+
+    private fun updateMaxCounter(newValue: Int) {
+        maxCounter = newValue
+        binding.tvCount.text = maxCounter.toString()
     }
 
     object TasbihZhikrUtil {

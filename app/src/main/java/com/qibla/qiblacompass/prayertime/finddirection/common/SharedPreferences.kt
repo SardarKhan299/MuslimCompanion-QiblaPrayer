@@ -7,9 +7,11 @@ import android.util.Log
 import androidx.preference.PreferenceManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_INCREMENTAL_COUNTER
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_NAVIGATING_BACK_TO_TASBIH_SCREEN
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.BIOMETRIC_ENABLE
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.SELECTED_IMAGE
-import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.KEY_INCREMENTAL_COUNTER
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.names.NamesData
 
 class SharedPreferences {
@@ -271,51 +273,74 @@ class SharedPreferences {
         }
 
 
-
-    fun getSelectionFromSharedPreferencesDetail(context: Context): Boolean {
-        val msharedPreferences: SharedPreferences? = initShardPreference(context)
-        return msharedPreferences!!.getBoolean(PREFS_SELECTED_KEY, true)
-    }
-
-    //translation data
-    fun saveTranslationToSharedPreferences(
-        context: Context,
-        urduTranslation: String,
-        englishTranslation: String
-    ) {
-        val msharedPreferences: SharedPreferences? = initShardPreference(context)
-        msharedPreferences!!.edit().apply {
-            putString("urdu_translation", urduTranslation)
-            putString("english_translation", englishTranslation)
-            apply()
+        fun getSelectionFromSharedPreferencesDetail(context: Context): Boolean {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getBoolean(PREFS_SELECTED_KEY, true)
         }
-    }
 
-    fun saveSelectedPlayerPosition(context: Context, position: Int) {
-        val msharedPreferences: SharedPreferences? = initShardPreference(context)
-        msharedPreferences?.edit()?.putInt("selectedPlayerPosition", position)?.apply()
-    }
-
-    fun getSelectedPlayerPosition(context: Context): Int {
-        val msharedPreferences: SharedPreferences? = initShardPreference(context)
-        if (msharedPreferences != null) {
-            return msharedPreferences.getInt("selectedPlayerPosition", 0)
+        //translation data
+        fun saveTranslationToSharedPreferences(
+            context: Context,
+            urduTranslation: String,
+            englishTranslation: String
+        ) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString("urdu_translation", urduTranslation)
+                putString("english_translation", englishTranslation)
+                apply()
+            }
         }
-        return 0
-    }
 
-    fun saveIncrementalCounter(context: Context, counter: Int) {
-        val msharedPreferences: SharedPreferences? = initShardPreference(context)
-        msharedPreferences!!.edit().apply {
-            putInt(KEY_INCREMENTAL_COUNTER, counter)
-            apply()
+        fun saveSelectedPlayerPosition(context: Context, position: Int) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences?.edit()?.putInt("selectedPlayerPosition", position)?.apply()
         }
-    }
 
-    fun retrieveIncrementalCounter(context: Context): Int {
-        val msharedPreferences: SharedPreferences? = initShardPreference(context)
-        return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER, 0)
-    }
+        fun getSelectedPlayerPosition(context: Context): Int {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            if (msharedPreferences != null) {
+                return msharedPreferences.getInt("selectedPlayerPosition", 0)
+            }
+            return 0
+        }
 
+        fun saveIncrementalCounter(context: Context, counter: Int) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putInt(KEY_INCREMENTAL_COUNTER, counter)
+                apply()
+            }
+        }
+
+        fun retrieveIncrementalCounter(context: Context): Int {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER, 0)
+        }
+
+
+        fun saveEnteredValue(context: Context, enteredValue: Int) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putInt(ENTERED_VALUE_KEY, enteredValue).apply()
+            }
+        }
+
+        fun retrieveEnteredValue(context: Context): Int {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getInt(ENTERED_VALUE_KEY, 0)
+        }
+
+        fun setNavigatingBackToTasbihScreen(context: Context, navigatingBack: Boolean) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putBoolean(KEY_NAVIGATING_BACK_TO_TASBIH_SCREEN, navigatingBack).apply()
+            }
+        }
+
+        fun getNavigatingBackToTasbihScreen(context: Context): Boolean {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getBoolean(KEY_NAVIGATING_BACK_TO_TASBIH_SCREEN, false)
+        }
     }
 }
