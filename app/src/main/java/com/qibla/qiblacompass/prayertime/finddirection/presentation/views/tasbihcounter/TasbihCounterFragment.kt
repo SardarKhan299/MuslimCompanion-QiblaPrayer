@@ -108,10 +108,6 @@ class TasbihCounterFragment :
         counterTextView.text = counter.toString() // Set initial counter text
         imageView = binding.layoutTasbihCounterFragment.findViewById(R.id.img_tasbih)
 
-//        // Retrieve the saved counter value from SharedPreferences
-//        val counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext())
-//        // Update the counter TextView with the saved counter value
-//        counterTextView.text = counterValue.toString()
 
 
         val selectedImageName = SharedPreferences.retrieveImageValue(requireContext())
@@ -132,7 +128,26 @@ class TasbihCounterFragment :
         digitalCounter.viewDigitalTasbih.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.digitalTasbihFragment)
         }
-        digitalCounter.viewSetCounter.setOnClickListener {
+        recyclerView.layoutManager = LinearLayoutManager(
+            requireContext(),
+            RecyclerView.HORIZONTAL, false
+        )
+
+        val adapter = TasbihCounterAdapter(imageResources) { selectedImage ->
+            // Handle the click event here to set the selected image to another ImageView
+            // For example, if you have an ImageView called 'selectedImageView'
+            imageView1.setImageResource(selectedImage)
+            imgFirst.setImageResource(selectedImage)
+            imgSecond.setImageResource(selectedImage)
+            imgFirst.setImageResource(selectedImage)
+            imgAnimated.setImageResource(selectedImage)
+            imgFirstBottom.setImageResource(selectedImage)
+            imageView2.setImageResource(selectedImage)
+        }
+        recyclerView.adapter = adapter
+
+
+    digitalCounter.viewSetCounter.setOnClickListener {
             Log.d(
                 TasbihCounterFragment::class.java.simpleName,
                 "onViewCreated: viewSetCounter Clicked.."
@@ -144,19 +159,30 @@ class TasbihCounterFragment :
             showBottomSheetSetCounter()
         }
 
-// Retrieve the stored entered value from SharedPreferences
+/// Retrieve the stored entered value from SharedPreferences
         val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
 
-        // Update the counter TextView with the retrieved entered value
+// Update the counter TextView with the retrieved entered value
         binding.tvCount.text = enteredValue.toString()
+
+// Set onTouchListener to handle user interactions
         view1.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
                 // Retrieve the stored entered value from SharedPreferences
                 val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
+
+                // Check if the current counter is less than the entered value
                 if (counter < enteredValue) {
+                    startMotionLayout()
+                    // Update the counter
                     updateIncrementalCounter()
+
+                    // Check if the counter has reached the entered value
                     if (counter == enteredValue) {
+                        // Stop the MotionLayout animation
                         stopMotionLayout()
+
+                        // Show a toast message indicating maximum count reached
                         Toast.makeText(
                             mContext,
                             "You've reached the maximum count.",
@@ -164,12 +190,19 @@ class TasbihCounterFragment :
                         ).show()
                     }
                 } else {
-                    // If equal or greater, disable interaction and show maximum count message
+                    // If the counter is equal or greater than the entered value
+                    // Stop the MotionLayout animation
                     stopMotionLayout()
-                    Toast.makeText(mContext, "You've reached the maximum count.", Toast.LENGTH_LONG)
-                        .show()
+
+                    // Show a toast message indicating maximum count reached
+                    Toast.makeText(
+                        mContext,
+                        "You've reached the maximum count.",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
+            // Return false to indicate that the listener has not consumed the event
             false
         }
 
@@ -222,29 +255,13 @@ class TasbihCounterFragment :
             }
         })
 
-        recyclerView.layoutManager = LinearLayoutManager(
-            requireContext(),
-            RecyclerView.HORIZONTAL, false
-        )
-
-        val adapter = TasbihCounterAdapter(imageResources) { selectedImage ->
-            // Handle the click event here to set the selected image to another ImageView
-            // For example, if you have an ImageView called 'selectedImageView'
-            imageView1.setImageResource(selectedImage)
-            imgFirst.setImageResource(selectedImage)
-            imgSecond.setImageResource(selectedImage)
-            imgFirst.setImageResource(selectedImage)
-            imgAnimated.setImageResource(selectedImage)
-            imgFirstBottom.setImageResource(selectedImage)
-            imageView2.setImageResource(selectedImage)
-        }
-        recyclerView.adapter = adapter
     }
-
     private fun stopMotionLayout() {
-        motionLayout.setInteractionEnabled(false)
+        motionLayout.isInteractionEnabled = false
     }
-
+    private fun startMotionLayout() {
+        motionLayout.isInteractionEnabled = true
+    }
     private fun updateCount(value: Int) {
         maxCounter = value
         binding.tvCount.text = maxCounter.toString()

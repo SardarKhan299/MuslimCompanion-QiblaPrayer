@@ -372,6 +372,8 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         data.add(QiblaData(R.drawable.near_me_icn))
         data.add(QiblaData(R.drawable.hijri_calendar_icn))
         data.add(QiblaData(R.drawable.hadith_icn))
+        data.add(QiblaData(R.drawable.dua_icn))
+        data.add(QiblaData(R.drawable.streak_icn))
 
 
         val adapter = QiblaAdapter(requireContext(), data) { position ->
@@ -409,6 +411,10 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             }
             6 -> {
                 findNavController().navigate(R.id.makkahLiveFragment)
+
+            }
+            10 -> {
+                findNavController().navigate(R.id.duaFragment)
 
             }
             // Add more cases for other positions

@@ -24,7 +24,7 @@ class ArcView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 //    }
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-    canvas?.drawPath(path, paint)
+    canvas.drawPath(path, paint)
     }
     fun updatePath(startX: Float, startY: Float, endX: Float, endY: Float) {
         path.reset()

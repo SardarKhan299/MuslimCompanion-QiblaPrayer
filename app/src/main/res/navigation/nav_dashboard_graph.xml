@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_boardFragment_to_namesFragment"
             app:destination="@id/namesFragment" />
+        <action
+            android:id="@+id/action_boardFragment_to_duaFragment"
+            app:destination="@id/duaFragment" />
     </fragment>
     <fragment
         android:id="@+id/sideMenuFragment"
@@ -134,4 +137,9 @@
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.nameDetail.NameDetailFragment"
         android:label="fragment_name_detail"
         tools:layout="@layout/fragment_name_detail" />
+    <fragment
+        android:id="@+id/duaFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dua.DuaFragment"
+        android:label="fragment_dua"
+        tools:layout="@layout/fragment_dua" />
 </navigation>
