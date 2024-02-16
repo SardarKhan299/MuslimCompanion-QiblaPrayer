@@ -1,9 +1,13 @@
 package com.qibla.qiblacompass.prayertime.finddirection.common
 
+import android.app.AlarmManager
 import android.content.ActivityNotFoundException
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import com.qibla.qiblacompass.prayertime.finddirection.BuildConfig
@@ -68,5 +72,90 @@ class CommonMethods {
                 //e.toString();
             }
         }
+
+        fun canScheduleExactAlarms(context: Context): Boolean {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                Log.d(CommonMethods::class.simpleName, "canScheduleExactAlarms: ${am.canScheduleExactAlarms()} ")
+                return am.canScheduleExactAlarms()
+            } else {
+                true
+            }
+        }
+
+        fun enableBootReceiver(context:Context){
+            val receiver = ComponentName(context, SampleBootReceiver::class.java)
+
+            context.packageManager.setComponentEnabledSetting(
+                receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP
+            )
+        }
+
+
+//        private fun addAlarm(
+//            alarmId: Int,
+//            routineId: String,
+//            timeInSec: Long,
+//            isNotification: Boolean = false
+//        ) {
+//            if (timeInSec != 0L) {
+//
+//                val alarmTimeInMilliSec = (timeInSec - DateTimeUtil.getParentOffset()) * 1000
+//
+//                if (DateTimeUtil.getParentTimestamp() > timeInSec) {
+//                    LogUtil.e("routine time is already passed")
+//                    return
+//                }
+//
+//                LogUtil.i(
+//                    "$TAG " + String.format(
+//                        "setting alarm (%d) for routine (%s) on time (%s)",
+//                        alarmId,
+//                        routineId,
+//                        Date(alarmTimeInMilliSec)
+//                    )
+//
+//                )
+//
+//                val deltaTimeInMinsUpdated =
+//                    (alarmTimeInMilliSec - System.currentTimeMillis()) / (1000 * 60)
+//                LogUtil.i(
+//                    "$TAG " + String.format(
+//                        "delta in min(s)=%d",
+//                        deltaTimeInMinsUpdated
+//                    )
+//                )
+//
+//                val am = mContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//                val intent = if (isNotification) getPendingRoutineReminderNotificationIntent(
+//                    alarmId,
+//                    routineId
+//                ) else getPendingIntent(alarmId, routineId)
+//
+//                try {
+//                    if (AppUtil.canScheduleExactAlarms(context)) {
+//                        am.setAlarmClock(
+//                            AlarmManager.AlarmClockInfo(
+//                                alarmTimeInMilliSec,
+//                                intent
+//                            ), intent
+//                        )
+//                    } else {
+//                        LogUtil.e("exact alarms permission not granted")
+////                    am.setExact(
+////                        AlarmManager.RTC_WAKEUP,
+////                        alarmTimeInMilliSec,
+////                        intent
+////                    )
+//                    }
+//                } catch (e: SecurityException) {
+//                    LogUtil.e("error in setting alarm for routine $routineId")
+//                    Sentry.captureException(e)
+//                    e.printStackTrace()
+//                }
+//            }
+//        }
     }
 }

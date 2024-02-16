@@ -1,7 +1,10 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login
 
+import android.app.AlarmManager
+import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -92,6 +95,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
         binding.viewLoginFacebook.setOnClickListener {
             Log.d(LoginFragment::class.simpleName, "onViewCreated: ")
+            SharedPreferences.saveUserDetails(mContext, "Guest" ?: "", "Guest@gmail.com" ?: "",
+                (""?: "").toString()
+            )
             // Navigate to DashboardActivity
             startActivity(Intent(requireContext(), DashBoardActivity::class.java))
             requireActivity().finish()
@@ -258,5 +264,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             Log.d("MakkahLiveFragment"::class.simpleName, "ok_btn_callback: ")
         }
     }
+
+
+
 
 }
