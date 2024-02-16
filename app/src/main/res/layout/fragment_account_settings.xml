@@ -58,22 +58,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_4sdp"
-            android:text="@string/prayer_notifications"
+            android:text="@string/notifications"
             app:layout_constraintBottom_toBottomOf="@+id/view_notification_prayer"
             app:layout_constraintStart_toStartOf="@+id/view_notification_prayer"
             app:layout_constraintTop_toTopOf="@+id/view_notification_prayer" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_prayer_notification"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            app:trackTint="@drawable/switch_track_selector"
-            app:thumbTint="@drawable/switch_thumb_selector"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_account_setting"
-            app:layout_constraintEnd_toEndOf="@+id/view_notification_prayer"
-            app:layout_constraintTop_toTopOf="@+id/tv_account_setting"
-            />
+
         <View
             android:id="@+id/view_face_id"
             android:layout_width="0dp"
@@ -104,6 +94,12 @@
             app:layout_constraintEnd_toEndOf="@+id/view_face_id"
             app:layout_constraintTop_toTopOf="@+id/tv_face_id"
             />
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="view_face_id,tv_face_id,switch_face_id"
+            />
         <View
             android:id="@+id/view_bio_metric"
             android:layout_width="0dp"
@@ -112,7 +108,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline_account_settings_right"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline_account_settings_left"
-            app:layout_constraintTop_toBottomOf="@+id/view_face_id" />
+            app:layout_constraintTop_toBottomOf="@+id/view_notification_prayer" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_bio_metric"

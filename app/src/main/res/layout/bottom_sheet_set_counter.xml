@@ -12,7 +12,7 @@
     android:id="@+id/tv_title_set_counter"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:text="Set Tasbih Counter"
+    android:text="@string/set_tasbih_counter"
     android:layout_marginStart="@dimen/_12sdp"
     android:layout_marginTop="@dimen/_18sdp"
     style="@style/side_menu_text_style"
@@ -24,8 +24,8 @@
         android:id="@+id/tv_tasbih_goal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Goal"
-        style="@style/side_menu_text_style"
+        android:text="@string/today_s_goal"
+        style="@style/goal_text_style"
         android:layout_marginTop="@dimen/_20sdp"
         app:layout_constraintStart_toStartOf="@+id/tv_title_set_counter"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_set_counter"
@@ -46,7 +46,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_counter"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"/>
+            android:layout_height="@dimen/_60sdp"
+            android:textAlignment="textStart"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -72,7 +76,7 @@
         android:layout_height="@dimen/_50sdp"
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
-        android:text="@string/continue_btn"
+        android:text="@string/save"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/btn_set_counter_cancel"

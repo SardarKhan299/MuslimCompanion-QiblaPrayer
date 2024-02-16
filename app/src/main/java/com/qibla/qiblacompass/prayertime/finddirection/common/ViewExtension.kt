@@ -59,7 +59,7 @@ fun View.changeAppearanceForPrayerType(
                 ResourcesCompat.getDrawable(resources, R.drawable.toolbar_next_prayer_bg, null)
             toolbarBellIcon.background =
                 ResourcesCompat.getDrawable(resources, R.drawable.toolbar_next_prayer_bg, null)
-            bellIcon.background = ResourcesCompat.getDrawable(resources, R.drawable.bell_icon, null)
+            bellIcon.background = ResourcesCompat.getDrawable(resources, R.drawable.ic_on_bell, null)
 
 
         }
@@ -78,7 +78,7 @@ fun View.changeAppearanceForPrayerType(
                 ResourcesCompat.getDrawable(resources, R.drawable.toolbar_zuhar_background, null)
             toolbarBellIcon.background =
                 ResourcesCompat.getDrawable(resources, R.drawable.toolbar_zuhar_background, null)
-            bellIcon.background = ResourcesCompat.getDrawable(resources, R.drawable.bell_icon, null)
+            bellIcon.background = ResourcesCompat.getDrawable(resources, R.drawable.ic_on_bell, null)
             layoutView.background =
                 ResourcesCompat.getDrawable(resources, R.drawable.prayer_zuhar_drawable_bg, null)
         }
@@ -94,7 +94,7 @@ fun View.changeAppearanceForPrayerType(
                 ResourcesCompat.getDrawable(resources, R.drawable.toolbar_asr_background, null)
             toolbarBellIcon.background =
                 ResourcesCompat.getDrawable(resources, R.drawable.toolbar_asr_background, null)
-            bellIcon.background = ResourcesCompat.getDrawable(resources, R.drawable.bell_icon, null)
+            bellIcon.background = ResourcesCompat.getDrawable(resources, R.drawable.ic_on_bell, null)
             layoutView.background =
                 ResourcesCompat.getDrawable(resources, R.drawable.background_main_view_asr, null)
         }
@@ -113,7 +113,7 @@ fun View.changeAppearanceForPrayerType(
                 ResourcesCompat.getDrawable(resources, R.drawable.toolbar_maghrib_background, null)
             toolbarBellIcon.background =
                 ResourcesCompat.getDrawable(resources, R.drawable.toolbar_maghrib_background, null)
-            bellIcon.background = ResourcesCompat.getDrawable(resources, R.drawable.bell_icon, null)
+            bellIcon.background = ResourcesCompat.getDrawable(resources, R.drawable.ic_on_bell, null)
             layoutView.background = ResourcesCompat.getDrawable(
                 resources,
                 R.drawable.background_main_view_maghrib,
@@ -135,7 +135,7 @@ fun View.changeAppearanceForPrayerType(
                 ResourcesCompat.getDrawable(resources, R.drawable.toolbar_isha_background, null)
             toolbarBellIcon.background =
                 ResourcesCompat.getDrawable(resources, R.drawable.toolbar_isha_background, null)
-            bellIcon.background = ResourcesCompat.getDrawable(resources, R.drawable.bell_icon, null)
+            bellIcon.background = ResourcesCompat.getDrawable(resources, R.drawable.ic_on_bell, null)
             layoutView.background =
                 ResourcesCompat.getDrawable(resources, R.drawable.background_main_view_isha, null)
         }
@@ -154,7 +154,7 @@ fun View.changeAppearanceForPrayerType(
                 ResourcesCompat.getDrawable(resources, R.drawable.toolbar_tahajjud_background, null)
             toolbarBellIcon.background =
                 ResourcesCompat.getDrawable(resources, R.drawable.toolbar_tahajjud_background, null)
-            bellIcon.background = ResourcesCompat.getDrawable(resources, R.drawable.bell_icon, null)
+            bellIcon.background = ResourcesCompat.getDrawable(resources, R.drawable.ic_on_bell, null)
             layoutView.background =
                 ResourcesCompat.getDrawable(resources, R.drawable.background_main_view_isha, null)
         }

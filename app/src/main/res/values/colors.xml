@@ -44,4 +44,5 @@
     <color name="about_us_text_color">#59000000</color>
     <color name="text_zakat_color">#009C06</color>
     <color name="search_text_color">#828183</color>
+    <color name="goal_text_color"> #7C7C7C</color>
 </resources>

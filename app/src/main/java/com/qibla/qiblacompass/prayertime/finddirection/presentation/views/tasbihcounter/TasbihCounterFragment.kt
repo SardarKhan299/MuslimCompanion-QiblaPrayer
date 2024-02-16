@@ -1,5 +1,6 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter
 
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -43,8 +44,11 @@ class TasbihCounterFragment :
     private lateinit var counterTextView: TextView
     private var counter = 0
     private var maxCounter = 100
+    private var counterInitialized: Boolean = false
+    lateinit var adapter: TasbihCounterAdapter
     lateinit var recyclerView: RecyclerView
     private lateinit var imageView: ImageView
+    private var mediaPlayer: MediaPlayer? = null
     private val imageResources = listOf(
         R.drawable.ic_counter_one,
         R.drawable.m1,
@@ -107,6 +111,7 @@ class TasbihCounterFragment :
         counterTextView.text = counter.toString() // Set initial counter text
         imageView = binding.layoutTasbihCounterFragment.findViewById(R.id.img_tasbih)
 
+
         val selectedImageName = SharedPreferences.retrieveImageValue(requireContext())
         Log.d("TasbihCounterFragment :selectedImageName", "Selected image name: $selectedImageName")
         // Map the image name to the corresponding resource ID
@@ -115,39 +120,117 @@ class TasbihCounterFragment :
         // Set the image resource to the ImageView
         imageView.setImageResource(imageResource)
         saveImageValue(requireContext(), selectedImageName.toString())
+             // Retrieve the saved counter value from SharedPreferences
+        val counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext())
 
+        // Update the increment text with the saved counter value
+        counterTextView.text = counterValue.toString()
 
         val digitalCounter = binding.layoutCounterType
         digitalCounter.viewDigitalTasbih.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.digitalTasbihFragment)
-            digitalCounter.viewSetCounter.setOnClickListener {
-                showBottomSheetSetCounter()
-            }
+        }
+        recyclerView.layoutManager = LinearLayoutManager(
+            requireContext(),
+            RecyclerView.HORIZONTAL, false
+        )
+        adapter = TasbihCounterAdapter(imageResources) { selectedImage ->
+            // Handle the click event here to set the selected image to another ImageView
+            // For example, if you have an ImageView called 'selectedImageView'
+            imageView1.setImageResource(selectedImage)
+            imgFirst.setImageResource(selectedImage)
+            imgSecond.setImageResource(selectedImage)
+            imgFirst.setImageResource(selectedImage)
+            imgAnimated.setImageResource(selectedImage)
+            imgFirstBottom.setImageResource(selectedImage)
+            imageView2.setImageResource(selectedImage)
+        }
+        recyclerView.adapter = adapter
+        //   adapter.notifyDataSetChanged()
+        digitalCounter.viewSetCounter.setOnClickListener {
+            Log.d(
+                TasbihCounterFragment::class.java.simpleName,
+                "onViewCreated: viewSetCounter Clicked.."
+            )
+            showBottomSheetSetCounter()
+        }
+        binding.imgReset.setOnClickListener {
+            Log.d(TasbihCounterFragment::class.java.simpleName, "onViewCreated: imgReset Clicked..")
+            showBottomSheetSetCounter()
         }
 
+
+/// Retrieve the stored entered value from SharedPreferences
+        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
+
+// Update the counter TextView with the retrieved entered value
+        binding.tvCount.text = enteredValue.toString()
+
+// Set onTouchListener to handle user interactions
         view1.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TasbihCounterFragment", "onViewCreated: motionAction....... ")
-                Log.d("TasbihCounterFragment", "onViewCreated: view touch")
-                if (counter < maxCounter) {
+                // Retrieve the stored entered value from SharedPreferences
+                val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
+
+                // Check if the current counter is less than the entered value
+                if (counter < enteredValue) {
+                    startMotionLayout()
+                    // Update the counter
                     updateIncrementalCounter()
-                    Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
-                    if (counter == maxCounter) {
+                    // Play the MP3 sound
+                    playSound()
+                    // Check if the counter has reached the entered value
+                    if (counter == enteredValue) {
+                        // Stop the MotionLayout animation
                         stopMotionLayout()
-                        Log.d("TasbihCounterFragment", "MotionLayout interaction stopped.")
+
+                        // Show a toast message indicating maximum count reached
+                        Toast.makeText(
+                            mContext,
+                            "You've reached the maximum count.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 } else {
-                    Log.d("TasbihCounterFragment", "Maximum count reached.")
-                    Toast.makeText(mContext,"Maximum count reached.",Toast.LENGTH_LONG).show()
+                    // If the counter is equal or greater than the entered value
+                    // Stop the MotionLayout animation
+                    stopMotionLayout()
+
+                    // Show a toast message indicating maximum count reached
+                    Toast.makeText(
+                        mContext,
+                        "You've reached the maximum count.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
-
+            // Return false to indicate that the listener has not consumed the event
             false
         }
 
-        binding.imgReset.setOnClickListener {
-            showBottomSheetSetCounter()
-        }
+//        view1.setOnTouchListener { view, motionEvent ->
+//            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+//                Log.d("TasbihCounterFragment", "onViewCreated: motionAction....... ")
+//                Log.d("TasbihCounterFragment", "onViewCreated: view touch")
+//                if (counter < maxCounter) {
+//                    updateIncrementalCounter()
+//                    Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
+//                    if (counter == maxCounter) {
+//                        stopMotionLayout()
+//                        Log.d("TasbihCounterFragment", "MotionLayout interaction stopped.")
+//                    }
+//                } else {
+//                    // If equal or greater, disable interaction and show maximum count message
+//                    stopMotionLayout()
+//                    Log.d("TasbihCounterFragment", "Maximum count reached.")
+//                    Toast.makeText(mContext, "Maximum count reached.", Toast.LENGTH_LONG).show()
+//                }
+//            }
+//
+//            false
+//        }
+
+
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {}
             override fun onTransitionChange(
@@ -174,27 +257,17 @@ class TasbihCounterFragment :
             }
         })
 
-        recyclerView.layoutManager = LinearLayoutManager(
-            requireContext(),
-            RecyclerView.HORIZONTAL, false
-        )
 
-        val adapter = TasbihCounterAdapter(imageResources) { selectedImage ->
-            // Handle the click event here to set the selected image to another ImageView
-            // For example, if you have an ImageView called 'selectedImageView'
-            imageView1.setImageResource(selectedImage)
-            imgFirst.setImageResource(selectedImage)
-            imgSecond.setImageResource(selectedImage)
-            imgFirst.setImageResource(selectedImage)
-            imgAnimated.setImageResource(selectedImage)
-            imgFirstBottom.setImageResource(selectedImage)
-            imageView2.setImageResource(selectedImage)
-        }
-        recyclerView.adapter = adapter
     }
+
     private fun stopMotionLayout() {
-        motionLayout.setInteractionEnabled(false)
+        motionLayout.isInteractionEnabled = false
     }
+
+    private fun startMotionLayout() {
+        motionLayout.isInteractionEnabled = true
+    }
+
     private fun updateCount(value: Int) {
         maxCounter = value
         binding.tvCount.text = maxCounter.toString()
@@ -204,7 +277,9 @@ class TasbihCounterFragment :
         counter++
         counterTextView.text = counter.toString()
         // Save the counter value to SharedPreferences
-        SharedPreferences.saveIncrementalCounter(mContext,counter)
+        SharedPreferences.saveIncrementalCounter(mContext, counter)
+        // Notify the adapter that the data set has changed
+        adapter.notifyDataSetChanged()
     }
 
     private fun showBottomSheetSetCounter() {
@@ -220,11 +295,42 @@ class TasbihCounterFragment :
         }
         continueButton.setOnClickListener {
             val enteredValue = valueCounter.text.toString().toIntOrNull() ?: 0
-            updateCount(enteredValue)
-            bottomSheetDialog.dismiss()
+            if (enteredValue != 0) {
+                // updateCount(enteredValue)
+                updateMaxCounter(enteredValue)
+                SharedPreferences.saveEnteredValue(mContext, enteredValue)
 
+                bottomSheetDialog.dismiss()
+            } else {
+                // Show a toast or an error message indicating that zero is not allowed
+                Toast.makeText(requireContext(), "Zero is not allowed", Toast.LENGTH_SHORT).show()
+            }
         }
         bottomSheetDialog.show()
+    }
+
+
+    private fun updateMaxCounter(newValue: Int) {
+        maxCounter = newValue
+        binding.tvCount.text = maxCounter.toString()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Release MediaPlayer when the fragment is destroyed
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+
+    private fun playSound() {
+        // Initialize MediaPlayer with the MP3 file
+        val mediaPlayer = MediaPlayer.create(requireContext(), R.raw.tasbih_sound)
+        mediaPlayer?.start()
+
+        // Release MediaPlayer when sound finishes playing
+        mediaPlayer?.setOnCompletionListener {
+            mediaPlayer.release()
+        }
     }
 
     object TasbihZhikrUtil {

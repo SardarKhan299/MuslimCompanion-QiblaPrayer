@@ -258,5 +258,13 @@
     <string name="compassCalibrationSubTitle">Tilt and move your phone 3 times like this:</string>
     <string name="shareText">Salam, download the best Muslim app for FREE now at https://play.google.com/store/apps/details?id=com.qibla.qiblacompass.prayertime.finddirection</string>
     <string name="salam_download_the_best_muslim_app_for_free_now_at">\nSalam, download the best Muslim app for FREE now at\n\n</string>
-
+    <string name="notifications">Notifications</string>
+    <string name="prayer_alerts">Prayer Alerts</string>
+    <string name="ayat_of_day_alert">Ayat of the day Alert</string>
+    <string name="streak_reminder">Check-in Streak Reminder</string>
+    <string name="dhikr_reminder">Dhikr Reminder</string>
+    <string name="save">Save</string>
+    <string name="today_s_goal">Today’s Goal</string>
+    <string name="set_tasbih_counter">Set Tasbih Counter</string>
+    <string name="privacy">Privacy Policy</string>
 </resources>

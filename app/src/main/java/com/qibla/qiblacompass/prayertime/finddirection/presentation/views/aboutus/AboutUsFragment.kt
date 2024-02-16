@@ -45,8 +45,8 @@ class AboutUsFragment : BaseFragment<FragmentAboutUsBinding>(R.layout.fragment_a
         }
     }
 
-    fun gotoUpdateAccountSettings() {
-        findNavController().navigate(R.id.accountSettingsFragment)
+    fun gotoPrivacy() {
+        findNavController().navigate(R.id.privacyFragment)
 
     }
 

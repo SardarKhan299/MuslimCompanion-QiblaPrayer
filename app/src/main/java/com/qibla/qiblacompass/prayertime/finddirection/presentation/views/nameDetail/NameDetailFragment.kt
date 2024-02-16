@@ -3,6 +3,9 @@ package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.nameD
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -19,6 +22,11 @@ class NameDetailFragment : BaseFragment<FragmentNameDetailBinding>(R.layout.frag
     private var mediaPlayer: MediaPlayer? = null
     lateinit var mainImage: ImageView
     lateinit var numberImageView: ImageView
+    private lateinit var scaleGestureDetector: ScaleGestureDetector
+    private lateinit var gestureDetector: GestureDetector
+    private var scaleFactor = 1.0f
+    private lateinit var touchableViews: List<View>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(NameDetailFragment::class.simpleName, "onCreate: ")
@@ -47,8 +55,28 @@ class NameDetailFragment : BaseFragment<FragmentNameDetailBinding>(R.layout.frag
         binding.imgForward.setOnClickListener {
             navigateToPosition(QiblaApp.isAllahNamesSelected, 1)
         }
-
-    }
+//        // Initialize ScaleGestureDetector
+//        scaleGestureDetector = ScaleGestureDetector(mContext, ScaleListener())
+//
+//        // Initialize GestureDetector
+//        gestureDetector = GestureDetector(context, GestureListener())
+//        // Initialize the list of touchable views
+//        touchableViews = listOf<View>(
+//            mainImage,
+//            numberImageView,
+//            binding.tvNameTranslationUrdu,
+//            binding.tvNameTranslationEnglish
+//        )
+//
+//        // Set touch listeners for each touchable view
+//        for (touchableView in touchableViews) {
+//            touchableView.setOnTouchListener { _, event ->
+//                gestureDetector.onTouchEvent(event)
+//                scaleGestureDetector.onTouchEvent(event)
+//                true
+//            }
+//        }
+}
 
     private fun navigateToPosition(isAllahSelected: Boolean, step: Int) {
         val currentPosition = SharedPreferences.getSelectedPosition(requireContext())
@@ -110,6 +138,34 @@ class NameDetailFragment : BaseFragment<FragmentNameDetailBinding>(R.layout.frag
         mediaPlayer = MediaPlayer.create(requireContext(), audioResource)
         mediaPlayer?.start()
     }
+//    // ScaleGestureDetector to handle pinch-to-zoom gesture
+//    inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+//        override fun onScale(detector: ScaleGestureDetector): Boolean {
+//            scaleFactor *= detector.scaleFactor
+//            scaleFactor = scaleFactor.coerceIn(0.1f, 5.0f) // Prevent scaling too small or too large
+//
+//            // Apply scale to all touchable views
+//            for (touchableView in touchableViews) {
+//                touchableView.scaleX = scaleFactor
+//                touchableView.scaleY = scaleFactor
+//            }
+//
+//            return true
+//        }
+//    }
+//
+//    // GestureDetector to handle double-tap gesture for resetting zoom
+//    inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
+//        override fun onDoubleTap(e: MotionEvent): Boolean {
+//            scaleFactor = 1.0f
+//            // Reset scale of all touchable views
+//            for (touchableView in touchableViews) {
+//                touchableView.scaleX = scaleFactor
+//                touchableView.scaleY = scaleFactor
+//            }
+//            return true
+//        }
+//    }
 }
 
 

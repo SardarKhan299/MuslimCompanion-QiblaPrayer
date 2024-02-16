@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -94,6 +95,7 @@ class DigitalTasbihFragment :
 
         // Retrieve the saved counter value from SharedPreferences only if it hasn't been initialized yet
         if (!counterInitialized) {
+
             counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext())
             counterInitialized = true
         }
@@ -103,12 +105,24 @@ class DigitalTasbihFragment :
     }
 
     private fun incrementCounter() {
-       // counterValue++
-        counterValue++
-        // Save the updated counter value to shared preferences
-     //   SharedPreferences.saveIncrementalCounter(requireContext(), counterValue)
-       // updateCounter()
-        updateCounter()
+        // Retrieve the entered value from SharedPreferences
+        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
+
+        // Check if the current counter value is less than the entered value
+        if (counterValue < enteredValue) {
+            // If less, increment the counter
+            counterValue++
+            updateCounter()
+            // Save the updated counter value to SharedPreferences
+            SharedPreferences.saveIncrementalCounter(requireContext(), counterValue)
+        } else {
+            // If equal or greater, show a message indicating maximum count reached
+            Toast.makeText(
+                requireContext(),
+                "You've reached the maximum count.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     private fun decrementCounter() {

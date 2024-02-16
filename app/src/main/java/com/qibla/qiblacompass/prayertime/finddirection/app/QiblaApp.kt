@@ -9,6 +9,8 @@ import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.qibla.qiblacompass.prayertime.finddirection.BuildConfig
 import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.MAKKAH_LIVE_URL1
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.PRIVACY_URL
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -25,10 +27,11 @@ class QiblaApp : Application() {
         val numberImages: ArrayList<Int> = ArrayList()
         val audioAllahResources = arrayListOf<Int>()
         val audioRasoolResources = arrayListOf<Int>()
-
-
+        val KEY_INCREMENTAL_COUNTER = "incremental_counter"
+        val ENTERED_VALUE_KEY = "entered_value_key"
         var isAllahNamesSelected = true
         var selectedPrayerPos = 0
+        val KEY_NAVIGATING_BACK_TO_TASBIH_SCREEN = "navigating_back_to_tasbih_screen"
     }
 
     override fun onCreate() {
@@ -46,7 +49,8 @@ class QiblaApp : Application() {
 
         // Initialize Remote Config default values.
         val defaults = mutableMapOf<String, Any>(
-            "MAKKAH_LIVE_URL1" to "https://www.youtube-nocookie.com/embed/xZtG7Bn2B5c?autoplay=1&playsinline=1"
+            MAKKAH_LIVE_URL1 to "https://www.youtube-nocookie.com/embed/xZtG7Bn2B5c?autoplay=1&playsinline=1",
+            PRIVACY_URL to "https://www.stellatechnology.com/"
         )
         remoteConfig.apply {
             setConfigSettingsAsync(configSettings)
