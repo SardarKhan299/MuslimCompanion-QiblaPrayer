@@ -1,20 +1,15 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard
 
 import android.Manifest
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.*
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -22,9 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,25 +35,15 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentDashBoardBinding
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.qibaldirection.CompassDirectionActivity
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.qibaldirection.QibalDirectionFragment
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.scopes.FragmentScoped
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.cancelAndJoin
-import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 @AndroidEntryPoint
@@ -190,7 +173,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                             val hijriDay = it.data[currentDay-1].date.hijri.day
                             val hijriDate = hijriDay +"_"+hijriMonth +"_"+ hijriYear
                             binding.tvIslamicMonth.text = hijriDate
-                            setAlarms()
+                            setAlarms(prayerTimeList)
 
 //                            updateUI(it)
 //                            viewModel.deleteAll()
@@ -271,8 +254,21 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         }
     }
 
-    private fun setAlarms() {
+    private fun setAlarms(prayerTimeList: List<String>) {
         Log.d(DashBoardFragment::class.simpleName, "setAlarms: ")
+
+        if(prayerTimeList.size ==6) {
+//            binding.layoutPrayerTiming.tvTimePrayer.text = prayerTimesList[0]
+//            binding.layoutPrayerTiming.tvTimeZuhrPrayer.text = prayerTimesList[2]
+//            binding.layoutPrayerTiming.tvTimeAsrPrayer.text = prayerTimesList[3]
+//            binding.layoutPrayerTiming.tvTimeMaghribPrayer.text = prayerTimesList[4]
+//            binding.layoutPrayerTiming.tvTimeIshaPrayer.text = prayerTimesList[5]
+        }
+
+        for (i in prayerTimeList) {
+            val namazTimeInMilliSeconds = convertTimeToMilliseconds(i)
+            Log.d(DashBoardFragment::class.simpleName, "setAlarms: $namazTimeInMilliSeconds")
+        }
     }
 
     fun startCountdown(totalSeconds: Long) {
