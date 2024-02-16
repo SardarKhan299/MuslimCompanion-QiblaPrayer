@@ -60,6 +60,7 @@
             android:layout_height="0dp"
             android:padding="@dimen/_10sdp"
             android:src="@drawable/ic_drop_down"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/tv_location_city_compass"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_direction"
             app:layout_constraintHorizontal_bias="0.028"
@@ -73,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pakistan"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_1sdp"
             app:layout_constraintEnd_toEndOf="@+id/tv_location_city_compass"
             app:layout_constraintStart_toStartOf="@+id/tv_location_city_compass"
             app:layout_constraintTop_toBottomOf="@+id/tv_location_city_compass" />
@@ -191,8 +192,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/qibla_indicator"
-            android:layout_width="@dimen/qibla"
-            android:layout_height="330dp"
+            android:layout_width="@dimen/_265sdp"
+            android:layout_height="@dimen/_285sdp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:contentDescription="@string/compass_hands"
@@ -204,10 +205,11 @@
             app:layout_constraintStart_toStartOf="@+id/guideline_left_direction"
             app:layout_constraintTop_toBottomOf="@+id/tv_location_country_compass" />
 
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/bg_shade"
-            android:layout_width="@dimen/qibla"
-            android:layout_height="285dp"
+            android:layout_width="@dimen/_230sdp"
+            android:layout_height="@dimen/_235sdp"
             android:contentDescription="@string/compass_hands"
             android:scaleType="fitXY"
             android:src="@drawable/shade_green"
@@ -216,10 +218,12 @@
             app:layout_constraintStart_toStartOf="@+id/guideline_left_direction"
             app:layout_constraintTop_toTopOf="@+id/qibla_indicator" />
 
+
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/dial"
-            android:layout_width="@dimen/dial"
-            android:layout_height="240dp"
+            android:layout_width="@dimen/_218sdp"
+            android:layout_height="@dimen/_218sdp"
             android:layout_centerInParent="true"
             android:contentDescription="@string/compass_dial"
             android:paddingStart="16dp"
@@ -231,10 +235,21 @@
             app:layout_constraintTop_toTopOf="@+id/qibla_indicator"
             app:srcCompat="@drawable/compass3" />
 
+        <View
+            android:id="@+id/indicator"
+            android:layout_width="@dimen/_4sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:background="@android:color/holo_green_light"
+           app:layout_constraintTop_toTopOf="@+id/dial"
+            app:layout_constraintStart_toStartOf="@+id/qibla_indicator"
+            app:layout_constraintEnd_toEndOf="@+id/qibla_indicator"
+            />
+
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/needle"
             android:layout_width="40dp"
-            android:layout_height="170dp"
+            android:layout_height="@dimen/_135sdp"
             android:layout_centerInParent="true"
             android:contentDescription="@string/compass_dial"
             android:visibility="visible"
@@ -243,5 +258,9 @@
             app:layout_constraintStart_toStartOf="@+id/guideline_left_direction"
             app:layout_constraintTop_toTopOf="@+id/dial"
             app:srcCompat="@drawable/needle_new" />
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

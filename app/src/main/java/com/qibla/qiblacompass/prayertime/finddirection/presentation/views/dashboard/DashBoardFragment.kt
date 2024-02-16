@@ -190,6 +190,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                             val hijriDay = it.data[currentDay-1].date.hijri.day
                             val hijriDate = hijriDay +"_"+hijriMonth +"_"+ hijriYear
                             binding.tvIslamicMonth.text = hijriDate
+                            setAlarms()
 
 //                            updateUI(it)
 //                            viewModel.deleteAll()
@@ -268,6 +269,10 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 }
             }
         }
+    }
+
+    private fun setAlarms() {
+        Log.d(DashBoardFragment::class.simpleName, "setAlarms: ")
     }
 
     fun startCountdown(totalSeconds: Long) {
