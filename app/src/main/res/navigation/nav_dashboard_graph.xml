@@ -75,6 +75,9 @@
         <action
             android:id="@+id/action_aboutUsFragment_to_webViewUrlLoadFragment"
             app:destination="@id/webViewUrlLoadFragment" />
+        <action
+            android:id="@+id/action_aboutUsFragment_to_privacyFragment"
+            app:destination="@id/privacyFragment" />
     </fragment>
     <fragment
         android:id="@+id/webViewUrlLoadFragment"
@@ -150,4 +153,8 @@
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.notificationsetting.NotificationSettingsFragment"
         android:label="fragment_notification_settings"
         tools:layout="@layout/fragment_notification_settings" />
+    <fragment
+        android:id="@+id/privacyFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.privacy.PrivacyFragment"
+        android:label="PrivacyFragment" />
 </navigation>

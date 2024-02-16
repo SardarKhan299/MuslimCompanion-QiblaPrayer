@@ -1,5 +1,6 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter
 
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -47,6 +48,7 @@ class TasbihCounterFragment :
     lateinit var adapter: TasbihCounterAdapter
     lateinit var recyclerView: RecyclerView
     private lateinit var imageView: ImageView
+    private var mediaPlayer: MediaPlayer? = null
     private val imageResources = listOf(
         R.drawable.ic_counter_one,
         R.drawable.m1,
@@ -118,7 +120,7 @@ class TasbihCounterFragment :
         // Set the image resource to the ImageView
         imageView.setImageResource(imageResource)
         saveImageValue(requireContext(), selectedImageName.toString())
-// Retrieve the saved counter value from SharedPreferences
+             // Retrieve the saved counter value from SharedPreferences
         val counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext())
 
         // Update the increment text with the saved counter value
@@ -175,7 +177,8 @@ class TasbihCounterFragment :
                     startMotionLayout()
                     // Update the counter
                     updateIncrementalCounter()
-
+                    // Play the MP3 sound
+                    playSound()
                     // Check if the counter has reached the entered value
                     if (counter == enteredValue) {
                         // Stop the MotionLayout animation
@@ -185,7 +188,7 @@ class TasbihCounterFragment :
                         Toast.makeText(
                             mContext,
                             "You've reached the maximum count.",
-                            Toast.LENGTH_LONG
+                            Toast.LENGTH_SHORT
                         ).show()
                     }
                 } else {
@@ -197,7 +200,7 @@ class TasbihCounterFragment :
                     Toast.makeText(
                         mContext,
                         "You've reached the maximum count.",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
             }
@@ -310,6 +313,24 @@ class TasbihCounterFragment :
     private fun updateMaxCounter(newValue: Int) {
         maxCounter = newValue
         binding.tvCount.text = maxCounter.toString()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Release MediaPlayer when the fragment is destroyed
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+
+    private fun playSound() {
+        // Initialize MediaPlayer with the MP3 file
+        val mediaPlayer = MediaPlayer.create(requireContext(), R.raw.tasbih_sound)
+        mediaPlayer?.start()
+
+        // Release MediaPlayer when sound finishes playing
+        mediaPlayer?.setOnCompletionListener {
+            mediaPlayer.release()
+        }
     }
 
     object TasbihZhikrUtil {

@@ -6,9 +6,10 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000"
+        motion:duration="400"
         motion:autoTransition="jumpToStart"
-        motion:pathMotionArc="flip">
+        motion:pathMotionArc="flip"
+        >
 
 
        <KeyFrameSet>
