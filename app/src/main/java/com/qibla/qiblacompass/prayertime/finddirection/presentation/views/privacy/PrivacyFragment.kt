@@ -79,7 +79,7 @@ class PrivacyFragment : BaseFragment<FragmentPrivacyBinding>(R.layout.fragment_p
         val remoteConfig = Firebase.remoteConfig
 
         // [START get_config_values]
-        privacyUrl = remoteConfig[PrayerConstants.MAKKAH_LIVE_URL1].asString()
+        privacyUrl = remoteConfig[PrayerConstants.PRIVACY_URL].asString()
         Log.d(MakkahLiveFragment::class.simpleName, "fetchUrl: $privacyUrl")
         if (privacyUrl != "") {
             configureWebViewForAutoPlay(
@@ -100,7 +100,8 @@ class PrivacyFragment : BaseFragment<FragmentPrivacyBinding>(R.layout.fragment_p
 
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
-                webView.loadUrl("javascript:(function() { document.getElementsByTagName('video')[0].play(); })()")
+                Log.d(PrivacyFragment::class.simpleName, "onPageFinished: ")    
+            //webView.loadUrl("javascript:(function() { document.getElementsByTagName('video')[0].play(); })()")
             }
         }
 
