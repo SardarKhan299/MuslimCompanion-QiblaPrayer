@@ -48,6 +48,13 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_top_dashboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.21" />
+
             <View
                 android:id="@+id/view_auto_detect"
                 android:layout_width="@dimen/_80sdp"
@@ -138,7 +145,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_4sdp"
                 android:text="@string/_00_25_20"
                 app:layout_constraintStart_toStartOf="@+id/view_dashboard"
                 app:layout_constraintTop_toBottomOf="@+id/tv_next_prayer_time" />
@@ -149,6 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/asar"
+                android:layout_marginTop="-8dp"
                 app:layout_constraintStart_toStartOf="@+id/tv_counter_next_prayer_time"
                 app:layout_constraintTop_toBottomOf="@+id/tv_counter_next_prayer_time" />
 
@@ -201,13 +208,13 @@
                 android:id="@+id/view_dashboard_atay_day"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_140sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
                 android:background="@drawable/dashboard_view_border_bg"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
                 app:layout_constraintHorizontal_bias="@dimen/bias_zero"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
-                app:layout_constraintTop_toBottomOf="@+id/view4" />
+                app:layout_constraintTop_toBottomOf="@+id/guideline_top_dashboard" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_ayat"
@@ -264,15 +271,6 @@
                 android:text="@string/ayat_name"
                 app:layout_constraintEnd_toEndOf="@+id/view_dashboard_atay_day"
                 app:layout_constraintTop_toBottomOf="@+id/view_separator_bottom" />
-
-            <View
-                android:id="@+id/view4"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="1dp"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
-                app:layout_constraintTop_toBottomOf="@+id/tv_prayer_time" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_ayat_translation"

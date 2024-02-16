@@ -171,7 +171,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                             val hijriMonth = it.data[currentDay-1].date.hijri.month.en
                             val hijriYear = it.data[currentDay-1].date.hijri.year
                             val hijriDay = it.data[currentDay-1].date.hijri.day
-                            val hijriDate = hijriDay +"_"+hijriMonth +"_"+ hijriYear
+                            val hijriDate = "$hijriDay $hijriMonth $hijriYear"
                             binding.tvIslamicMonth.text = hijriDate
                             setAlarms(prayerTimeList)
 

@@ -11,7 +11,7 @@ import java.util.Calendar
 class PrayerReminder(val context: Context, val prayerTimes: List<String>) {
 
     fun setAlarms(){
-            Log.d(PrayerReminder::class.simpleName, "setAlarms: ")
+//            Log.d(PrayerReminder::class.simpleName, "setAlarms: ")
 //            createAlarm(1, prayerTimes.fajr, context.getString(R.string.fajr))
 //            createAlarm(2, prayerTimes.dhuhr, context.getString(R.string.zuhar))
 //            createAlarm(3, prayerTimes.asr, context.getString(R.string.asr))
