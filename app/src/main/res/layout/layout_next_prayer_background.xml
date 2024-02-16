@@ -41,7 +41,7 @@
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:src="@drawable/ic_unselected_bell_icon"
+
             app:layout_constraintBottom_toBottomOf="@+id/view_fajr"
             app:layout_constraintEnd_toEndOf="@+id/view_fajr"
             app:layout_constraintTop_toTopOf="@+id/view_fajr" />
@@ -84,7 +84,6 @@
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:src="@drawable/ic_unselected_bell_icon"
             app:layout_constraintBottom_toBottomOf="@+id/view_zuhar"
             app:layout_constraintEnd_toEndOf="@+id/view_zuhar"
             app:layout_constraintTop_toTopOf="@+id/view_zuhar" />
@@ -127,7 +126,6 @@
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:src="@drawable/ic_unselected_bell_icon"
             app:layout_constraintBottom_toBottomOf="@+id/view_asr"
             app:layout_constraintEnd_toEndOf="@+id/view_asr"
             app:layout_constraintTop_toTopOf="@+id/view_asr" />
@@ -170,7 +168,7 @@
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:src="@drawable/ic_unselected_bell_icon"
+
             app:layout_constraintBottom_toBottomOf="@+id/view_maghrib"
             app:layout_constraintEnd_toEndOf="@+id/view_maghrib"
             app:layout_constraintTop_toTopOf="@+id/view_maghrib" />
@@ -214,7 +212,7 @@
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:src="@drawable/ic_unselected_bell_icon"
+
             app:layout_constraintBottom_toBottomOf="@+id/view_isha"
             app:layout_constraintEnd_toEndOf="@+id/view_isha"
             app:layout_constraintTop_toTopOf="@+id/view_isha" />
@@ -224,7 +222,7 @@
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:src="@drawable/ic_unselected_bell_icon"
+            android:src="@drawable/ic_off_bell"
             app:layout_constraintBottom_toBottomOf="@+id/view_tahajjud"
             app:layout_constraintEnd_toEndOf="@+id/view_tahajjud"
             app:layout_constraintTop_toTopOf="@+id/view_tahajjud" />

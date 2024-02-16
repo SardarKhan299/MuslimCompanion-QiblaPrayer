@@ -58,6 +58,9 @@
         <action
             android:id="@+id/action_accountSettingsFragment_to_securityFragment"
             app:destination="@id/securityFragment" />
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_notificationSettingsFragment"
+            app:destination="@id/notificationSettingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/securityFragment"
@@ -142,4 +145,9 @@
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dua.DuaFragment"
         android:label="fragment_dua"
         tools:layout="@layout/fragment_dua" />
+    <fragment
+        android:id="@+id/notificationSettingsFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.notificationsetting.NotificationSettingsFragment"
+        android:label="fragment_notification_settings"
+        tools:layout="@layout/fragment_notification_settings" />
 </navigation>

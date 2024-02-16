@@ -44,6 +44,7 @@ class TasbihCounterFragment :
     private var counter = 0
     private var maxCounter = 100
     private var counterInitialized: Boolean = false
+    lateinit var adapter: TasbihCounterAdapter
     lateinit var recyclerView: RecyclerView
     private lateinit var imageView: ImageView
     private val imageResources = listOf(
@@ -109,7 +110,6 @@ class TasbihCounterFragment :
         imageView = binding.layoutTasbihCounterFragment.findViewById(R.id.img_tasbih)
 
 
-
         val selectedImageName = SharedPreferences.retrieveImageValue(requireContext())
         Log.d("TasbihCounterFragment :selectedImageName", "Selected image name: $selectedImageName")
         // Map the image name to the corresponding resource ID
@@ -132,8 +132,7 @@ class TasbihCounterFragment :
             requireContext(),
             RecyclerView.HORIZONTAL, false
         )
-
-        val adapter = TasbihCounterAdapter(imageResources) { selectedImage ->
+        adapter = TasbihCounterAdapter(imageResources) { selectedImage ->
             // Handle the click event here to set the selected image to another ImageView
             // For example, if you have an ImageView called 'selectedImageView'
             imageView1.setImageResource(selectedImage)
@@ -145,9 +144,8 @@ class TasbihCounterFragment :
             imageView2.setImageResource(selectedImage)
         }
         recyclerView.adapter = adapter
-        adapter.notifyDataSetChanged()
-
-    digitalCounter.viewSetCounter.setOnClickListener {
+        //   adapter.notifyDataSetChanged()
+        digitalCounter.viewSetCounter.setOnClickListener {
             Log.d(
                 TasbihCounterFragment::class.java.simpleName,
                 "onViewCreated: viewSetCounter Clicked.."
@@ -158,6 +156,7 @@ class TasbihCounterFragment :
             Log.d(TasbihCounterFragment::class.java.simpleName, "onViewCreated: imgReset Clicked..")
             showBottomSheetSetCounter()
         }
+
 
 /// Retrieve the stored entered value from SharedPreferences
         val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
@@ -255,13 +254,17 @@ class TasbihCounterFragment :
             }
         })
 
+
     }
+
     private fun stopMotionLayout() {
         motionLayout.isInteractionEnabled = false
     }
+
     private fun startMotionLayout() {
         motionLayout.isInteractionEnabled = true
     }
+
     private fun updateCount(value: Int) {
         maxCounter = value
         binding.tvCount.text = maxCounter.toString()
@@ -272,6 +275,8 @@ class TasbihCounterFragment :
         counterTextView.text = counter.toString()
         // Save the counter value to SharedPreferences
         SharedPreferences.saveIncrementalCounter(mContext, counter)
+        // Notify the adapter that the data set has changed
+        adapter.notifyDataSetChanged()
     }
 
     private fun showBottomSheetSetCounter() {

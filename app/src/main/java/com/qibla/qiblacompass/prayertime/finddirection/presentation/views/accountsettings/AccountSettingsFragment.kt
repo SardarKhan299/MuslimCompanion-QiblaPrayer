@@ -48,7 +48,9 @@ class AccountSettingsFragment :
             findNavController().closeCurrentScreen()
         }
         setupBiometricAuth()
-
+        binding.viewNotificationPrayer.setOnClickListener {
+            findNavController().navigate(R.id.notificationSettingsFragment)
+        }
         binding.switchBioMetric.isChecked = SharedPreferences.isBiometricEnabled(mContext)
         binding.switchBioMetric.setOnCheckedChangeListener { buttonView, isChecked ->
             Log.d(AccountSettingsFragment::class.simpleName, "onViewCreated: $isChecked")
@@ -147,7 +149,7 @@ class AccountSettingsFragment :
             if (result.resultCode == Activity.RESULT_OK) {
                 // There are no request codes
                 val data: Intent? = result.data
-                Log.d(AccountSettingsFragment::class.simpleName, ": Activity Result ${data}")
+                Log.d(AccountSettingsFragment::class.simpleName, ": Activity Result $data")
                 checkBiometricFeatureState()
             } else {
                 Log.d(AccountSettingsFragment::class.simpleName, ": User cancelled the Settings.")

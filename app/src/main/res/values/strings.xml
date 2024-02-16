@@ -263,4 +263,7 @@
     <string name="ayat_of_day_alert">Ayat of the day Alert</string>
     <string name="streak_reminder">Check-in Streak Reminder</string>
     <string name="dhikr_reminder">Dhikr Reminder</string>
+    <string name="save">Save</string>
+    <string name="today_s_goal">Today’s Goal</string>
+    <string name="set_tasbih_counter">Set Tasbih Counter</string>
 </resources>
