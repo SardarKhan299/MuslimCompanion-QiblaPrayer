@@ -48,18 +48,22 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
-            <androidx.constraintlayout.widget.Guideline
+            <View
                 android:id="@+id/guideline_top_dashboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.21" />
+                app:layout_constraintTop_toTopOf="@+id/view_dashboard"
+                app:layout_constraintBottom_toBottomOf="@+id/view_dashboard"
+                app:layout_constraintStart_toStartOf="@+id/view_dashboard"
+                app:layout_constraintEnd_toEndOf="@+id/view_dashboard"
+                app:layout_constraintVertical_bias="0.75"
+                />
 
             <View
                 android:id="@+id/view_auto_detect"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_30sdp"
-                app:layout_constraintStart_toStartOf="@+id/toolbar_board"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_board" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -67,7 +71,6 @@
                 style="@style/auto_detect_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_4sdp"
                 android:text="@string/auto_detect"
                 app:layout_constraintBottom_toBottomOf="@+id/view_auto_detect"
                 app:layout_constraintStart_toStartOf="@id/view_auto_detect"
@@ -134,10 +137,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginBottom="-6dp"
                 android:text="@string/next_prayer_in"
                 app:layout_constraintStart_toStartOf="@+id/view_dashboard"
-                app:layout_constraintTop_toBottomOf="@+id/tv_dashboard_date_time" />
+                app:layout_constraintBottom_toTopOf="@+id/tv_counter_next_prayer_time" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_counter_next_prayer_time"
@@ -146,8 +149,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:text="@string/_00_25_20"
+                android:layout_marginBottom="@dimen/_6sdp"
                 app:layout_constraintStart_toStartOf="@+id/view_dashboard"
-                app:layout_constraintTop_toBottomOf="@+id/tv_next_prayer_time" />
+                app:layout_constraintBottom_toTopOf="@+id/tv_prayer_time" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_prayer_time"
@@ -155,9 +159,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/asar"
-                android:layout_marginTop="-8dp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="@+id/tv_counter_next_prayer_time"
-                app:layout_constraintTop_toBottomOf="@+id/tv_counter_next_prayer_time" />
+                app:layout_constraintBottom_toTopOf="@+id/guideline_top_dashboard" />
 
             <View
                 android:id="@+id/view_separator"
@@ -177,9 +181,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:text="@string/_05_30_pm"
-                app:layout_constraintBottom_toBottomOf="@+id/view_separator"
-                app:layout_constraintStart_toEndOf="@+id/view_separator"
-                app:layout_constraintTop_toTopOf="@+id/view_separator" />
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline_top_dashboard"
+                app:layout_constraintStart_toEndOf="@+id/view_separator" />
 
             <View
                 android:id="@+id/view_bell_icon"

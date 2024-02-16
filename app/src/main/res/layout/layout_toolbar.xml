@@ -5,22 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
+
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_toolbar_title"
         style="@style/toolbar_title_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_6sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:text="@string/my_location"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline_left_toolbar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_8sdp"
         android:padding="@dimen/_8sdp"
         android:src="@drawable/ic_toolbar_menu"
         app:layout_constraintBottom_toBottomOf="@+id/tv_toolbar_title"

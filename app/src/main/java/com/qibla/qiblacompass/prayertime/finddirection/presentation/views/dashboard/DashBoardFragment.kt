@@ -147,7 +147,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
     private fun setUserCityFromStorage() {
         val city = SharedPreferences.getUserCity(mContext)
-        val locationText = "City: $city"
+        val locationText = "$city"
         locationTextView.text = locationText
     }
 
@@ -516,7 +516,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         val longitude = location.longitude
         val city = getCityFromLocation(latitude, longitude)
         Log.d(DashBoardFragment::class.simpleName, "updateLocationText: $city")
-        val locationText = "City: $city"
+        val locationText = "$city"
         locationTextView.text = locationText
         SharedPreferences.saveUserCity(mContext,city)
     }
