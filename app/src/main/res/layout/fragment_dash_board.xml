@@ -247,6 +247,7 @@
                 style="@style/ayat_name_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="-2dp"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:text="@string/surah_ikhlaas_ayah_01"
                 app:layout_constraintEnd_toEndOf="@+id/tv_title_ayat_of_day"
