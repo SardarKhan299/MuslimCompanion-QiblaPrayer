@@ -93,6 +93,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_8sdp"
+        android:onClick="@{()->aboutUsFragment.gotoTermsAndCondition()}"
         app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
         app:layout_constraintHorizontal_bias="@dimen/bias_zero"
         app:layout_constraintStart_toStartOf="@+id/guideline_about_us_left"

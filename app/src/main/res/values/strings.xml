@@ -267,4 +267,6 @@
     <string name="today_s_goal">Today’s Goal</string>
     <string name="set_tasbih_counter">Set Tasbih Counter</string>
     <string name="privacy">Privacy Policy</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

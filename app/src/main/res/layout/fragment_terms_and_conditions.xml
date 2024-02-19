@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="termsAndConditionsFragment"
+            type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.termsandconditions.TermsAndConditionsFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.views.termsandconditions.TermsAndConditionsFragment">
+
+        <include
+            android:id="@+id/toolbar_terms_conditions"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left_terms_conditions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right_terms_conditions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
+
+        <WebView
+            android:id="@+id/webView_terms_conditions"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_terms_conditions"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_terms_conditions"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_terms_conditions">
+
+        </WebView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

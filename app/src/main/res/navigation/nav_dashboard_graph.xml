@@ -78,6 +78,9 @@
         <action
             android:id="@+id/action_aboutUsFragment_to_privacyFragment"
             app:destination="@id/privacyFragment" />
+        <action
+            android:id="@+id/action_aboutUsFragment_to_termsAndConditionsFragment"
+            app:destination="@id/termsAndConditionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/webViewUrlLoadFragment"
@@ -157,4 +160,8 @@
         android:id="@+id/privacyFragment"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.privacy.PrivacyFragment"
         android:label="PrivacyFragment" />
+    <fragment
+        android:id="@+id/termsAndConditionsFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.termsandconditions.TermsAndConditionsFragment"
+        android:label="TermsAndConditionsFragment" />
 </navigation>

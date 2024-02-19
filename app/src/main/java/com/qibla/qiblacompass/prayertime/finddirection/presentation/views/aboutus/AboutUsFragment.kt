@@ -49,6 +49,9 @@ class AboutUsFragment : BaseFragment<FragmentAboutUsBinding>(R.layout.fragment_a
         findNavController().navigate(R.id.privacyFragment)
 
     }
+    fun gotoTermsAndCondition(){
+        findNavController().navigate(R.id.termsAndConditionsFragment)
+    }
 
     private fun loadLinkedInUrl() {
         Log.d(AboutUsFragment::class.simpleName, "loadLinkedInUrl: ")
