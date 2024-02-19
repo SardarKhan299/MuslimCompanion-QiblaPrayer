@@ -190,6 +190,22 @@ class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.frag
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        webView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(MakkahLiveFragment::class.simpleName, "onPause: ")
+        webView.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(MakkahLiveFragment::class.simpleName, "onStop: ")
+    }
+
 }
 
 
