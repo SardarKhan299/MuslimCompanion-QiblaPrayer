@@ -45,4 +45,6 @@
     <color name="text_zakat_color">#009C06</color>
     <color name="search_text_color">#828183</color>
     <color name="goal_text_color"> #7C7C7C</color>
+    <color name="alert_notification_color">#EDECE5</color>
+    <color name="view_divider_color">#A0A09C</color>
 </resources>

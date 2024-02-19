@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
 
-class ZakatAdapter(private val zakatData: List<ZakatData>) :
+class ZakatAdapter(private val zakatData: List<ZakatData>, private val onItemClick: (ZakatData) -> Unit) :
     RecyclerView.Adapter<ZakatAdapter.ZakatViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ZakatViewHolder {
@@ -32,6 +32,13 @@ class ZakatAdapter(private val zakatData: List<ZakatData>) :
         val imageZakatType: ImageView = itemView.findViewById(R.id.img_type_zakat)
         val textZakatType: TextView = itemView.findViewById(R.id.tv_zakat_type_name)
         val textZakatAmount: Button = itemView.findViewById(R.id.btn_zakat)
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                onItemClick(zakatData[position])
+            }
+        }
     }
+
 
 }

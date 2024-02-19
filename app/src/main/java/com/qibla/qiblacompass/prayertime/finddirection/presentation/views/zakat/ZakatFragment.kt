@@ -57,7 +57,9 @@ class ZakatFragment : BaseFragment<FragmentZakatBinding>(R.layout.fragment_zakat
         data.add(ZakatData(R.drawable.ic_partnership, getString(R.string.partnership), "1000 PKR"))
         data.add(ZakatData(R.drawable.ic_loan, getString(R.string.loan), "5 million"))
 
-        val adapter = ZakatAdapter(data)
+        val adapter = ZakatAdapter(data){
+            findNavController().navigate(R.id.zakatCalculateFragment)
+        }
         recyclerView.adapter = adapter
     }
 }
