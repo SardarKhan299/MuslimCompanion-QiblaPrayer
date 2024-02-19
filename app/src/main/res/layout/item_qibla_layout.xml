@@ -28,11 +28,11 @@
     <androidx.appcompat.widget.AppCompatImageView
 
         android:id="@+id/img_item_frame"
-        android:layout_width="@dimen/_52sdp"
+        android:layout_width="@dimen/_58sdp"
         android:layout_height="@dimen/_60sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:src="@drawable/qibal_icn"
+        android:src="@drawable/makah_live_icn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
