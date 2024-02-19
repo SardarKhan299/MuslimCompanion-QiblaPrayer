@@ -267,4 +267,6 @@
     <string name="today_s_goal">Today’s Goal</string>
     <string name="set_tasbih_counter">Set Tasbih Counter</string>
     <string name="privacy">Privacy Policy</string>
+    <string name="notification_channel_id">alarm_id\n</string>
+    <string name="notification_channel_name">alarm_name</string>
 </resources>

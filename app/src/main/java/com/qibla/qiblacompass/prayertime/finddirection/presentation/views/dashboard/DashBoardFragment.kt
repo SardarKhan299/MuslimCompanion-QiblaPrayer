@@ -29,6 +29,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToMilliseconds
 import com.qibla.qiblacompass.prayertime.finddirection.common.MyLocationManager
 import com.qibla.qiblacompass.prayertime.finddirection.common.NetworkResult
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerReminder
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.formatTimeTo12Hour
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
@@ -159,9 +160,15 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                         response.data?.let {
                             Log.d(DashBoardFragment::class.simpleName, "initObservation: Receive Data ${it.data.size }")
                             val prayTime = it.data[currentDay - 1].timings
+                            setAlarms(listOf(
+                                prayTime.Fajr,
+                                prayTime.Dhuhr,
+                                prayTime.Asr,
+                                prayTime.Maghrib,
+                                prayTime.Isha
+                            ))
                             prayerTimeList = listOf(
                                 prayTime.Fajr.formatTimeTo12Hour(),
-                                prayTime.Sunrise.formatTimeTo12Hour(),
                                 prayTime.Dhuhr.formatTimeTo12Hour(),
                                 prayTime.Asr.formatTimeTo12Hour(),
                                 prayTime.Maghrib.formatTimeTo12Hour(),
@@ -173,7 +180,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                             val hijriDay = it.data[currentDay-1].date.hijri.day
                             val hijriDate = "$hijriDay $hijriMonth $hijriYear"
                             binding.tvIslamicMonth.text = hijriDate
-                            setAlarms(prayerTimeList)
+
 
 //                            updateUI(it)
 //                            viewModel.deleteAll()
@@ -196,12 +203,12 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             viewModel.prayerTimes.observe(viewLifecycleOwner) {prayerTimesList->
                 Log.d(DashBoardFragment::class.simpleName, "initObservation: Setting prayer times")
                 // set prayer times on Views..//
-                if(prayerTimesList!=null && prayerTimesList.size ==6) {
+                if(prayerTimesList!=null && prayerTimesList.size ==5) {
                     binding.layoutPrayerTiming.tvTimePrayer.text = prayerTimesList[0]
-                    binding.layoutPrayerTiming.tvTimeZuhrPrayer.text = prayerTimesList[2]
-                    binding.layoutPrayerTiming.tvTimeAsrPrayer.text = prayerTimesList[3]
-                    binding.layoutPrayerTiming.tvTimeMaghribPrayer.text = prayerTimesList[4]
-                    binding.layoutPrayerTiming.tvTimeIshaPrayer.text = prayerTimesList[5]
+                    binding.layoutPrayerTiming.tvTimeZuhrPrayer.text = prayerTimesList[1]
+                    binding.layoutPrayerTiming.tvTimeAsrPrayer.text = prayerTimesList[2]
+                    binding.layoutPrayerTiming.tvTimeMaghribPrayer.text = prayerTimesList[3]
+                    binding.layoutPrayerTiming.tvTimeIshaPrayer.text = prayerTimesList[4]
                 }
                 if(firstTime==0) {
                     firstTime++
@@ -231,22 +238,18 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                     }
 
                     2 -> {
-                        binding.tvPrayerTime.text = "Sunrise"
-                    }
-
-                    3 -> {
                         binding.tvPrayerTime.text = "Duhr"
                     }
 
-                    4 -> {
+                    3 -> {
                         binding.tvPrayerTime.text = "Asr"
                     }
 
-                    5 -> {
+                    4 -> {
                         binding.tvPrayerTime.text = "Maghrib"
                     }
 
-                    6 -> {
+                    5 -> {
                         binding.tvPrayerTime.text = "Isha"
                     }
                 }
@@ -256,19 +259,12 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
     private fun setAlarms(prayerTimeList: List<String>) {
         Log.d(DashBoardFragment::class.simpleName, "setAlarms: ")
+        val prayerReminder = PrayerReminder(mContext, prayerTimeList)
 
-        if(prayerTimeList.size ==6) {
-//            binding.layoutPrayerTiming.tvTimePrayer.text = prayerTimesList[0]
-//            binding.layoutPrayerTiming.tvTimeZuhrPrayer.text = prayerTimesList[2]
-//            binding.layoutPrayerTiming.tvTimeAsrPrayer.text = prayerTimesList[3]
-//            binding.layoutPrayerTiming.tvTimeMaghribPrayer.text = prayerTimesList[4]
-//            binding.layoutPrayerTiming.tvTimeIshaPrayer.text = prayerTimesList[5]
+        if(prayerTimeList.size ==5) {
+            prayerReminder.setAlarms()
         }
 
-        for (i in prayerTimeList) {
-            val namazTimeInMilliSeconds = convertTimeToMilliseconds(i)
-            Log.d(DashBoardFragment::class.simpleName, "setAlarms: $namazTimeInMilliSeconds")
-        }
     }
 
     fun startCountdown(totalSeconds: Long) {
@@ -279,6 +275,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 SharedPreferences.saveTimerEndTime(mContext,seconds)
                 viewModel.setCounterValue(seconds)
                 delay(1000)
+                // add  condition for count down timer ends..
                 if(seconds.toInt() ==2){
                     Log.d(DashBoardFragment::class.simpleName, "startCountdown: Time Ends")
                     // reload api and values on dashboard.//

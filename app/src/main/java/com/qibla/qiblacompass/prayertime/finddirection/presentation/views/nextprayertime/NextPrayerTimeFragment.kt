@@ -96,12 +96,12 @@ class NextPrayerTimeFragment :
         viewModel.prayerTimes.observe(viewLifecycleOwner) { prayerTimesList->
             Log.d(NextPrayerTimeFragment::class.simpleName, "initObservation: Setting prayer times")
             // set prayer times on Views..//
-            if(prayerTimesList!=null && prayerTimesList.size ==6) {
+            if(prayerTimesList!=null && prayerTimesList.size ==5) {
                 binding.layoutNextPrayerBackground.tvTimeFajr.text = prayerTimesList[0]
-                binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text = prayerTimesList[2]
-                binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text = prayerTimesList[3]
-                binding.layoutNextPrayerBackground.tvUnselectedMaghribTime.text = prayerTimesList[4]
-                binding.layoutNextPrayerBackground.tvUnselectedIshaTime.text = prayerTimesList[5]
+                binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text = prayerTimesList[1]
+                binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text = prayerTimesList[2]
+                binding.layoutNextPrayerBackground.tvUnselectedMaghribTime.text = prayerTimesList[3]
+                binding.layoutNextPrayerBackground.tvUnselectedIshaTime.text = prayerTimesList[4]
             }
         }
 
@@ -111,10 +111,10 @@ class NextPrayerTimeFragment :
             if( QiblaApp.selectedPrayerPos ==0) {
                 when (index) {
                     1 -> fajrBg()
-                    3 -> zuhrBg()
-                    4 -> asarBg()
-                    5 -> maghribBg()
-                    6 -> ishaBg()
+                    2 -> zuhrBg()
+                    3 -> asarBg()
+                    4 -> maghribBg()
+                    5 -> ishaBg()
                 }
             }else{
                 Log.d(NextPrayerTimeFragment::class.simpleName, "initObserver: Background selected by user.")
