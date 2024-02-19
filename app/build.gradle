@@ -35,8 +35,12 @@ android {
         android.applicationVariants.all { variant ->
             variant.outputs.all {
                 def date = new Date()
-                def formattedDate = date.format('dd-MM-yy_HHmm')
-                outputFileName = "Muslim Companion_${variant.name}_v${variant.versionName}_${variant.versionCode}_D${formattedDate}.apk"
+                def formattedDate = date.format('dd-MM-yy_HH:mm:ss')
+                def formattedTime = date.format('HH:mm:ss')
+                outputFileName = "Muslim Companion_${variant.name}" +
+                        "_v${variant.versionName}_${variant.versionCode}" +
+                        "_D${formattedDate}" +
+                        "_T${formattedTime}.apk"
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.privacy
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -23,6 +24,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants
+import com.qibla.qiblacompass.prayertime.finddirection.common.ProgressBar
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentPrivacyBinding
@@ -50,6 +52,8 @@ class PrivacyFragment : BaseFragment<FragmentPrivacyBinding>(R.layout.fragment_p
         binding.toolbarPrivacyPolicy.viewSubScreen.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
+
+        com.qibla.qiblacompass.prayertime.finddirection.common.ProgressBar.showProgressBar(mContext,getString(R.string.please_wait))
     }
 
     private fun callFirebaseRemoteConfig() {
@@ -135,8 +139,15 @@ class PrivacyFragment : BaseFragment<FragmentPrivacyBinding>(R.layout.fragment_p
 
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
-                Log.d(PrivacyFragment::class.simpleName, "onPageFinished: ")    
+                Log.d(PrivacyFragment::class.simpleName, "onPageFinished: ")
+                ProgressBar.hideProgressBar()
             //webView.loadUrl("javascript:(function() { document.getElementsByTagName('video')[0].play(); })()")
+            }
+
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+                Log.d(PrivacyFragment::class.simpleName, "onPageStarted: ")
+                ProgressBar.hideProgressBar()
             }
         }
 
