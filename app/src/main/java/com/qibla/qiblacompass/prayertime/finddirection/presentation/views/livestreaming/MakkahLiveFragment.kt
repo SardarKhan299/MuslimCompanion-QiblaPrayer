@@ -86,6 +86,8 @@ class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.frag
                 ).show(requireActivity().supportFragmentManager, "")
             }
         })
+
+        com.qibla.qiblacompass.prayertime.finddirection.common.ProgressBar.showProgressBar(mContext,getString(R.string.please_wait))
     }
 
     private fun callFirebaseRemoteConfig() {
@@ -174,7 +176,9 @@ class MakkahLiveFragment : BaseFragment<FragmentMakkahLiveBinding>(R.layout.frag
 
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
+                Log.d(MakkahLiveFragment::class.simpleName, "onPageFinished: Page Load..")
                 webView.loadUrl("javascript:(function() { document.getElementsByTagName('video')[0].play(); })()")
+                com.qibla.qiblacompass.prayertime.finddirection.common.ProgressBar.hideProgressBar()
             }
         }
 
