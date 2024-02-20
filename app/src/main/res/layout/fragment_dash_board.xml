@@ -166,7 +166,7 @@
             <View
                 android:id="@+id/view_separator"
                 android:layout_width="@dimen/_8sdp"
-                android:layout_height="@dimen/_4sdp"
+                android:layout_height="@dimen/_2sdp"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:background="@drawable/white_bg"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_prayer_time"
