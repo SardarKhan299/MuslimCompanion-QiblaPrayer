@@ -95,7 +95,6 @@ class DigitalTasbihFragment :
 
         // Retrieve the saved counter value from SharedPreferences only if it hasn't been initialized yet
         if (!counterInitialized) {
-
             counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext())
             counterInitialized = true
         }

@@ -122,9 +122,10 @@ class TasbihCounterFragment :
         saveImageValue(requireContext(), selectedImageName.toString())
              // Retrieve the saved counter value from SharedPreferences
         val counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext())
+        counter = counterValue
 
         // Update the increment text with the saved counter value
-        counterTextView.text = counterValue.toString()
+        counterTextView.text = counter.toString()
 
         val digitalCounter = binding.layoutCounterType
         digitalCounter.viewDigitalTasbih.setOnClickListener {
