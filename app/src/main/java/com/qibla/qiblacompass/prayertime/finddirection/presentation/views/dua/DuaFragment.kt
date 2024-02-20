@@ -33,7 +33,7 @@ class DuaFragment : BaseFragment<FragmentDuaBinding>(R.layout.fragment_dua) {
             duaFragment = this@DuaFragment
         }
         binding.toolbarDua.groupToolbarSubScreenProfile.visibility = View.VISIBLE
-        binding.toolbarDua.tvToolbarSubScreen.text = "Dua_e_qanoot"
+        binding.toolbarDua.tvToolbarSubScreen.text = "Dua e Qanoot"
         binding.toolbarDua.viewSubScreen.setOnClickListener {
             findNavController().closeCurrentScreen()
         }

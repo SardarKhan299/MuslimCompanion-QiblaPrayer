@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.Group
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -144,12 +145,52 @@ class NextPrayerTimeFragment :
         val adhanFourSpeakerText: TextView =
             bottomSheetView.findViewById(R.id.tv_adhan_four_speaker)
         val navigateBack: ImageView = bottomSheetView.findViewById(R.id.img_bottom_navigate_back)
-
-
-        navigateBack.setOnClickListener {
-            bottomSheetDialog.show()
+        val preAlertView: View = bottomSheetView.findViewById(R.id.view_pre_reminder)
+        val alertGroup: Group = bottomSheetView.findViewById(R.id.group_alert_notification)
+        preAlertView.setOnClickListener {
+            if (alertGroup.visibility == View.VISIBLE) {
+                alertGroup.gone()
+            }else{
+                alertGroup.visible()
+            }
         }
 
+        navigateBack.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+
+
+
+        noneNotificationView.setOnClickListener {
+
+            setViewStyleNotification(noneNotificationText, noneTickImage)
+            resetViewStyleNotification(beepNotificationText, beepTickImage)
+            resetViewStyleNotification(silentNotificationText, silentTickImage)
+            resetViewStyleNotification(
+                adhanOneNotificationText,
+                adhanOneTickImage,
+                adhanOneSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanTwoNotificationText,
+                adhanTwoTickImage,
+                adhanTwoSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanFourNotificationText,
+                adhanFourTickImage,
+                adhanFourSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanThreeNotificationText,
+                adhanThreeTickImage,
+                adhanThreeSpeakerText,
+                true
+            )
+        }
         silentNotificationView.setOnClickListener {
             Log.d(
                 NextPrayerTimeFragment::class.simpleName,
@@ -158,21 +199,59 @@ class NextPrayerTimeFragment :
             setViewStyleNotification(silentNotificationText, silentTickImage)
             resetViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(noneNotificationText, noneTickImage)
-
+            resetViewStyleNotification(
+                adhanOneNotificationText,
+                adhanOneTickImage,
+                adhanOneSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanTwoNotificationText,
+                adhanTwoTickImage,
+                adhanTwoSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanFourNotificationText,
+                adhanFourTickImage,
+                adhanFourSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanThreeNotificationText,
+                adhanThreeTickImage,
+                adhanThreeSpeakerText,
+                true
+            )
         }
-
-        noneNotificationView.setOnClickListener {
-
-            setViewStyleNotification(noneNotificationText, noneTickImage)
-            resetViewStyleNotification(beepNotificationText, beepTickImage)
-            resetViewStyleNotification(silentNotificationText, silentTickImage)
-        }
-
         beepNotificationView.setOnClickListener {
             setViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(silentNotificationText, silentTickImage)
             resetViewStyleNotification(noneNotificationText, noneTickImage)
-
+            resetViewStyleNotification(
+                adhanOneNotificationText,
+                adhanOneTickImage,
+                adhanOneSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanTwoNotificationText,
+                adhanTwoTickImage,
+                adhanTwoSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanFourNotificationText,
+                adhanFourTickImage,
+                adhanFourSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanThreeNotificationText,
+                adhanThreeTickImage,
+                adhanThreeSpeakerText,
+                true
+            )
         }
 
         adhanOneNotificationView.setOnClickListener {
@@ -253,10 +332,7 @@ class NextPrayerTimeFragment :
                 true
             )
             resetViewStyleNotification(
-                adhanFourNotificationText,
-                adhanFourTickImage,
-                adhanFourSpeakerText,
-                true
+                adhanFourNotificationText, adhanFourTickImage, adhanFourSpeakerText, true
             )
             resetViewStyleNotification(noneNotificationText, noneTickImage)
             resetViewStyleNotification(beepNotificationText, beepTickImage)
@@ -283,10 +359,7 @@ class NextPrayerTimeFragment :
                 true
             )
             resetViewStyleNotification(
-                adhanThreeNotificationText,
-                adhanThreeTickImage,
-                adhanThreeSpeakerText,
-                true
+                adhanThreeNotificationText, adhanThreeTickImage, adhanThreeSpeakerText, true
             )
             resetViewStyleNotification(noneNotificationText, noneTickImage)
             resetViewStyleNotification(beepNotificationText, beepTickImage)
