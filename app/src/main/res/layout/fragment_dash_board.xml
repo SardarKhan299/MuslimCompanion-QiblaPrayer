@@ -372,7 +372,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_4sdp"
                 android:text="@string/qibla_dir"
                 app:layout_constraintStart_toStartOf="@+id/view_qibla_direction"
                 app:layout_constraintTop_toTopOf="@+id/view_qibla_direction" />
@@ -393,7 +393,7 @@
                 style="@style/qibla_direction_heading_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:text="@string/distance"
                 app:layout_constraintStart_toStartOf="@+id/tv_heading_qibla"
                 app:layout_constraintTop_toBottomOf="@+id/tv_heading_qibla" />
@@ -414,7 +414,7 @@
                 style="@style/qibla_direction_heading_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:text="@string/location"
                 app:layout_constraintStart_toStartOf="@+id/tv_heading_qibla"
                 app:layout_constraintTop_toBottomOf="@+id/tv_distance" />
