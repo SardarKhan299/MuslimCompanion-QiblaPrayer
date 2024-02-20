@@ -212,7 +212,7 @@
     <string name="view_2">View 2</string>
     <string name="view_3">View 3</string>
     <string name="view_1">View 1</string>
-    <string name="makkah_live">Makkah Live</string>
+    <string name="makkah_live">Live</string>
     <string name="warning">Warning</string>
     <string name="exit">Are you sure you want to exit</string>
     <string name="logout_dialog">Are you sure you want to logout</string>
@@ -227,7 +227,7 @@
     <string name="quran">Quran</string>
     <string name="makkah_live_">Makkah Live</string>
     <string name="near_me">Near me</string>
-    <string name="hijri_calendar">Hijri Calendar</string>
+    <string name="hijri_calendar">Calendar</string>
     <string name="hadith">Hadith</string>
     <string name="analog_tasbih">Analog Tasbih</string>
     <string name="location_not_available">Location not available</string>

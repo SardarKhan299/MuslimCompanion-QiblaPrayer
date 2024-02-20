@@ -187,8 +187,8 @@
 
             <View
                 android:id="@+id/view_bell_icon"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_6sdp"
@@ -200,8 +200,8 @@
                 app:layout_constraintTop_toTopOf="@+id/view_dashboard" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:src="@drawable/ic_dashboard_notification"
                 app:layout_constraintBottom_toBottomOf="@+id/view_bell_icon"
                 app:layout_constraintEnd_toEndOf="@+id/view_bell_icon"
@@ -295,7 +295,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_qibla"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_75sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/_8sdp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
@@ -358,7 +358,7 @@
             <View
                 android:id="@+id/view_qibla_direction"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_height="@dimen/_78sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:background="@drawable/ic_dashboard_qibal"
