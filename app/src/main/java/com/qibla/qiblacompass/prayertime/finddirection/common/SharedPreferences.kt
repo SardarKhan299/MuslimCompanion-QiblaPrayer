@@ -328,7 +328,7 @@ class SharedPreferences {
 
         fun retrieveEnteredValue(context: Context): Int {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
-            return msharedPreferences!!.getInt(ENTERED_VALUE_KEY, 0)
+            return msharedPreferences!!.getInt(ENTERED_VALUE_KEY, 33)
         }
 
         fun setNavigatingBackToTasbihScreen(context: Context, navigatingBack: Boolean) {
