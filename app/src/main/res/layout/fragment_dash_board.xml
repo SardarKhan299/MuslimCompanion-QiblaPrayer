@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="boardFragment"
             type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment" />
@@ -49,10 +48,21 @@
                 app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
 
             <View
+                android:id="@+id/guideline_top_dashboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/view_dashboard"
+                app:layout_constraintBottom_toBottomOf="@+id/view_dashboard"
+                app:layout_constraintStart_toStartOf="@+id/view_dashboard"
+                app:layout_constraintEnd_toEndOf="@+id/view_dashboard"
+                app:layout_constraintVertical_bias="0.75"
+                />
+
+            <View
                 android:id="@+id/view_auto_detect"
                 android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_30sdp"
-                app:layout_constraintStart_toStartOf="@+id/toolbar_board"
+                android:layout_height="@dimen/_15sdp"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_board" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -60,7 +70,6 @@
                 style="@style/auto_detect_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_4sdp"
                 android:text="@string/auto_detect"
                 app:layout_constraintBottom_toBottomOf="@+id/view_auto_detect"
                 app:layout_constraintStart_toStartOf="@id/view_auto_detect"
@@ -127,10 +136,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginBottom="-6dp"
                 android:text="@string/next_prayer_in"
                 app:layout_constraintStart_toStartOf="@+id/view_dashboard"
-                app:layout_constraintTop_toBottomOf="@+id/tv_dashboard_date_time" />
+                app:layout_constraintBottom_toTopOf="@+id/tv_counter_next_prayer_time" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_counter_next_prayer_time"
@@ -138,10 +147,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_4sdp"
                 android:text="@string/_00_25_20"
+                android:layout_marginBottom="@dimen/_6sdp"
                 app:layout_constraintStart_toStartOf="@+id/view_dashboard"
-                app:layout_constraintTop_toBottomOf="@+id/tv_next_prayer_time" />
+                app:layout_constraintBottom_toTopOf="@+id/tv_prayer_time" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_prayer_time"
@@ -149,13 +158,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/asar"
+                android:layout_marginBottom="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="@+id/tv_counter_next_prayer_time"
-                app:layout_constraintTop_toBottomOf="@+id/tv_counter_next_prayer_time" />
+                app:layout_constraintBottom_toTopOf="@+id/guideline_top_dashboard" />
 
             <View
                 android:id="@+id/view_separator"
                 android:layout_width="@dimen/_8sdp"
-                android:layout_height="@dimen/_4sdp"
+                android:layout_height="@dimen/_2sdp"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:background="@drawable/white_bg"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_prayer_time"
@@ -170,17 +180,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:text="@string/_05_30_pm"
-                app:layout_constraintBottom_toBottomOf="@+id/view_separator"
-                app:layout_constraintStart_toEndOf="@+id/view_separator"
-                app:layout_constraintTop_toTopOf="@+id/view_separator" />
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline_top_dashboard"
+                app:layout_constraintStart_toEndOf="@+id/view_separator" />
 
             <View
                 android:id="@+id/view_bell_icon"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_25sdp"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
                 android:background="@drawable/button_bg"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/view_dashboard"
@@ -189,8 +199,8 @@
                 app:layout_constraintTop_toTopOf="@+id/view_dashboard" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:src="@drawable/ic_dashboard_notification"
                 app:layout_constraintBottom_toBottomOf="@+id/view_bell_icon"
                 app:layout_constraintEnd_toEndOf="@+id/view_bell_icon"
@@ -200,14 +210,14 @@
             <View
                 android:id="@+id/view_dashboard_atay_day"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_140sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_height="@dimen/_125sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/dashboard_view_border_bg"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
                 app:layout_constraintHorizontal_bias="@dimen/bias_zero"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
-                app:layout_constraintTop_toBottomOf="@+id/view4" />
+                app:layout_constraintTop_toBottomOf="@+id/guideline_top_dashboard" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_ayat"
@@ -225,6 +235,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginBottom="2dp"
                 android:text="@string/ayat_of_the_day"
                 app:layout_constraintBottom_toBottomOf="@+id/img_ayat"
                 app:layout_constraintStart_toEndOf="@+id/img_ayat"
@@ -235,6 +246,8 @@
                 style="@style/ayat_name_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="-2dp"
+                android:layout_marginStart="@dimen/_2sdp"
                 android:text="@string/surah_ikhlaas_ayah_01"
                 app:layout_constraintEnd_toEndOf="@+id/tv_title_ayat_of_day"
                 app:layout_constraintStart_toStartOf="@+id/tv_title_ayat_of_day"
@@ -247,7 +260,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_1sdp"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
                 android:background="@drawable/view_separator"
                 app:layout_constraintEnd_toEndOf="@+id/view_dashboard_atay_day"
@@ -265,15 +278,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/view_dashboard_atay_day"
                 app:layout_constraintTop_toBottomOf="@+id/view_separator_bottom" />
 
-            <View
-                android:id="@+id/view4"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="1dp"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left_dashboard"
-                app:layout_constraintTop_toBottomOf="@+id/tv_prayer_time" />
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_ayat_translation"
                 style="@style/ayat_translation_text_style"
@@ -290,7 +294,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_qibla"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_70sdp"
+                android:layout_height="@dimen/_68sdp"
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/_8sdp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
@@ -353,7 +357,7 @@
             <View
                 android:id="@+id/view_qibla_direction"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_height="@dimen/_78sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:background="@drawable/ic_dashboard_qibal"

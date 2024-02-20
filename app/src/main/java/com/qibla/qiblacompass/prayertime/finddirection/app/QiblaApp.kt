@@ -32,30 +32,18 @@ class QiblaApp : Application() {
         var isAllahNamesSelected = true
         var selectedPrayerPos = 0
         val KEY_NAVIGATING_BACK_TO_TASBIH_SCREEN = "navigating_back_to_tasbih_screen"
+
     }
 
     override fun onCreate() {
         super.onCreate()
         Log.d(QiblaApp::class.simpleName, "onCreate: ")
         FirebaseApp.initializeApp(this)
-        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
-        val configSettings = remoteConfigSettings {
-            minimumFetchIntervalInSeconds = if (BuildConfig.DEBUG) {
-                0 // fetch every time in debug mode
-            } else {
-                300
-            }
-        }
 
-        // Initialize Remote Config default values.
-        val defaults = mutableMapOf<String, Any>(
-            MAKKAH_LIVE_URL1 to "https://www.youtube-nocookie.com/embed/xZtG7Bn2B5c?autoplay=1&playsinline=1",
-            PRIVACY_URL to "https://www.stellatechnology.com/"
-        )
-        remoteConfig.apply {
-            setConfigSettingsAsync(configSettings)
-            setDefaultsAsync(defaults)
-        }
+
+
+
+
         // Initialize the ArrayList with the image resources of the 99 names
         allahNamesImages.apply {
             add(R.drawable.nameallah1)

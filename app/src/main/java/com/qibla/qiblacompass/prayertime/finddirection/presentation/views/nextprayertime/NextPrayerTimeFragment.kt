@@ -403,51 +403,48 @@ class NextPrayerTimeFragment :
 
     private fun initObserver() {
         Log.d(NextPrayerTimeFragment::class.simpleName, "initObserver: ")
-        viewModel.prayerTimes.observe(viewLifecycleOwner) { prayerTimesList ->
+        viewModel.prayerTimes.observe(viewLifecycleOwner) { prayerTimesList->
             Log.d(NextPrayerTimeFragment::class.simpleName, "initObservation: Setting prayer times")
             // set prayer times on Views..//
-            if (prayerTimesList != null && prayerTimesList.size == 6) {
+            if(prayerTimesList!=null && prayerTimesList.size ==5) {
                 binding.layoutNextPrayerBackground.tvTimeFajr.text = prayerTimesList[0]
-                binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text = prayerTimesList[2]
-                binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text = prayerTimesList[3]
-                binding.layoutNextPrayerBackground.tvUnselectedMaghribTime.text = prayerTimesList[4]
-                binding.layoutNextPrayerBackground.tvUnselectedIshaTime.text = prayerTimesList[5]
+                binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text = prayerTimesList[1]
+                binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text = prayerTimesList[2]
+                binding.layoutNextPrayerBackground.tvUnselectedMaghribTime.text = prayerTimesList[3]
+                binding.layoutNextPrayerBackground.tvUnselectedIshaTime.text = prayerTimesList[4]
             }
         }
 
         // to handle count down
         viewModel.index.observe(viewLifecycleOwner) { index ->
             Log.d(DashBoardFragment::class.simpleName, "initObserver: next Prayer $index")
-            if (QiblaApp.selectedPrayerPos == 0) {
+            if( QiblaApp.selectedPrayerPos ==0) {
                 when (index) {
                     1 -> fajrBg()
-                    3 -> zuhrBg()
-                    4 -> asarBg()
-                    5 -> maghribBg()
-                    6 -> ishaBg()
+                    2 -> zuhrBg()
+                    3 -> asarBg()
+                    4 -> maghribBg()
+                    5 -> ishaBg()
                 }
-            } else {
-                Log.d(
-                    NextPrayerTimeFragment::class.simpleName,
-                    "initObserver: Background selected by user."
-                )
+            }else{
+                Log.d(NextPrayerTimeFragment::class.simpleName, "initObserver: Background selected by user.")
             }
         }
 
         // handle count down value
-        viewModel.counter.observe(viewLifecycleOwner) {
+        viewModel.counter.observe(viewLifecycleOwner){
             binding.tvTime.text = "$it"
         }
     }
 
     private fun setUserCityFromStorage() {
         Log.d(NextPrayerTimeFragment::class.simpleName, "setUserCityFromStorage: ")
-        val city = SharedPreferences.getUserCity(mContext)
-        binding.tvLocationCity.text = city
+            val city = SharedPreferences.getUserCity(mContext)
+            binding.tvLocationCity.text = city
     }
 
-    private fun scrollToEnd() {
-        binding.layoutNextPrayerBackground.svPrayerTimes.post {
+    private fun scrollToEnd(){
+        binding.layoutNextPrayerBackground.svPrayerTimes.post{
             binding.layoutNextPrayerBackground.svPrayerTimes.scrollTo(
                 0,
                 binding.layoutNextPrayerBackground.svPrayerTimes.bottom

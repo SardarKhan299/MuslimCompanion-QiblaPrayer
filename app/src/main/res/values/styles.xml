@@ -217,17 +217,17 @@
     </style>
 
     <style name="time_next_prayer_text_style" parent="@android:style/TextAppearance">
-        <item name="android:textSize">@dimen/_22sdp</item>
+        <item name="android:textSize">@dimen/_20sdp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:fontFamily">@font/poppins_extra_bold</item>
     </style>
 
     <style name="prayer_time_text_style" parent="@android:style/TextAppearance">
-        <item name="android:textSize">@dimen/_18sdp</item>
+        <item name="android:textSize">@dimen/_15sdp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:includeFontPadding">false</item>
-        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
 
     <style name="ayat_of_date_title_text_style" parent="@android:style/TextAppearance">

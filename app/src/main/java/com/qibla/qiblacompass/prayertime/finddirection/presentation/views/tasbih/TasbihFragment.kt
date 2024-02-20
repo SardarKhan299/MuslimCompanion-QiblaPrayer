@@ -17,6 +17,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstan
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.ALLAHU_AKBAR
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.LA_ILAHA_ILLA_ALLAH
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.SUBHAN_ALLAH
+import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.getCurrentDateFormatted
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
@@ -38,6 +39,7 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
         }
         recyclerView = binding.layoutTasbihFragment.findViewById(R.id.recycler_view_zhikr)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.tvTasbihDate.text = getCurrentDateFormatted()
 
         val data = ArrayList<TasbihZhikrData>()
         data.add(TasbihZhikrData(SUBHAN_ALLAH, R.drawable.ic_subhan_allah))
