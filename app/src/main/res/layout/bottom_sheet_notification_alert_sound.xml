@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg">
+    android:background="@drawable/notification_bottom_sheet_bg">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_bottom_navigate_back"
@@ -93,6 +93,7 @@
         app:layout_constraintStart_toStartOf="@+id/tv_notification_sound"
         app:layout_constraintTop_toBottomOf="@+id/tv_notification_sound" />
 
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_notification_none"
         android:layout_width="wrap_content"
@@ -101,6 +102,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_none_notification"
         app:layout_constraintStart_toStartOf="@+id/tv_notification_sound"
         app:layout_constraintTop_toTopOf="@+id/view_none_notification" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_none_tick"
+        android:layout_width="@dimen/_13sdp"
+        android:layout_height="@dimen/_13sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:src="@drawable/ic_tick"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/img_notification_none"
+        app:layout_constraintEnd_toEndOf="@+id/view_none_notification"
+        app:layout_constraintTop_toTopOf="@+id/img_notification_none" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_notification_none"
@@ -139,6 +150,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_notification_silent"
         app:layout_constraintStart_toStartOf="@+id/tv_notification_sound"
         app:layout_constraintTop_toTopOf="@+id/view_notification_silent" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_silent_tick"
+        android:layout_width="@dimen/_13sdp"
+        android:layout_height="@dimen/_13sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:src="@drawable/ic_tick"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/img_notification_silent"
+        app:layout_constraintEnd_toEndOf="@+id/view_notification_silent"
+        app:layout_constraintTop_toTopOf="@+id/img_notification_silent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_notification_silent"
@@ -187,6 +208,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_beep_notification"
         app:layout_constraintEnd_toStartOf="@+id/tv_notification_no"
         app:layout_constraintTop_toTopOf="@+id/tv_beep_notification" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_beep_tick"
+        android:layout_width="@dimen/_13sdp"
+        android:layout_height="@dimen/_13sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:src="@drawable/ic_tick"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/img_notification_play"
+        app:layout_constraintEnd_toEndOf="@+id/view_notification_silent"
+        app:layout_constraintTop_toTopOf="@+id/img_notification_play" />
 
     <View
         android:id="@+id/view_notification_beep_divider"
@@ -218,7 +249,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title_adhan_one"
-        style="@style/toolbar_sub_screens_text_style"
+        style="@style/notification_sound_title_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
@@ -229,7 +260,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_adhan_one_speaker"
-        style="@style/makkah_view_text_text_style"
+        style="@style/adhan_speaker_text_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nasir_al_qatami"
@@ -251,6 +282,7 @@
         android:layout_height="@dimen/_13sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:src="@drawable/ic_tick"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/img_notification_adhan_one_play"
         app:layout_constraintEnd_toEndOf="@+id/view_adhan_one_notification"
         app:layout_constraintTop_toTopOf="@+id/img_notification_adhan_one_play" />

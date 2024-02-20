@@ -277,4 +277,7 @@
     <string name="mansour_al_zahrani">Mansour Al Zahrani</string>
     <string name="masjid_al_haram_mecca">Masjid Al-Haram (MECCA)</string>
     <string name="mishary_rashid_alafasy">Mishary Rashid Alafasy</string>
+    <string name="_5_mins_before">5 mins before</string>
+    <string name="_10_mins_before">10 mins before</string>
+    <string name="_15_mins_before">15 mins before</string>
 </resources>

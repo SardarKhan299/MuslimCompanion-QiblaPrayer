@@ -3,12 +3,12 @@ package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.nextp
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
@@ -38,6 +38,9 @@ class NextPrayerTimeFragment :
         binding.toolbarNextPrayerTiming.groupToolbarNextPrayer.visibility = View.VISIBLE
         binding.toolbarNextPrayerTiming.viewNextPrayerIcon.setOnClickListener {
             findNavController().closeCurrentScreen()
+        }
+        binding.toolbarNextPrayerTiming.viewBellNotificationIcon.setOnClickListener {
+            showBottomSheetNotificationAlertSound()
         }
         initObserver()
         updateBackgroundColor()
@@ -78,7 +81,7 @@ class NextPrayerTimeFragment :
         val position = SharedPreferences.getSelectedPrayerPosition(mContext)
         Log.d(NextPrayerTimeFragment::class.simpleName, "onViewCreated: $position")
         when (position) {
-            0->{
+            0 -> {
                 Log.d(NextPrayerTimeFragment::class.simpleName, "onViewCreated: No option Selected")
             }
             1 -> fajrBg()
@@ -91,12 +94,246 @@ class NextPrayerTimeFragment :
 
     }
 
+    private fun showBottomSheetNotificationAlertSound() {
+        val bottomSheetView =
+            View.inflate(requireContext(), R.layout.bottom_sheet_notification_alert_sound, null)
+        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        //none Notification views
+        val noneNotificationView: View = bottomSheetView.findViewById(R.id.view_none_notification)
+        val noneNotificationText: TextView = bottomSheetView.findViewById(R.id.tv_notification_none)
+        val noneTickImage: ImageView = bottomSheetView.findViewById(R.id.img_none_tick)
+        // silent Notification views
+        val silentNotificationView: View =
+            bottomSheetView.findViewById(R.id.view_notification_silent)
+        val silentNotificationText: TextView =
+            bottomSheetView.findViewById(R.id.tv_notification_silent)
+        val silentTickImage: ImageView = bottomSheetView.findViewById(R.id.img_silent_tick)
+        // beep Notification views
+        val beepNotificationView: View = bottomSheetView.findViewById(R.id.view_beep_notification)
+        val beepNotificationText: TextView = bottomSheetView.findViewById(R.id.tv_beep_notification)
+        val beepTickImage: ImageView = bottomSheetView.findViewById(R.id.img_beep_tick)
+        //Adhan One View
+        val adhanOneNotificationView: View =
+            bottomSheetView.findViewById(R.id.view_adhan_one_notification)
+        val adhanOneNotificationText: TextView =
+            bottomSheetView.findViewById(R.id.tv_title_adhan_one)
+        val adhanOneTickImage: ImageView = bottomSheetView.findViewById(R.id.img_adhan_one_tick)
+        val adhanOneSpeakerText: TextView = bottomSheetView.findViewById(R.id.tv_adhan_one_speaker)
+        //Adhan Two View
+        val adhanTwoNotificationView: View =
+            bottomSheetView.findViewById(R.id.view_adhan_two_notification)
+        val adhanTwoNotificationText: TextView =
+            bottomSheetView.findViewById(R.id.tv_title_adhan_two)
+        val adhanTwoTickImage: ImageView = bottomSheetView.findViewById(R.id.img_adhan_two_tick)
+        val adhanTwoSpeakerText: TextView = bottomSheetView.findViewById(R.id.tv_adhan_two_speaker)
+        //Adhan Three View
+        val adhanThreeNotificationView: View =
+            bottomSheetView.findViewById(R.id.view_adhan_three_notification)
+        val adhanThreeNotificationText: TextView =
+            bottomSheetView.findViewById(R.id.tv_title_adhan_three)
+        val adhanThreeTickImage: ImageView = bottomSheetView.findViewById(R.id.img_adhan_three_tick)
+        val adhanThreeSpeakerText: TextView =
+            bottomSheetView.findViewById(R.id.tv_adhan_three_speaker)
+        //Adhan Three View
+        val adhanFourNotificationView: View =
+            bottomSheetView.findViewById(R.id.view_adhan_four_notification)
+        val adhanFourNotificationText: TextView =
+            bottomSheetView.findViewById(R.id.tv_title_adhan_four)
+        val adhanFourTickImage: ImageView = bottomSheetView.findViewById(R.id.img_adhan_four_tick)
+        val adhanFourSpeakerText: TextView =
+            bottomSheetView.findViewById(R.id.tv_adhan_four_speaker)
+        val navigateBack: ImageView = bottomSheetView.findViewById(R.id.img_bottom_navigate_back)
+
+
+        navigateBack.setOnClickListener {
+            bottomSheetDialog.show()
+        }
+
+        silentNotificationView.setOnClickListener {
+            Log.d(
+                NextPrayerTimeFragment::class.simpleName,
+                "showBottomSheetNotificationAlertSound: silentNotificationView clicked.."
+            )
+            setViewStyleNotification(silentNotificationText, silentTickImage)
+            resetViewStyleNotification(beepNotificationText, beepTickImage)
+            resetViewStyleNotification(noneNotificationText, noneTickImage)
+
+        }
+
+        noneNotificationView.setOnClickListener {
+
+            setViewStyleNotification(noneNotificationText, noneTickImage)
+            resetViewStyleNotification(beepNotificationText, beepTickImage)
+            resetViewStyleNotification(silentNotificationText, silentTickImage)
+        }
+
+        beepNotificationView.setOnClickListener {
+            setViewStyleNotification(beepNotificationText, beepTickImage)
+            resetViewStyleNotification(silentNotificationText, silentTickImage)
+            resetViewStyleNotification(noneNotificationText, noneTickImage)
+
+        }
+
+        adhanOneNotificationView.setOnClickListener {
+            setViewStyleNotification(
+                adhanOneNotificationText,
+                adhanOneTickImage,
+                adhanOneSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanTwoNotificationText,
+                adhanTwoTickImage,
+                adhanTwoSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanThreeNotificationText,
+                adhanThreeTickImage,
+                adhanThreeSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanFourNotificationText,
+                adhanFourTickImage,
+                adhanFourSpeakerText,
+                true
+            )
+            resetViewStyleNotification(noneNotificationText, noneTickImage)
+            resetViewStyleNotification(beepNotificationText, beepTickImage)
+            resetViewStyleNotification(silentNotificationText, silentTickImage)
+        }
+        adhanTwoNotificationView.setOnClickListener {
+            setViewStyleNotification(
+                adhanTwoNotificationText,
+                adhanTwoTickImage,
+                adhanTwoSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanOneNotificationText,
+                adhanOneTickImage,
+                adhanOneSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanThreeNotificationText,
+                adhanThreeTickImage,
+                adhanThreeSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanFourNotificationText,
+                adhanFourTickImage,
+                adhanFourSpeakerText,
+                true
+            )
+            resetViewStyleNotification(noneNotificationText, noneTickImage)
+            resetViewStyleNotification(beepNotificationText, beepTickImage)
+            resetViewStyleNotification(silentNotificationText, silentTickImage)
+        }
+        adhanThreeNotificationView.setOnClickListener {
+            setViewStyleNotification(
+                adhanThreeNotificationText,
+                adhanThreeTickImage,
+                adhanThreeSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanOneNotificationText,
+                adhanOneTickImage,
+                adhanOneSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanTwoNotificationText,
+                adhanTwoTickImage,
+                adhanTwoSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanFourNotificationText,
+                adhanFourTickImage,
+                adhanFourSpeakerText,
+                true
+            )
+            resetViewStyleNotification(noneNotificationText, noneTickImage)
+            resetViewStyleNotification(beepNotificationText, beepTickImage)
+            resetViewStyleNotification(silentNotificationText, silentTickImage)
+
+        }
+        adhanFourNotificationView.setOnClickListener {
+            setViewStyleNotification(
+                adhanFourNotificationText,
+                adhanFourTickImage,
+                adhanFourSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanOneNotificationText,
+                adhanOneTickImage,
+                adhanOneSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanTwoNotificationText,
+                adhanTwoTickImage,
+                adhanTwoSpeakerText,
+                true
+            )
+            resetViewStyleNotification(
+                adhanThreeNotificationText,
+                adhanThreeTickImage,
+                adhanThreeSpeakerText,
+                true
+            )
+            resetViewStyleNotification(noneNotificationText, noneTickImage)
+            resetViewStyleNotification(beepNotificationText, beepTickImage)
+            resetViewStyleNotification(silentNotificationText, silentTickImage)
+
+        }
+        bottomSheetDialog.show()
+    }
+
+    // Method to set the view style
+    private fun setViewStyleNotification(
+        titleTextView: TextView,
+        tickImageView: ImageView,
+        speakerTextView: TextView? = null, // Nullable TextView for speaker text
+        isSpeakerText: Boolean = false // Boolean parameter for speaker text
+    ) {
+        titleTextView.setTextAppearance(R.style.toolbar_sub_screens_text_style)
+        tickImageView.visible()
+
+        // Check if speaker text exists and the isSpeakerText flag is true
+        if (speakerTextView != null && isSpeakerText) {
+            speakerTextView.setTextAppearance(R.style.makkah_view_text_text_style)
+        }
+    }
+
+    // Method to reset the view style
+    private fun resetViewStyleNotification(
+        titleTextView: TextView,
+        tickImageView: ImageView,
+        speakerTextView: TextView? = null, // Nullable TextView for speaker text
+        isSpeakerText: Boolean = false // Boolean parameter for speaker text
+    ) {
+        titleTextView.setTextAppearance(R.style.notification_sound_title_text_style)
+        tickImageView.invisible()
+
+        // Check if speaker text exists and the isSpeakerText flag is true
+        if (speakerTextView != null && isSpeakerText) {
+            speakerTextView.setTextAppearance(R.style.adhan_speaker_text_text_style)
+        }
+    }
+
     private fun initObserver() {
         Log.d(NextPrayerTimeFragment::class.simpleName, "initObserver: ")
-        viewModel.prayerTimes.observe(viewLifecycleOwner) { prayerTimesList->
+        viewModel.prayerTimes.observe(viewLifecycleOwner) { prayerTimesList ->
             Log.d(NextPrayerTimeFragment::class.simpleName, "initObservation: Setting prayer times")
             // set prayer times on Views..//
-            if(prayerTimesList!=null && prayerTimesList.size ==6) {
+            if (prayerTimesList != null && prayerTimesList.size == 6) {
                 binding.layoutNextPrayerBackground.tvTimeFajr.text = prayerTimesList[0]
                 binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text = prayerTimesList[2]
                 binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text = prayerTimesList[3]
@@ -108,7 +345,7 @@ class NextPrayerTimeFragment :
         // to handle count down
         viewModel.index.observe(viewLifecycleOwner) { index ->
             Log.d(DashBoardFragment::class.simpleName, "initObserver: next Prayer $index")
-            if( QiblaApp.selectedPrayerPos ==0) {
+            if (QiblaApp.selectedPrayerPos == 0) {
                 when (index) {
                     1 -> fajrBg()
                     3 -> zuhrBg()
@@ -116,25 +353,28 @@ class NextPrayerTimeFragment :
                     5 -> maghribBg()
                     6 -> ishaBg()
                 }
-            }else{
-                Log.d(NextPrayerTimeFragment::class.simpleName, "initObserver: Background selected by user.")
+            } else {
+                Log.d(
+                    NextPrayerTimeFragment::class.simpleName,
+                    "initObserver: Background selected by user."
+                )
             }
         }
 
         // handle count down value
-        viewModel.counter.observe(viewLifecycleOwner){
+        viewModel.counter.observe(viewLifecycleOwner) {
             binding.tvTime.text = "$it"
         }
     }
 
     private fun setUserCityFromStorage() {
         Log.d(NextPrayerTimeFragment::class.simpleName, "setUserCityFromStorage: ")
-            val city = SharedPreferences.getUserCity(mContext)
-            binding.tvLocationCity.text = city
+        val city = SharedPreferences.getUserCity(mContext)
+        binding.tvLocationCity.text = city
     }
 
-    private fun scrollToEnd(){
-        binding.layoutNextPrayerBackground.svPrayerTimes.post{
+    private fun scrollToEnd() {
+        binding.layoutNextPrayerBackground.svPrayerTimes.post {
             binding.layoutNextPrayerBackground.svPrayerTimes.scrollTo(
                 0,
                 binding.layoutNextPrayerBackground.svPrayerTimes.bottom
