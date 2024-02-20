@@ -338,9 +338,9 @@ class TasbihCounterFragment :
             return when (imageName) {
                 SUBHAN_ALLAH -> R.drawable.ic_subhan_allah
                 ALHAMDULILLAH -> R.drawable.allhamdulillah
-                LA_ILAHA_ILLA_ALLAH -> R.drawable.laillaha
+                LA_ILAHA_ILLA_ALLAH -> R.drawable.laillaha_ic
                 ALLAHU_AKBAR -> R.drawable.allahoakbar
-                else -> R.drawable.ic_hathid // Provide a default image resource ID
+                else -> R.drawable.ic_hadith // Provide a default image resource ID
             }
         }
     }

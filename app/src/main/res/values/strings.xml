@@ -220,7 +220,6 @@
     <string name="are_you_sure_you_want_to_exit">Are you sure you want to exit</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="qibal">Qibal</string>
     <string name="zakat">Zakat</string>
     <string name="names">Names</string>
     <string name="tasbih_">Tasbih</string>
@@ -269,4 +268,6 @@
     <string name="privacy">Privacy Policy</string>
     <string name="notification_channel_id">alarm_id\n</string>
     <string name="notification_channel_name">alarm_name</string>
+    <string name="dua">Dua</string>
+    <string name="streak">Streak\n</string>
 </resources>

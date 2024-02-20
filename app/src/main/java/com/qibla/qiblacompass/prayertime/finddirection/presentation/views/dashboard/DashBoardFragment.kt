@@ -360,18 +360,18 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
     private fun setUpQibla() {
         val data = ArrayList<QiblaData>()
-        data.add(QiblaData(R.drawable.qibal_icn))
-        data.add(QiblaData(R.drawable.zakat_icn))
-        data.add(QiblaData(R.drawable.names_icn))
-        data.add(QiblaData(R.drawable.tasbih_icn))
-        data.add(QiblaData(R.drawable.prayer_icn))
-        data.add(QiblaData(R.drawable.quran_icn))
-        data.add(QiblaData(R.drawable.makah_live_icn))
-        data.add(QiblaData(R.drawable.near_me_icn))
-        data.add(QiblaData(R.drawable.hijri_calendar_icn))
-        data.add(QiblaData(R.drawable.hadith_icn))
-        data.add(QiblaData(R.drawable.dua_icn))
-        data.add(QiblaData(R.drawable.streak_icn))
+        data.add(QiblaData((R.drawable.ic_qibla),getString(R.string.qibla)))
+        data.add(QiblaData((R.drawable.ic_zakat),getString(R.string.zakat)))
+        data.add(QiblaData((R.drawable.ic_names),getString(R.string.names)))
+        data.add(QiblaData((R.drawable.ic_tasbih),getString(R.string.tasbih)))
+        data.add(QiblaData((R.drawable.ic_prayer),getString(R.string.prayer)))
+        data.add(QiblaData((R.drawable.ic_quran),getString(R.string.quran)))
+        data.add(QiblaData((R.drawable.ic_makkah),getString(R.string.makkah_live)))
+        data.add(QiblaData((R.drawable.ic_near_me),getString(R.string.near_me)))
+        data.add(QiblaData((R.drawable.ic_calendar),getString(R.string.hijri_calendar)))
+        data.add(QiblaData((R.drawable.ic_hadith),getString(R.string.hadith)))
+        data.add(QiblaData((R.drawable.ic_dua),getString(R.string.dua)))
+        data.add(QiblaData((R.drawable.ic_streak),getString(R.string.streak)))
 
 
         val adapter = QiblaAdapter(requireContext(), data) { position ->

@@ -150,7 +150,7 @@ class DigitalTasbihFragment :
                 ApplicationConstant.ALHAMDULILLAH -> R.drawable.allhamdulillah
                 ApplicationConstant.LA_ILAHA_ILLA_ALLAH -> R.drawable.laillaha
                 ApplicationConstant.ALLAHU_AKBAR -> R.drawable.allahoakbar
-                else -> R.drawable.ic_hathid // Provide a default image resource ID
+                else -> R.drawable.ic_hadith // Provide a default image resource ID
             }
         }
     }

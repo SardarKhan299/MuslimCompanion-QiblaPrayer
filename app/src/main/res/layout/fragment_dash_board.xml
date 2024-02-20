@@ -295,7 +295,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_qibla"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_70sdp"
+                android:layout_height="@dimen/_75sdp"
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/_8sdp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_dashboard"
