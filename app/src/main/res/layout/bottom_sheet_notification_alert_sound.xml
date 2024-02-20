@@ -80,47 +80,93 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_none_alert"
-            style="@style/side_menu_text_style"
+            style="@style/notification_sound_title_text_style"
             android:layout_width="0dp"
+            android:paddingStart="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/_4sdp"
             android:text="@string/none"
-            app:layout_constraintEnd_toEndOf="@+id/view_pre_alert"
+            app:layout_constraintEnd_toStartOf="@+id/img_pre_alert_none_tick"
             app:layout_constraintStart_toStartOf="@+id/tv_pre_notification"
             app:layout_constraintTop_toBottomOf="@+id/tv_pre_notification" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_pre_alert_none_tick"
+            android:layout_width="@dimen/_13sdp"
+            android:layout_height="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:src="@drawable/ic_tick"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_none_alert"
+            app:layout_constraintEnd_toEndOf="@+id/view_none_notification"
+            app:layout_constraintTop_toTopOf="@+id/tv_none_alert" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_alert_five_min"
-            style="@style/side_menu_text_style"
+            style="@style/notification_sound_title_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/_4sdp"
+            android:paddingStart="0dp"
             android:text="@string/_5_mins_before"
-            app:layout_constraintEnd_toEndOf="@+id/tv_none_alert"
+            app:layout_constraintEnd_toStartOf="@+id/img_pre_alert_five_tick"
             app:layout_constraintStart_toStartOf="@+id/tv_none_alert"
             app:layout_constraintTop_toBottomOf="@+id/tv_none_alert" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_pre_alert_five_tick"
+            android:layout_width="@dimen/_13sdp"
+            android:layout_height="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:src="@drawable/ic_tick"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_alert_five_min"
+            app:layout_constraintEnd_toEndOf="@+id/view_none_notification"
+            app:layout_constraintTop_toTopOf="@+id/tv_alert_five_min" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_alert_ten_min"
-            style="@style/side_menu_text_style"
+            style="@style/notification_sound_title_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingStart="0dp"
             android:padding="@dimen/_4sdp"
             android:text="@string/_10_mins_before"
             app:layout_constraintEnd_toEndOf="@+id/tv_alert_five_min"
             app:layout_constraintStart_toStartOf="@+id/tv_alert_five_min"
             app:layout_constraintTop_toBottomOf="@+id/tv_alert_five_min" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_pre_alert_ten_tick"
+            android:layout_width="@dimen/_13sdp"
+            android:layout_height="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:src="@drawable/ic_tick"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_alert_ten_min"
+            app:layout_constraintEnd_toEndOf="@+id/view_none_notification"
+            app:layout_constraintTop_toTopOf="@+id/tv_alert_ten_min" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_alert_fifteen_min"
-            style="@style/side_menu_text_style"
+            style="@style/notification_sound_title_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingStart="0dp"
             android:padding="@dimen/_4sdp"
             android:text="@string/_15_mins_before"
             app:layout_constraintEnd_toEndOf="@+id/tv_alert_ten_min"
             app:layout_constraintStart_toStartOf="@+id/tv_alert_ten_min"
             app:layout_constraintTop_toBottomOf="@+id/tv_alert_ten_min" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_pre_alert_fifteen_tick"
+            android:layout_width="@dimen/_13sdp"
+            android:layout_height="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:src="@drawable/ic_tick"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_alert_fifteen_min"
+            app:layout_constraintEnd_toEndOf="@+id/view_none_notification"
+            app:layout_constraintTop_toTopOf="@+id/tv_alert_fifteen_min" />
+
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/group_alert_notification"
@@ -149,7 +195,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
-            android:text="Pre-Adhan Reminder-Alert"
+            android:text="Pre-Adhan Reminder Alert"
             app:layout_constraintStart_toStartOf="@+id/tv_pre_reminder"
             app:layout_constraintTop_toTopOf="@+id/view_pre_alert" />
 

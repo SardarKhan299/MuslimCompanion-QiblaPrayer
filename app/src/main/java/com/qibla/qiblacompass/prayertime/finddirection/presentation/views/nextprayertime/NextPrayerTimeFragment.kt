@@ -376,7 +376,7 @@ class NextPrayerTimeFragment :
         speakerTextView: TextView? = null, // Nullable TextView for speaker text
         isSpeakerText: Boolean = false // Boolean parameter for speaker text
     ) {
-        titleTextView.setTextAppearance(R.style.toolbar_sub_screens_text_style)
+        titleTextView.setTextAppearance(R.style.selected_notification_text_style)
         tickImageView.visible()
 
         // Check if speaker text exists and the isSpeakerText flag is true
