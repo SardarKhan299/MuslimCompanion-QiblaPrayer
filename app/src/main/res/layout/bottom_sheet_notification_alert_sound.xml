@@ -80,7 +80,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_none_alert"
-            style="@style/notification_sound_title_text_style"
+            style="@style/unselected_alert_title_text_style"
             android:layout_width="0dp"
             android:paddingStart="0dp"
             android:layout_height="wrap_content"
@@ -96,14 +96,14 @@
             android:layout_height="@dimen/_13sdp"
             android:layout_marginEnd="@dimen/_8sdp"
             android:src="@drawable/ic_tick"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/tv_none_alert"
             app:layout_constraintEnd_toEndOf="@+id/view_none_notification"
             app:layout_constraintTop_toTopOf="@+id/tv_none_alert" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_alert_five_min"
-            style="@style/notification_sound_title_text_style"
+            style="@style/unselected_alert_title_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/_4sdp"
@@ -118,14 +118,14 @@
             android:layout_height="@dimen/_13sdp"
             android:layout_marginEnd="@dimen/_8sdp"
             android:src="@drawable/ic_tick"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/tv_alert_five_min"
             app:layout_constraintEnd_toEndOf="@+id/view_none_notification"
             app:layout_constraintTop_toTopOf="@+id/tv_alert_five_min" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_alert_ten_min"
-            style="@style/notification_sound_title_text_style"
+            style="@style/unselected_alert_title_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="0dp"
@@ -140,14 +140,14 @@
             android:layout_height="@dimen/_13sdp"
             android:layout_marginEnd="@dimen/_8sdp"
             android:src="@drawable/ic_tick"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/tv_alert_ten_min"
             app:layout_constraintEnd_toEndOf="@+id/view_none_notification"
             app:layout_constraintTop_toTopOf="@+id/tv_alert_ten_min" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_alert_fifteen_min"
-            style="@style/notification_sound_title_text_style"
+            style="@style/unselected_alert_title_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="0dp"
@@ -162,7 +162,7 @@
             android:layout_height="@dimen/_13sdp"
             android:layout_marginEnd="@dimen/_8sdp"
             android:src="@drawable/ic_tick"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/tv_alert_fifteen_min"
             app:layout_constraintEnd_toEndOf="@+id/view_none_notification"
             app:layout_constraintTop_toTopOf="@+id/tv_alert_fifteen_min" />
@@ -332,8 +332,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_notification_play"
+            android:layout_marginEnd="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_beep_notification"
-            app:layout_constraintEnd_toStartOf="@+id/tv_notification_no"
+            app:layout_constraintEnd_toStartOf="@+id/img_beep_tick"
             app:layout_constraintTop_toTopOf="@+id/tv_beep_notification" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -400,8 +401,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_notification_play"
+            android:layout_marginEnd="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="@+id/img_adhan_one"
-            app:layout_constraintEnd_toStartOf="@+id/tv_notification_no"
+            app:layout_constraintEnd_toStartOf="@+id/img_adhan_one_tick"
             app:layout_constraintTop_toTopOf="@+id/img_adhan_one" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -468,8 +470,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_notification_play"
+            android:layout_marginEnd="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="@+id/img_adhan_two"
-            app:layout_constraintEnd_toStartOf="@+id/tv_notification_no"
+            app:layout_constraintEnd_toStartOf="@+id/img_adhan_two_tick"
             app:layout_constraintTop_toTopOf="@+id/img_adhan_two" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -536,8 +539,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_notification_play"
+            android:layout_marginEnd="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="@+id/img_adhan_three"
-            app:layout_constraintEnd_toStartOf="@+id/tv_notification_no"
+            app:layout_constraintEnd_toStartOf="@+id/img_adhan_three_tick"
             app:layout_constraintTop_toTopOf="@+id/img_adhan_three" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -605,9 +609,10 @@
             android:id="@+id/img_notification_adhan_four_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
             android:src="@drawable/ic_notification_play"
             app:layout_constraintBottom_toBottomOf="@+id/img_adhan_four"
-            app:layout_constraintEnd_toStartOf="@+id/tv_notification_no"
+            app:layout_constraintEnd_toStartOf="@+id/img_adhan_four_tick"
             app:layout_constraintTop_toTopOf="@+id/img_adhan_four" />
 
         <androidx.appcompat.widget.AppCompatImageView

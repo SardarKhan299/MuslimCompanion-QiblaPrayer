@@ -39,6 +39,7 @@ class SharedPreferences {
         var isRasoolNamesSelected = false
         private const val PREF_IS_ALLAH_SELECTED = "is_allah_selected"
         private const val PREF_IS_Rasool_SELECTED = "is_allah_selected"
+        private const val PREF_PRE_ALERT_VALUE="preAlertValue"
 
 
         var mSharedPreferences: SharedPreferences? = null
@@ -341,6 +342,18 @@ class SharedPreferences {
         fun getNavigatingBackToTasbihScreen(context: Context): Boolean {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getBoolean(KEY_NAVIGATING_BACK_TO_TASBIH_SCREEN, false)
+        }
+        fun savePreAlertValue(context: Context, value: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString(PREF_PRE_ALERT_VALUE, value)
+               apply()
+            }
+        }
+
+        fun getPreAlertValue(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString(PREF_PRE_ALERT_VALUE, "")
         }
     }
 }

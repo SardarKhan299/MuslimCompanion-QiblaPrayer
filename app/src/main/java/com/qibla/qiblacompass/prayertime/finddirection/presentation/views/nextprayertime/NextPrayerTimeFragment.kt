@@ -147,16 +147,74 @@ class NextPrayerTimeFragment :
         val navigateBack: ImageView = bottomSheetView.findViewById(R.id.img_bottom_navigate_back)
         val preAlertView: View = bottomSheetView.findViewById(R.id.view_pre_reminder)
         val alertGroup: Group = bottomSheetView.findViewById(R.id.group_alert_notification)
+
+        val preAlertNone: TextView = bottomSheetView.findViewById(R.id.tv_none_alert)
+        val preAlertNoneTick: ImageView = bottomSheetView.findViewById(R.id.img_pre_alert_none_tick)
+        val preAlertFiveMins: TextView = bottomSheetView.findViewById(R.id.tv_alert_five_min)
+        val preAlertFiveMinsTick: ImageView =
+            bottomSheetView.findViewById(R.id.img_pre_alert_five_tick)
+
+        val preAlertTenMins: TextView = bottomSheetView.findViewById(R.id.tv_alert_ten_min)
+        val preAlertTenTick: ImageView = bottomSheetView.findViewById(R.id.img_pre_alert_ten_tick)
+        val preAlertFifteenMins: TextView = bottomSheetView.findViewById(R.id.tv_alert_fifteen_min)
+        val preAlertFifteenTick: ImageView =
+            bottomSheetView.findViewById(R.id.img_pre_alert_fifteen_tick)
+
+        val preAdhanReminderText: TextView = bottomSheetView.findViewById(R.id.tv_notification_no)
         preAlertView.setOnClickListener {
             if (alertGroup.visibility == View.VISIBLE) {
                 alertGroup.gone()
-            }else{
+                preAlertNoneTick.gone()
+                preAlertFiveMinsTick.gone()
+                preAlertTenTick.gone()
+                preAlertFifteenTick.gone()
+            } else {
                 alertGroup.visible()
             }
         }
 
         navigateBack.setOnClickListener {
             bottomSheetDialog.dismiss()
+        }
+// Set initial value of TextView to "none" if no other value is set
+        val preAlertValue = SharedPreferences.getPreAlertValue(mContext)
+        if (preAlertValue.isNullOrEmpty()) {
+            preAdhanReminderText.text = getString(R.string.none)
+        } else {
+            preAdhanReminderText.text = preAlertValue
+        }
+        preAlertNone.setOnClickListener {
+            setViewStyleAlertReminder(preAlertNone, preAlertNoneTick)
+            preAdhanReminderText.text = getString(R.string.none) // Immediately update text
+            SharedPreferences.savePreAlertValue(mContext, "none") // Save preference
+            resetViewStyleAlertReminder(preAlertFiveMins, preAlertFiveMinsTick)
+            resetViewStyleAlertReminder(preAlertTenMins, preAlertTenTick)
+            resetViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
+        }
+        preAlertFiveMins.setOnClickListener {
+            setViewStyleAlertReminder(preAlertFiveMins, preAlertFiveMinsTick)
+            SharedPreferences.savePreAlertValue(mContext, "5 mins before")
+            preAdhanReminderText.text = getString(R.string._5_mins_before)
+            resetViewStyleAlertReminder(preAlertNone, preAlertNoneTick)
+            resetViewStyleAlertReminder(preAlertTenMins, preAlertTenTick)
+            resetViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
+        }
+        preAlertTenMins.setOnClickListener {
+            setViewStyleAlertReminder(preAlertTenMins, preAlertTenTick)
+            preAdhanReminderText.text = getString(R.string._10_mins_before)
+            SharedPreferences.savePreAlertValue(mContext, "10 mins before")
+            resetViewStyleAlertReminder(preAlertNone, preAlertNoneTick)
+            resetViewStyleAlertReminder(preAlertNone, preAlertNoneTick)
+            resetViewStyleAlertReminder(preAlertFiveMins, preAlertFiveMinsTick)
+            resetViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
+        }
+        preAlertFifteenMins.setOnClickListener {
+            setViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
+            preAdhanReminderText.text = getString(R.string._15_mins_before)
+            SharedPreferences.savePreAlertValue(mContext, "15 mins before")
+            resetViewStyleAlertReminder(preAlertNone, preAlertNoneTick)
+            resetViewStyleAlertReminder(preAlertFiveMins, preAlertFiveMinsTick)
+            resetViewStyleAlertReminder(preAlertTenMins, preAlertTenTick)
         }
 
 
@@ -401,12 +459,33 @@ class NextPrayerTimeFragment :
         }
     }
 
+    // Method to set the view style
+    private fun setViewStyleAlertReminder(
+        titleTextView: TextView,
+        tickImageView: ImageView,
+
+        ) {
+        titleTextView.setTextAppearance(R.style.selected_notification_text_style)
+        tickImageView.visible()
+    }
+
+    // Method to reset the view style
+    private fun resetViewStyleAlertReminder(
+        titleTextView: TextView,
+        tickImageView: ImageView,
+
+        ) {
+        titleTextView.setTextAppearance(R.style.unselected_alert_title_text_style)
+        tickImageView.invisible()
+
+    }
+
     private fun initObserver() {
         Log.d(NextPrayerTimeFragment::class.simpleName, "initObserver: ")
-        viewModel.prayerTimes.observe(viewLifecycleOwner) { prayerTimesList->
+        viewModel.prayerTimes.observe(viewLifecycleOwner) { prayerTimesList ->
             Log.d(NextPrayerTimeFragment::class.simpleName, "initObservation: Setting prayer times")
             // set prayer times on Views..//
-            if(prayerTimesList!=null && prayerTimesList.size ==5) {
+            if (prayerTimesList != null && prayerTimesList.size == 5) {
                 binding.layoutNextPrayerBackground.tvTimeFajr.text = prayerTimesList[0]
                 binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text = prayerTimesList[1]
                 binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text = prayerTimesList[2]
@@ -418,7 +497,7 @@ class NextPrayerTimeFragment :
         // to handle count down
         viewModel.index.observe(viewLifecycleOwner) { index ->
             Log.d(DashBoardFragment::class.simpleName, "initObserver: next Prayer $index")
-            if( QiblaApp.selectedPrayerPos ==0) {
+            if (QiblaApp.selectedPrayerPos == 0) {
                 when (index) {
                     1 -> fajrBg()
                     2 -> zuhrBg()
@@ -426,25 +505,28 @@ class NextPrayerTimeFragment :
                     4 -> maghribBg()
                     5 -> ishaBg()
                 }
-            }else{
-                Log.d(NextPrayerTimeFragment::class.simpleName, "initObserver: Background selected by user.")
+            } else {
+                Log.d(
+                    NextPrayerTimeFragment::class.simpleName,
+                    "initObserver: Background selected by user."
+                )
             }
         }
 
         // handle count down value
-        viewModel.counter.observe(viewLifecycleOwner){
+        viewModel.counter.observe(viewLifecycleOwner) {
             binding.tvTime.text = "$it"
         }
     }
 
     private fun setUserCityFromStorage() {
         Log.d(NextPrayerTimeFragment::class.simpleName, "setUserCityFromStorage: ")
-            val city = SharedPreferences.getUserCity(mContext)
-            binding.tvLocationCity.text = city
+        val city = SharedPreferences.getUserCity(mContext)
+        binding.tvLocationCity.text = city
     }
 
-    private fun scrollToEnd(){
-        binding.layoutNextPrayerBackground.svPrayerTimes.post{
+    private fun scrollToEnd() {
+        binding.layoutNextPrayerBackground.svPrayerTimes.post {
             binding.layoutNextPrayerBackground.svPrayerTimes.scrollTo(
                 0,
                 binding.layoutNextPrayerBackground.svPrayerTimes.bottom
