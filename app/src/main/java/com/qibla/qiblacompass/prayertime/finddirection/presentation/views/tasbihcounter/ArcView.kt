@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 
 class ArcView(context: Context, attrs: AttributeSet) : View(context, attrs) {
@@ -24,9 +25,11 @@ class ArcView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 //    }
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-    canvas.drawPath(path, paint)
+        Log.d(ArcView::class.simpleName, "onDraw: ")
+        canvas.drawPath(path, paint)
     }
     fun updatePath(startX: Float, startY: Float, endX: Float, endY: Float) {
+        Log.d(ArcView::class.simpleName, "updatePath: ")
         path.reset()
         path.moveTo(startX, startY)
         val controlX = (startX + endX) / 2
