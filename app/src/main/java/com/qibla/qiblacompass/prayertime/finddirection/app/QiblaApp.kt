@@ -31,7 +31,10 @@ class QiblaApp : Application() {
         val KEY_INCREMENTAL_COUNTER_2 = "incremental_counter_2"
         val KEY_INCREMENTAL_COUNTER_3 = "incremental_counter_3"
         val KEY_INCREMENTAL_COUNTER_4 = "incremental_counter_4"
-        val ENTERED_VALUE_KEY = "entered_value_key"
+        val ENTERED_VALUE_KEY_1 = "entered_value_key_1"
+        val ENTERED_VALUE_KEY_2 = "entered_value_key_2"
+        val ENTERED_VALUE_KEY_3 = "entered_value_key_3"
+        val ENTERED_VALUE_KEY_4 = "entered_value_key_4"
         var isAllahNamesSelected = true
         var selectedPrayerPos = 0
         val KEY_NAVIGATING_BACK_TO_TASBIH_SCREEN = "navigating_back_to_tasbih_screen"

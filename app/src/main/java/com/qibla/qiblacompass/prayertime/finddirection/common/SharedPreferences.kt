@@ -5,9 +5,10 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import androidx.preference.PreferenceManager
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_1
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_2
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_3
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_4
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_INCREMENTAL_COUNTER_1
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_INCREMENTAL_COUNTER_2
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_INCREMENTAL_COUNTER_3
@@ -373,16 +374,63 @@ class SharedPreferences {
         }
 
 
-        fun saveEnteredValue(context: Context, enteredValue: Int) {
+        fun saveEnteredValue(context: Context, enteredValue: Int,imageName: String) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
-            msharedPreferences!!.edit().apply {
-                putInt(ENTERED_VALUE_KEY, enteredValue).apply()
+
+            when(imageName){
+                SUBHAN_ALLAH ->{
+                    msharedPreferences!!.edit().apply {
+                        putInt(ENTERED_VALUE_KEY_1, enteredValue)
+                        apply()
+                    }
+                }
+                ALHAMDULILLAH->{
+                    msharedPreferences!!.edit().apply {
+                        putInt(ENTERED_VALUE_KEY_2, enteredValue)
+                        apply()
+                    }
+                }
+                ALLAHU_AKBAR ->{
+                    msharedPreferences!!.edit().apply {
+                        putInt(ENTERED_VALUE_KEY_3, enteredValue)
+                        apply()
+                    }
+                }
+                LA_ILAHA_ILLA_ALLAH->{
+                    msharedPreferences!!.edit().apply {
+                        putInt(ENTERED_VALUE_KEY_4, enteredValue)
+                        apply()
+                    }
+                }else->{
+                msharedPreferences!!.edit().apply {
+                    putInt(ENTERED_VALUE_KEY_1, enteredValue)
+                    apply()
+                }
+            }
             }
         }
 
-        fun retrieveEnteredValue(context: Context): Int {
+        fun retrieveEnteredValue(context: Context,imageName: String): Int {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
-            return msharedPreferences!!.getInt(ENTERED_VALUE_KEY, 33)
+
+            when(imageName){
+                SUBHAN_ALLAH ->{
+                    return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_1, 33)
+                }
+                ALHAMDULILLAH->{
+                    return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_2, 33)
+                }
+                ALLAHU_AKBAR ->{
+                    return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_3, 33)
+                }
+                LA_ILAHA_ILLA_ALLAH->{
+                    return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_4, 33)
+                }else->{
+                return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_1, 33)
+            }
+            }
+
+
         }
 
         fun setNavigatingBackToTasbihScreen(context: Context, navigatingBack: Boolean) {

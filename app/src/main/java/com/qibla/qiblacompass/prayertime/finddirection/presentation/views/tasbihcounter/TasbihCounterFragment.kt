@@ -163,7 +163,7 @@ class TasbihCounterFragment :
 
 
 /// Retrieve the stored entered value from SharedPreferences
-        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
+        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
 
 // Update the counter TextView with the retrieved entered value
         binding.tvCount.text = enteredValue.toString()
@@ -172,7 +172,7 @@ class TasbihCounterFragment :
         view1.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
                 // Retrieve the stored entered value from SharedPreferences
-                val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
+                val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
 
                 // Check if the current counter is less than the entered value
                 if (counter < enteredValue) {
@@ -300,7 +300,7 @@ class TasbihCounterFragment :
             if (enteredValue != 0) {
                 // updateCount(enteredValue)
                 updateMaxCounter(enteredValue)
-                SharedPreferences.saveEnteredValue(mContext, enteredValue)
+                SharedPreferences.saveEnteredValue(mContext, enteredValue,selectedImageName)
 
                 bottomSheetDialog.dismiss()
             } else {

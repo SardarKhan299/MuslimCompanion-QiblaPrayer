@@ -100,7 +100,7 @@ class DigitalTasbihFragment :
 
     private fun incrementCounter() {
         // Retrieve the entered value from SharedPreferences
-        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
+        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
 
         // Check if the current counter value is less than the entered value
         if (counterValue < enteredValue) {
