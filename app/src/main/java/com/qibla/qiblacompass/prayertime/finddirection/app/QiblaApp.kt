@@ -27,7 +27,10 @@ class QiblaApp : Application() {
         val numberImages: ArrayList<Int> = ArrayList()
         val audioAllahResources = arrayListOf<Int>()
         val audioRasoolResources = arrayListOf<Int>()
-        val KEY_INCREMENTAL_COUNTER = "incremental_counter"
+        val KEY_INCREMENTAL_COUNTER_1 = "incremental_counter_1"
+        val KEY_INCREMENTAL_COUNTER_2 = "incremental_counter_2"
+        val KEY_INCREMENTAL_COUNTER_3 = "incremental_counter_3"
+        val KEY_INCREMENTAL_COUNTER_4 = "incremental_counter_4"
         val ENTERED_VALUE_KEY = "entered_value_key"
         var isAllahNamesSelected = true
         var selectedPrayerPos = 0

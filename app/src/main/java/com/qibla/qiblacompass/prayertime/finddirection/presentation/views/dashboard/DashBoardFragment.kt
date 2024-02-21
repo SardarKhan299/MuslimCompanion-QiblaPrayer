@@ -399,7 +399,6 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
             }
             3 -> {
-
                 findNavController().navigate(R.id.tasbihFragment)
             }
             4 -> {

@@ -44,7 +44,6 @@ class TasbihCounterFragment :
     private lateinit var counterTextView: TextView
     private var counter = 0
     private var maxCounter = 100
-    private var counterInitialized: Boolean = false
     lateinit var adapter: TasbihCounterAdapter
     lateinit var recyclerView: RecyclerView
     private lateinit var imageView: ImageView
@@ -64,6 +63,8 @@ class TasbihCounterFragment :
         R.drawable.m13,
         R.drawable.m14,
     )
+
+    var selectedImageName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,7 +113,7 @@ class TasbihCounterFragment :
         imageView = binding.layoutTasbihCounterFragment.findViewById(R.id.img_tasbih)
 
 
-        val selectedImageName = SharedPreferences.retrieveImageValue(requireContext())
+        selectedImageName = SharedPreferences.retrieveImageValue(requireContext())!!
         Log.d("TasbihCounterFragment :selectedImageName", "Selected image name: $selectedImageName")
         // Map the image name to the corresponding resource ID
         val imageResource = TasbihZhikrUtil.getImageResource(selectedImageName ?: "")
@@ -121,7 +122,7 @@ class TasbihCounterFragment :
         imageView.setImageResource(imageResource)
         saveImageValue(requireContext(), selectedImageName.toString())
              // Retrieve the saved counter value from SharedPreferences
-        val counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext())
+        val counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext(),selectedImageName)
         counter = counterValue
 
         // Update the increment text with the saved counter value
@@ -278,7 +279,7 @@ class TasbihCounterFragment :
         counter++
         counterTextView.text = counter.toString()
         // Save the counter value to SharedPreferences
-        SharedPreferences.saveIncrementalCounter(mContext, counter)
+        SharedPreferences.saveIncrementalCounter(mContext, counter,selectedImageName)
         // Notify the adapter that the data set has changed
         adapter.notifyDataSetChanged()
     }
@@ -314,6 +315,11 @@ class TasbihCounterFragment :
     private fun updateMaxCounter(newValue: Int) {
         maxCounter = newValue
         binding.tvCount.text = maxCounter.toString()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startMotionLayout()
     }
 
     override fun onDestroy() {
