@@ -45,7 +45,7 @@ class SharedPreferences {
         private const val PREF_PRE_ALERT_VALUE = "preAlertValue"
         private const val PREF_PRE_ALERT_STYLE_KEY = "preAlertValueStyle"
         private const val PREF_NOTIFICATION_STYLE_KEY = "preAlertValueNotificationStyle"
-
+        private const val AUDIO_PREF_KEY = "audio_pref_key"
         var mSharedPreferences: SharedPreferences? = null
         private fun initShardPreference(context: Context): SharedPreferences? {
             if (mSharedPreferences == null) {
@@ -417,6 +417,20 @@ class SharedPreferences {
         fun loadNotificationStyleValue(context: Context): String? {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getString(PREF_NOTIFICATION_STYLE_KEY, null)
+        }
+
+        //Save Audio
+        fun saveAudioNameInPrefs(context: Context, audioName: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString(AUDIO_PREF_KEY, audioName)
+                apply()
+            }
+        }
+
+        private fun getStoredAudioName(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString(AUDIO_PREF_KEY, null)
         }
 
     }

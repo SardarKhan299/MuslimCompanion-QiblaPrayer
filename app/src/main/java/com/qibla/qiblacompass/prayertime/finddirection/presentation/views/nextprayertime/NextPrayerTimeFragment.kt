@@ -1,5 +1,6 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.nextprayertime
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -37,6 +38,7 @@ class NextPrayerTimeFragment :
     lateinit var preAlertFifteenMins: TextView
     lateinit var preAlertFifteenTick: ImageView
     lateinit var preAdhanReminderText: TextView
+    private var mediaPlayer: MediaPlayer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)?.hideActionBar()
@@ -212,11 +214,12 @@ class NextPrayerTimeFragment :
 
 
         navigateBack.setOnClickListener {
+            mediaPlayer!!.stop()
             bottomSheetDialog.dismiss()
         }
 
 
-        val getPreAlertValue =getPreAlertValue(mContext)
+        val getPreAlertValue = getPreAlertValue(mContext)
         if (getPreAlertValue.isNullOrEmpty()) {
             preAdhanReminderText.text = getString(R.string.none)
         } else {
@@ -408,6 +411,8 @@ class NextPrayerTimeFragment :
             )
         }
         beepNotificationView.setOnClickListener {
+            setMediaPlayer(R.raw.beep_sound)
+            SharedPreferences.saveAudioNameInPrefs(mContext, "beep_sound")
             setViewStyleAndSaveToPrefs(
                 mContext,
                 beepNotificationText,
@@ -446,6 +451,8 @@ class NextPrayerTimeFragment :
         }
 
         adhanOneNotificationView.setOnClickListener {
+            setMediaPlayer(R.raw.one_azan_by_nasir_al_qatami)
+            SharedPreferences.saveAudioNameInPrefs(mContext, "one_azan_by_nasir_al_qatami")
             setViewStyleAndSaveToPrefs(
                 mContext,
                 adhanOneNotificationText,
@@ -483,6 +490,9 @@ class NextPrayerTimeFragment :
             resetViewStyleNotification(silentNotificationText, silentTickImage)
         }
         adhanTwoNotificationView.setOnClickListener {
+            setMediaPlayer(R.raw.two_azan_by_mansour_al_zahrani)
+            SharedPreferences.saveAudioNameInPrefs(mContext, "two_azan_by_mansour_al_zahrani")
+
             setViewStyleAndSaveToPrefs(
                 mContext,
                 adhanTwoNotificationText,
@@ -520,6 +530,9 @@ class NextPrayerTimeFragment :
             resetViewStyleNotification(silentNotificationText, silentTickImage)
         }
         adhanThreeNotificationView.setOnClickListener {
+            setMediaPlayer(R.raw.three_adhan_by_masjid_al_haram)
+            SharedPreferences.saveAudioNameInPrefs(mContext, "three_adhan_by_masjid_al_haram")
+
             setViewStyleAndSaveToPrefs(
                 mContext,
                 adhanThreeNotificationText,
@@ -555,6 +568,9 @@ class NextPrayerTimeFragment :
 
         }
         adhanFourNotificationView.setOnClickListener {
+            setMediaPlayer(R.raw.four_adhan_by_mishary_rashid_alafasy)
+            SharedPreferences.saveAudioNameInPrefs(mContext, "four_adhan_by_mishary_rashid_alafasy")
+
             setViewStyleAndSaveToPrefs(
                 mContext,
                 adhanFourNotificationText,
@@ -591,6 +607,16 @@ class NextPrayerTimeFragment :
 
         }
         bottomSheetDialog.show()
+        bottomSheetDialog.setOnDismissListener {
+            mediaPlayer?.stop() // Stop the audio playback when the bottom sheet is dismissed
+        }
+    }
+
+    private fun setMediaPlayer(audioResource: Int) {
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = MediaPlayer.create(requireContext(), audioResource)
+        mediaPlayer?.start()
     }
 
     // Method to set the view style
@@ -952,6 +978,22 @@ class NextPrayerTimeFragment :
         bellIcon.background =
             ResourcesCompat.getDrawable(resources, R.drawable.ic_unselected_bell_icon, null)
 
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        // Stop the audio playback
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 }
 
