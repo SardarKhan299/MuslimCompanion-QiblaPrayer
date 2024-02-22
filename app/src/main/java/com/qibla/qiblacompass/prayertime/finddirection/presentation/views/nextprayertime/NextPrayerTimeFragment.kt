@@ -14,6 +14,10 @@ import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.*
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.getPreAlertValue
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.loadNotificationStyleValue
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.loadPreAlertValue
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.setViewStyleAndSaveToPrefs
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentNextPrayerTimeBinding
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashboardViewModel
@@ -24,7 +28,15 @@ class NextPrayerTimeFragment :
     BaseFragment<FragmentNextPrayerTimeBinding>(R.layout.fragment_next_prayer_time) {
 
     private val viewModel: DashboardViewModel by activityViewModels()
-
+    lateinit var preAlertNone: TextView
+    lateinit var preAlertNoneTick: ImageView
+    lateinit var preAlertFiveMins: TextView
+    lateinit var preAlertFiveMinsTick: ImageView
+    lateinit var preAlertTenMins: TextView
+    lateinit var preAlertTenTick: ImageView
+    lateinit var preAlertFifteenMins: TextView
+    lateinit var preAlertFifteenTick: ImageView
+    lateinit var preAdhanReminderText: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)?.hideActionBar()
@@ -148,19 +160,18 @@ class NextPrayerTimeFragment :
         val preAlertView: View = bottomSheetView.findViewById(R.id.view_pre_reminder)
         val alertGroup: Group = bottomSheetView.findViewById(R.id.group_alert_notification)
 
-        val preAlertNone: TextView = bottomSheetView.findViewById(R.id.tv_none_alert)
-        val preAlertNoneTick: ImageView = bottomSheetView.findViewById(R.id.img_pre_alert_none_tick)
-        val preAlertFiveMins: TextView = bottomSheetView.findViewById(R.id.tv_alert_five_min)
-        val preAlertFiveMinsTick: ImageView =
-            bottomSheetView.findViewById(R.id.img_pre_alert_five_tick)
+        preAlertNone = bottomSheetView.findViewById(R.id.tv_none_alert)
+        preAlertNoneTick = bottomSheetView.findViewById(R.id.img_pre_alert_none_tick)
+        preAlertFiveMins = bottomSheetView.findViewById(R.id.tv_alert_five_min)
+        preAlertFiveMinsTick = bottomSheetView.findViewById(R.id.img_pre_alert_five_tick)
 
-        val preAlertTenMins: TextView = bottomSheetView.findViewById(R.id.tv_alert_ten_min)
-        val preAlertTenTick: ImageView = bottomSheetView.findViewById(R.id.img_pre_alert_ten_tick)
-        val preAlertFifteenMins: TextView = bottomSheetView.findViewById(R.id.tv_alert_fifteen_min)
-        val preAlertFifteenTick: ImageView =
-            bottomSheetView.findViewById(R.id.img_pre_alert_fifteen_tick)
+        preAlertTenMins = bottomSheetView.findViewById(R.id.tv_alert_ten_min)
+        preAlertTenTick = bottomSheetView.findViewById(R.id.img_pre_alert_ten_tick)
+        preAlertFifteenMins = bottomSheetView.findViewById(R.id.tv_alert_fifteen_min)
+        preAlertFifteenTick = bottomSheetView.findViewById(R.id.img_pre_alert_fifteen_tick)
 
         val preAdhanReminderText: TextView = bottomSheetView.findViewById(R.id.tv_notification_no)
+
         preAlertView.setOnClickListener {
             if (alertGroup.visibility == View.VISIBLE) {
                 alertGroup.gone()
@@ -168,22 +179,57 @@ class NextPrayerTimeFragment :
                 preAlertFiveMinsTick.gone()
                 preAlertTenTick.gone()
                 preAlertFifteenTick.gone()
+
             } else {
                 alertGroup.visible()
+                val lastSelectedValue = loadPreAlertValue(mContext)
+                // Apply the last selected value to the appropriate views
+                when (lastSelectedValue) {
+                    "none" -> {
+                        setViewStyleAlertReminder(preAlertNone, preAlertNoneTick)
+                        preAlertNoneTick.visible()
+                        preAdhanReminderText.text = getString(R.string.none)
+
+                    }
+                    "5 mins before" -> {
+                        setViewStyleAlertReminder(preAlertFiveMins, preAlertFiveMinsTick)
+                        preAlertFiveMins.visible()
+                        preAdhanReminderText.text = getString(R.string._5_mins_before)
+                    }
+                    "10 mins before" -> {
+                        setViewStyleAlertReminder(preAlertTenMins, preAlertTenTick)
+                        preAlertTenTick.visible()
+                        preAdhanReminderText.text = getString(R.string._10_mins_before)
+                    }
+                    "15 mins before" -> {
+                        setViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
+                        preAlertFifteenTick.visible()
+                        preAdhanReminderText.text = getString(R.string._15_mins_before)
+                    }
+                }
             }
         }
+
 
         navigateBack.setOnClickListener {
             bottomSheetDialog.dismiss()
         }
-// Set initial value of TextView to "none" if no other value is set
-        val preAlertValue = SharedPreferences.getPreAlertValue(mContext)
-        if (preAlertValue.isNullOrEmpty()) {
+
+
+        val getPreAlertValue =getPreAlertValue(mContext)
+        if (getPreAlertValue.isNullOrEmpty()) {
             preAdhanReminderText.text = getString(R.string.none)
         } else {
-            preAdhanReminderText.text = preAlertValue
+            preAdhanReminderText.text = getPreAlertValue
         }
+
         preAlertNone.setOnClickListener {
+            SharedPreferences.setViewStyleAndSaveToPrefs(
+                mContext,
+                preAlertNone,
+                preAlertNoneTick,
+                "none"
+            )
             setViewStyleAlertReminder(preAlertNone, preAlertNoneTick)
             preAdhanReminderText.text = getString(R.string.none) // Immediately update text
             SharedPreferences.savePreAlertValue(mContext, "none") // Save preference
@@ -192,6 +238,12 @@ class NextPrayerTimeFragment :
             resetViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
         }
         preAlertFiveMins.setOnClickListener {
+            SharedPreferences.setViewStyleAndSaveToPrefs(
+                mContext,
+                preAlertFiveMins,
+                preAlertFiveMinsTick,
+                "5 mins before"
+            )
             setViewStyleAlertReminder(preAlertFiveMins, preAlertFiveMinsTick)
             SharedPreferences.savePreAlertValue(mContext, "5 mins before")
             preAdhanReminderText.text = getString(R.string._5_mins_before)
@@ -200,6 +252,13 @@ class NextPrayerTimeFragment :
             resetViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
         }
         preAlertTenMins.setOnClickListener {
+            SharedPreferences.setViewStyleAndSaveToPrefs(
+                mContext,
+                preAlertTenMins,
+                preAlertTenTick,
+                "10 mins before"
+            )
+
             setViewStyleAlertReminder(preAlertTenMins, preAlertTenTick)
             preAdhanReminderText.text = getString(R.string._10_mins_before)
             SharedPreferences.savePreAlertValue(mContext, "10 mins before")
@@ -209,6 +268,13 @@ class NextPrayerTimeFragment :
             resetViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
         }
         preAlertFifteenMins.setOnClickListener {
+            SharedPreferences.setViewStyleAndSaveToPrefs(
+                mContext,
+                preAlertFifteenMins,
+                preAlertFifteenTick,
+                "15 mins before"
+            )
+
             setViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
             preAdhanReminderText.text = getString(R.string._15_mins_before)
             SharedPreferences.savePreAlertValue(mContext, "15 mins before")
@@ -218,9 +284,60 @@ class NextPrayerTimeFragment :
         }
 
 
-
+        // Apply styles based on the loaded value
+        when (loadNotificationStyleValue(mContext)) {
+            "none" -> {
+                setViewStyleNotification(noneNotificationText, noneTickImage)
+            }
+            "silent" -> {
+                setViewStyleNotification(silentNotificationText, silentTickImage)
+            }
+            "beep" -> {
+                setViewStyleNotification(beepNotificationText, beepTickImage)
+            }
+            "adhan one" -> {
+                setViewStyleNotification(
+                    adhanOneNotificationText,
+                    adhanOneTickImage,
+                    adhanOneSpeakerText,
+                    true
+                )
+            }
+            "adhan two" -> {
+                setViewStyleNotification(
+                    adhanTwoNotificationText,
+                    adhanTwoTickImage,
+                    adhanTwoSpeakerText,
+                    true
+                )
+            }
+            "adhan three" -> {
+                setViewStyleNotification(
+                    adhanThreeNotificationText,
+                    adhanThreeTickImage,
+                    adhanThreeSpeakerText,
+                    true
+                )
+            }
+            "adhan four" -> {
+                setViewStyleNotification(
+                    adhanFourNotificationText,
+                    adhanFourTickImage,
+                    adhanFourSpeakerText,
+                    true
+                )
+            }
+            // Handle other cases as needed
+        }
         noneNotificationView.setOnClickListener {
-
+            setViewStyleAndSaveToPrefs(
+                mContext,
+                noneNotificationText,
+                noneTickImage,
+                null,
+                false,
+                "none"
+            )
             setViewStyleNotification(noneNotificationText, noneTickImage)
             resetViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(silentNotificationText, silentTickImage)
@@ -254,6 +371,14 @@ class NextPrayerTimeFragment :
                 NextPrayerTimeFragment::class.simpleName,
                 "showBottomSheetNotificationAlertSound: silentNotificationView clicked.."
             )
+            setViewStyleAndSaveToPrefs(
+                mContext,
+                silentNotificationText,
+                silentTickImage,
+                null,
+                false,
+                "silent"
+            )
             setViewStyleNotification(silentNotificationText, silentTickImage)
             resetViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(noneNotificationText, noneTickImage)
@@ -283,6 +408,14 @@ class NextPrayerTimeFragment :
             )
         }
         beepNotificationView.setOnClickListener {
+            setViewStyleAndSaveToPrefs(
+                mContext,
+                beepNotificationText,
+                beepTickImage,
+                null,
+                false,
+                "beep"
+            )
             setViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(silentNotificationText, silentTickImage)
             resetViewStyleNotification(noneNotificationText, noneTickImage)
@@ -313,6 +446,14 @@ class NextPrayerTimeFragment :
         }
 
         adhanOneNotificationView.setOnClickListener {
+            setViewStyleAndSaveToPrefs(
+                mContext,
+                adhanOneNotificationText,
+                adhanOneTickImage,
+                adhanOneSpeakerText,
+                true,
+                "adhan one"
+            )
             setViewStyleNotification(
                 adhanOneNotificationText,
                 adhanOneTickImage,
@@ -342,6 +483,14 @@ class NextPrayerTimeFragment :
             resetViewStyleNotification(silentNotificationText, silentTickImage)
         }
         adhanTwoNotificationView.setOnClickListener {
+            setViewStyleAndSaveToPrefs(
+                mContext,
+                adhanTwoNotificationText,
+                adhanTwoTickImage,
+                adhanTwoSpeakerText,
+                true,
+                "adhan two"
+            )
             setViewStyleNotification(
                 adhanTwoNotificationText,
                 adhanTwoTickImage,
@@ -371,6 +520,14 @@ class NextPrayerTimeFragment :
             resetViewStyleNotification(silentNotificationText, silentTickImage)
         }
         adhanThreeNotificationView.setOnClickListener {
+            setViewStyleAndSaveToPrefs(
+                mContext,
+                adhanThreeNotificationText,
+                adhanThreeTickImage,
+                adhanThreeSpeakerText,
+                true,
+                "adhan three"
+            )
             setViewStyleNotification(
                 adhanThreeNotificationText,
                 adhanThreeTickImage,
@@ -398,6 +555,14 @@ class NextPrayerTimeFragment :
 
         }
         adhanFourNotificationView.setOnClickListener {
+            setViewStyleAndSaveToPrefs(
+                mContext,
+                adhanFourNotificationText,
+                adhanFourTickImage,
+                adhanFourSpeakerText,
+                true,
+                "adhan four"
+            )
             setViewStyleNotification(
                 adhanFourNotificationText,
                 adhanFourTickImage,
@@ -422,6 +587,7 @@ class NextPrayerTimeFragment :
             resetViewStyleNotification(noneNotificationText, noneTickImage)
             resetViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(silentNotificationText, silentTickImage)
+
 
         }
         bottomSheetDialog.show()
@@ -476,7 +642,7 @@ class NextPrayerTimeFragment :
 
         ) {
         titleTextView.setTextAppearance(R.style.unselected_alert_title_text_style)
-        tickImageView.invisible()
+        tickImageView.gone()
 
     }
 
