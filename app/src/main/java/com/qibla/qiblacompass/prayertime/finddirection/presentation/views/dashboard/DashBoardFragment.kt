@@ -254,7 +254,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             // to handle count down
             viewModel.index.observe(viewLifecycleOwner) { index ->
                 Log.d(DashBoardFragment::class.simpleName, "initObserver: next Prayer $index")
-                binding.tvNextPrayerTimeVal.text = prayerTimeList.values.elementAt(index)
+                binding.tvNextPrayerTimeVal.text = prayerTimeList.values.elementAt(index-1)
                 when (index) {
                     1 -> {
                         binding.tvPrayerTime.text = "Fajr"
