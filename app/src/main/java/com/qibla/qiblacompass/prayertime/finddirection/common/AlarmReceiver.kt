@@ -38,7 +38,7 @@ class AlarmReceiver: BroadcastReceiver() {
             var notificationBuilder: NotificationCompat.Builder? = null
             notificationBuilder =
                 NotificationCompat.Builder(ctx, ctx.getString(R.string.notification_channel_id))
-                    .setContentText("Namaz Time $namazTitle")
+                    .setContentText("$namazTitle Namaz Time by ${context.getString(R.string.app_name)} ")
                     .setContentTitle("Its Time for $namazTitle Prayer.")
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentIntent(pendingIntent)

@@ -30,6 +30,29 @@ class CommonMethods {
             }
         }
 
+        fun convertTimeToUnixTime(time:String): Long {
+            val timePart = time.split(" ")
+            val timeParts = timePart[0].split(":")
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.HOUR_OF_DAY, timeParts[0].toInt())
+            calendar.set(Calendar.MINUTE, timeParts[1].toInt())
+            calendar.set(Calendar.SECOND, 0)
+            calendar.set(Calendar.MILLISECOND, 0)
+            return calendar.timeInMillis
+        }
+
+
+        fun convertTimeToUnixTimeDay(time:String): Long {
+            val timePart = time.split(" ")
+            val timeParts = timePart[0].split(":")
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.DAY_OF_MONTH,1)
+            calendar.set(Calendar.HOUR_OF_DAY, timeParts[0].toInt())
+            calendar.set(Calendar.MINUTE, timeParts[1].toInt())
+            calendar.set(Calendar.SECOND, 0)
+            calendar.set(Calendar.MILLISECOND, 0)
+            return calendar.timeInMillis
+        }
          fun formatTime(seconds: Long): String {
             val hours = seconds / 3600
             val minutes = (seconds % 3600) / 60

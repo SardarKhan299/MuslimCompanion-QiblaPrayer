@@ -407,11 +407,11 @@ class NextPrayerTimeFragment :
             Log.d(NextPrayerTimeFragment::class.simpleName, "initObservation: Setting prayer times")
             // set prayer times on Views..//
             if(prayerTimesList!=null && prayerTimesList.size ==5) {
-                binding.layoutNextPrayerBackground.tvTimeFajr.text = prayerTimesList[0]
-                binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text = prayerTimesList[1]
-                binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text = prayerTimesList[2]
-                binding.layoutNextPrayerBackground.tvUnselectedMaghribTime.text = prayerTimesList[3]
-                binding.layoutNextPrayerBackground.tvUnselectedIshaTime.text = prayerTimesList[4]
+                binding.layoutNextPrayerBackground.tvTimeFajr.text = prayerTimesList.values.elementAt(0)
+                binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text = prayerTimesList.values.elementAt(1)
+                binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text = prayerTimesList.values.elementAt(2)
+                binding.layoutNextPrayerBackground.tvUnselectedMaghribTime.text = prayerTimesList.values.elementAt(3)
+                binding.layoutNextPrayerBackground.tvUnselectedIshaTime.text = prayerTimesList.values.elementAt(4)
             }
         }
 

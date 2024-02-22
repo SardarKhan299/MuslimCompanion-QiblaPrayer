@@ -27,6 +27,8 @@ import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToMilliseconds
+import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToUnixTime
+import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToUnixTimeDay
 import com.qibla.qiblacompass.prayertime.finddirection.common.MyLocationManager
 import com.qibla.qiblacompass.prayertime.finddirection.common.NetworkResult
 import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerReminder
@@ -45,6 +47,9 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.collections.HashMap
+import kotlin.collections.LinkedHashMap
 
 
 @AndroidEntryPoint
@@ -55,7 +60,9 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     private lateinit var locationTextView: TextView
     private lateinit var mLocationManager: MyLocationManager
 
-    private lateinit var prayerTimeList: List<String>
+    private lateinit var prayerTimeList: LinkedHashMap<Long,String>
+
+    private lateinit var nextDayPrayerTimeList: LinkedHashMap<Long,String>
 
     val c = Calendar.getInstance()
 
@@ -160,6 +167,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                         response.data?.let {
                             Log.d(DashBoardFragment::class.simpleName, "initObservation: Receive Data ${it.data.size }")
                             val prayTime = it.data[currentDay - 1].timings
+                            val nextDayPrayTime = it.data[currentDay].timings
                             setAlarms(listOf(
                                 prayTime.Fajr,
                                 prayTime.Dhuhr,
@@ -167,12 +175,19 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                                 prayTime.Maghrib,
                                 prayTime.Isha
                             ))
-                            prayerTimeList = listOf(
-                                prayTime.Fajr.formatTimeTo12Hour(),
-                                prayTime.Dhuhr.formatTimeTo12Hour(),
-                                prayTime.Asr.formatTimeTo12Hour(),
-                                prayTime.Maghrib.formatTimeTo12Hour(),
-                                prayTime.Isha.formatTimeTo12Hour()
+                            prayerTimeList = linkedMapOf(
+                                convertTimeToUnixTime(prayTime.Fajr) to prayTime.Fajr.formatTimeTo12Hour() ,
+                                convertTimeToUnixTime(prayTime.Dhuhr) to prayTime.Dhuhr.formatTimeTo12Hour(),
+                                convertTimeToUnixTime(prayTime.Asr) to prayTime.Asr.formatTimeTo12Hour(),
+                                convertTimeToUnixTime(prayTime.Maghrib) to prayTime.Maghrib.formatTimeTo12Hour(),
+                                convertTimeToUnixTime(prayTime.Isha) to prayTime.Isha.formatTimeTo12Hour(),
+                            )
+                            nextDayPrayerTimeList = linkedMapOf(
+                                convertTimeToUnixTimeDay(nextDayPrayTime.Fajr) to nextDayPrayTime.Fajr.formatTimeTo12Hour() ,
+                                convertTimeToUnixTimeDay(nextDayPrayTime.Dhuhr) to nextDayPrayTime.Dhuhr.formatTimeTo12Hour(),
+                                convertTimeToUnixTimeDay(nextDayPrayTime.Asr) to nextDayPrayTime.Asr.formatTimeTo12Hour(),
+                                convertTimeToUnixTimeDay(nextDayPrayTime.Maghrib) to nextDayPrayTime.Maghrib.formatTimeTo12Hour(),
+                                convertTimeToUnixTimeDay(nextDayPrayTime.Isha) to nextDayPrayTime.Isha.formatTimeTo12Hour(),
                             )
                             viewModel.setPrayerTimes(prayerTimeList)
                             val hijriMonth = it.data[currentDay-1].date.hijri.month.en
@@ -204,18 +219,25 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 Log.d(DashBoardFragment::class.simpleName, "initObservation: Setting prayer times")
                 // set prayer times on Views..//
                 if(prayerTimesList!=null && prayerTimesList.size ==5) {
-                    binding.layoutPrayerTiming.tvTimePrayer.text = prayerTimesList[0]
-                    binding.layoutPrayerTiming.tvTimeZuhrPrayer.text = prayerTimesList[1]
-                    binding.layoutPrayerTiming.tvTimeAsrPrayer.text = prayerTimesList[2]
-                    binding.layoutPrayerTiming.tvTimeMaghribPrayer.text = prayerTimesList[3]
-                    binding.layoutPrayerTiming.tvTimeIshaPrayer.text = prayerTimesList[4]
+                    binding.layoutPrayerTiming.tvTimePrayer.text = prayerTimesList.values.elementAt(0)
+                    binding.layoutPrayerTiming.tvTimeZuhrPrayer.text = prayerTimesList.values.elementAt(1)
+                    binding.layoutPrayerTiming.tvTimeAsrPrayer.text = prayerTimesList.values.elementAt(2)
+                    binding.layoutPrayerTiming.tvTimeMaghribPrayer.text = prayerTimesList.values.elementAt(3)
+                    binding.layoutPrayerTiming.tvTimeIshaPrayer.text = prayerTimesList.values.elementAt(4)
                 }
                 if(firstTime==0) {
                     firstTime++
                     //get next prayer time
-                    val time = nextPrayer(prayerTimesList)
-                    SharedPreferences.saveTimerEndTime(mContext, time)
-                    startCountdown(time / 1000)
+                    val time = nextPrayer(prayerTimesList.keys.toList())
+                    if(time == -1L){
+                        // fetch next Day time for fajar namaz...//
+                        val time = nextPrayer(nextDayPrayerTimeList.keys.toList())
+                        SharedPreferences.saveTimerEndTime(mContext, time)
+                        startCountdown(TimeUnit.MILLISECONDS.toSeconds(time))
+                    }else {
+                        SharedPreferences.saveTimerEndTime(mContext, time)
+                        startCountdown(TimeUnit.MILLISECONDS.toSeconds(time))
+                    }
                 }
             }
 
@@ -224,14 +246,15 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 binding.tvCounterNextPrayerTime.text = "$it"
             }
 
-            // set next prayer time
-            viewModel.nextPrayerTime.observe(viewLifecycleOwner){
-                binding.tvNextPrayerTimeVal.text = "$it"
-            }
+//            // set next prayer time
+//            viewModel.nextPrayerTime.observe(viewLifecycleOwner){
+//                binding.tvNextPrayerTimeVal.text = "$it"
+//            }
 
             // to handle count down
             viewModel.index.observe(viewLifecycleOwner) { index ->
                 Log.d(DashBoardFragment::class.simpleName, "initObserver: next Prayer $index")
+                binding.tvNextPrayerTimeVal.text = prayerTimeList.values.elementAt(index)
                 when (index) {
                     1 -> {
                         binding.tvPrayerTime.text = "Fajr"
@@ -288,20 +311,20 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
 
 
-    private fun nextPrayer(times: List<String>): Long {
+    private fun nextPrayer(times: List<Long>): Long {
         Log.d(DashBoardFragment::class.simpleName, "nextPrayer: ")
-        val currentTime = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        val formattedTime = dateFormat.format(currentTime)
-        val newTime = convertTimeToMilliseconds(formattedTime)
+        val currentTime = Calendar.getInstance().timeInMillis
+        val timeExistInThisDay = times.filter {currentTime<it}
+        if(timeExistInThisDay.isEmpty()){
+            return -1
+        }
         for (i in times) {
-            val x = convertTimeToMilliseconds(i)
             index++
 
-            if (newTime < x) {
-                val result = x - newTime
+            if (currentTime < i) {
+                val result = i - currentTime
                 viewModel.setIndex(index)
-                viewModel.setPrayerTime(i)
+                //viewModel.setPrayerTime(i)
                 return result
             }
         }

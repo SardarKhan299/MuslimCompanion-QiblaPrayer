@@ -6,15 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.formatTime
 import com.qibla.qiblacompass.prayertime.finddirection.common.NetworkResult
-import com.qibla.qiblacompass.prayertime.finddirection.data.remote.dto.ApiDto
 import com.qibla.qiblacompass.prayertime.finddirection.data.remote.dto.PrayerTimeResponse
 import com.qibla.qiblacompass.prayertime.finddirection.domain.usecase.GetNamazTimeUsecase
-import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.MainActivityState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,8 +30,8 @@ class DashboardViewModel @Inject constructor(val usecase: GetNamazTimeUsecase):V
     val nextPrayerTime: LiveData<String> = _nextPrayerTime
 
     //livedata objects
-    private val _prayerTimes = MutableLiveData<List<String>>()
-    val prayerTimes: LiveData<List<String>> = _prayerTimes
+    private val _prayerTimes = MutableLiveData<Map<Long, String>>()
+    val prayerTimes: LiveData<Map<Long, String>> = _prayerTimes
 
 
     //livedata objects Counter
@@ -83,7 +80,7 @@ class DashboardViewModel @Inject constructor(val usecase: GetNamazTimeUsecase):V
         _counter.postValue(formattedTime)
     }
 
-    fun setPrayerTimes(PrayerTimes: List<String>) {
+    fun setPrayerTimes(PrayerTimes: Map<Long, String>) {
         _prayerTimes.postValue(PrayerTimes)
     }
 
