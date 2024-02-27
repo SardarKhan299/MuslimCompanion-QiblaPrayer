@@ -38,6 +38,7 @@ class SharedPreferences {
         val PREFS_SELECTED_KEY_ALLAH = "isAllahNamesSelected"
         val PREFS_SELECTED_KEY_RASOOL = "isRasoolNamesSelected"
 
+
         var isAllahNamesSelected = false
         var isRasoolNamesSelected = false
         private const val PREF_IS_ALLAH_SELECTED = "is_allah_selected"
@@ -46,6 +47,9 @@ class SharedPreferences {
         private const val PREF_PRE_ALERT_STYLE_KEY = "preAlertValueStyle"
         private const val PREF_NOTIFICATION_STYLE_KEY = "preAlertValueNotificationStyle"
         private const val AUDIO_PREF_KEY = "audio_pref_key"
+        private const val PRAYER_PREF_KEY = "prayerName"
+        private const val KEY_SELECTED_PRAYER ="selected_prayer_name"
+        private const val KEY_SELECTED_PRE_ALERT_OPTION_PREFIX ="selectedReminder"
         var mSharedPreferences: SharedPreferences? = null
         private fun initShardPreference(context: Context): SharedPreferences? {
             if (mSharedPreferences == null) {
@@ -432,6 +436,78 @@ class SharedPreferences {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getString(AUDIO_PREF_KEY, null)
         }
+        fun savePrayerInPrefs(context: Context,prayerName: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString(PRAYER_PREF_KEY, prayerName)
+               apply()
+            }
+        }
+        fun getStoredPrayerName(context: Context):String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString(PRAYER_PREF_KEY, null)
+        }
+        // Function to save the selected prayer
+        fun saveSelectPrayerInPrefs(context: Context, prayer: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString(KEY_SELECTED_PRAYER, prayer).apply()
+            }
+            }
 
+
+        // Function to retrieve the saved prayer
+        fun getSavedPrayer(context: Context): String {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            // Return the saved prayer; if not found, return an empty string
+            return msharedPreferences!!.getString(KEY_SELECTED_PRAYER, "") ?: ""
+        }
+
+
+        fun saveNotificationOption(context: Context, prayerName: String, option: String?) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+       msharedPreferences!!.edit().putString("${prayerName}_notification_option", option).apply()
+        }
+
+        fun getNotificationOption(context: Context, prayerName: String): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString("${prayerName}_notification_option", null)
+        }
+
+        fun savePreAdhanReminderOption(context: Context, prayerName: String, option: String?) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+           msharedPreferences!!.edit().putString("${prayerName}_pre_adhan_reminder_option", option).apply()
+        }
+
+        fun getPreAdhanReminderOption(context: Context, prayerName: String): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString("${prayerName}_pre_adhan_reminder_option", null)
+        }
+
+        fun saveAdhanOption(context: Context, prayerName: String, option: String?) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().putString("${prayerName}_adhan_option", option).apply()
+        }
+
+        fun getAdhanOption(context: Context, prayerName: String): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString("${prayerName}_adhan_option", null)
+        }
+
+
+
+        // Method to save the selected pre-alert option for a specific prayer
+        fun saveSelectedPreAlertOption(context: Context, prayerName: String, selectedOption: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            val editor = msharedPreferences!!.edit()
+            editor.putString(KEY_SELECTED_PRE_ALERT_OPTION_PREFIX + prayerName, selectedOption)
+            editor.apply()
+        }
+
+        // Method to retrieve the selected pre-alert option for a specific prayer
+        fun getSelectedPreAlertOption(context: Context, prayerName: String): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString(KEY_SELECTED_PRE_ALERT_OPTION_PREFIX + prayerName, null)
+        }
     }
 }
