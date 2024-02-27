@@ -35,6 +35,7 @@
     <include
         android:id="@+id/include_layout_item_list"
         layout="@layout/layout_quran_list_item"
+        android:layout_marginTop="@dimen/_8sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_quran"
@@ -45,7 +46,7 @@
         android:id="@+id/searchView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:background="@drawable/search_bg"
         android:queryHint="Search"
         android:textColorHint="@color/search_text_color"
@@ -57,16 +58,22 @@
         android:id="@+id/recycler_view_quran_sura"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_quran"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_quran"
+        app:layout_constraintTop_toBottomOf="@+id/include_sura_read_plan"
         tools:listitem="@layout/item_quran_sura_list_layout" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/include_sura_read_plan"
+        layout="@layout/layout_read_quran_sura"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_sura_bg"
-
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right_quran"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_quran"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

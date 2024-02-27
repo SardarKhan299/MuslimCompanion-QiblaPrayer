@@ -288,4 +288,9 @@
     <string name="al_faatiha">Al-Faatiha</string>
     <string name="the_opening">The Opening</string>
     <string name="sura_faatiha">الفاتهة</string>
+    <string name="al_yaseen">Al-Yaseen</string>
+    <string name="read_sura_number">15-20</string>
+    <string name="last_read">Last Read</string>
+    <string name="reading_plan">Reading Plan</string>
+    <string name="see_reading_plan">See Reading Plan</string>
 </resources>
