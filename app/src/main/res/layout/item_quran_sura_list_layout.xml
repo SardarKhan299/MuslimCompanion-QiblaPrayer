@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_4sdp"
+    >
+<androidx.appcompat.widget.AppCompatImageView
+    android:id="@+id/img_quran_sura_number"
+    android:layout_width="@dimen/_40sdp"
+    android:layout_height="@dimen/_40sdp"
+    android:src="@drawable/suranumber1"
+    android:layout_marginStart="@dimen/_4sdp"
+    android:layout_marginTop="@dimen/_4sdp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_quran_sura_name"
+        style="@style/qibla_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/al_faatiha"
+        android:layout_marginStart="@dimen/_4sdp"
+        app:layout_constraintStart_toEndOf="@+id/img_quran_sura_number"
+        app:layout_constraintTop_toTopOf="@+id/img_quran_sura_number" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_quran_sura_open"
+        style="@style/makkah_view_text_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/the_opening"
+        app:layout_constraintStart_toStartOf="@+id/tv_quran_sura_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_quran_sura_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_quran_sura_name_urdu"
+        style="@style/skip_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sura_faatiha"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:textSize="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_quran_sura_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_quran_sura_number" />
+</androidx.constraintlayout.widget.ConstraintLayout>

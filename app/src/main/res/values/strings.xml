@@ -283,4 +283,9 @@
     <string name="notification_channel_name">alarm_name</string>
     <string name="dua">Dua</string>
     <string name="streak">Streak\n</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="al_faatiha">Al-Faatiha</string>
+    <string name="the_opening">The Opening</string>
+    <string name="sura_faatiha">الفاتهة</string>
 </resources>
