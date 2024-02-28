@@ -1,9 +1,11 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter
 
+import android.graphics.Point
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Display
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
@@ -30,6 +32,8 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentTasbihCounterBinding
+import kotlin.math.log
+
 
 class TasbihCounterFragment :
     BaseFragment<FragmentTasbihCounterBinding>(R.layout.fragment_tasbih_counter) {
@@ -44,11 +48,11 @@ class TasbihCounterFragment :
     private lateinit var counterTextView: TextView
     private var counter = 0
     private var maxCounter = 100
-    private var counterInitialized: Boolean = false
     lateinit var adapter: TasbihCounterAdapter
     lateinit var recyclerView: RecyclerView
     private lateinit var imageView: ImageView
     private var mediaPlayer: MediaPlayer? = null
+    private var userClicked = 0
     private val imageResources = listOf(
         R.drawable.ic_counter_one,
         R.drawable.m1,
@@ -64,6 +68,8 @@ class TasbihCounterFragment :
         R.drawable.m13,
         R.drawable.m14,
     )
+
+    var selectedImageName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,19 +118,20 @@ class TasbihCounterFragment :
         imageView = binding.layoutTasbihCounterFragment.findViewById(R.id.img_tasbih)
 
 
-        val selectedImageName = SharedPreferences.retrieveImageValue(requireContext())
-        Log.d("TasbihCounterFragment :selectedImageName", "Selected image name: $selectedImageName")
+        selectedImageName = SharedPreferences.retrieveImageValue(requireContext())!!
+        Log.d(TasbihCounterFragment::class.simpleName, "Selected image name: $selectedImageName")
         // Map the image name to the corresponding resource ID
         val imageResource = TasbihZhikrUtil.getImageResource(selectedImageName ?: "")
-        Log.d("TasbihCounterFragment :imageResource ", "onViewCreated:$imageResource ")
+        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated:$imageResource ")
         // Set the image resource to the ImageView
         imageView.setImageResource(imageResource)
         saveImageValue(requireContext(), selectedImageName.toString())
              // Retrieve the saved counter value from SharedPreferences
-        val counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext())
+        val counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext(),selectedImageName)
+        counter = counterValue
 
         // Update the increment text with the saved counter value
-        counterTextView.text = counterValue.toString()
+        counterTextView.text = counter.toString()
 
         val digitalCounter = binding.layoutCounterType
         digitalCounter.viewDigitalTasbih.setOnClickListener {
@@ -135,6 +142,7 @@ class TasbihCounterFragment :
             RecyclerView.HORIZONTAL, false
         )
         adapter = TasbihCounterAdapter(imageResources) { selectedImage ->
+            Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: ImageSelected")
             // Handle the click event here to set the selected image to another ImageView
             // For example, if you have an ImageView called 'selectedImageView'
             imageView1.setImageResource(selectedImage)
@@ -146,7 +154,7 @@ class TasbihCounterFragment :
             imageView2.setImageResource(selectedImage)
         }
         recyclerView.adapter = adapter
-        //   adapter.notifyDataSetChanged()
+        //adapter.notifyDataSetChanged()
         digitalCounter.viewSetCounter.setOnClickListener {
             Log.d(
                 TasbihCounterFragment::class.java.simpleName,
@@ -161,7 +169,7 @@ class TasbihCounterFragment :
 
 
 /// Retrieve the stored entered value from SharedPreferences
-        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
+        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
 
 // Update the counter TextView with the retrieved entered value
         binding.tvCount.text = enteredValue.toString()
@@ -169,8 +177,9 @@ class TasbihCounterFragment :
 // Set onTouchListener to handle user interactions
         view1.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+                Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: User Clicked")
                 // Retrieve the stored entered value from SharedPreferences
-                val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
+                val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
 
                 // Check if the current counter is less than the entered value
                 if (counter < enteredValue) {
@@ -208,56 +217,36 @@ class TasbihCounterFragment :
             false
         }
 
-//        view1.setOnTouchListener { view, motionEvent ->
-//            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
-//                Log.d("TasbihCounterFragment", "onViewCreated: motionAction....... ")
-//                Log.d("TasbihCounterFragment", "onViewCreated: view touch")
-//                if (counter < maxCounter) {
-//                    updateIncrementalCounter()
-//                    Log.d("TasbihCounterFragment", "Counter incremented. New value: $counter")
-//                    if (counter == maxCounter) {
-//                        stopMotionLayout()
-//                        Log.d("TasbihCounterFragment", "MotionLayout interaction stopped.")
-//                    }
-//                } else {
-//                    // If equal or greater, disable interaction and show maximum count message
-//                    stopMotionLayout()
-//                    Log.d("TasbihCounterFragment", "Maximum count reached.")
-//                    Toast.makeText(mContext, "Maximum count reached.", Toast.LENGTH_LONG).show()
-//                }
-//            }
-//
-//            false
-//        }
-
-
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
-            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {}
+            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted: ")
+                    Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted: Clicked...")
+                    // Calculate positions of images based on progress
+                    val startX = imageView1.x + imageView1.width / 2
+                    val startY = imageView1.y + imageView1.height / 2
+                    val endX = imageView2.x + imageView2.width / 2
+                    val endY = imageView2.y
+                    // Update the arc view's path
+                Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: $startX - $startY : $endX - $endY")
+                    arcView.updatePath(startX, startY, endX, endY)
+            }
             override fun onTransitionChange(
                 motionLayout: MotionLayout?,
                 startId: Int,
                 endId: Int,
                 progress: Float
             ) {
-                Log.d("TasbihCounterFragment", "onTransitionChange: Transition ")
-
-                // Calculate positions of images based on progress
-                val startX = imageView1.x + imageView1.width / 2
-                val startY = imageView1.y + imageView1.height / 2
-                val endX = imageView2.x + imageView2.width / 2
-                val endY = imageView2.y
-                // Update the arc view's path
-                arcView.updatePath(startX, startY, endX, endY)
-
+                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionChange: Transition ")
             }
 
-            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {}
+            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionCompleted: ")
+            }
 
             override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionTrigger: ")
             }
         })
-
-
     }
 
     private fun stopMotionLayout() {
@@ -277,7 +266,7 @@ class TasbihCounterFragment :
         counter++
         counterTextView.text = counter.toString()
         // Save the counter value to SharedPreferences
-        SharedPreferences.saveIncrementalCounter(mContext, counter)
+        SharedPreferences.saveIncrementalCounter(mContext, counter,selectedImageName)
         // Notify the adapter that the data set has changed
         adapter.notifyDataSetChanged()
     }
@@ -298,7 +287,7 @@ class TasbihCounterFragment :
             if (enteredValue != 0) {
                 // updateCount(enteredValue)
                 updateMaxCounter(enteredValue)
-                SharedPreferences.saveEnteredValue(mContext, enteredValue)
+                SharedPreferences.saveEnteredValue(mContext, enteredValue,selectedImageName)
 
                 bottomSheetDialog.dismiss()
             } else {
@@ -315,11 +304,34 @@ class TasbihCounterFragment :
         binding.tvCount.text = maxCounter.toString()
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TasbihCounterFragment::class.simpleName, "onResume: ")
+        val display: Display = requireActivity().windowManager.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+        Log.d(TasbihCounterFragment::class.simpleName, "onResume: $width - $height")
+        val startX = width/3
+        val startY = height/16
+        val endX = width + (width/4.5)
+        val endY = height - (height/8)
+        arcView.updatePath(startX.toFloat(), startY.toFloat(), endX.toFloat(), endY.toFloat())
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         // Release MediaPlayer when the fragment is destroyed
         mediaPlayer?.release()
         mediaPlayer = null
+    }
+
+    fun View.getLocationOnScreen(): Point {
+        val location = IntArray(2)
+        this.getLocationOnScreen(location)
+        return Point(location[0],location[1])
     }
 
     private fun playSound() {

@@ -12,9 +12,21 @@ import com.google.gson.reflect.TypeToken
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_INCREMENTAL_COUNTER
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_1
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_2
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_3
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_4
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_INCREMENTAL_COUNTER_1
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_INCREMENTAL_COUNTER_2
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_INCREMENTAL_COUNTER_3
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_INCREMENTAL_COUNTER_4
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_NAVIGATING_BACK_TO_TASBIH_SCREEN
+import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.ALHAMDULILLAH
+import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.ALLAHU_AKBAR
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.BIOMETRIC_ENABLE
+import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.LA_ILAHA_ILLA_ALLAH
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.SELECTED_IMAGE
+import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.SUBHAN_ALLAH
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.names.NamesData
 
 class SharedPreferences {
@@ -37,7 +49,6 @@ class SharedPreferences {
         // Flag to determine which set of data to display
         val PREFS_SELECTED_KEY_ALLAH = "isAllahNamesSelected"
         val PREFS_SELECTED_KEY_RASOOL = "isRasoolNamesSelected"
-
 
         var isAllahNamesSelected = false
         var isRasoolNamesSelected = false
@@ -76,7 +87,6 @@ class SharedPreferences {
         fun saveImageValue(context: Context, imageName: String) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             if (msharedPreferences != null) {
-
                 mSharedPreferences?.edit()?.putString(SELECTED_IMAGE, imageName)?.apply()
             }
         }
@@ -314,30 +324,125 @@ class SharedPreferences {
             return 0
         }
 
-        fun saveIncrementalCounter(context: Context, counter: Int) {
+        fun saveIncrementalCounter(context: Context, counter: Int,imageName:String) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
-            msharedPreferences!!.edit().apply {
-                putInt(KEY_INCREMENTAL_COUNTER, counter)
-                apply()
+
+            when(imageName){
+                SUBHAN_ALLAH ->{
+                    msharedPreferences!!.edit().apply {
+                        putInt(KEY_INCREMENTAL_COUNTER_1, counter)
+                        apply()
+                    }
+                }
+                ALHAMDULILLAH->{
+                    msharedPreferences!!.edit().apply {
+                        putInt(KEY_INCREMENTAL_COUNTER_2, counter)
+                        apply()
+                    }
+                }
+                ALLAHU_AKBAR ->{
+                    msharedPreferences!!.edit().apply {
+                        putInt(KEY_INCREMENTAL_COUNTER_3, counter)
+                        apply()
+                    }
+                }
+                LA_ILAHA_ILLA_ALLAH->{
+                    msharedPreferences!!.edit().apply {
+                        putInt(KEY_INCREMENTAL_COUNTER_4, counter)
+                        apply()
+                    }
+                }else->{
+                msharedPreferences!!.edit().apply {
+                    putInt(KEY_INCREMENTAL_COUNTER_1, counter)
+                    apply()
+                }
+                }
+            }
+
+
+        }
+
+        fun retrieveIncrementalCounter(context: Context,imageName: String): Int {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+
+            when(imageName){
+                SUBHAN_ALLAH ->{
+                    return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER_1, 0)
+                }
+                ALHAMDULILLAH->{
+                    return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER_2, 0)
+                }
+                ALLAHU_AKBAR ->{
+                    return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER_3, 0)
+                }
+                LA_ILAHA_ILLA_ALLAH->{
+                    return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER_4, 0)
+                }else->{
+                return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER_1, 0)
+                }
+            }
+
+
+        }
+
+
+        fun saveEnteredValue(context: Context, enteredValue: Int,imageName: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+
+            when(imageName){
+                SUBHAN_ALLAH ->{
+                    msharedPreferences!!.edit().apply {
+                        putInt(ENTERED_VALUE_KEY_1, enteredValue)
+                        apply()
+                    }
+                }
+                ALHAMDULILLAH->{
+                    msharedPreferences!!.edit().apply {
+                        putInt(ENTERED_VALUE_KEY_2, enteredValue)
+                        apply()
+                    }
+                }
+                ALLAHU_AKBAR ->{
+                    msharedPreferences!!.edit().apply {
+                        putInt(ENTERED_VALUE_KEY_3, enteredValue)
+                        apply()
+                    }
+                }
+                LA_ILAHA_ILLA_ALLAH->{
+                    msharedPreferences!!.edit().apply {
+                        putInt(ENTERED_VALUE_KEY_4, enteredValue)
+                        apply()
+                    }
+                }else->{
+                msharedPreferences!!.edit().apply {
+                    putInt(ENTERED_VALUE_KEY_1, enteredValue)
+                    apply()
+                }
+            }
             }
         }
 
-        fun retrieveIncrementalCounter(context: Context): Int {
+        fun retrieveEnteredValue(context: Context,imageName: String): Int {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
-            return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER, 0)
-        }
 
-
-        fun saveEnteredValue(context: Context, enteredValue: Int) {
-            val msharedPreferences: SharedPreferences? = initShardPreference(context)
-            msharedPreferences!!.edit().apply {
-                putInt(ENTERED_VALUE_KEY, enteredValue).apply()
+            when(imageName){
+                SUBHAN_ALLAH ->{
+                    return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_1, 33)
+                }
+                ALHAMDULILLAH->{
+                    return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_2, 33)
+                }
+                ALLAHU_AKBAR ->{
+                    return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_3, 33)
+                }
+                LA_ILAHA_ILLA_ALLAH->{
+                    return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_4, 33)
+                }else->{
+                return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_1, 33)
             }
-        }
+            }
 
-        fun retrieveEnteredValue(context: Context): Int {
-            val msharedPreferences: SharedPreferences? = initShardPreference(context)
-            return msharedPreferences!!.getInt(ENTERED_VALUE_KEY, 0)
+
         }
 
         fun setNavigatingBackToTasbihScreen(context: Context, navigatingBack: Boolean) {

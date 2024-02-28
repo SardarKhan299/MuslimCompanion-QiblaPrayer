@@ -4,10 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layoutDescription="@xml/layout_tasbih_animation_scene"
-    tools:showPaths="true"
    >
 
     <View
@@ -22,7 +22,11 @@
     <com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter.ArcView
         android:id="@+id/arcView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        custom:pathx = "1"
+        custom:pathy = "1"
+        android:visibility="visible"
+        />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_top_counter_one"

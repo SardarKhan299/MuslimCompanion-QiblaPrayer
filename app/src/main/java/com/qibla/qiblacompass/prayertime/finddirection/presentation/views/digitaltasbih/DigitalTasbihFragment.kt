@@ -26,9 +26,9 @@ class DigitalTasbihFragment :
     private lateinit var mainIncrementButton: ImageView
     private lateinit var resetButton: ImageView
     private lateinit var imageView: ImageView
-    private var counterInitialized: Boolean = false
 
     private var counterValue = 0
+    var selectedImageName = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)?.hideActionBar()
@@ -48,10 +48,7 @@ class DigitalTasbihFragment :
             findNavController().closeCurrentScreen()
         }
         counterTextView = binding.tvDigitalCounter
-        // Set the initial counter value only if it hasn't been initialized already
-        if (!counterInitialized) {
-            counterTextView.text = counterValue.toString()
-        }
+        counterTextView.text = counterValue.toString()
 
 
         decrementButton = binding.imgMinusDigitalCounter
@@ -76,9 +73,9 @@ class DigitalTasbihFragment :
         }
 
 
-        val retrievedImageName = retrieveImageValue(requireContext())
+        selectedImageName = retrieveImageValue(requireContext())!!
 // Map the image name to the corresponding resource ID using TasbihZhikrUtil
-        val imageResource = TasbihZhikrUtil.getImageResource(retrievedImageName)
+        val imageResource = TasbihZhikrUtil.getImageResource(selectedImageName)
 
         // Set the image resource to the ImageView
         imageView.setImageResource(imageResource)
@@ -94,11 +91,8 @@ class DigitalTasbihFragment :
         }
 
         // Retrieve the saved counter value from SharedPreferences only if it hasn't been initialized yet
-        if (!counterInitialized) {
+        counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext(),selectedImageName)
 
-            counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext())
-            counterInitialized = true
-        }
         // Update the counter TextView with the current counter value
         counterTextView.text = counterValue.toString()
 
@@ -106,7 +100,7 @@ class DigitalTasbihFragment :
 
     private fun incrementCounter() {
         // Retrieve the entered value from SharedPreferences
-        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext())
+        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
 
         // Check if the current counter value is less than the entered value
         if (counterValue < enteredValue) {
@@ -114,7 +108,7 @@ class DigitalTasbihFragment :
             counterValue++
             updateCounter()
             // Save the updated counter value to SharedPreferences
-            SharedPreferences.saveIncrementalCounter(requireContext(), counterValue)
+            SharedPreferences.saveIncrementalCounter(requireContext(), counterValue,selectedImageName)
         } else {
             // If equal or greater, show a message indicating maximum count reached
             Toast.makeText(
@@ -140,7 +134,7 @@ class DigitalTasbihFragment :
     private fun updateCounter() {
         counterTextView.text = counterValue.toString()
         // Save the updated counter value to SharedPreferences
-        SharedPreferences.saveIncrementalCounter(requireContext(), counterValue)
+        SharedPreferences.saveIncrementalCounter(requireContext(), counterValue,selectedImageName)
     }
 
     object TasbihZhikrUtil {

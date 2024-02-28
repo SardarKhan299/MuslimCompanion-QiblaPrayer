@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene 
+<MotionScene
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
+        android:id="@+id/transition"
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="400"
+        motion:duration="800"
         motion:autoTransition="jumpToStart"
         motion:pathMotionArc="flip"
         >
@@ -18,10 +19,7 @@
     <OnClick motion:targetId="@+id/view_animated_counter" />
     </Transition>
     <ConstraintSet android:id="@+id/start">
-        <Constraint
-
-
-               android:layout_height="wrap_content"
+        <Constraint android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/img_animated_move"
         motion:layout_constraintStart_toStartOf="@+id/img_top_counter_three"
