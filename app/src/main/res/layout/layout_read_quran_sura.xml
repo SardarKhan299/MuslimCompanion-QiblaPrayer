@@ -16,7 +16,6 @@
         android:layout_height="@dimen/_90sdp"
         android:src="@drawable/ic_sura_bg"
         android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginStart="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

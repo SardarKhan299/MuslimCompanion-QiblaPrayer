@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_boardFragment_to_duaFragment"
             app:destination="@id/duaFragment" />
+        <action
+            android:id="@+id/action_boardFragment_to_quranFragment"
+            app:destination="@id/quranFragment" />
     </fragment>
     <fragment
         android:id="@+id/sideMenuFragment"
@@ -164,4 +167,9 @@
         android:id="@+id/termsAndConditionsFragment"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.termsandconditions.TermsAndConditionsFragment"
         android:label="TermsAndConditionsFragment" />
+    <fragment
+        android:id="@+id/quranFragment"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.quran.QuranFragment"
+        android:label="fragment_quran"
+        tools:layout="@layout/fragment_quran" />
 </navigation>
