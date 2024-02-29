@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_sura_read"
+        android:layout_width="@dimen/_170sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:src="@drawable/ic_sura_bg"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_read_sura_name"
+        style="@style/advertisement_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/al_yaseen"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintStart_toStartOf="@+id/img_sura_read"
+        app:layout_constraintTop_toTopOf="@+id/img_sura_read" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_read_sura_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/read_sura_number"
+        style="@style/zakat_btn_text_style"
+        app:layout_constraintStart_toStartOf="@+id/tv_read_sura_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_read_sura_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_last_sura_read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/last_read"
+        style="@style/zakat_btn_text_style"
+        android:layout_marginBottom="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_sura_read"
+        app:layout_constraintStart_toStartOf="@+id/tv_read_sura_number" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_reading_plan"
+        android:layout_width="@dimen/_170sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:src="@drawable/ic_sura_bg"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_sura_read"
+        app:layout_constraintStart_toEndOf="@+id/img_sura_read"
+        app:layout_constraintTop_toTopOf="@+id/img_sura_read" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_reading_plan"
+        style="@style/advertisement_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reading_plan"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintStart_toStartOf="@+id/img_reading_plan"
+        app:layout_constraintTop_toTopOf="@+id/img_reading_plan" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_reading_plan_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/read_sura_number"
+        style="@style/zakat_btn_text_style"
+        app:layout_constraintStart_toStartOf="@+id/tv_reading_plan"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reading_plan" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/see_reading_plan"
+        style="@style/zakat_btn_text_style"
+        android:layout_marginBottom="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_reading_plan"
+        app:layout_constraintStart_toStartOf="@+id/tv_reading_plan_number" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</HorizontalScrollView>

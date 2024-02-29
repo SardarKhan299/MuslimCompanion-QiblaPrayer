@@ -4,7 +4,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.preference.PreferenceManager
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY
+import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_INCREMENTAL_COUNTER
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_1
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_2
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_3
@@ -47,8 +54,13 @@ class SharedPreferences {
         var isRasoolNamesSelected = false
         private const val PREF_IS_ALLAH_SELECTED = "is_allah_selected"
         private const val PREF_IS_Rasool_SELECTED = "is_allah_selected"
-
-
+        private const val PREF_PRE_ALERT_VALUE = "preAlertValue"
+        private const val PREF_PRE_ALERT_STYLE_KEY = "preAlertValueStyle"
+        private const val PREF_NOTIFICATION_STYLE_KEY = "preAlertValueNotificationStyle"
+        private const val AUDIO_PREF_KEY = "audio_pref_key"
+        private const val PRAYER_PREF_KEY = "prayerName"
+        private const val KEY_SELECTED_PRAYER ="selected_prayer_name"
+        private const val KEY_SELECTED_PRE_ALERT_OPTION_PREFIX ="selectedReminder"
         var mSharedPreferences: SharedPreferences? = null
         private fun initShardPreference(context: Context): SharedPreferences? {
             if (mSharedPreferences == null) {
@@ -443,6 +455,164 @@ class SharedPreferences {
         fun getNavigatingBackToTasbihScreen(context: Context): Boolean {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getBoolean(KEY_NAVIGATING_BACK_TO_TASBIH_SCREEN, false)
+        }
+
+        fun savePreAlertValue(context: Context, value: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString(PREF_PRE_ALERT_VALUE, value)
+                apply()
+            }
+        }
+
+        fun getPreAlertValue(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString(PREF_PRE_ALERT_VALUE, "")
+        }
+
+        // Method to set the view style and save to SharedPreferences
+        fun setViewStyleAndSaveToPrefs(
+            context: Context,
+            titleTextView: TextView,
+            tickImageView: ImageView,
+            value: String
+        ) {
+            // Set view style
+            titleTextView.setTextAppearance(R.style.selected_notification_text_style)
+            tickImageView.visible()
+
+            // Save selected value to SharedPreferences
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString(PREF_PRE_ALERT_STYLE_KEY, value)
+                apply()
+            }
+        }
+
+
+        // Method to load pre-alert value from SharedPreferences
+        fun loadPreAlertValue(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString(PREF_PRE_ALERT_STYLE_KEY, null)
+        }
+
+        // Method to set the view style and save to SharedPreferences
+        fun setViewStyleAndSaveToPrefs(
+            context: Context,
+            titleTextView: TextView,
+            tickImageView: ImageView,
+            speakerTextView: TextView? = null,
+            isSpeakerText: Boolean = false,
+            value: String
+        ) {
+            // Set view style
+            titleTextView.setTextAppearance(R.style.selected_notification_text_style)
+            tickImageView.visible()
+
+            // Check if speaker text exists and the isSpeakerText flag is true
+            if (speakerTextView != null && isSpeakerText) {
+                speakerTextView.setTextAppearance(R.style.makkah_view_text_text_style)
+            }
+
+            // Save selected value to SharedPreferences
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString(PREF_NOTIFICATION_STYLE_KEY, value)
+                apply()
+            }
+        }
+
+        // Method to load notification style value from SharedPreferences
+        fun loadNotificationStyleValue(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString(PREF_NOTIFICATION_STYLE_KEY, null)
+        }
+
+        //Save Audio
+        fun saveAudioNameInPrefs(context: Context, audioName: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString(AUDIO_PREF_KEY, audioName)
+                apply()
+            }
+        }
+
+        private fun getStoredAudioName(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString(AUDIO_PREF_KEY, null)
+        }
+        fun savePrayerInPrefs(context: Context,prayerName: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString(PRAYER_PREF_KEY, prayerName)
+               apply()
+            }
+        }
+        fun getStoredPrayerName(context: Context):String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString(PRAYER_PREF_KEY, null)
+        }
+        // Function to save the selected prayer
+        fun saveSelectPrayerInPrefs(context: Context, prayer: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().apply {
+                putString(KEY_SELECTED_PRAYER, prayer).apply()
+            }
+            }
+
+
+        // Function to retrieve the saved prayer
+        fun getSavedPrayer(context: Context): String {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            // Return the saved prayer; if not found, return an empty string
+            return msharedPreferences!!.getString(KEY_SELECTED_PRAYER, "") ?: ""
+        }
+
+
+        fun saveNotificationOption(context: Context, prayerName: String, option: String?) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+       msharedPreferences!!.edit().putString("${prayerName}_notification_option", option).apply()
+        }
+
+        fun getNotificationOption(context: Context, prayerName: String): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString("${prayerName}_notification_option", null)
+        }
+
+        fun savePreAdhanReminderOption(context: Context, prayerName: String, option: String?) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+           msharedPreferences!!.edit().putString("${prayerName}_pre_adhan_reminder_option", option).apply()
+        }
+
+        fun getPreAdhanReminderOption(context: Context, prayerName: String): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString("${prayerName}_pre_adhan_reminder_option", null)
+        }
+
+        fun saveAdhanOption(context: Context, prayerName: String, option: String?) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            msharedPreferences!!.edit().putString("${prayerName}_adhan_option", option).apply()
+        }
+
+        fun getAdhanOption(context: Context, prayerName: String): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString("${prayerName}_adhan_option", null)
+        }
+
+
+
+        // Method to save the selected pre-alert option for a specific prayer
+        fun saveSelectedPreAlertOption(context: Context, prayerName: String, selectedOption: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            val editor = msharedPreferences!!.edit()
+            editor.putString(KEY_SELECTED_PRE_ALERT_OPTION_PREFIX + prayerName, selectedOption)
+            editor.apply()
+        }
+
+        // Method to retrieve the selected pre-alert option for a specific prayer
+        fun getSelectedPreAlertOption(context: Context, prayerName: String): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences!!.getString(KEY_SELECTED_PRE_ALERT_OPTION_PREFIX + prayerName, null)
         }
     }
 }

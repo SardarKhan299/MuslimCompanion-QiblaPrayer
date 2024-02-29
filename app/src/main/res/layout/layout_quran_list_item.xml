@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_sura"
+        style="@style/quran_text_selected_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sura"
+        android:padding="@dimen/_6sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_sura"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_2sdp"
+        android:src="@drawable/button_bg"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_sura"
+        app:layout_constraintStart_toStartOf="@+id/tv_sura"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sura" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_juz"
+        style="@style/quran_text_unselected_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Juz"
+        android:padding="@dimen/_6sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_sura"
+        app:layout_constraintStart_toEndOf="@+id/tv_sura"
+        app:layout_constraintTop_toTopOf="@+id/tv_sura" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_juz"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_2sdp"
+        android:src="@drawable/button_bg"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        app:layout_constraintStart_toStartOf="@+id/tv_juz"
+        app:layout_constraintEnd_toEndOf="@+id/tv_juz"
+        app:layout_constraintTop_toBottomOf="@+id/tv_juz"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_playlist"
+        style="@style/quran_text_unselected_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_6sdp"
+        android:text="Playlist"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_juz"
+        app:layout_constraintStart_toEndOf="@+id/tv_juz"
+        app:layout_constraintTop_toTopOf="@+id/tv_juz" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_playlist"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_2sdp"
+        android:src="@drawable/button_bg"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        app:layout_constraintStart_toStartOf="@+id/tv_playlist"
+        app:layout_constraintEnd_toEndOf="@+id/tv_playlist"
+        app:layout_constraintTop_toBottomOf="@+id/tv_playlist"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_my_quran"
+        style="@style/quran_text_unselected_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_6sdp"
+        android:text="My Quran"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_playlist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_playlist"
+        app:layout_constraintTop_toTopOf="@+id/tv_playlist" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_my_quran"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_2sdp"
+        android:src="@drawable/button_bg"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        app:layout_constraintStart_toStartOf="@+id/tv_my_quran"
+        app:layout_constraintEnd_toEndOf="@+id/tv_my_quran"
+        app:layout_constraintTop_toBottomOf="@+id/tv_my_quran"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

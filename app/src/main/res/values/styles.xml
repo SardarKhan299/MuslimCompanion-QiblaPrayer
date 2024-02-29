@@ -499,7 +499,25 @@
         <item name="android:fontFamily">@font/poppins_light</item>
     </style>
 
+    <style name="unselected_alert_title_text_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textColor">@color/goal_text_color</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
 
+    <style name="quran_text_selected_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+    <style name="quran_text_unselected_style" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textColor">@color/quran_text_unselected_color</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+    </style>
 
 
 

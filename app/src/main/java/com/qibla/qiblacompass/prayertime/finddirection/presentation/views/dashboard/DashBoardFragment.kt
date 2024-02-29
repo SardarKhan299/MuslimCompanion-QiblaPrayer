@@ -429,6 +429,11 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 findNavController().navigate(R.id.nextPrayerTimeFragment)
 
             }
+            5 -> {
+                QiblaApp.selectedPrayerPos = 0
+                findNavController().navigate(R.id.quranFragment)
+
+            }
             6 -> {
                 findNavController().navigate(R.id.makkahLiveFragment)
 

@@ -1,5 +1,6 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.nextprayertime
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,6 +15,33 @@ import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.*
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.AUDIO_ADHAN_FOUR
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.AUDIO_ADHAN_ONE
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.AUDIO_ADHAN_THREE
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.AUDIO_ADHAN_TWO
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.AUDIO_BEEP
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.NOTIFICATION_ADHAN_FOUR
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.NOTIFICATION_ADHAN_ONE
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.NOTIFICATION_ADHAN_THREE
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.NOTIFICATION_ADHAN_TWO
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.NOTIFICATION_BEEP
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.NOTIFICATION_NONE
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.NOTIFICATION_SILENT
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.PRAYER_ASR
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.PRAYER_FAJR
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.PRAYER_ISHA
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.PRAYER_MAGHRIB
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.PRAYER_ZUHR
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.REMINDER_FIFTEEN_MINT_BEFORE
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.REMINDER_FIVE_MINT_BEFORE
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.REMINDER_NONE
+import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.REMINDER_TEN_MINT_BEFORE
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.getPreAlertValue
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.loadNotificationStyleValue
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.loadPreAlertValue
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.saveNotificationOption
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.saveSelectedPreAlertOption
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.Companion.setViewStyleAndSaveToPrefs
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentNextPrayerTimeBinding
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashboardViewModel
@@ -24,7 +52,19 @@ class NextPrayerTimeFragment :
     BaseFragment<FragmentNextPrayerTimeBinding>(R.layout.fragment_next_prayer_time) {
 
     private val viewModel: DashboardViewModel by activityViewModels()
-
+    lateinit var preAlertNone: TextView
+    lateinit var preAlertNoneTick: ImageView
+    lateinit var preAlertFiveMins: TextView
+    lateinit var preAlertFiveMinsTick: ImageView
+    lateinit var preAlertTenMins: TextView
+    lateinit var preAlertTenTick: ImageView
+    lateinit var preAlertFifteenMins: TextView
+    lateinit var preAlertFifteenTick: ImageView
+    lateinit var preAdhanReminderText: TextView
+    lateinit var imgFajrNotification: ImageView
+    lateinit var imgZuhrFajrNotification: ImageView
+lateinit var  titleBottomSheet: TextView
+    private var mediaPlayer: MediaPlayer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)?.hideActionBar()
@@ -41,7 +81,7 @@ class NextPrayerTimeFragment :
             findNavController().closeCurrentScreen()
         }
         binding.toolbarNextPrayerTiming.viewBellNotificationIcon.setOnClickListener {
-            showBottomSheetNotificationAlertSound()
+            //showBottomSheetNotificationAlertSound()
         }
         initObserver()
         updateBackgroundColor()
@@ -57,21 +97,46 @@ class NextPrayerTimeFragment :
         val maghribView = commonTerm.viewMaghrib
         val ishaView = commonTerm.viewIsha
         val layoutPrayerMainBackground = commonTerm.bgFragment
+        imgFajrNotification = binding.layoutNextPrayerBackground.imgFajrNotification
+        imgZuhrFajrNotification = binding.layoutNextPrayerBackground.imgUnselectedZuharIcon
+
+
 
         binding.layoutNextPrayerBackground.viewFajr.setOnClickListener {
+            showBottomSheetNotificationAlertSound(PRAYER_FAJR)
+            // Update the bottom sheet title immediately
+            titleBottomSheet.text = PRAYER_FAJR
+            SharedPreferences.savePrayerInPrefs(mContext, PRAYER_FAJR)
             fajrBg()
         }
 
         zuharView.setOnClickListener {
+            showBottomSheetNotificationAlertSound(PRAYER_ZUHR)
+            // Update the bottom sheet title immediately
+            titleBottomSheet.text = PRAYER_ZUHR
+            //Save prayer name in shared preference
+            SharedPreferences.savePrayerInPrefs(mContext, PRAYER_ZUHR)
             zuhrBg()
         }
         asrView.setOnClickListener {
+            showBottomSheetNotificationAlertSound(PRAYER_ASR)
+            // Update the bottom sheet title immediately
+            titleBottomSheet.text = PRAYER_ASR
+            SharedPreferences.savePrayerInPrefs(mContext, PRAYER_ASR)
             asarBg()
         }
         maghribView.setOnClickListener {
+            showBottomSheetNotificationAlertSound(PRAYER_MAGHRIB)
+            // Update the bottom sheet title immediately
+            titleBottomSheet.text = PRAYER_MAGHRIB
+            SharedPreferences.savePrayerInPrefs(mContext, PRAYER_MAGHRIB)
             maghribBg()
         }
         ishaView.setOnClickListener {
+            showBottomSheetNotificationAlertSound(PRAYER_ISHA)
+            // Update the bottom sheet title immediately
+            titleBottomSheet.text = PRAYER_ISHA
+            SharedPreferences.savePrayerInPrefs(mContext, PRAYER_ISHA)
             ishaBg()
         }
         tahajjudView.setOnClickListener {
@@ -95,7 +160,7 @@ class NextPrayerTimeFragment :
 
     }
 
-    private fun showBottomSheetNotificationAlertSound() {
+    private fun showBottomSheetNotificationAlertSound(prayerName: String) {
         val bottomSheetView =
             View.inflate(requireContext(), R.layout.bottom_sheet_notification_alert_sound, null)
         val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
@@ -147,217 +212,247 @@ class NextPrayerTimeFragment :
         val navigateBack: ImageView = bottomSheetView.findViewById(R.id.img_bottom_navigate_back)
         val preAlertView: View = bottomSheetView.findViewById(R.id.view_pre_reminder)
         val alertGroup: Group = bottomSheetView.findViewById(R.id.group_alert_notification)
-        preAlertView.setOnClickListener {
-            if (alertGroup.visibility == View.VISIBLE) {
-                alertGroup.gone()
-            }else{
-                alertGroup.visible()
+
+        preAlertNone = bottomSheetView.findViewById(R.id.tv_none_alert)
+        preAlertNoneTick = bottomSheetView.findViewById(R.id.img_pre_alert_none_tick)
+        preAlertFiveMins = bottomSheetView.findViewById(R.id.tv_alert_five_min)
+        preAlertFiveMinsTick = bottomSheetView.findViewById(R.id.img_pre_alert_five_tick)
+
+        preAlertTenMins = bottomSheetView.findViewById(R.id.tv_alert_ten_min)
+        preAlertTenTick = bottomSheetView.findViewById(R.id.img_pre_alert_ten_tick)
+        preAlertFifteenMins = bottomSheetView.findViewById(R.id.tv_alert_fifteen_min)
+        preAlertFifteenTick = bottomSheetView.findViewById(R.id.img_pre_alert_fifteen_tick)
+         titleBottomSheet = bottomSheetView.findViewById(R.id.tv_bottom_sheet_title)
+
+
+//get prayer name from shared preference
+        val getTitleName =  SharedPreferences.getStoredPrayerName(mContext) ?: "Default Prayer Name"
+        titleBottomSheet.text = getTitleName
+
+
+        val preAdhanReminderText: TextView = bottomSheetView.findViewById(R.id.tv_notification_no)
+
+        // Retrieve saved settings for this prayer time from SharedPreferences
+        val selectedNotificationOption =
+            SharedPreferences.getNotificationOption(requireContext(), prayerName)
+        val selectedPreAlertOption =
+            SharedPreferences.getPreAdhanReminderOption(requireContext(), prayerName)
+        when (selectedPreAlertOption) {
+            REMINDER_NONE -> {
+                preAdhanReminderText.text = getString(R.string.none)
+
+            }
+            REMINDER_FIVE_MINT_BEFORE -> {
+                preAdhanReminderText.text = getString(R.string._5_mins_before)
+            }
+            REMINDER_TEN_MINT_BEFORE -> {
+                preAdhanReminderText.text = getString(R.string._10_mins_before)
+            }
+            REMINDER_FIFTEEN_MINT_BEFORE -> {
+                preAdhanReminderText.text = getString(R.string._15_mins_before)
             }
         }
 
-        navigateBack.setOnClickListener {
-            bottomSheetDialog.dismiss()
+        preAlertView.setOnClickListener {
+
+            if (alertGroup.visibility == View.VISIBLE) {
+                alertGroup.gone()
+                preAlertNoneTick.gone()
+                preAlertFiveMinsTick.gone()
+                preAlertTenTick.gone()
+                preAlertFifteenTick.gone()
+
+            } else {
+                alertGroup.visible()
+                val lastSelectedValue = loadPreAlertValue(mContext)
+                // Apply the last selected value to the appropriate views
+                when (selectedPreAlertOption) {
+                    REMINDER_NONE -> {
+                        setViewStyleAlertReminder(preAlertNone, preAlertNoneTick)
+                        preAlertNoneTick.visible()
+                        preAdhanReminderText.text = getString(R.string.none)
+
+                    }
+                    REMINDER_FIVE_MINT_BEFORE -> {
+                        setViewStyleAlertReminder(preAlertFiveMins, preAlertFiveMinsTick)
+                        preAlertFiveMins.visible()
+                        preAdhanReminderText.text = getString(R.string._5_mins_before)
+                    }
+                    REMINDER_TEN_MINT_BEFORE -> {
+                        setViewStyleAlertReminder(preAlertTenMins, preAlertTenTick)
+                        preAlertTenTick.visible()
+                        preAdhanReminderText.text = getString(R.string._10_mins_before)
+                    }
+                    REMINDER_FIFTEEN_MINT_BEFORE -> {
+                        setViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
+                        preAlertFifteenTick.visible()
+                        preAdhanReminderText.text = getString(R.string._15_mins_before)
+                    }
+                }
+            }
+        }
+
+
+
+
+        if (selectedPreAlertOption.isNullOrEmpty()) {
+            preAdhanReminderText.text = getString(R.string.none)
+        } else {
+            preAdhanReminderText.text = selectedPreAlertOption
+
+        }
+
+        preAlertNone.setOnClickListener {
+           setViewStyleAndSaveToPrefs(mContext, preAlertNone, preAlertNoneTick, REMINDER_NONE)
+            setViewStyleAlertReminder(preAlertNone, preAlertNoneTick)
+            SharedPreferences.savePreAdhanReminderOption(requireContext(), prayerName,  REMINDER_NONE)
+
+            preAdhanReminderText.text = getString(R.string.none) // Immediately update text
+            SharedPreferences.savePreAlertValue(mContext, REMINDER_NONE) // Save preference
+
+            resetViewStyleAlertReminder(preAlertFiveMins, preAlertFiveMinsTick)
+            resetViewStyleAlertReminder(preAlertTenMins, preAlertTenTick)
+            resetViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
+        }
+        preAlertFiveMins.setOnClickListener {
+            SharedPreferences.setViewStyleAndSaveToPrefs(mContext, preAlertFiveMins, preAlertFiveMinsTick,  REMINDER_FIVE_MINT_BEFORE)
+            setViewStyleAlertReminder(preAlertFiveMins, preAlertFiveMinsTick)
+            SharedPreferences.savePreAdhanReminderOption(requireContext(),prayerName,  REMINDER_FIVE_MINT_BEFORE)
+            preAdhanReminderText.text = getString(R.string._5_mins_before)
+            SharedPreferences.savePreAlertValue(mContext, REMINDER_FIVE_MINT_BEFORE)
+            resetViewStyleAlertReminder(preAlertNone, preAlertNoneTick)
+            resetViewStyleAlertReminder(preAlertTenMins, preAlertTenTick)
+            resetViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
+        }
+        preAlertTenMins.setOnClickListener {
+            SharedPreferences.savePreAdhanReminderOption(requireContext(), prayerName, REMINDER_TEN_MINT_BEFORE)
+            SharedPreferences.setViewStyleAndSaveToPrefs(mContext, preAlertTenMins, preAlertTenTick, REMINDER_TEN_MINT_BEFORE)
+            setViewStyleAlertReminder(preAlertTenMins, preAlertTenTick)
+            preAdhanReminderText.text = getString(R.string._10_mins_before)
+
+            SharedPreferences.savePreAlertValue(mContext, REMINDER_TEN_MINT_BEFORE)
+            resetViewStyleAlertReminder(preAlertNone, preAlertNoneTick)
+            resetViewStyleAlertReminder(preAlertFiveMins, preAlertFiveMinsTick)
+            resetViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
+        }
+        preAlertFifteenMins.setOnClickListener {
+            SharedPreferences.savePreAdhanReminderOption(requireContext(), prayerName, REMINDER_FIFTEEN_MINT_BEFORE)
+            SharedPreferences.setViewStyleAndSaveToPrefs(mContext, preAlertFifteenMins, preAlertFifteenTick, REMINDER_FIFTEEN_MINT_BEFORE)
+            setViewStyleAlertReminder(preAlertFifteenMins, preAlertFifteenTick)
+            preAdhanReminderText.text = getString(R.string._15_mins_before)
+            SharedPreferences.savePreAlertValue(mContext, REMINDER_FIFTEEN_MINT_BEFORE)
+
+            resetViewStyleAlertReminder(preAlertNone, preAlertNoneTick)
+            resetViewStyleAlertReminder(preAlertFiveMins, preAlertFiveMinsTick)
+            resetViewStyleAlertReminder(preAlertTenMins, preAlertTenTick)
         }
 
 
 
         noneNotificationView.setOnClickListener {
-
+          //  SharedPreferences.saveAdhanOption(mContext, prayerName, "none")
+            saveNotificationOption(mContext,prayerName,NOTIFICATION_NONE)
+            // Save the selected options to SharedPreferences
+            SharedPreferences.savePreAdhanReminderOption(requireContext(), prayerName, NOTIFICATION_NONE)
+            setViewStyleAndSaveToPrefs(mContext, noneNotificationText, noneTickImage, null, false, NOTIFICATION_NONE)
             setViewStyleNotification(noneNotificationText, noneTickImage)
             resetViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(silentNotificationText, silentTickImage)
-            resetViewStyleNotification(
-                adhanOneNotificationText,
-                adhanOneTickImage,
-                adhanOneSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanTwoNotificationText,
-                adhanTwoTickImage,
-                adhanTwoSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanFourNotificationText,
-                adhanFourTickImage,
-                adhanFourSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanThreeNotificationText,
-                adhanThreeTickImage,
-                adhanThreeSpeakerText,
-                true
-            )
+            resetViewStyleNotification(adhanOneNotificationText, adhanOneTickImage, adhanOneSpeakerText, true)
+            resetViewStyleNotification(adhanTwoNotificationText, adhanTwoTickImage, adhanTwoSpeakerText, true)
+            resetViewStyleNotification(adhanFourNotificationText, adhanFourTickImage, adhanFourSpeakerText, true)
+            resetViewStyleNotification(adhanThreeNotificationText, adhanThreeTickImage, adhanThreeSpeakerText, true)
         }
         silentNotificationView.setOnClickListener {
-            Log.d(
-                NextPrayerTimeFragment::class.simpleName,
-                "showBottomSheetNotificationAlertSound: silentNotificationView clicked.."
-            )
+        //    SharedPreferences.saveAdhanOption(mContext, prayerName, "silent")
+            saveNotificationOption(mContext,prayerName,NOTIFICATION_SILENT)
+
+            Log.d(NextPrayerTimeFragment::class.simpleName, "showBottomSheetNotificationAlertSound: silentNotificationView clicked..")
+            setViewStyleAndSaveToPrefs(mContext, silentNotificationText, silentTickImage, null, false, NOTIFICATION_SILENT)
             setViewStyleNotification(silentNotificationText, silentTickImage)
             resetViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(noneNotificationText, noneTickImage)
-            resetViewStyleNotification(
-                adhanOneNotificationText,
-                adhanOneTickImage,
-                adhanOneSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanTwoNotificationText,
-                adhanTwoTickImage,
-                adhanTwoSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanFourNotificationText,
-                adhanFourTickImage,
-                adhanFourSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanThreeNotificationText,
-                adhanThreeTickImage,
-                adhanThreeSpeakerText,
-                true
-            )
+            resetViewStyleNotification(adhanOneNotificationText, adhanOneTickImage, adhanOneSpeakerText, true)
+            resetViewStyleNotification(adhanTwoNotificationText, adhanTwoTickImage, adhanTwoSpeakerText, true)
+            resetViewStyleNotification(adhanFourNotificationText, adhanFourTickImage, adhanFourSpeakerText, true)
+            resetViewStyleNotification(adhanThreeNotificationText, adhanThreeTickImage, adhanThreeSpeakerText, true)
         }
         beepNotificationView.setOnClickListener {
+         //   SharedPreferences.saveAdhanOption(mContext, prayerName, "beep")
+            saveNotificationOption(mContext,prayerName,NOTIFICATION_BEEP)
+            setMediaPlayer(R.raw.beep_sound)
+            SharedPreferences.saveAudioNameInPrefs(mContext, AUDIO_BEEP)
+            setViewStyleAndSaveToPrefs(mContext, beepNotificationText, beepTickImage, null, false, NOTIFICATION_BEEP)
             setViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(silentNotificationText, silentTickImage)
             resetViewStyleNotification(noneNotificationText, noneTickImage)
-            resetViewStyleNotification(
-                adhanOneNotificationText,
-                adhanOneTickImage,
-                adhanOneSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanTwoNotificationText,
-                adhanTwoTickImage,
-                adhanTwoSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanFourNotificationText,
-                adhanFourTickImage,
-                adhanFourSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanThreeNotificationText,
-                adhanThreeTickImage,
-                adhanThreeSpeakerText,
-                true
-            )
+            resetViewStyleNotification(adhanOneNotificationText, adhanOneTickImage, adhanOneSpeakerText, true)
+            resetViewStyleNotification(adhanTwoNotificationText, adhanTwoTickImage, adhanTwoSpeakerText, true)
+            resetViewStyleNotification(adhanFourNotificationText, adhanFourTickImage, adhanFourSpeakerText, true)
+            resetViewStyleNotification(adhanThreeNotificationText, adhanThreeTickImage, adhanThreeSpeakerText, true)
         }
 
         adhanOneNotificationView.setOnClickListener {
+        //    SharedPreferences.saveAdhanOption(mContext, prayerName, "adhan one")
+            saveNotificationOption(mContext,prayerName, NOTIFICATION_ADHAN_ONE)
+            setMediaPlayer(R.raw.one_azan_by_nasir_al_qatami)
+            SharedPreferences.saveAudioNameInPrefs(mContext, AUDIO_ADHAN_ONE)
+            setViewStyleAndSaveToPrefs(mContext, adhanOneNotificationText, adhanOneTickImage, adhanOneSpeakerText, true,  NOTIFICATION_ADHAN_ONE)
             setViewStyleNotification(
                 adhanOneNotificationText,
                 adhanOneTickImage,
                 adhanOneSpeakerText,
                 true
             )
-            resetViewStyleNotification(
-                adhanTwoNotificationText,
-                adhanTwoTickImage,
-                adhanTwoSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanThreeNotificationText,
-                adhanThreeTickImage,
-                adhanThreeSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanFourNotificationText,
-                adhanFourTickImage,
-                adhanFourSpeakerText,
-                true
-            )
+            resetViewStyleNotification(adhanTwoNotificationText, adhanTwoTickImage, adhanTwoSpeakerText, true)
+            resetViewStyleNotification(adhanThreeNotificationText, adhanThreeTickImage, adhanThreeSpeakerText, true)
+            resetViewStyleNotification(adhanFourNotificationText, adhanFourTickImage, adhanFourSpeakerText, true)
             resetViewStyleNotification(noneNotificationText, noneTickImage)
             resetViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(silentNotificationText, silentTickImage)
         }
         adhanTwoNotificationView.setOnClickListener {
-            setViewStyleNotification(
-                adhanTwoNotificationText,
-                adhanTwoTickImage,
-                adhanTwoSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanOneNotificationText,
-                adhanOneTickImage,
-                adhanOneSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanThreeNotificationText,
-                adhanThreeTickImage,
-                adhanThreeSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanFourNotificationText,
-                adhanFourTickImage,
-                adhanFourSpeakerText,
-                true
-            )
+         //   SharedPreferences.saveAdhanOption(mContext, prayerName, "adhan two")
+            saveNotificationOption(mContext,prayerName,NOTIFICATION_ADHAN_TWO)
+            setMediaPlayer(R.raw.two_azan_by_mansour_al_zahrani)
+            SharedPreferences.saveAudioNameInPrefs(mContext, AUDIO_ADHAN_TWO)
+
+            setViewStyleAndSaveToPrefs(mContext, adhanTwoNotificationText, adhanTwoTickImage, adhanTwoSpeakerText, true, NOTIFICATION_ADHAN_TWO)
+            setViewStyleNotification(adhanTwoNotificationText, adhanTwoTickImage, adhanTwoSpeakerText, true)
+
+            resetViewStyleNotification(adhanOneNotificationText, adhanOneTickImage, adhanOneSpeakerText, true)
+            resetViewStyleNotification(adhanThreeNotificationText, adhanThreeTickImage, adhanThreeSpeakerText, true)
+            resetViewStyleNotification(adhanFourNotificationText, adhanFourTickImage, adhanFourSpeakerText, true)
             resetViewStyleNotification(noneNotificationText, noneTickImage)
             resetViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(silentNotificationText, silentTickImage)
         }
         adhanThreeNotificationView.setOnClickListener {
-            setViewStyleNotification(
-                adhanThreeNotificationText,
-                adhanThreeTickImage,
-                adhanThreeSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanOneNotificationText,
-                adhanOneTickImage,
-                adhanOneSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanTwoNotificationText,
-                adhanTwoTickImage,
-                adhanTwoSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanFourNotificationText, adhanFourTickImage, adhanFourSpeakerText, true
-            )
+          //  SharedPreferences.saveAdhanOption(mContext, prayerName, "adhan three")
+            saveNotificationOption(mContext,prayerName,NOTIFICATION_ADHAN_THREE )
+            setMediaPlayer(R.raw.three_adhan_by_masjid_al_haram)
+            SharedPreferences.saveAudioNameInPrefs(mContext, AUDIO_ADHAN_THREE)
+
+            setViewStyleAndSaveToPrefs(mContext, adhanThreeNotificationText, adhanThreeTickImage, adhanThreeSpeakerText, true, NOTIFICATION_ADHAN_THREE )
+            setViewStyleNotification(adhanThreeNotificationText, adhanThreeTickImage, adhanThreeSpeakerText, true)
+            resetViewStyleNotification(adhanOneNotificationText, adhanOneTickImage, adhanOneSpeakerText, true)
+            resetViewStyleNotification(adhanTwoNotificationText, adhanTwoTickImage, adhanTwoSpeakerText, true)
+            resetViewStyleNotification(adhanFourNotificationText, adhanFourTickImage, adhanFourSpeakerText, true)
             resetViewStyleNotification(noneNotificationText, noneTickImage)
             resetViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(silentNotificationText, silentTickImage)
 
         }
         adhanFourNotificationView.setOnClickListener {
-            setViewStyleNotification(
-                adhanFourNotificationText,
-                adhanFourTickImage,
-                adhanFourSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanOneNotificationText,
-                adhanOneTickImage,
-                adhanOneSpeakerText,
-                true
-            )
-            resetViewStyleNotification(
-                adhanTwoNotificationText,
-                adhanTwoTickImage,
-                adhanTwoSpeakerText,
-                true
-            )
+         //   SharedPreferences.saveAdhanOption(mContext, prayerName, "adhan four")
+            saveNotificationOption(mContext,prayerName,NOTIFICATION_ADHAN_FOUR)
+            setMediaPlayer(R.raw.four_adhan_by_mishary_rashid_alafasy)
+            SharedPreferences.saveAudioNameInPrefs(mContext, AUDIO_ADHAN_FOUR)
+
+            setViewStyleAndSaveToPrefs(mContext, adhanFourNotificationText, adhanFourTickImage, adhanFourSpeakerText, true, NOTIFICATION_ADHAN_FOUR)
+            setViewStyleNotification(adhanFourNotificationText, adhanFourTickImage, adhanFourSpeakerText, true)
+            resetViewStyleNotification(adhanOneNotificationText, adhanOneTickImage, adhanOneSpeakerText, true)
+            resetViewStyleNotification(adhanTwoNotificationText, adhanTwoTickImage, adhanTwoSpeakerText, true)
             resetViewStyleNotification(
                 adhanThreeNotificationText, adhanThreeTickImage, adhanThreeSpeakerText, true
             )
@@ -365,8 +460,73 @@ class NextPrayerTimeFragment :
             resetViewStyleNotification(beepNotificationText, beepTickImage)
             resetViewStyleNotification(silentNotificationText, silentTickImage)
 
+
+        }
+        // Apply styles based on the loaded value
+        when (selectedNotificationOption) {
+            NOTIFICATION_NONE -> {
+                setViewStyleNotification(noneNotificationText, noneTickImage)
+            }
+            NOTIFICATION_SILENT  -> {
+                setViewStyleNotification(silentNotificationText, silentTickImage)
+            }
+            NOTIFICATION_BEEP -> {
+                setViewStyleNotification(beepNotificationText, beepTickImage)
+            }
+            NOTIFICATION_ADHAN_ONE -> {
+                setViewStyleNotification(
+                    adhanOneNotificationText,
+                    adhanOneTickImage,
+                    adhanOneSpeakerText,
+                    true
+                )
+            }
+            NOTIFICATION_ADHAN_TWO  -> {
+                setViewStyleNotification(
+                    adhanTwoNotificationText,
+                    adhanTwoTickImage,
+                    adhanTwoSpeakerText,
+                    true
+                )
+            }
+            NOTIFICATION_ADHAN_THREE -> {
+                setViewStyleNotification(
+                    adhanThreeNotificationText,
+                    adhanThreeTickImage,
+                    adhanThreeSpeakerText,
+                    true
+                )
+            }
+            NOTIFICATION_ADHAN_FOUR  -> {
+                setViewStyleNotification(
+                    adhanFourNotificationText,
+                    adhanFourTickImage,
+                    adhanFourSpeakerText,
+                    true
+                )
+            }
+            // Handle other cases as needed
         }
         bottomSheetDialog.show()
+        bottomSheetDialog.setOnDismissListener {
+            mediaPlayer?.stop() // Stop the audio playback when the bottom sheet is dismissed
+        }
+        navigateBack.setOnClickListener {
+            mediaPlayer?.let {
+                if (it.isPlaying) {
+                    it.stop()
+                }
+            }
+            bottomSheetDialog.dismiss()
+        }
+    }
+
+
+    private fun setMediaPlayer(audioResource: Int) {
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = MediaPlayer.create(requireContext(), audioResource)
+        mediaPlayer?.start()
     }
 
     // Method to set the view style
@@ -401,11 +561,38 @@ class NextPrayerTimeFragment :
         }
     }
 
+    // Method to set the view style
+    private fun setViewStyleAlertReminder(
+        titleTextView: TextView,
+        tickImageView: ImageView,
+
+        ) {
+        titleTextView.setTextAppearance(R.style.selected_notification_text_style)
+        tickImageView.visible()
+    }
+
+    // Method to reset the view style
+    private fun resetViewStyleAlertReminder(
+        titleTextView: TextView,
+        tickImageView: ImageView,
+
+        ) {
+        titleTextView.setTextAppearance(R.style.unselected_alert_title_text_style)
+        tickImageView.gone()
+
+    }
+
     private fun initObserver() {
         Log.d(NextPrayerTimeFragment::class.simpleName, "initObserver: ")
-        viewModel.prayerTimes.observe(viewLifecycleOwner) { prayerTimesList->
+        viewModel.prayerTimes.observe(viewLifecycleOwner) { prayerTimesList ->
             Log.d(NextPrayerTimeFragment::class.simpleName, "initObservation: Setting prayer times")
             // set prayer times on Views..//
+            if (prayerTimesList != null && prayerTimesList.size == 5) {
+                binding.layoutNextPrayerBackground.tvTimeFajr.text = prayerTimesList[0]
+                binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text = prayerTimesList[1]
+                binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text = prayerTimesList[2]
+                binding.layoutNextPrayerBackground.tvUnselectedMaghribTime.text = prayerTimesList[3]
+                binding.layoutNextPrayerBackground.tvUnselectedIshaTime.text = prayerTimesList[4]
             if(prayerTimesList!=null && prayerTimesList.size ==5) {
                 binding.layoutNextPrayerBackground.tvTimeFajr.text = prayerTimesList.values.elementAt(0)
                 binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text = prayerTimesList.values.elementAt(1)
@@ -418,7 +605,7 @@ class NextPrayerTimeFragment :
         // to handle count down
         viewModel.index.observe(viewLifecycleOwner) { index ->
             Log.d(DashBoardFragment::class.simpleName, "initObserver: next Prayer $index")
-            if( QiblaApp.selectedPrayerPos ==0) {
+            if (QiblaApp.selectedPrayerPos == 0) {
                 when (index) {
                     1 -> fajrBg()
                     2 -> zuhrBg()
@@ -426,25 +613,28 @@ class NextPrayerTimeFragment :
                     4 -> maghribBg()
                     5 -> ishaBg()
                 }
-            }else{
-                Log.d(NextPrayerTimeFragment::class.simpleName, "initObserver: Background selected by user.")
+            } else {
+                Log.d(
+                    NextPrayerTimeFragment::class.simpleName,
+                    "initObserver: Background selected by user."
+                )
             }
         }
 
         // handle count down value
-        viewModel.counter.observe(viewLifecycleOwner){
+        viewModel.counter.observe(viewLifecycleOwner) {
             binding.tvTime.text = "$it"
         }
     }
 
     private fun setUserCityFromStorage() {
         Log.d(NextPrayerTimeFragment::class.simpleName, "setUserCityFromStorage: ")
-            val city = SharedPreferences.getUserCity(mContext)
-            binding.tvLocationCity.text = city
+        val city = SharedPreferences.getUserCity(mContext)
+        binding.tvLocationCity.text = city
     }
 
-    private fun scrollToEnd(){
-        binding.layoutNextPrayerBackground.svPrayerTimes.post{
+    private fun scrollToEnd() {
+        binding.layoutNextPrayerBackground.svPrayerTimes.post {
             binding.layoutNextPrayerBackground.svPrayerTimes.scrollTo(
                 0,
                 binding.layoutNextPrayerBackground.svPrayerTimes.bottom
@@ -704,6 +894,22 @@ class NextPrayerTimeFragment :
         bellIcon.background =
             ResourcesCompat.getDrawable(resources, R.drawable.ic_unselected_bell_icon, null)
 
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        // Stop the audio playback
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 }
 
