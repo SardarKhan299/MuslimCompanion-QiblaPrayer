@@ -3,6 +3,7 @@ package com.qibla.qiblacompass.prayertime.finddirection.presentation.views
 import android.content.Intent
 import android.os.Bundle
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.qibla.qiblacompass.prayertime.finddirection.MotionLayoutExample
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseActivity
 import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerConstants.SPLASH_VISIT_TIME

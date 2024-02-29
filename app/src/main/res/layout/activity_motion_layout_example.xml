@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/activity_motion_layout_example_scene"
+    tools:context=".MotionLayoutExample">
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnv"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:alpha="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/nav_menu" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bnv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_bg" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_bg"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:background="#0F000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/iv_main"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/cl_bg"
+        app:layout_constraintStart_toStartOf="@id/cl_bg"
+        app:layout_constraintTop_toTopOf="@id/cl_bg"
+        app:srcCompat="@android:drawable/bottom_bar" />
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:alpha="0"
+        android:padding="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="@id/cl_bg"
+        app:layout_constraintTop_toTopOf="@id/cl_bg"
+        app:srcCompat="@drawable/icon_close" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
