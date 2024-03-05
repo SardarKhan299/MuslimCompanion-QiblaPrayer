@@ -19,6 +19,17 @@
     />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        style="@style/toolbar_sub_screens_text_style"
+        app:layout_constraintBottom_toBottomOf="@+id/img_quran_sura_number"
+        app:layout_constraintEnd_toEndOf="@+id/img_quran_sura_number"
+        app:layout_constraintStart_toStartOf="@+id/img_quran_sura_number"
+        app:layout_constraintTop_toTopOf="@+id/img_quran_sura_number" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_quran_sura_name"
         style="@style/qibla_text_style"
         android:layout_width="wrap_content"

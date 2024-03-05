@@ -68,7 +68,17 @@
                 android:layout_height="wrap_content"
                 android:text="My Quran" />
         </com.google.android.material.tabs.TabLayout>
-
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/search_bar_quran_bg"
+                android:queryHint="Search"
+                android:textColorHint="@color/search_text_color"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_quran"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_quran"
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="wrap_content"
