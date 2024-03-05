@@ -6,22 +6,39 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentSuraBinding
 
 
-class SuraFragment : Fragment() {
-
+class SuraFragment : BaseFragment<FragmentSuraBinding>(R.layout.fragment_sura) {
+    lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(SuraFragment::class.java.simpleName, "onCreate: ")
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sura, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            suraFragment = this@SuraFragment
+        }
+        recyclerView = binding.recyclerViewQuranSura
+        recyclerView.layoutManager = LinearLayoutManager(
+            requireContext(),
+            RecyclerView.HORIZONTAL, false
+        )
+        val data = ArrayList<SuraData>()
+        data.add(SuraData("1", "Al Faatiha", "الفاتهة", "The Opener"))
+        data.add(SuraData("1", "Al Faatiha", "الفاتهة", "The Opener"))
+        data.add(SuraData("1", "Al Faatiha", "الفاتهة", "The Opener"))
+        data.add(SuraData("1", "Al Faatiha", "الفاتهة", "The Opener"))
+
+        val adapter = SuraAdapter(data)
+        recyclerView.adapter = adapter
+
     }
 
 }

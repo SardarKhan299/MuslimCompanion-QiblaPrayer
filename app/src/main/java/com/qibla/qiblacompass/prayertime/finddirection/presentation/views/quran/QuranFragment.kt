@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
@@ -36,21 +38,44 @@ class QuranFragment : BaseFragment<FragmentQuranBinding>(R.layout.fragment_quran
         val tabLayout = binding.tabLayout
         val viewPagerAdapter = QuranViewPagerFragment(fragmentManager!!, lifecycle)
         viewPager.adapter = viewPagerAdapter
-        TabLayoutMediator(tabLayout,viewPager){tab,position->
-            when(position){
-                0->{
-                    tab.text="Sura"
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                // Handle tab selection
+                tab?.let {
+                    viewPager.currentItem = tab.position
                 }
-                1->{
-                    tab.text ="Second"
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                // Handle tab unselection
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                // Handle tab reselection
+            }
+        })
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = "Sura"
                 }
-                2->{
-                    tab.text ="Playlist"
+                1 -> {
+                    tab.text = "Juz"
                 }
-                3->{
-                    tab.text ="My Quran"
+                2 -> {
+                    tab.text = "Playlist"
+                }
+                3 -> {
+                    tab.text = "My Quran"
                 }
             }
         }.attach()
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                tabLayout.selectTab(tabLayout.getTabAt(position))
+            }
+
+        })
     }
 }
