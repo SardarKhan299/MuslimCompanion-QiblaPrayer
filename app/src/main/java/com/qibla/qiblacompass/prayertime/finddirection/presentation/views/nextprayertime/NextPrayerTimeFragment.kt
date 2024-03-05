@@ -593,40 +593,45 @@ lateinit var  titleBottomSheet: TextView
                 binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text = prayerTimesList[2]
                 binding.layoutNextPrayerBackground.tvUnselectedMaghribTime.text = prayerTimesList[3]
                 binding.layoutNextPrayerBackground.tvUnselectedIshaTime.text = prayerTimesList[4]
-            if(prayerTimesList!=null && prayerTimesList.size ==5) {
-                binding.layoutNextPrayerBackground.tvTimeFajr.text = prayerTimesList.values.elementAt(0)
-                binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text = prayerTimesList.values.elementAt(1)
-                binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text = prayerTimesList.values.elementAt(2)
-                binding.layoutNextPrayerBackground.tvUnselectedMaghribTime.text = prayerTimesList.values.elementAt(3)
-                binding.layoutNextPrayerBackground.tvUnselectedIshaTime.text = prayerTimesList.values.elementAt(4)
-            }
-        }
-
-        // to handle count down
-        viewModel.index.observe(viewLifecycleOwner) { index ->
-            Log.d(DashBoardFragment::class.simpleName, "initObserver: next Prayer $index")
-            if (QiblaApp.selectedPrayerPos == 0) {
-                when (index) {
-                    1 -> fajrBg()
-                    2 -> zuhrBg()
-                    3 -> asarBg()
-                    4 -> maghribBg()
-                    5 -> ishaBg()
+                if (prayerTimesList != null && prayerTimesList.size == 5) {
+                    binding.layoutNextPrayerBackground.tvTimeFajr.text =
+                        prayerTimesList.values.elementAt(0)
+                    binding.layoutNextPrayerBackground.tvUnselectedZuharTime.text =
+                        prayerTimesList.values.elementAt(1)
+                    binding.layoutNextPrayerBackground.tvUnselectedAsrTime.text =
+                        prayerTimesList.values.elementAt(2)
+                    binding.layoutNextPrayerBackground.tvUnselectedMaghribTime.text =
+                        prayerTimesList.values.elementAt(3)
+                    binding.layoutNextPrayerBackground.tvUnselectedIshaTime.text =
+                        prayerTimesList.values.elementAt(4)
                 }
-            } else {
-                Log.d(
-                    NextPrayerTimeFragment::class.simpleName,
-                    "initObserver: Background selected by user."
-                )
             }
-        }
 
-        // handle count down value
-        viewModel.counter.observe(viewLifecycleOwner) {
-            binding.tvTime.text = "$it"
+            // to handle count down
+            viewModel.index.observe(viewLifecycleOwner) { index ->
+                Log.d(DashBoardFragment::class.simpleName, "initObserver: next Prayer $index")
+                if (QiblaApp.selectedPrayerPos == 0) {
+                    when (index) {
+                        1 -> fajrBg()
+                        2 -> zuhrBg()
+                        3 -> asarBg()
+                        4 -> maghribBg()
+                        5 -> ishaBg()
+                    }
+                } else {
+                    Log.d(
+                        NextPrayerTimeFragment::class.simpleName,
+                        "initObserver: Background selected by user."
+                    )
+                }
+            }
+
+            // handle count down value
+            viewModel.counter.observe(viewLifecycleOwner) {
+                binding.tvTime.text = "$it"
+            }
         }
     }
-
     private fun setUserCityFromStorage() {
         Log.d(NextPrayerTimeFragment::class.simpleName, "setUserCityFromStorage: ")
         val city = SharedPreferences.getUserCity(mContext)

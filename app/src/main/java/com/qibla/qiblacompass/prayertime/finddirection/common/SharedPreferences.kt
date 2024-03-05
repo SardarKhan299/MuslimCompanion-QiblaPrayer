@@ -10,8 +10,6 @@ import androidx.preference.PreferenceManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.qibla.qiblacompass.prayertime.finddirection.R
-import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY
-import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.KEY_INCREMENTAL_COUNTER
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_1
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_2
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ENTERED_VALUE_KEY_3

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.tabs.TabLayoutMediator
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
@@ -31,5 +32,25 @@ class QuranFragment : BaseFragment<FragmentQuranBinding>(R.layout.fragment_quran
         binding.toolbarQuran.viewSubScreen.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
+        val viewPager = binding.viewPager
+        val tabLayout = binding.tabLayout
+        val viewPagerAdapter = QuranViewPagerFragment(fragmentManager!!, lifecycle)
+        viewPager.adapter = viewPagerAdapter
+        TabLayoutMediator(tabLayout,viewPager){tab,position->
+            when(position){
+                0->{
+                    tab.text="Sura"
+                }
+                1->{
+                    tab.text ="Second"
+                }
+                2->{
+                    tab.text ="Playlist"
+                }
+                3->{
+                    tab.text ="My Quran"
+                }
+            }
+        }.attach()
     }
 }
