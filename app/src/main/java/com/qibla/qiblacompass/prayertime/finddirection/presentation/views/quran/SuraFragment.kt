@@ -28,13 +28,18 @@ class SuraFragment : BaseFragment<FragmentSuraBinding>(R.layout.fragment_sura) {
         recyclerView = binding.recyclerViewQuranSura
         recyclerView.layoutManager = LinearLayoutManager(
             requireContext(),
-            RecyclerView.HORIZONTAL, false
+            RecyclerView.VERTICAL, false
         )
         val data = ArrayList<SuraData>()
-        data.add(SuraData("1", "Al Faatiha", "الفاتهة", "The Opener"))
-        data.add(SuraData("1", "Al Faatiha", "الفاتهة", "The Opener"))
-        data.add(SuraData("1", "Al Faatiha", "الفاتهة", "The Opener"))
-        data.add(SuraData("1", "Al Faatiha", "الفاتهة", "The Opener"))
+        data.add(SuraData("1", "Al Faatiha", "The Opener", "الفاتهة"))
+        data.add(SuraData("1", "Al Faatiha", "The Opener", "الفاتهة"))
+        data.add(SuraData("1", "Al Faatiha", "The Opener", "الفاتهة"))
+        data.add(SuraData("1", "Al Faatiha", "The Opener", "الفاتهة"))
+        data.add(SuraData("1", "Al Faatiha", "The Opener", "الفاتهة"))
+        data.add(SuraData("1", "Al Faatiha", "The Opener", "الفاتهة"))
+        data.add(SuraData("1", "Al Faatiha", "The Opener", "الفاتهة"))
+        data.add(SuraData("1", "Al Faatiha", "The Opener", "الفاتهة"))
+
 
         val adapter = SuraAdapter(data)
         recyclerView.adapter = adapter

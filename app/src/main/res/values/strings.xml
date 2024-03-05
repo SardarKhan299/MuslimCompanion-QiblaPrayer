@@ -293,4 +293,9 @@
     <string name="last_read">Last Read</string>
     <string name="reading_plan">Reading Plan</string>
     <string name="see_reading_plan">See Reading Plan</string>
+    <string name="sura">Sura</string>
+    <string name="juz">Juz</string>
+    <string name="playlist">Playlist</string>
+    <string name="my_quran">My Quran</string>
+
 </resources>

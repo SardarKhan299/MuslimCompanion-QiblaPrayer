@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_4sdp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_juz_number"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:src="@drawable/suranumber1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_juz_number"
+        style="@style/toolbar_sub_screens_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        app:layout_constraintBottom_toBottomOf="@+id/img_juz_number"
+        app:layout_constraintEnd_toEndOf="@+id/img_juz_number"
+        app:layout_constraintStart_toStartOf="@+id/img_juz_number"
+        app:layout_constraintTop_toTopOf="@+id/img_juz_number" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_juz_name"
+        style="@style/qibla_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="Juz 1"
+        app:layout_constraintStart_toEndOf="@+id/img_juz_number"
+        app:layout_constraintTop_toTopOf="@+id/img_juz_number" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_juz_page_number"
+        style="@style/makkah_view_text_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Page 1-2"
+        app:layout_constraintStart_toStartOf="@+id/tv_juz_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_juz_name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

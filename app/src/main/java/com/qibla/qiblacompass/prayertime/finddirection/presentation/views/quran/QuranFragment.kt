@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -13,6 +14,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
+import com.qibla.qiblacompass.prayertime.finddirection.common.loadFont
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentQuranBinding
 
 
@@ -36,10 +38,17 @@ class QuranFragment : BaseFragment<FragmentQuranBinding>(R.layout.fragment_quran
         }
         val viewPager = binding.viewPager
         val tabLayout = binding.tabLayout
+        tabLayout!!.addTab(tabLayout!!.newTab().setText("Sura"))
+        tabLayout!!.addTab(tabLayout!!.newTab().setText("Juz"))
+        tabLayout!!.addTab(tabLayout!!.newTab().setText("Playlist"))
+        tabLayout!!.addTab(tabLayout!!.newTab().setText("My Quran"))
+        tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
         val viewPagerAdapter = QuranViewPagerFragment(fragmentManager!!, lifecycle)
         viewPager.adapter = viewPagerAdapter
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
+
+
                 // Handle tab selection
                 tab?.let {
                     viewPager.currentItem = tab.position
@@ -48,28 +57,14 @@ class QuranFragment : BaseFragment<FragmentQuranBinding>(R.layout.fragment_quran
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 // Handle tab unselection
+
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 // Handle tab reselection
             }
         })
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            when (position) {
-                0 -> {
-                    tab.text = "Sura"
-                }
-                1 -> {
-                    tab.text = "Juz"
-                }
-                2 -> {
-                    tab.text = "Playlist"
-                }
-                3 -> {
-                    tab.text = "My Quran"
-                }
-            }
-        }.attach()
+
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
