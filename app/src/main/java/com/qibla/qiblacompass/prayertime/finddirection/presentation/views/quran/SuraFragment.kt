@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
@@ -41,7 +42,9 @@ class SuraFragment : BaseFragment<FragmentSuraBinding>(R.layout.fragment_sura) {
         data.add(SuraData("1", "Al Faatiha", "The Opener", "الفاتهة"))
 
 
-        val adapter = SuraAdapter(data)
+        val adapter = SuraAdapter(data){
+            findNavController().navigate(R.id.quranSurahDetailFragment)
+        }
         recyclerView.adapter = adapter
 
     }

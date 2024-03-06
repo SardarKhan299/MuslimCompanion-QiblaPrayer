@@ -6,9 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
-import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.zakat.ZakatData
 
-class SuraAdapter(private val suraData :List<SuraData>):
+class SuraAdapter(private val suraData :List<SuraData>,private val onItemClick: (SuraData) -> Unit):
 RecyclerView.Adapter<SuraAdapter.SuraViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuraViewHolder {
       return SuraViewHolder(
@@ -34,6 +33,11 @@ RecyclerView.Adapter<SuraAdapter.SuraViewHolder>(){
         val textSuraNameEnglish: TextView = itemView.findViewById(R.id.tv_quran_sura_name)
         val textSuraOpen: TextView = itemView.findViewById(R.id.tv_quran_sura_open)
         val textSuraNameUrdu: TextView = itemView.findViewById(R.id.tv_quran_sura_name_urdu)
-
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                onItemClick(suraData[position])
+            }
+        }
     }
 }

@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/al_faatiha"
-        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_8sdp"
         app:layout_constraintStart_toEndOf="@+id/img_quran_sura_number"
         app:layout_constraintTop_toTopOf="@+id/img_quran_sura_number" />
 
