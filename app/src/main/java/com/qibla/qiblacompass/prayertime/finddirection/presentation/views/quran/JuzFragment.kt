@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentJuzBinding
 
 class JuzFragment : BaseFragment<FragmentJuzBinding>(R.layout.fragment_juz) {
@@ -18,6 +20,7 @@ class JuzFragment : BaseFragment<FragmentJuzBinding>(R.layout.fragment_juz) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(JuzFragment::class.java.simpleName, "onCreate: ")
+        (activity as AppCompatActivity?)?.hideActionBar()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

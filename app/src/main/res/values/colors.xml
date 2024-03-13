@@ -49,4 +49,5 @@
     <color name="view_divider_color">#A0A09C</color>
     <color name="quran_text_unselected_color"> #CFCFCF</color>
     <color name="search_bar_quran_color">#EAE7DE</color>
+    <color name="surah_background_color">#E6E3D9</color>
 </resources>

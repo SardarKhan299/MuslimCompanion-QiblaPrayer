@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -14,6 +15,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
+import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.common.loadFont
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentQuranBinding
 
@@ -23,7 +25,7 @@ class QuranFragment : BaseFragment<FragmentQuranBinding>(R.layout.fragment_quran
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(QuranFragment::class.java.simpleName, "onCreate: ")
-
+        (activity as AppCompatActivity?)?.hideActionBar()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
