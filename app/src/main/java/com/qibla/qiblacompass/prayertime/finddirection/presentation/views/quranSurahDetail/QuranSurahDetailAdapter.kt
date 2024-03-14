@@ -1,6 +1,7 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.quranSurahDetail
 
 import android.graphics.Color
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.R
 class QuranSurahDetailAdapter(private val surahList: List<QuranSurahDetailData>) : RecyclerView.Adapter<QuranSurahDetailAdapter.QuranSurahDetailViewHolder>() {
     private var clickedPosition = -1
     private var previousClickedPosition = -1
+    private var fontSize = 14f // Default font size
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuranSurahDetailViewHolder {
         return QuranSurahDetailViewHolder(
             LayoutInflater.from(parent.context)
@@ -30,6 +32,7 @@ class QuranSurahDetailAdapter(private val surahList: List<QuranSurahDetailData>)
             holder.itemView.setBackgroundColor(Color.TRANSPARENT)
         }
 
+
         holder.itemView.setOnClickListener {
             // Update clicked position and notify item change
             // Update clicked position and notify item change
@@ -39,6 +42,21 @@ class QuranSurahDetailAdapter(private val surahList: List<QuranSurahDetailData>)
             notifyItemChanged(clickedPosition)
         }
 
+    }
+    fun setFontSize(size: Float) {
+        fontSize = size
+        notifyDataSetChanged() // Notify adapter to update views
+    }
+    fun increaseFontSize(amount: Float): Float {
+        fontSize += amount
+        notifyDataSetChanged() // Notify adapter to update views
+        return fontSize
+    }
+
+    fun decreaseFontSize(amount: Float): Float {
+        fontSize -= amount
+        notifyDataSetChanged() // Notify adapter to update views
+        return fontSize
     }
 
     override fun getItemCount(): Int = surahList.size
@@ -53,6 +71,9 @@ class QuranSurahDetailAdapter(private val surahList: List<QuranSurahDetailData>)
             textArabic.text = surah.arabicText
             textEnglish.text = surah.englishTranslation
             textUrdu.text = surah.urduTranslation
+            textArabic.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize)
+            textEnglish.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize)
+            textUrdu.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize)
 
         }
     }

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_pre_adhan_alert"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/notification_bottom_sheet_bg"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_theme"
+        style="@style/version_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="Theme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_theme_separator"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@color/secondary_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_theme" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_theme_one"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_theme_one"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_theme_separator"
+        app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_theme_two"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_theme_two"
+        app:layout_constraintBottom_toBottomOf="@+id/img_theme_one"
+        app:layout_constraintStart_toEndOf="@+id/img_theme_one"
+        app:layout_constraintTop_toBottomOf="@+id/view_theme_separator"
+        app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_theme_three"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_theme_three"
+        app:layout_constraintBottom_toBottomOf="@+id/img_theme_two"
+        app:layout_constraintStart_toEndOf="@+id/img_theme_two"
+        app:layout_constraintTop_toBottomOf="@+id/view_theme_separator"
+        app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_text_settings"
+        style="@style/version_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_14sdp"
+        android:text="Text Settings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_theme_one" />
+
+    <View
+        android:id="@+id/view_text_settings_separator"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@color/secondary_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_text_settings" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/img_font_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:src="@drawable/ic_font"
+        app:layout_constraintEnd_toStartOf="@+id/img_text_decrease"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_text_settings_separator" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/img_text_decrease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="8dp"
+        android:padding="@dimen/_8sdp"
+        android:src="@drawable/ic_text_decrease"
+        app:layout_constraintBottom_toBottomOf="@+id/img_font_size"
+        app:layout_constraintEnd_toStartOf="@+id/img_text_increase"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/img_font_size"
+        app:layout_constraintTop_toBottomOf="@+id/view_text_settings_separator" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/img_text_increase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="8dp"
+        android:padding="@dimen/_8sdp"
+        android:src="@drawable/ic_text_increase"
+        app:layout_constraintBottom_toBottomOf="@+id/img_font_size"
+        app:layout_constraintEnd_toStartOf="@+id/img_text_arabic"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/img_text_decrease"
+        app:layout_constraintTop_toBottomOf="@+id/view_text_settings_separator" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/img_text_arabic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:padding="@dimen/_8sdp"
+        android:src="@drawable/ic_text_arabic"
+        app:layout_constraintBottom_toBottomOf="@+id/img_font_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_text_increase"
+        app:layout_constraintTop_toBottomOf="@+id/view_text_settings_separator" />
+
+    <View
+        android:id="@+id/view_reader_mode_separator"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@color/secondary_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_font_size" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_reader_mode"
+        style="@style/version_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_14sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:text="@string/reader_s_mode"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_reader_mode_separator" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_reader_mode"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_reader_mode"
+        app:layout_constraintEnd_toEndOf="@+id/img_text_arabic"
+        app:layout_constraintTop_toTopOf="@+id/tv_reader_mode"
+        app:thumbTint="@drawable/switch_thumb_selector"
+        app:trackTint="@drawable/switch_track_selector" />
+
+    <SeekBar
+        android:id="@+id/seekBarFontSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:max="90"
+        android:progress="10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_reader_mode" />
+</androidx.constraintlayout.widget.ConstraintLayout>

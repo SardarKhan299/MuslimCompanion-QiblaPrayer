@@ -36,16 +36,18 @@ class QuranFragment : BaseFragment<FragmentQuranBinding>(R.layout.fragment_quran
         binding.toolbarQuran.groupToolbarSubScreenProfile.visibility = View.VISIBLE
         binding.toolbarQuran.tvToolbarSubScreen.text = "Quran"
         binding.toolbarQuran.viewSubScreen.setOnClickListener {
-            findNavController().closeCurrentScreen()
+            findNavController().navigate(R.id.boardFragment)
         }
         val viewPager = binding.viewPager
         val tabLayout = binding.tabLayout
-        tabLayout!!.addTab(tabLayout!!.newTab().setText("Sura"))
-        tabLayout!!.addTab(tabLayout!!.newTab().setText("Juz"))
-        tabLayout!!.addTab(tabLayout!!.newTab().setText("Playlist"))
-        tabLayout!!.addTab(tabLayout!!.newTab().setText("My Quran"))
-        tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
-        val viewPagerAdapter = QuranViewPagerFragment(fragmentManager!!, lifecycle)
+        tabLayout.addTab(tabLayout.newTab().setText("Sura"))
+        tabLayout.addTab(tabLayout.newTab().setText("Juz"))
+        tabLayout.addTab(tabLayout.newTab().setText("Playlist"))
+        tabLayout.addTab(tabLayout.newTab().setText("My Quran"))
+        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+        //manages fragments attached to another fragment (child fragments).
+        //fragmentManager manages fragments attached directly to the activity.
+        val viewPagerAdapter = QuranViewPagerFragment(childFragmentManager, lifecycle)
         viewPager.adapter = viewPagerAdapter
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {

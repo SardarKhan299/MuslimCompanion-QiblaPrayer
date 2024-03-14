@@ -2,16 +2,22 @@ package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.quran
 
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentQuranSurahDetailBinding
@@ -20,6 +26,15 @@ import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentQuran
 class QuranSurahDetailFragment :
     BaseFragment<FragmentQuranSurahDetailBinding>(R.layout.fragment_quran_surah_detail) {
 
+    lateinit var themeImageOne: ImageView
+    lateinit var themeImageTwo: ImageView
+    lateinit var themeImageThree: ImageView
+    lateinit var fontImageView: ImageView
+    lateinit var imgTextIncrease: ImageView
+    lateinit var imgTextDecrease: ImageView
+    lateinit var imgTextArabic: ImageView
+    lateinit var readerModeSwitch: SwitchCompat
+    lateinit var adapter: QuranSurahDetailAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,13 +50,21 @@ class QuranSurahDetailFragment :
         binding.toolbarQuranSurahDetail.groupToolbarSubScreenProfile.visibility = View.VISIBLE
         binding.toolbarQuranSurahDetail.tvToolbarSubScreen.text = "Quran"
         binding.toolbarQuranSurahDetail.viewSubScreen.setOnClickListener {
-            findNavController().navigate(R.id.quranFragment)
+           // findNavController().navigate(R.id.quranFragment)
+           findNavController().navigate(R.id.action_quranSurahDetailFragment_to_quranFragment)
         }
 
         val recyclerView: RecyclerView = binding.recyclerViewQuranSurahDetail
 
 
         val surahList = ArrayList<QuranSurahDetailData>().apply {
+            add(
+                QuranSurahDetailData(
+                    "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمَِۙ",
+                    "اللہ کے نام سے شروع جو نہایت مہربان ہمیشہ رحم فرمانے والا ہے",
+                    "In the Name of Allah, the Most Compassionate, the Ever-Merciful"
+                )
+            )
             add(
                 QuranSurahDetailData(
                     "اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِیْنَۙ",
@@ -96,11 +119,87 @@ class QuranSurahDetailFragment :
 
 
         val layoutManager = LinearLayoutManager(mContext)
-        val adapter = QuranSurahDetailAdapter(surahList)
+        adapter = QuranSurahDetailAdapter(surahList)
 
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
+
+
+        binding.viewPage.setOnClickListener {
+            showBottomSheetDisplayTheme()
+        }
     }
 
+    private fun showBottomSheetDisplayTheme() {
+        val bottomSheetView =
+            View.inflate(requireContext(), R.layout.bottom_sheet_quran_display_theme, null)
+        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        themeImageOne = bottomSheetView.findViewById(R.id.img_theme_one)
+        themeImageTwo = bottomSheetView.findViewById(R.id.img_theme_two)
+        themeImageThree = bottomSheetView.findViewById(R.id.img_theme_three)
 
+        fontImageView = bottomSheetView.findViewById(R.id.img_font_size)
+        imgTextIncrease = bottomSheetView.findViewById(R.id.img_text_increase)
+        imgTextDecrease = bottomSheetView.findViewById(R.id.img_text_decrease)
+        imgTextArabic = bottomSheetView.findViewById(R.id.img_text_arabic)
+
+        imgTextDecrease.setOnClickListener {
+            val newSize = adapter.decreaseFontSize(5f) // Adjust the decrement as needed
+
+            // Ensure the font size does not go below the minimum value
+            if (newSize < MIN_FONT_SIZE) {
+                adapter.setFontSize(MIN_FONT_SIZE.toFloat())
+            }
+        }
+        imgTextIncrease.setOnClickListener {
+            // Increase the font size by a certain amount
+            val newSize = adapter.increaseFontSize(5f) // Adjust the increment as needed
+
+            // Ensure the font size does not exceed the maximum value
+            if (newSize > MAX_FONT_SIZE) {
+                adapter.setFontSize(MAX_FONT_SIZE.toFloat())
+            }
+        }
+
+        readerModeSwitch = bottomSheetView.findViewById(R.id.switch_reader_mode)
+        themeImageOne.setOnClickListener {
+            binding.layoutQuranSurahDetailFragment.setBackgroundResource(R.drawable.ic_quran_background_one)
+            bottomSheetDialog.dismiss()
+        }
+        themeImageTwo.setOnClickListener {
+            binding.layoutQuranSurahDetailFragment.setBackgroundResource(R.drawable.ic_quran_background_two)
+            bottomSheetDialog.dismiss()
+        }
+        themeImageThree.setOnClickListener {
+            binding.layoutQuranSurahDetailFragment.setBackgroundResource(R.drawable.bg)
+            bottomSheetDialog.dismiss()
+        }
+        bottomSheetDialog.show()
+        val seekBarFontSize = bottomSheetView.findViewById<SeekBar>(R.id.seekBarFontSize)
+        seekBarFontSize.thumb.setTint(ContextCompat.getColor(mContext, R.color.goal_text_color))
+        seekBarFontSize.progressDrawable.setTint(
+            ContextCompat.getColor(
+                mContext,
+                R.color.primary_color
+            )
+        )
+
+        seekBarFontSize.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                val fontSize = MIN_FONT_SIZE + (MAX_FONT_SIZE - MIN_FONT_SIZE) * (progress / 100f)
+                adapter.setFontSize(fontSize)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+    }
+
+    companion object {
+        private const val MIN_FONT_SIZE = 10
+        private const val MAX_FONT_SIZE = 100
+    }
 }

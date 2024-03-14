@@ -180,5 +180,9 @@
         android:id="@+id/quranSurahDetailFragment"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.quranSurahDetail.QuranSurahDetailFragment"
         android:label="fragment_quran_surah_detail"
-        tools:layout="@layout/fragment_quran_surah_detail" />
+        tools:layout="@layout/fragment_quran_surah_detail" >
+        <action
+            android:id="@+id/action_quranSurahDetailFragment_to_quranFragment"
+            app:destination="@id/quranFragment" />
+    </fragment>
 </navigation>

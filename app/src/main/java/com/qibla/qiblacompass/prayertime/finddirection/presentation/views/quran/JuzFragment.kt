@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
@@ -47,7 +48,9 @@ class JuzFragment : BaseFragment<FragmentJuzBinding>(R.layout.fragment_juz) {
         data.add(JuzData("1", "Juz 1", "1-2"))
         data.add(JuzData("1", "Juz 1", "1-2"))
 
-        val adapter = JuzAdapter(data)
+        val adapter = JuzAdapter(data) {
+            findNavController().navigate(R.id.quranSurahDetailFragment)
+        }
         recyclerView.adapter = adapter
     }
 

@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.qibla.qiblacompass.prayertime.finddirection.R
 
-class JuzAdapter(private val juzData: List<JuzData>) :
+class JuzAdapter(private val juzData: List<JuzData>,private val onItemClick: (JuzData) -> Unit) :
     RecyclerView.Adapter<JuzAdapter.JuzViewHolder>() {
 
 
@@ -32,6 +32,12 @@ class JuzAdapter(private val juzData: List<JuzData>) :
         val textJuzNumber: TextView = itemView.findViewById(R.id.tv_juz_number)
         val textJuzName: TextView = itemView.findViewById(R.id.tv_juz_name)
         val textJuzPage: TextView = itemView.findViewById(R.id.tv_juz_page_number)
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                onItemClick(juzData[position])
+            }
+        }
     }
 
 }
