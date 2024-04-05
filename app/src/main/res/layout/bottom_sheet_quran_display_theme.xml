@@ -8,14 +8,25 @@
     android:background="@drawable/notification_bottom_sheet_bg"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_close_sheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_display_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_display_settings" />
+
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_theme"
-        style="@style/version_text_style"
+        android:id="@+id/tv_display_settings"
+        style="@style/heading_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:text="Theme"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:text="@string/display_settings"
+        app:layout_constraintEnd_toStartOf="@+id/img_close_sheet"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,77 +34,186 @@
         android:id="@+id/view_theme_separator"
         android:layout_width="0dp"
         android:layout_height="@dimen/_2sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_12sdp"
         android:background="@color/secondary_color"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_theme" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_display_settings" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_theme"
+        style="@style/heading_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:text="Theme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_theme_separator" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_theme_one"
-        android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_90sdp"
+        android:layout_width="@dimen/_85sdp"
+        android:layout_height="@dimen/_85sdp"
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_theme_one"
+        app:layout_constraintEnd_toStartOf="@+id/img_theme_two"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_theme_separator"
+        app:layout_constraintTop_toBottomOf="@+id/tv_theme"
         app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_theme_two"
-        android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_90sdp"
+        android:layout_width="@dimen/_85sdp"
+        android:layout_height="@dimen/_85sdp"
         android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_8sdp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_theme_two"
         app:layout_constraintBottom_toBottomOf="@+id/img_theme_one"
+        app:layout_constraintEnd_toStartOf="@+id/img_theme_three"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/img_theme_one"
-        app:layout_constraintTop_toBottomOf="@+id/view_theme_separator"
+        app:layout_constraintTop_toTopOf="@+id/img_theme_one"
         app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_theme_three"
-        android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_90sdp"
+        android:layout_width="@dimen/_85sdp"
+        android:layout_height="@dimen/_85sdp"
         android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_theme_three"
         app:layout_constraintBottom_toBottomOf="@+id/img_theme_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/img_theme_two"
-        app:layout_constraintTop_toBottomOf="@+id/view_theme_separator"
+        app:layout_constraintTop_toTopOf="@+id/img_theme_two"
         app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_text_settings"
-        style="@style/version_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_14sdp"
-        android:text="Text Settings"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_theme_one" />
 
     <View
         android:id="@+id/view_text_settings_separator"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_2sdp"
+        android:layout_height="1dp"
         android:layout_marginTop="@dimen/_8sdp"
         android:background="@color/secondary_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_text_settings" />
+        app:layout_constraintTop_toBottomOf="@+id/img_theme_one" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_font_style"
+        style="@style/heading_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="@string/font_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_text_settings_separator" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_font_style_one"
+        android:layout_width="@dimen/_85sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:src="@drawable/font_style_bg"
+        app:layout_constraintEnd_toStartOf="@+id/img_font_style_two"
+        app:layout_constraintHorizontal_chainStyle="spread"
+
+        app:layout_constraintStart_toStartOf="@+id/tv_font_style"
+        app:layout_constraintTop_toBottomOf="@+id/tv_font_style" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_font_style_one"
+        style="@style/adhan_reminder_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Font style"
+        app:layout_constraintBottom_toBottomOf="@+id/img_font_style_one"
+        app:layout_constraintEnd_toEndOf="@+id/img_font_style_one"
+        app:layout_constraintStart_toStartOf="@id/img_font_style_one"
+        app:layout_constraintTop_toTopOf="@+id/img_font_style_one" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_font_style_two"
+        android:layout_width="@dimen/_85sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:src="@drawable/font_style_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/img_font_style_one"
+        app:layout_constraintEnd_toStartOf="@+id/img_font_style_three"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/img_font_style_one"
+        app:layout_constraintTop_toTopOf="@+id/img_font_style_one" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_font_style_two"
+        style="@style/adhan_reminder_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Font style"
+        app:layout_constraintBottom_toBottomOf="@+id/img_font_style_two"
+        app:layout_constraintEnd_toEndOf="@+id/img_font_style_two"
+        app:layout_constraintStart_toStartOf="@id/img_font_style_two"
+        app:layout_constraintTop_toTopOf="@+id/img_font_style_two" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_font_style_three"
+        android:layout_width="@dimen/_85sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:src="@drawable/font_style_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/img_font_style_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/img_font_style_two"
+        app:layout_constraintTop_toTopOf="@+id/img_font_style_two" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_font_style_three"
+        style="@style/adhan_reminder_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Font style"
+        app:layout_constraintBottom_toBottomOf="@+id/img_font_style_three"
+        app:layout_constraintEnd_toEndOf="@+id/img_font_style_three"
+        app:layout_constraintStart_toStartOf="@id/img_font_style_three"
+        app:layout_constraintTop_toTopOf="@+id/img_font_style_three" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_font_size"
+        style="@style/heading_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_14sdp"
+        android:text="Font Size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_font_style_one" />
+
+    <View
+        android:id="@+id/view_font_size_separator"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@color/secondary_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_font_size" />
+
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/img_font_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_14sdp"
         android:paddingTop="@dimen/_8sdp"
         android:paddingEnd="@dimen/_8sdp"
         android:paddingBottom="@dimen/_8sdp"
@@ -101,80 +221,109 @@
         app:layout_constraintEnd_toStartOf="@+id/img_text_decrease"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_text_settings_separator" />
+        app:layout_constraintTop_toBottomOf="@+id/view_font_size_separator" />
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/img_text_decrease"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="8dp"
         android:padding="@dimen/_8sdp"
         android:src="@drawable/ic_text_decrease"
         app:layout_constraintBottom_toBottomOf="@+id/img_font_size"
         app:layout_constraintEnd_toStartOf="@+id/img_text_increase"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/img_font_size"
-        app:layout_constraintTop_toBottomOf="@+id/view_text_settings_separator" />
+        app:layout_constraintTop_toTopOf="@+id/img_font_size" />
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/img_text_increase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="8dp"
         android:padding="@dimen/_8sdp"
         android:src="@drawable/ic_text_increase"
         app:layout_constraintBottom_toBottomOf="@+id/img_font_size"
         app:layout_constraintEnd_toStartOf="@+id/img_text_arabic"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/img_text_decrease"
-        app:layout_constraintTop_toBottomOf="@+id/view_text_settings_separator" />
+        app:layout_constraintTop_toTopOf="@+id/img_text_decrease" />
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/img_text_arabic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:padding="@dimen/_8sdp"
         android:src="@drawable/ic_text_arabic"
         app:layout_constraintBottom_toBottomOf="@+id/img_font_size"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_text_increase"
-        app:layout_constraintTop_toBottomOf="@+id/view_text_settings_separator" />
+        app:layout_constraintStart_toEndOf="@+id/img_text_increase" />
 
     <View
-        android:id="@+id/view_reader_mode_separator"
+        android:id="@+id/view_brightness_separator"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_2sdp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@color/secondary_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_font_size" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_screen_brightness"
+        style="@style/heading_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_14sdp"
+        android:text="@string/screen_brightness"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_brightness_separator" />
+
+    <SeekBar
+        android:id="@+id/seek_bar_screen_brightness"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:max="90"
+        android:padding="@dimen/_4sdp"
+        android:progress="10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_screen_brightness" />
+
+    <View
+        android:id="@+id/view_translation_separator"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
         android:layout_marginTop="@dimen/_8sdp"
         android:background="@color/secondary_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_font_size" />
+        app:layout_constraintTop_toBottomOf="@id/seek_bar_screen_brightness" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_reader_mode"
-        style="@style/version_text_style"
+        android:id="@+id/tv_translation_mode"
+        style="@style/heading_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_14sdp"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:text="@string/reader_s_mode"
+        android:text="@string/translation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_reader_mode_separator" />
+        app:layout_constraintTop_toBottomOf="@+id/view_translation_separator" />
 
     <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switch_reader_mode"
+        android:id="@+id/switch_translation_mode"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_reader_mode"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_translation_mode"
         app:layout_constraintEnd_toEndOf="@+id/img_text_arabic"
-        app:layout_constraintTop_toTopOf="@+id/tv_reader_mode"
+        app:layout_constraintTop_toTopOf="@+id/tv_translation_mode"
         app:thumbTint="@drawable/switch_thumb_selector"
         app:trackTint="@drawable/switch_track_selector" />
 
@@ -183,13 +332,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/_4sdp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="@dimen/_12sdp"
         android:max="90"
+        android:padding="@dimen/_4sdp"
         android:progress="10"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_reader_mode" />
+        app:layout_constraintTop_toBottomOf="@id/tv_translation_mode" />
+    <!--    <View-->
+    <!--        android:id="@+id/view_text_size_separator"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="1dp"-->
+    <!--        android:layout_marginTop="@dimen/_12sdp"-->
+    <!--        android:background="@color/secondary_color"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tv_reader_mode" />-->
+    <!--    <androidx.appcompat.widget.AppCompatTextView-->
+    <!--        android:id="@+id/tv_text_size"-->
+    <!--        style="@style/version_text_style"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="@dimen/_8sdp"-->
+    <!--        android:layout_marginTop="@dimen/_14sdp"-->
+    <!--        android:text="Text Size"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/view_text_size_separator" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

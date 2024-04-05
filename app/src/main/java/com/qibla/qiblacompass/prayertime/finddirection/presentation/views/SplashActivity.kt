@@ -19,7 +19,7 @@ class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        FirebaseCrashlytics.getInstance().log("Test Log. Splash..")
+   //     FirebaseCrashlytics.getInstance().log("Test Log. Splash..")
         Timer("splash", false).schedule(SPLASH_VISIT_TIME) {
             if(SharedPreferences.isFirstTimeLogin(this@SplashActivity)){
                 startActivity(Intent(this@SplashActivity, OnboardingActivity::class.java))

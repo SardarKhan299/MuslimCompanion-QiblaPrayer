@@ -27,7 +27,7 @@ class QuranSurahDetailAdapter(private val surahList: List<QuranSurahDetailData>)
         // Set background color based on clicked position
         // Set background color based on clicked position
         if (position == clickedPosition) {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.surah_background_color))
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.surah_bg_color))
         } else {
             holder.itemView.setBackgroundColor(Color.TRANSPARENT)
         }

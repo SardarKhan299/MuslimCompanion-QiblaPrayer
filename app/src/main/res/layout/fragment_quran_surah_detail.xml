@@ -11,7 +11,7 @@
     android:id="@+id/layoutQuranSurahDetailFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_quran_surah_detail"
+    android:background="@drawable/ic_quran_bg_one"
     tools:context=".presentation.views.quranSurahDetail.QuranSurahDetailFragment">
 
     <include

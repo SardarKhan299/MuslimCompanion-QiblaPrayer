@@ -50,8 +50,8 @@ class QuranSurahDetailFragment :
         binding.toolbarQuranSurahDetail.groupToolbarSubScreenProfile.visibility = View.VISIBLE
         binding.toolbarQuranSurahDetail.tvToolbarSubScreen.text = "Quran"
         binding.toolbarQuranSurahDetail.viewSubScreen.setOnClickListener {
-           // findNavController().navigate(R.id.quranFragment)
-           findNavController().navigate(R.id.action_quranSurahDetailFragment_to_quranFragment)
+            // findNavController().navigate(R.id.quranFragment)
+            findNavController().navigate(R.id.action_quranSurahDetailFragment_to_quranFragment)
         }
 
         val recyclerView: RecyclerView = binding.recyclerViewQuranSurahDetail
@@ -162,13 +162,13 @@ class QuranSurahDetailFragment :
             }
         }
 
-        readerModeSwitch = bottomSheetView.findViewById(R.id.switch_reader_mode)
+        readerModeSwitch = bottomSheetView.findViewById(R.id.switch_translation_mode)
         themeImageOne.setOnClickListener {
-            binding.layoutQuranSurahDetailFragment.setBackgroundResource(R.drawable.ic_quran_background_one)
+            binding.layoutQuranSurahDetailFragment.setBackgroundResource(R.drawable.ic_quran_bg_one)
             bottomSheetDialog.dismiss()
         }
         themeImageTwo.setOnClickListener {
-            binding.layoutQuranSurahDetailFragment.setBackgroundResource(R.drawable.ic_quran_background_two)
+            binding.layoutQuranSurahDetailFragment.setBackgroundResource(R.drawable.ic_quran_bg_two)
             bottomSheetDialog.dismiss()
         }
         themeImageThree.setOnClickListener {

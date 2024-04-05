@@ -298,6 +298,9 @@
     <string name="playlist">Playlist</string>
     <string name="my_quran">My Quran</string>
     <string name="surah_english_tanslation">All praise is for Allah—Lord of all worlds,</string>
-    <string name="reader_s_mode">Reader\'s Mode</string>
+    <string name="translation">Translation</string>
+    <string name="display_settings">Display Settings</string>
+    <string name="font_style">Font Style</string>
+    <string name="screen_brightness">Screen Brightness</string>
 
 </resources>
