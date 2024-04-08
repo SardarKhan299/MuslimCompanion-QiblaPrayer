@@ -47,12 +47,22 @@ class QuranSurahDetailFragment :
         binding.apply {
             quranSurahDetailFragment = this@QuranSurahDetailFragment
         }
-        binding.toolbarQuranSurahDetail.groupToolbarSubScreenProfile.visibility = View.VISIBLE
-        binding.toolbarQuranSurahDetail.tvToolbarSubScreen.text = "Quran"
-        binding.toolbarQuranSurahDetail.viewSubScreen.setOnClickListener {
-            // findNavController().navigate(R.id.quranFragment)
+       // binding.toolbarQuranSurahDetail.groupToolbarSubScreenProfile.visibility = View.VISIBLE
+        val toolbar = binding.toolbarQuranSurahDetail
+        toolbar.groupToolbarTasbihCounter.visibility = View.VISIBLE
+        toolbar.imgNavigateBack.setOnClickListener {
             findNavController().navigate(R.id.action_quranSurahDetailFragment_to_quranFragment)
         }
+        toolbar.titleCounter.text = "Quran"
+        toolbar.imgAddMore.setImageResource(R.drawable.ic_home)
+        toolbar.imgAddMore.setOnClickListener {
+            findNavController().navigate(R.id.boardFragment)
+        }
+//        binding.toolbarQuranSurahDetail.tvToolbarSubScreen.text = "Quran"
+//        binding.toolbarQuranSurahDetail.viewSubScreen.setOnClickListener {
+//            // findNavController().navigate(R.id.quranFragment)
+//            findNavController().navigate(R.id.action_quranSurahDetailFragment_to_quranFragment)
+//        }
 
         val recyclerView: RecyclerView = binding.recyclerViewQuranSurahDetail
 
@@ -143,6 +153,10 @@ class QuranSurahDetailFragment :
         imgTextIncrease = bottomSheetView.findViewById(R.id.img_text_increase)
         imgTextDecrease = bottomSheetView.findViewById(R.id.img_text_decrease)
         imgTextArabic = bottomSheetView.findViewById(R.id.img_text_arabic)
+        val imgClose = bottomSheetView.findViewById<ImageView>(R.id.img_close_sheet)
+        imgClose.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
 
         imgTextDecrease.setOnClickListener {
             val newSize = adapter.decreaseFontSize(5f) // Adjust the decrement as needed
@@ -172,7 +186,8 @@ class QuranSurahDetailFragment :
             bottomSheetDialog.dismiss()
         }
         themeImageThree.setOnClickListener {
-            binding.layoutQuranSurahDetailFragment.setBackgroundResource(R.drawable.bg)
+            binding.layoutQuranSurahDetailFragment.setBackgroundResource(R.drawable.ic_quran_bg_three
+            )
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.show()
