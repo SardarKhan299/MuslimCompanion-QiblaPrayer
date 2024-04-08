@@ -63,6 +63,9 @@ class NextPrayerTimeFragment :
     lateinit var preAdhanReminderText: TextView
     lateinit var imgFajrNotification: ImageView
     lateinit var imgZuhrFajrNotification: ImageView
+    lateinit var imgAsrNotification: ImageView
+    lateinit var imgMaghribNotification: ImageView
+    lateinit var imgIshaNotification: ImageView
     lateinit var titleBottomSheet: TextView
     private var mediaPlayer: MediaPlayer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,43 +102,52 @@ class NextPrayerTimeFragment :
         val layoutPrayerMainBackground = commonTerm.bgFragment
         imgFajrNotification = binding.layoutNextPrayerBackground.imgFajrNotification
         imgZuhrFajrNotification = binding.layoutNextPrayerBackground.imgUnselectedZuharIcon
+        imgAsrNotification = binding.layoutNextPrayerBackground.imgUnselectedAsrIcon
+        imgMaghribNotification = binding.layoutNextPrayerBackground.imgUnselectedMaghribIcon
+        imgIshaNotification = binding.layoutNextPrayerBackground.imgUnselectedIshaIcon
 
 
 
         binding.layoutNextPrayerBackground.viewFajr.setOnClickListener {
-            showBottomSheetNotificationAlertSound(PRAYER_FAJR)
-            // Update the bottom sheet title immediately
             titleBottomSheet.text = PRAYER_FAJR
             SharedPreferences.savePrayerInPrefs(mContext, PRAYER_FAJR)
             fajrBg()
         }
+        imgFajrNotification.setOnClickListener {
+            showBottomSheetNotificationAlertSound(PRAYER_FAJR)
+            titleBottomSheet.text = PRAYER_FAJR
+        }
+        imgZuhrFajrNotification.setOnClickListener {
+            showBottomSheetNotificationAlertSound(PRAYER_ZUHR)
+            titleBottomSheet.text = PRAYER_ZUHR
+        }
+        imgAsrNotification.setOnClickListener {
+            showBottomSheetNotificationAlertSound(PRAYER_ASR)
+            titleBottomSheet.text = PRAYER_ASR
+        }
+        imgMaghribNotification.setOnClickListener {
+            showBottomSheetNotificationAlertSound(PRAYER_MAGHRIB)
+            titleBottomSheet.text = PRAYER_MAGHRIB
+        }
+        imgIshaNotification.setOnClickListener {
+            showBottomSheetNotificationAlertSound(PRAYER_ISHA)
+            titleBottomSheet.text = PRAYER_ISHA
+        }
 
         zuharView.setOnClickListener {
-            showBottomSheetNotificationAlertSound(PRAYER_ZUHR)
-            // Update the bottom sheet title immediately
-            titleBottomSheet.text = PRAYER_ZUHR
             //Save prayer name in shared preference
             SharedPreferences.savePrayerInPrefs(mContext, PRAYER_ZUHR)
             zuhrBg()
         }
         asrView.setOnClickListener {
-            showBottomSheetNotificationAlertSound(PRAYER_ASR)
-            // Update the bottom sheet title immediately
-            titleBottomSheet.text = PRAYER_ASR
             SharedPreferences.savePrayerInPrefs(mContext, PRAYER_ASR)
             asarBg()
         }
         maghribView.setOnClickListener {
-            showBottomSheetNotificationAlertSound(PRAYER_MAGHRIB)
-            // Update the bottom sheet title immediately
-            titleBottomSheet.text = PRAYER_MAGHRIB
             SharedPreferences.savePrayerInPrefs(mContext, PRAYER_MAGHRIB)
             maghribBg()
         }
         ishaView.setOnClickListener {
-            showBottomSheetNotificationAlertSound(PRAYER_ISHA)
-            // Update the bottom sheet title immediately
-            titleBottomSheet.text = PRAYER_ISHA
             SharedPreferences.savePrayerInPrefs(mContext, PRAYER_ISHA)
             ishaBg()
         }
@@ -863,299 +875,299 @@ class NextPrayerTimeFragment :
         }
     }
 
-        private fun setUserCityFromStorage() {
-            Log.d(NextPrayerTimeFragment::class.simpleName, "setUserCityFromStorage: ")
-            val city = SharedPreferences.getUserCity(mContext)
-            binding.tvLocationCity.text = city
-        }
+    private fun setUserCityFromStorage() {
+        Log.d(NextPrayerTimeFragment::class.simpleName, "setUserCityFromStorage: ")
+        val city = SharedPreferences.getUserCity(mContext)
+        binding.tvLocationCity.text = city
+    }
 
-        private fun scrollToEnd() {
-            binding.layoutNextPrayerBackground.svPrayerTimes.post {
-                binding.layoutNextPrayerBackground.svPrayerTimes.scrollTo(
-                    0,
-                    binding.layoutNextPrayerBackground.svPrayerTimes.bottom
-                )
-            }
-        }
-
-        private fun fajrBg() {
-
-            val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
-            val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
-            val mainLayoutBackground = binding.layoutNextPrayerFragment
-            val commonTerm = binding.layoutNextPrayerBackground
-            val layoutPrayerMainBackground = commonTerm.bgFragment
-
-            val fajrView = commonTerm.viewFajr
-            val fajrPrayerText = commonTerm.tvFajr
-            val fajrPrayerTime = commonTerm.tvTimeFajr
-            val fajrNotificationIcon = commonTerm.imgFajrNotification
-            resetAllViewsStyle()
-            fajrView.changeAppearanceForPrayerType(
-                mainLayoutBackground,
-                fajrView,
-                fajrPrayerText,
-                fajrPrayerTime,
-                toolbarCloseIcon,
-                toolbarNotificationIcon,
-                PrayerType.Fajr,
-                fajrNotificationIcon,
-                layoutPrayerMainBackground
+    private fun scrollToEnd() {
+        binding.layoutNextPrayerBackground.svPrayerTimes.post {
+            binding.layoutNextPrayerBackground.svPrayerTimes.scrollTo(
+                0,
+                binding.layoutNextPrayerBackground.svPrayerTimes.bottom
             )
-        }
-
-        private fun zuhrBg() {
-            val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
-            val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
-            val mainLayoutBackground = binding.layoutNextPrayerFragment
-            val commonTerm = binding.layoutNextPrayerBackground
-            val layoutPrayerMainBackground = commonTerm.bgFragment
-            val zuharText = commonTerm.tvZuhar
-            val zuharTime = commonTerm.tvUnselectedZuharTime
-            val zuharView = commonTerm.viewZuhar
-            val zuharNotificationIcon = commonTerm.imgUnselectedZuharIcon
-            resetAllViewsStyle()
-            zuharView.changeAppearanceForPrayerType(
-                mainLayoutBackground,
-                zuharView,
-                zuharText,
-                zuharTime,
-                toolbarCloseIcon,
-                toolbarNotificationIcon,
-                PrayerType.Zuhar,
-                zuharNotificationIcon,
-                layoutPrayerMainBackground
-            )
-        }
-
-        private fun asarBg() {
-            val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
-            val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
-            val mainLayoutBackground = binding.layoutNextPrayerFragment
-            val commonTerm = binding.layoutNextPrayerBackground
-            val layoutPrayerMainBackground = commonTerm.bgFragment
-            val asrText = commonTerm.tvAsr
-            val asrView = commonTerm.viewAsr
-            val asrTime = commonTerm.tvUnselectedAsrTime
-            val asrNotificationBell = commonTerm.imgUnselectedAsrIcon
-            resetAllViewsStyle()
-            asrView.changeAppearanceForPrayerType(
-                mainLayoutBackground,
-                asrView,
-                asrText,
-                asrTime,
-                toolbarCloseIcon,
-                toolbarNotificationIcon,
-                PrayerType.Asr,
-                asrNotificationBell,
-                layoutPrayerMainBackground
-            )
-        }
-
-        private fun maghribBg() {
-            val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
-            val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
-            val mainLayoutBackground = binding.layoutNextPrayerFragment
-            val commonTerm = binding.layoutNextPrayerBackground
-            val maghribText = commonTerm.tvMaghribPrayer
-            val maghribTime = commonTerm.tvUnselectedMaghribTime
-            val maghribNotificationBell = commonTerm.imgUnselectedMaghribIcon
-            val maghribView = commonTerm.viewMaghrib
-            val layoutPrayerMainBackground = commonTerm.bgFragment
-            resetAllViewsStyle()
-            maghribView.changeAppearanceForPrayerType(
-                mainLayoutBackground,
-                maghribView,
-                maghribText,
-                maghribTime,
-                toolbarCloseIcon,
-                toolbarNotificationIcon,
-                PrayerType.Maghrib,
-                maghribNotificationBell,
-                layoutPrayerMainBackground
-            )
-            scrollToEnd()
-        }
-
-        private fun ishaBg() {
-            val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
-            val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
-            val mainLayoutBackground = binding.layoutNextPrayerFragment
-            val commonTerm = binding.layoutNextPrayerBackground
-            val layoutPrayerMainBackground = commonTerm.bgFragment
-            val ishaText = commonTerm.tvIshaPrayer
-            val ishaTime = commonTerm.tvUnselectedIshaTime
-            val ishaNotificationIcon = commonTerm.imgUnselectedIshaIcon
-            val ishaView = commonTerm.viewIsha
-            resetAllViewsStyle()
-            ishaView.changeAppearanceForPrayerType(
-                mainLayoutBackground,
-                ishaView,
-                ishaText,
-                ishaTime,
-                toolbarCloseIcon,
-                toolbarNotificationIcon,
-                PrayerType.Isha,
-                ishaNotificationIcon,
-                layoutPrayerMainBackground
-            )
-            scrollToEnd()
-        }
-
-        private fun tahajjudBg() {
-            val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
-            val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
-            val mainLayoutBackground = binding.layoutNextPrayerFragment
-            val commonTerm = binding.layoutNextPrayerBackground
-            val layoutPrayerMainBackground = commonTerm.bgFragment
-            val tahajjudText = commonTerm.tvTahajjudPrayer
-            val tahajjudTime = commonTerm.tvUnselectedTahajjudTime
-            val tahajjudNotificationIcon = commonTerm.imgUnselectedTahajjudIcon
-            val tahajjudView = commonTerm.viewTahajjud
-
-            resetAllViewsStyle()
-            tahajjudView.changeAppearanceForPrayerType(
-                mainLayoutBackground,
-                tahajjudView,
-                tahajjudText,
-                tahajjudTime,
-                toolbarCloseIcon,
-                toolbarNotificationIcon,
-                PrayerType.Tahajjud,
-                tahajjudNotificationIcon,
-                layoutPrayerMainBackground
-            )
-
-        }
-
-        private fun updateBackgroundColor() {
-            val selectedPrayerType = arguments?.getString("selectedPrayerType")
-
-            when (selectedPrayerType) {
-                PrayerConstants.FAJR -> fajrBg()
-                PrayerConstants.ZUHAR -> zuhrBg()
-                PrayerConstants.ASR -> asarBg()
-                PrayerConstants.MAGHRIB -> maghribBg()
-                PrayerConstants.ISHA -> ishaBg()
-                PrayerConstants.TAHAJJUD -> tahajjudBg()
-            }
-
-        }
-
-        private fun resetAllViewsStyle() {
-            // Reset the style of all views here
-            resetViewStyle(binding.layoutNextPrayerBackground.viewFajr)
-            resetViewStyle(binding.layoutNextPrayerBackground.viewZuhar)
-            resetViewStyle(binding.layoutNextPrayerBackground.viewAsr)
-            resetViewStyle(binding.layoutNextPrayerBackground.viewMaghrib)
-            resetViewStyle(binding.layoutNextPrayerBackground.viewIsha)
-            resetViewStyle(binding.layoutNextPrayerBackground.viewTahajjud)
-        }
-
-        private fun resetViewStyle(view: View) {
-            // Reset the style of the given view to its original state
-            // You can use the code from your original function to do this
-            val resources = resources // Assuming this is accessible in your context
-            when (view) {
-                binding.layoutNextPrayerBackground.viewFajr -> {
-                    binding.layoutNextPrayerBackground.viewFajr.background =
-                        ResourcesCompat.getDrawable(
-                            resources,
-                            R.drawable.background_transparent,
-                            null
-                        )
-                    binding.layoutNextPrayerBackground.tvFajr.setTextAppearance(R.style.next_prayer_unselected_main_heading_style)
-                    binding.layoutNextPrayerBackground.tvTimeFajr.setTextAppearance(R.style.next_prayer_unselected_main_heading_style)
-                    binding.layoutNextPrayerBackground.imgFajrNotification.setBackgroundResource(R.drawable.ic_unselected_bell_icon)
-                }
-
-                binding.layoutNextPrayerBackground.viewZuhar -> {
-                    // Reset the style of the Zuhar view
-                    // Use the code for resetting the Zuhar view style here
-                    view.viewChangingDone(
-                        binding.layoutNextPrayerBackground.viewZuhar,
-                        binding.layoutNextPrayerBackground.tvZuhar,
-                        binding.layoutNextPrayerBackground.tvUnselectedZuharTime,
-                        binding.layoutNextPrayerBackground.imgUnselectedZuharIcon
-                    )
-                }
-
-                binding.layoutNextPrayerBackground.viewAsr -> {
-                    // Reset the style of the Asr view
-                    // Use the code for resetting the Asr view style here
-                    view.viewChangingDone(
-                        binding.layoutNextPrayerBackground.viewAsr,
-                        binding.layoutNextPrayerBackground.tvAsr,
-                        binding.layoutNextPrayerBackground.tvUnselectedAsrTime,
-                        binding.layoutNextPrayerBackground.imgUnselectedAsrIcon
-                    )
-
-                }
-
-                binding.layoutNextPrayerBackground.viewMaghrib -> {
-                    // Reset the style of the Asr view
-                    // Use the code for resetting the Asr view style here
-                    view.viewChangingDone(
-                        binding.layoutNextPrayerBackground.viewMaghrib,
-                        binding.layoutNextPrayerBackground.tvMaghribPrayer,
-                        binding.layoutNextPrayerBackground.tvUnselectedMaghribTime,
-                        binding.layoutNextPrayerBackground.imgUnselectedMaghribIcon
-                    )
-                }
-
-                binding.layoutNextPrayerBackground.viewIsha -> {
-                    // Reset the style of the Asr view
-                    // Use the code for resetting the Asr view style here
-                    view.viewChangingDone(
-                        binding.layoutNextPrayerBackground.viewIsha,
-                        binding.layoutNextPrayerBackground.tvIshaPrayer,
-                        binding.layoutNextPrayerBackground.tvUnselectedIshaTime,
-                        binding.layoutNextPrayerBackground.imgUnselectedIshaIcon
-                    )
-                }
-
-                binding.layoutNextPrayerBackground.viewTahajjud -> {
-                    // Reset the style of the Asr view
-                    // Use the code for resetting the Asr view style here
-                    view.viewChangingDone(
-                        binding.layoutNextPrayerBackground.viewTahajjud,
-                        binding.layoutNextPrayerBackground.tvTahajjudPrayer,
-                        binding.layoutNextPrayerBackground.tvUnselectedTahajjudTime,
-                        binding.layoutNextPrayerBackground.imgUnselectedTahajjudIcon
-                    )
-                }
-
-                else -> {}
-            }
-        }
-
-        private fun View.viewChangingDone(
-            viewbg: View, PrayerText: TextView,
-            PrayerTime: TextView, bellIcon: ImageView,
-        ) {
-            viewbg.background =
-                ResourcesCompat.getDrawable(resources, R.drawable.background_transparent, null)
-            PrayerTime.setTextAppearance(R.style.next_prayer_unselected_main_heading_style)
-            PrayerText.setTextAppearance(R.style.next_prayer_unselected_main_heading_style)
-            bellIcon.background =
-                ResourcesCompat.getDrawable(resources, R.drawable.ic_unselected_bell_icon, null)
-
-        }
-
-        override fun onStop() {
-            super.onStop()
-            mediaPlayer?.stop()
-            mediaPlayer?.release()
-            mediaPlayer = null
-        }
-
-
-        override fun onPause() {
-            super.onPause()
-            // Stop the audio playback
-            mediaPlayer?.stop()
-            mediaPlayer?.release()
-            mediaPlayer = null
         }
     }
+
+    private fun fajrBg() {
+
+        val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
+        val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
+        val mainLayoutBackground = binding.layoutNextPrayerFragment
+        val commonTerm = binding.layoutNextPrayerBackground
+        val layoutPrayerMainBackground = commonTerm.bgFragment
+
+        val fajrView = commonTerm.viewFajr
+        val fajrPrayerText = commonTerm.tvFajr
+        val fajrPrayerTime = commonTerm.tvTimeFajr
+        val fajrNotificationIcon = commonTerm.imgFajrNotification
+        resetAllViewsStyle()
+        fajrView.changeAppearanceForPrayerType(
+            mainLayoutBackground,
+            fajrView,
+            fajrPrayerText,
+            fajrPrayerTime,
+            toolbarCloseIcon,
+            toolbarNotificationIcon,
+            PrayerType.Fajr,
+            fajrNotificationIcon,
+            layoutPrayerMainBackground
+        )
+    }
+
+    private fun zuhrBg() {
+        val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
+        val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
+        val mainLayoutBackground = binding.layoutNextPrayerFragment
+        val commonTerm = binding.layoutNextPrayerBackground
+        val layoutPrayerMainBackground = commonTerm.bgFragment
+        val zuharText = commonTerm.tvZuhar
+        val zuharTime = commonTerm.tvUnselectedZuharTime
+        val zuharView = commonTerm.viewZuhar
+        val zuharNotificationIcon = commonTerm.imgUnselectedZuharIcon
+        resetAllViewsStyle()
+        zuharView.changeAppearanceForPrayerType(
+            mainLayoutBackground,
+            zuharView,
+            zuharText,
+            zuharTime,
+            toolbarCloseIcon,
+            toolbarNotificationIcon,
+            PrayerType.Zuhar,
+            zuharNotificationIcon,
+            layoutPrayerMainBackground
+        )
+    }
+
+    private fun asarBg() {
+        val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
+        val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
+        val mainLayoutBackground = binding.layoutNextPrayerFragment
+        val commonTerm = binding.layoutNextPrayerBackground
+        val layoutPrayerMainBackground = commonTerm.bgFragment
+        val asrText = commonTerm.tvAsr
+        val asrView = commonTerm.viewAsr
+        val asrTime = commonTerm.tvUnselectedAsrTime
+        val asrNotificationBell = commonTerm.imgUnselectedAsrIcon
+        resetAllViewsStyle()
+        asrView.changeAppearanceForPrayerType(
+            mainLayoutBackground,
+            asrView,
+            asrText,
+            asrTime,
+            toolbarCloseIcon,
+            toolbarNotificationIcon,
+            PrayerType.Asr,
+            asrNotificationBell,
+            layoutPrayerMainBackground
+        )
+    }
+
+    private fun maghribBg() {
+        val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
+        val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
+        val mainLayoutBackground = binding.layoutNextPrayerFragment
+        val commonTerm = binding.layoutNextPrayerBackground
+        val maghribText = commonTerm.tvMaghribPrayer
+        val maghribTime = commonTerm.tvUnselectedMaghribTime
+        val maghribNotificationBell = commonTerm.imgUnselectedMaghribIcon
+        val maghribView = commonTerm.viewMaghrib
+        val layoutPrayerMainBackground = commonTerm.bgFragment
+        resetAllViewsStyle()
+        maghribView.changeAppearanceForPrayerType(
+            mainLayoutBackground,
+            maghribView,
+            maghribText,
+            maghribTime,
+            toolbarCloseIcon,
+            toolbarNotificationIcon,
+            PrayerType.Maghrib,
+            maghribNotificationBell,
+            layoutPrayerMainBackground
+        )
+        scrollToEnd()
+    }
+
+    private fun ishaBg() {
+        val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
+        val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
+        val mainLayoutBackground = binding.layoutNextPrayerFragment
+        val commonTerm = binding.layoutNextPrayerBackground
+        val layoutPrayerMainBackground = commonTerm.bgFragment
+        val ishaText = commonTerm.tvIshaPrayer
+        val ishaTime = commonTerm.tvUnselectedIshaTime
+        val ishaNotificationIcon = commonTerm.imgUnselectedIshaIcon
+        val ishaView = commonTerm.viewIsha
+        resetAllViewsStyle()
+        ishaView.changeAppearanceForPrayerType(
+            mainLayoutBackground,
+            ishaView,
+            ishaText,
+            ishaTime,
+            toolbarCloseIcon,
+            toolbarNotificationIcon,
+            PrayerType.Isha,
+            ishaNotificationIcon,
+            layoutPrayerMainBackground
+        )
+        scrollToEnd()
+    }
+
+    private fun tahajjudBg() {
+        val toolbarNotificationIcon = binding.toolbarNextPrayerTiming.viewBellNotificationIcon
+        val toolbarCloseIcon = binding.toolbarNextPrayerTiming.viewNextPrayerIcon
+        val mainLayoutBackground = binding.layoutNextPrayerFragment
+        val commonTerm = binding.layoutNextPrayerBackground
+        val layoutPrayerMainBackground = commonTerm.bgFragment
+        val tahajjudText = commonTerm.tvTahajjudPrayer
+        val tahajjudTime = commonTerm.tvUnselectedTahajjudTime
+        val tahajjudNotificationIcon = commonTerm.imgUnselectedTahajjudIcon
+        val tahajjudView = commonTerm.viewTahajjud
+
+        resetAllViewsStyle()
+        tahajjudView.changeAppearanceForPrayerType(
+            mainLayoutBackground,
+            tahajjudView,
+            tahajjudText,
+            tahajjudTime,
+            toolbarCloseIcon,
+            toolbarNotificationIcon,
+            PrayerType.Tahajjud,
+            tahajjudNotificationIcon,
+            layoutPrayerMainBackground
+        )
+
+    }
+
+    private fun updateBackgroundColor() {
+        val selectedPrayerType = arguments?.getString("selectedPrayerType")
+
+        when (selectedPrayerType) {
+            PrayerConstants.FAJR -> fajrBg()
+            PrayerConstants.ZUHAR -> zuhrBg()
+            PrayerConstants.ASR -> asarBg()
+            PrayerConstants.MAGHRIB -> maghribBg()
+            PrayerConstants.ISHA -> ishaBg()
+            PrayerConstants.TAHAJJUD -> tahajjudBg()
+        }
+
+    }
+
+    private fun resetAllViewsStyle() {
+        // Reset the style of all views here
+        resetViewStyle(binding.layoutNextPrayerBackground.viewFajr)
+        resetViewStyle(binding.layoutNextPrayerBackground.viewZuhar)
+        resetViewStyle(binding.layoutNextPrayerBackground.viewAsr)
+        resetViewStyle(binding.layoutNextPrayerBackground.viewMaghrib)
+        resetViewStyle(binding.layoutNextPrayerBackground.viewIsha)
+        resetViewStyle(binding.layoutNextPrayerBackground.viewTahajjud)
+    }
+
+    private fun resetViewStyle(view: View) {
+        // Reset the style of the given view to its original state
+        // You can use the code from your original function to do this
+        val resources = resources // Assuming this is accessible in your context
+        when (view) {
+            binding.layoutNextPrayerBackground.viewFajr -> {
+                binding.layoutNextPrayerBackground.viewFajr.background =
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.background_transparent,
+                        null
+                    )
+                binding.layoutNextPrayerBackground.tvFajr.setTextAppearance(R.style.next_prayer_unselected_main_heading_style)
+                binding.layoutNextPrayerBackground.tvTimeFajr.setTextAppearance(R.style.next_prayer_unselected_main_heading_style)
+                binding.layoutNextPrayerBackground.imgFajrNotification.setBackgroundResource(R.drawable.ic_unselected_bell_icon)
+            }
+
+            binding.layoutNextPrayerBackground.viewZuhar -> {
+                // Reset the style of the Zuhar view
+                // Use the code for resetting the Zuhar view style here
+                view.viewChangingDone(
+                    binding.layoutNextPrayerBackground.viewZuhar,
+                    binding.layoutNextPrayerBackground.tvZuhar,
+                    binding.layoutNextPrayerBackground.tvUnselectedZuharTime,
+                    binding.layoutNextPrayerBackground.imgUnselectedZuharIcon
+                )
+            }
+
+            binding.layoutNextPrayerBackground.viewAsr -> {
+                // Reset the style of the Asr view
+                // Use the code for resetting the Asr view style here
+                view.viewChangingDone(
+                    binding.layoutNextPrayerBackground.viewAsr,
+                    binding.layoutNextPrayerBackground.tvAsr,
+                    binding.layoutNextPrayerBackground.tvUnselectedAsrTime,
+                    binding.layoutNextPrayerBackground.imgUnselectedAsrIcon
+                )
+
+            }
+
+            binding.layoutNextPrayerBackground.viewMaghrib -> {
+                // Reset the style of the Asr view
+                // Use the code for resetting the Asr view style here
+                view.viewChangingDone(
+                    binding.layoutNextPrayerBackground.viewMaghrib,
+                    binding.layoutNextPrayerBackground.tvMaghribPrayer,
+                    binding.layoutNextPrayerBackground.tvUnselectedMaghribTime,
+                    binding.layoutNextPrayerBackground.imgUnselectedMaghribIcon
+                )
+            }
+
+            binding.layoutNextPrayerBackground.viewIsha -> {
+                // Reset the style of the Asr view
+                // Use the code for resetting the Asr view style here
+                view.viewChangingDone(
+                    binding.layoutNextPrayerBackground.viewIsha,
+                    binding.layoutNextPrayerBackground.tvIshaPrayer,
+                    binding.layoutNextPrayerBackground.tvUnselectedIshaTime,
+                    binding.layoutNextPrayerBackground.imgUnselectedIshaIcon
+                )
+            }
+
+            binding.layoutNextPrayerBackground.viewTahajjud -> {
+                // Reset the style of the Asr view
+                // Use the code for resetting the Asr view style here
+                view.viewChangingDone(
+                    binding.layoutNextPrayerBackground.viewTahajjud,
+                    binding.layoutNextPrayerBackground.tvTahajjudPrayer,
+                    binding.layoutNextPrayerBackground.tvUnselectedTahajjudTime,
+                    binding.layoutNextPrayerBackground.imgUnselectedTahajjudIcon
+                )
+            }
+
+            else -> {}
+        }
+    }
+
+    private fun View.viewChangingDone(
+        viewbg: View, PrayerText: TextView,
+        PrayerTime: TextView, bellIcon: ImageView,
+    ) {
+        viewbg.background =
+            ResourcesCompat.getDrawable(resources, R.drawable.background_transparent, null)
+        PrayerTime.setTextAppearance(R.style.next_prayer_unselected_main_heading_style)
+        PrayerText.setTextAppearance(R.style.next_prayer_unselected_main_heading_style)
+        bellIcon.background =
+            ResourcesCompat.getDrawable(resources, R.drawable.ic_unselected_bell_icon, null)
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        // Stop the audio playback
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+}
 
