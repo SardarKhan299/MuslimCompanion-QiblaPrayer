@@ -72,8 +72,6 @@ class ZakatCalculateFragment :
         binding.apply {
             zakatCalculateFragment = this@ZakatCalculateFragment
         }
-        binding.toolbarZakatCalculate.groupToolbarSubScreenProfile.visibility = View.VISIBLE
-        binding.toolbarZakatCalculate.tvToolbarSubScreen.text = getString(R.string.zakat_calculator)
         val zakatFragment = binding.includeZakatCalculateForm
         edittext1 = zakatFragment.edtGoldAmount
         edittext2 = zakatFragment.edtGoldTrust
@@ -123,8 +121,15 @@ class ZakatCalculateFragment :
         val groupGold = binding.includeZakatCalculateForm.groupZakatGold
         val groupSilver = binding.includeZakatCalculateForm.groupZakatSilver
 
-        binding.toolbarZakatCalculate.viewSubScreen.setOnClickListener {
+        val toolbar = binding.toolbarZakatCalculate
+        toolbar.groupToolbarTasbihCounter.visibility = View.VISIBLE
+        toolbar.imgNavigateBack.setOnClickListener {
             findNavController().closeCurrentScreen()
+        }
+       toolbar.titleCounter.text = getString(R.string.zakat_calculator)
+        toolbar.imgAddMore.setImageResource(R.drawable.ic_home)
+        toolbar.imgAddMore.setOnClickListener {
+            findNavController().navigate(R.id.boardFragment)
         }
 
         binding.includeZakatCalculateForm.viewHeadingZakat.setOnClickListener {
@@ -168,7 +173,7 @@ class ZakatCalculateFragment :
         binding.includeZakatCalculateForm.goldViewSeparator.setOnClickListener {
             if (groupSilver.visibility == View.GONE) {
                 groupSilver.visibility = View.VISIBLE
-               binding.includeZakatCalculateForm.imgFinancialDropDown.setImageResource(R.drawable.ic_arrow_drop_up)
+                binding.includeZakatCalculateForm.imgFinancialDropDown.setImageResource(R.drawable.ic_arrow_drop_up)
             } else {
                 groupSilver.visibility = View.GONE
                 binding.includeZakatCalculateForm.imgFinancialDropDown.setImageResource(R.drawable.ic_arrow_drop_down)

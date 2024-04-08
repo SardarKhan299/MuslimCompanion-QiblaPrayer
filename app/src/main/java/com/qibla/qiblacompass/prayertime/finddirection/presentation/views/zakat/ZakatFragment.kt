@@ -28,11 +28,22 @@ class ZakatFragment : BaseFragment<FragmentZakatBinding>(R.layout.fragment_zakat
         binding.apply {
             zakatFragment = this@ZakatFragment
         }
-        binding.toolbarZakat.groupToolbarSubScreenProfile.visibility = View.VISIBLE
-        binding.toolbarZakat.tvToolbarSubScreen.text = getString(R.string.zakat_calculator)
-        binding.toolbarZakat.viewSubScreen.setOnClickListener {
+        val toolbar = binding.toolbarZakat
+        toolbar.groupToolbarTasbihCounter.visibility = View.VISIBLE
+        toolbar.imgNavigateBack.setOnClickListener {
             findNavController().closeCurrentScreen()
         }
+        toolbar.titleCounter.text = getString(R.string.zakat)
+        toolbar.imgAddMore.setImageResource(R.drawable.ic_home)
+        toolbar.imgAddMore.setOnClickListener {
+            findNavController().navigate(R.id.boardFragment)
+        }
+
+//        binding.toolbarZakat.groupToolbarSubScreenProfile.visibility = View.VISIBLE
+//        binding.toolbarZakat.tvToolbarSubScreen.text = getString(R.string.zakat_calculator)
+//        binding.toolbarZakat.viewSubScreen.setOnClickListener {
+//            findNavController().closeCurrentScreen()
+//        }
         binding.btnCalculateZakat.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.zakatCalculateFragment)
         }
