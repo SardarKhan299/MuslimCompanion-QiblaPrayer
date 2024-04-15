@@ -27,7 +27,8 @@ class GetNamazTimeUsecase @Inject constructor(private val repository: MainReposi
             }
 
         }catch (e:java.lang.Exception){
-            emit(NetworkResult.Error("500"))
+            e.printStackTrace()
+            emit(NetworkResult.Error(e.message))
         }
     }
 }

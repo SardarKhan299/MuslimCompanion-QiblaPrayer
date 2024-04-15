@@ -1,8 +1,10 @@
 package com.qibla.qiblacompass.prayertime.finddirection.data.remote.dto
 
+import androidx.annotation.Keep
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+@Keep
 @Entity(
     tableName = "prayers"
 )
