@@ -10,6 +10,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".presentation.views.addOwnTasbih.AddOwnTasbihFragment">
 
     <include
@@ -41,11 +42,11 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_new_tasbih_background"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_260sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_new_tasbih"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_add_own_tasbih" />
 
@@ -124,16 +125,68 @@
         app:layout_constraintStart_toEndOf="@+id/ic_gallery_camera"
         app:layout_constraintTop_toTopOf="@+id/ic_gallery_camera"
     />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/edt_name"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutTextTasbihName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:helperTextEnabled="true"
         android:text="@string/name"
         app:layout_constraintEnd_toStartOf="@+id/guideline_add_own_tasbih_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_add_own_tasbih_left"
-        app:layout_constraintTop_toBottomOf="@+id/img_new_tasbih_background" />
+        app:layout_constraintTop_toBottomOf="@+id/img_new_tasbih_background">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtTasbihName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_transparent"
+            android:ems="10"
+            android:importantForAutofill="no"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <View
+        android:id="@+id/view_tasbih_save_close"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/add_own_tasbih_close_icon_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_close_tasbih_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_8sdp"
+        android:src="@drawable/ic_close_tasbih_icon"
+        app:layout_constraintTop_toTopOf="@+id/view_tasbih_save_close"
+        app:layout_constraintBottom_toBottomOf="@+id/view_tasbih_save_close"
+        app:layout_constraintStart_toStartOf="@id/guideline_add_own_tasbih_left"
+        />
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_save_tasbih_icon"
+        android:padding="@dimen/_8sdp"
+        app:layout_constraintTop_toTopOf="@+id/view_tasbih_save_close"
+        app:layout_constraintBottom_toBottomOf="@+id/view_tasbih_save_close"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_add_own_tasbih_right"
+        />
+    <!--    <androidx.appcompat.widget.AppCompatEditText-->
+<!--        android:id="@+id/edt_name"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/_8sdp"-->
+<!--        android:text="@string/name"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/guideline_add_own_tasbih_right"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/guideline_add_own_tasbih_left"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/img_new_tasbih_background" />-->
     <!--    <androidx.appcompat.widget.AppCompatButton-->
 <!--        android:layout_width="0dp"-->
 <!--        android:layout_height="@dimen/_50sdp"-->

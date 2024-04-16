@@ -1,17 +1,18 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.addOwnTasbih
 
 import android.os.Bundle
-import android.text.Editable
 import android.text.SpannableString
 import android.text.Spanned
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.text.style.ForegroundColorSpan
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
+import com.qibla.qiblacompass.prayertime.finddirection.common.invisible
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentAddOwnTasbihBinding
 
 
@@ -30,17 +31,32 @@ class AddOwnTasbihFragment :
             addOwnTasbihFragment =
                 this@AddOwnTasbihFragment
         }
-        val name = binding.edtName
+        val toolbar = binding.toolbarAddOwnTasbih
+        toolbar.groupToolbarTasbihCounter.visibility = View.VISIBLE
+        toolbar.titleCounter.text = getString(R.string.add_own_tasbih)
+        toolbar.imgNavigateBack.setOnClickListener {
+            findNavController().closeCurrentScreen()
+        }
+        toolbar.imgAddMore.invisible()
+
+
+        val nameInputLayout = binding.layoutTextTasbihName
         val stringNum = String.format(getString(R.string.name), "*")
-        val startPosition = 3
+        val startPosition = 4
         val endPosition = stringNum.length
         val spannableStr = SpannableString(stringNum)
         spannableStr.setSpan(
-            R.color.about_us_text_color,
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    mContext,
+                    R.color.zakat_point_heading_text_color
+                )
+            ),
             startPosition,
             endPosition,
             Spanned.SPAN_INCLUSIVE_EXCLUSIVE
         )
-      //  name.text = spannableStr as Editable
+        nameInputLayout.hint = spannableStr
+
     }
 }
