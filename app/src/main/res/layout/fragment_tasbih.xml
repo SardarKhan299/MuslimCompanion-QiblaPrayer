@@ -44,10 +44,10 @@
         android:id="@+id/recycler_view_zhikr"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_tasbih_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_tasbih_left"
         app:layout_constraintTop_toBottomOf="@+id/img_tasbih_main"
+        app:layout_constraintBottom_toTopOf="@+id/img_add_new_tasbih"
         tools:listitem="@layout/item_tasbih_dhikr" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -98,5 +98,15 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_tasbih_date"
         app:layout_constraintStart_toStartOf="@+id/tv_tasbih_date"
         app:layout_constraintTop_toBottomOf="@+id/tv_tasbih_date" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_add_new_tasbih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_new_tasbih"
+        android:padding="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_tasbih_right" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

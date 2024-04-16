@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="addOwnTasbihFragment"
+            type="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.addOwnTasbih.AddOwnTasbihFragment" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.views.addOwnTasbih.AddOwnTasbihFragment">
+
+    <include
+        android:id="@+id/toolbar_add_own_tasbih"
+        layout="@layout/layout_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_add_own_tasbih_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_left"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_add_own_tasbih_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_new_tasbih_background"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_new_tasbih"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_add_own_tasbih" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_upload_new_tasbih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_upload_tasbih"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_add_own_tasbih_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_add_own_tasbih_left"
+        app:layout_constraintTop_toTopOf="@id/img_new_tasbih_background"
+        android:layout_marginTop="@dimen/_20sdp"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_upload_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Image"
+        style="@style/title_prayer_text_style"
+        app:layout_constraintTop_toBottomOf="@+id/img_upload_new_tasbih"
+        app:layout_constraintStart_toStartOf="@+id/img_upload_new_tasbih"
+        app:layout_constraintEnd_toEndOf="@id/img_upload_new_tasbih"
+    />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_upload_gallery_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/zakat_btn_text_style"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:text="Select image from your image gallery"
+        app:layout_constraintTop_toBottomOf="@+id/tv_upload_image"
+        app:layout_constraintStart_toStartOf="@id/tv_upload_image"
+        app:layout_constraintEnd_toEndOf="@id/tv_upload_image"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_or"
+        style="@style/title_prayer_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:text="------------------ Or ------------------"
+        app:layout_constraintEnd_toEndOf="@+id/tv_upload_gallery_image"
+        app:layout_constraintStart_toStartOf="@+id/tv_upload_gallery_image"
+        app:layout_constraintTop_toBottomOf="@+id/tv_upload_gallery_image" />
+
+    <View
+        android:id="@+id/view_upload_gallery_image"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/button_upload_gallery_bg"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_or"
+        app:layout_constraintStart_toStartOf="@+id/tv_or"
+        app:layout_constraintTop_toBottomOf="@+id/tv_or" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ic_gallery_camera"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_16sdp"
+        android:src="@drawable/ic_camera"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_upload_gallery_image"
+        app:layout_constraintStart_toStartOf="@+id/view_upload_gallery_image"
+        app:layout_constraintTop_toTopOf="@+id/view_upload_gallery_image" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/skip_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open Camera &amp; Take Photo"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_gallery_camera"
+        app:layout_constraintEnd_toEndOf="@+id/view_upload_gallery_image"
+        app:layout_constraintStart_toEndOf="@+id/ic_gallery_camera"
+        app:layout_constraintTop_toTopOf="@+id/ic_gallery_camera"
+    />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edt_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="@string/name"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_add_own_tasbih_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_add_own_tasbih_left"
+        app:layout_constraintTop_toBottomOf="@+id/img_new_tasbih_background" />
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="@dimen/_50sdp"-->
+<!--        android:layout_marginTop="@dimen/_12sdp"-->
+<!--        android:text="Open Camera & Take Photo"-->
+<!--        style="@style/skip_text_style"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:background="@drawable/button_upload_gallery_bg"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/tv_or"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/tv_or"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_or" />-->
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -58,6 +58,9 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
             findNavController().closeCurrentScreen()
 
         }
+        binding.imgAddNewTasbih.setOnClickListener {
+            findNavController().navigate(R.id.addOwnTasbihFragment)
+        }
     }
 
 

@@ -108,8 +108,13 @@
     </fragment>
     <fragment
         android:id="@+id/tasbihFragment"
+        tools:layout="@layout/fragment_tasbih"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbih.TasbihFragment"
-        android:label="TasbihFragment" />
+        android:label="TasbihFragment" >
+        <action
+            android:id="@+id/action_tasbihFragment_to_addOwnTasbihFragment"
+            app:destination="@id/addOwnTasbihFragment" />
+    </fragment>
     <fragment
         android:id="@+id/qibalDirectionFragment"
         android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.qibaldirection.QibalDirectionFragment"
@@ -185,4 +190,9 @@
             android:id="@+id/action_quranSurahDetailFragment_to_quranFragment"
             app:destination="@id/quranFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addOwnTasbihFragment"
+        tools:layout="@layout/fragment_add_own_tasbih"
+        android:name="com.qibla.qiblacompass.prayertime.finddirection.presentation.views.addOwnTasbih.AddOwnTasbihFragment"
+        android:label="AddOwnTasbihFragment" />
 </navigation>
