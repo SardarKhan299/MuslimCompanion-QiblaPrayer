@@ -302,4 +302,7 @@
     <string name="screen_brightness">Screen Brightness</string>
     <string name="name">Name%1$s </string>
     <string name="add_own_tasbih">Add Own Tasbih</string>
+    <string name="image_from_gallery">Select image from your image gallery</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="tasbih_name">Enter your own tasbih</string>
 </resources>

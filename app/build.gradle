@@ -164,5 +164,17 @@ dependencies {
 
     // Gif Image View.
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
+    // CameraX dependencies
+    implementation "androidx.camera:camera-core:1.0.0"
+    implementation "androidx.camera:camera-camera2:1.0.0"
+
+    // Image cropper library
+  implementation "com.theartofdev.edmodo:android-image-cropper:2.8.0"
+    implementation 'com.vanniktech:android-image-cropper:4.5.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+
 
 }
+
