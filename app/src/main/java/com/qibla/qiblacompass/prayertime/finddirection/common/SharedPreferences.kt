@@ -59,6 +59,8 @@ class SharedPreferences {
         private const val PRAYER_PREF_KEY = "prayerName"
         private const val KEY_SELECTED_PRAYER ="selected_prayer_name"
         private const val KEY_SELECTED_PRE_ALERT_OPTION_PREFIX ="selectedReminder"
+        private const val KEY_TASBIH_URI="image_uri"
+        private const val KEY_TASBIH_NAME="tasbih_name"
         var mSharedPreferences: SharedPreferences? = null
         private fun initShardPreference(context: Context): SharedPreferences? {
             if (mSharedPreferences == null) {
@@ -612,5 +614,52 @@ class SharedPreferences {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getString(KEY_SELECTED_PRE_ALERT_OPTION_PREFIX + prayerName, null)
         }
+
+//        fun saveDataToSharedPreferences(context: Context,imageUri: Uri, tasbihName: String) {
+////            val sharedPreferences = mContext.getSharedPreferences("tasbih_data", Context.MODE_PRIVATE)
+////            val editor = sharedPreferences.edit()
+//            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+//            val editor = msharedPreferences!!.edit()
+//
+//            editor.putString(KEY_TASBIH_URI, imageUri.toString())
+//            editor.putString(KEY_TASBIH_NAME, tasbihName)
+//            editor.apply()
+//        }
+
+        fun saveDataTasbihImageUri(context: Context, imageUri: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            val editor = msharedPreferences!!.edit()
+            editor.putString(KEY_TASBIH_URI, imageUri)
+            editor.apply()
+        }
+        fun saveDataTasbihName(context: Context, tasbihName: String) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            val editor = msharedPreferences!!.edit()
+            editor.putString(KEY_TASBIH_NAME, tasbihName)
+            editor.apply()
+        }
+
+        fun getImageUri(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences?.getString(KEY_TASBIH_URI, null)
+        }
+
+        fun getTasbihName(context: Context): String? {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            return msharedPreferences?.getString(KEY_TASBIH_NAME, null)
+        }
+
+        fun clearTasbihImageUriAndTasbihName(context: Context) {
+            val msharedPreferences: SharedPreferences? = initShardPreference(context)
+            val editor = msharedPreferences!!.edit()
+            editor.remove(KEY_TASBIH_URI)
+            editor.remove(KEY_TASBIH_NAME)
+            editor.apply()
+        }
+        // Method to clear SharedPreferences:
+
     }
 }
+
+
+

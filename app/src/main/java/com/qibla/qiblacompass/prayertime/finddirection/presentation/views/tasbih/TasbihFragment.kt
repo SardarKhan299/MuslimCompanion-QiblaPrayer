@@ -1,11 +1,14 @@
 package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbih
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -40,12 +43,27 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
         recyclerView = binding.layoutTasbihFragment.findViewById(R.id.recycler_view_zhikr)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.tvTasbihDate.text = getCurrentDateFormatted()
-
+        // Retrieve stored image URI and Tasbih name from SharedPreferences
+        val imageUri = SharedPreferences.getImageUri(requireContext())
+        val tasbihName = SharedPreferences.getTasbihName(requireContext())
         val data = ArrayList<TasbihZhikrData>()
+
+        // Add the retrieved image URI and Tasbih name to the data list
         data.add(TasbihZhikrData(SUBHAN_ALLAH, R.drawable.ic_subhan_allah))
         data.add(TasbihZhikrData(ALHAMDULILLAH, R.drawable.allhamdulillah))
         data.add(TasbihZhikrData(LA_ILAHA_ILLA_ALLAH, R.drawable.laillaha))
         data.add(TasbihZhikrData(ALLAHU_AKBAR, R.drawable.allahoakbar))
+        // Load the image from URI and convert it to a Drawable
+        imageUri?.let { uri ->
+            val uri1: Uri = Uri.parse(uri)
+            val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri1)
+            val drawable = BitmapDrawable(resources, bitmap)
+
+            // Add the retrieved image Drawable and Tasbih name to the data list
+            tasbihName?.let { name ->
+                data.add(TasbihZhikrData(tvZhikr = name, imgZhikrDrawable = drawable))
+            }
+        }
 
         val adapter = TasbihZhikrAdapter(data) { selectedImageName ->
             SharedPreferences.saveImageValue(requireContext(),selectedImageName)
@@ -63,5 +81,8 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
         }
     }
 
-
+    // Function to convert Bitmap to Drawable
+    fun bitmapToDrawable(bitmap: Bitmap): Drawable {
+        return BitmapDrawable(resources, bitmap)
+    }
 }

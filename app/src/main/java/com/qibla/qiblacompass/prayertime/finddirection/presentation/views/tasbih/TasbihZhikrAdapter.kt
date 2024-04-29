@@ -43,7 +43,11 @@ class TasbihZhikrAdapter(
         val itemLayout: ConstraintLayout = itemView.findViewById(R.id.item_view_tasbih)
         val btnStart: Button = itemView.findViewById(R.id.btn_start)
         fun bind(item: TasbihZhikrData) {
-            itemView.findViewById<ImageView>(R.id.img_zhikr).setImageResource(item.imgZhikr)
+            if (item.imgZhikrResId != null) {
+                itemView.findViewById<ImageView>(R.id.img_zhikr).setImageResource(item.imgZhikrResId)
+            } else if (item.imgZhikrDrawable != null) {
+                itemView.findViewById<ImageView>(R.id.img_zhikr).setImageDrawable(item.imgZhikrDrawable)
+            }
             itemView.findViewById<TextView>(R.id.tv_zhikr).text = item.tvZhikr
         }
     }
