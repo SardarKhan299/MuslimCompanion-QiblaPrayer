@@ -245,7 +245,13 @@ class TasbihCounterFragment :
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
                 Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted:  "+p0?.targetPosition)
                     // Calculate positions of images based on progress
-
+                val startX = binding.guidelineLeftTasbihCounter.x
+                val startY = imgFirst.y + imageView2.height / 2
+                val endX = binding.guidelineRightTasbihCounter.x
+                val endY = imageView2.y + imageView2.height / 2
+                // Update the arc view's path
+                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted: $startX - $startY : $endX - $endY")
+                arcView.updatePath(startX, startY, endX, endY)
             }
             override fun onTransitionChange(
                 motionLayout: MotionLayout?,
@@ -334,18 +340,11 @@ class TasbihCounterFragment :
         val height = size.y
         Log.d(TasbihCounterFragment::class.simpleName, "onResume: $width - $height")
 
-        val startX = binding.guidelineLeftTasbihCounter.x
-        val startY = imgFirst.y + imageView2.height / 2
-        val endX = binding.guidelineRightTasbihCounter.x
-        val endY = imageView2.y + imageView2.height / 2
-        // Update the arc view's path
-        Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted: $startX - $startY : $endX - $endY")
-        arcView.updatePath(startX, startY, endX, endY)
-//        val startX = width/3
-//        val startY = height/16
-//        val endX = width + (width/4.5)
-//        val endY = height - (height/8)
-//        //arcView.updatePath(startX.toFloat(), startY.toFloat(), endX.toFloat(), endY.toFloat())
+        val startX = 0
+        val startY = height/15
+        val endX = width + width
+        val endY = height/15
+        arcView.updatePath(startX.toFloat(), startY.toFloat(), endX.toFloat(), endY.toFloat())
     }
 
     override fun onDestroy() {
