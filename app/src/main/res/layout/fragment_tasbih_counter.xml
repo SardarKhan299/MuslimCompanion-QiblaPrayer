@@ -112,8 +112,9 @@
             layout="@layout/layout_tasbih_animation"
             android:layout_width="0dp"
             android:layout_height="@dimen/_250sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_tasbih" />
 

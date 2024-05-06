@@ -32,22 +32,24 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentTasbihCounterBinding
-import kotlin.math.log
 
 
 class TasbihCounterFragment :
     BaseFragment<FragmentTasbihCounterBinding>(R.layout.fragment_tasbih_counter) {
     private lateinit var motionLayout: MotionLayout
-    private lateinit var imageView1: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var arcView: ArcView
     private lateinit var imgFirst: ImageView
+    private lateinit var imgZero: ImageView
     private lateinit var imgSecond: ImageView
     private lateinit var imgAnimated: ImageView
     private lateinit var imgFirstBottom: ImageView
     private lateinit var counterTextView: TextView
     private var counter = 0
     private var maxCounter = 100
+    var x1 = 0.0f
+    var x2 = 0.0f
+    var MIN_DISTANCE = 100
     lateinit var adapter: TasbihCounterAdapter
     lateinit var recyclerView: RecyclerView
     private lateinit var imageView: ImageView
@@ -103,9 +105,9 @@ class TasbihCounterFragment :
 
         val includelayout = binding.include
         motionLayout = includelayout.motionLayout
-        imageView1 = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_three)
         imageView2 = binding.layoutTasbihCounterFragment.findViewById(R.id.img_bottom_count_counter)
         arcView = binding.layoutTasbihCounterFragment.findViewById(R.id.arcView)
+        imgZero = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_zero)
         imgFirst = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_one)
         imgSecond = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_two)
         imgAnimated = binding.layoutTasbihCounterFragment.findViewById(R.id.img_animated_move)
@@ -145,10 +147,9 @@ class TasbihCounterFragment :
             Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: ImageSelected")
             // Handle the click event here to set the selected image to another ImageView
             // For example, if you have an ImageView called 'selectedImageView'
-            imageView1.setImageResource(selectedImage)
+            imgZero.setImageResource(selectedImage)
             imgFirst.setImageResource(selectedImage)
             imgSecond.setImageResource(selectedImage)
-            imgFirst.setImageResource(selectedImage)
             imgAnimated.setImageResource(selectedImage)
             imgFirstBottom.setImageResource(selectedImage)
             imageView2.setImageResource(selectedImage)
@@ -176,8 +177,11 @@ class TasbihCounterFragment :
 
 // Set onTouchListener to handle user interactions
         view1.setOnTouchListener { view, motionEvent ->
+
+
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
                 Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: User Clicked")
+                x1 = motionEvent.x
                 // Retrieve the stored entered value from SharedPreferences
                 val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
 
@@ -212,23 +216,36 @@ class TasbihCounterFragment :
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+            }else if(motionEvent.action == MotionEvent.ACTION_UP){
+                x2 = motionEvent.x
+                val deltaX: Float = x2 - x1
+                Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: "+deltaX)
+                if (Math.abs(deltaX) > MIN_DISTANCE) {
+                    // Left to Right swipe action
+                    if (x2 > x1) {
+                        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Left to Right swipe [Next]")
+                        motionLayout.setTransition(R.id.transition)
+                        motionLayout.transitionToEnd()
+                    } else {
+                        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Right to Left swipe [Previous]")
+                        motionLayout.setTransition(R.id.transition1)
+                        motionLayout.transitionToEnd()
+
+                    }
+                } else {
+                    // consider as something else - a screen tap for example
+                }
+
             }
             // Return false to indicate that the listener has not consumed the event
-            false
+            true
         }
 
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted: ")
-                    Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted: Clicked...")
+                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted:  "+p0?.targetPosition)
                     // Calculate positions of images based on progress
-                    val startX = imageView1.x + imageView1.width / 2
-                    val startY = imageView1.y + imageView1.height / 2
-                    val endX = imageView2.x + imageView2.width / 2
-                    val endY = imageView2.y
-                    // Update the arc view's path
-                Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: $startX - $startY : $endX - $endY")
-                    arcView.updatePath(startX, startY, endX, endY)
+
             }
             override fun onTransitionChange(
                 motionLayout: MotionLayout?,
@@ -250,10 +267,12 @@ class TasbihCounterFragment :
     }
 
     private fun stopMotionLayout() {
+        Log.d(TasbihCounterFragment::class.simpleName, "stopMotionLayout: stop motion layout")
         motionLayout.isInteractionEnabled = false
     }
 
     private fun startMotionLayout() {
+        Log.d(TasbihCounterFragment::class.simpleName, "startMotionLayout: start motion layout")
         motionLayout.isInteractionEnabled = true
     }
 
@@ -314,11 +333,19 @@ class TasbihCounterFragment :
         val width = size.x
         val height = size.y
         Log.d(TasbihCounterFragment::class.simpleName, "onResume: $width - $height")
-        val startX = width/3
-        val startY = height/16
-        val endX = width + (width/4.5)
-        val endY = height - (height/8)
-        arcView.updatePath(startX.toFloat(), startY.toFloat(), endX.toFloat(), endY.toFloat())
+
+        val startX = binding.guidelineLeftTasbihCounter.x
+        val startY = imgFirst.y + imageView2.height / 2
+        val endX = binding.guidelineRightTasbihCounter.x
+        val endY = imageView2.y + imageView2.height / 2
+        // Update the arc view's path
+        Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted: $startX - $startY : $endX - $endY")
+        arcView.updatePath(startX, startY, endX, endY)
+//        val startX = width/3
+//        val startY = height/16
+//        val endX = width + (width/4.5)
+//        val endY = height - (height/8)
+//        //arcView.updatePath(startX.toFloat(), startY.toFloat(), endX.toFloat(), endY.toFloat())
     }
 
     override fun onDestroy() {
