@@ -47,7 +47,7 @@
         android:id="@+id/transition1"
         motion:constraintSetEnd="@+id/end1"
         motion:constraintSetStart="@+id/start1"
-        motion:duration="350"
+        motion:duration="300"
         motion:autoTransition="jumpToStart"
         >
         <OnSwipe

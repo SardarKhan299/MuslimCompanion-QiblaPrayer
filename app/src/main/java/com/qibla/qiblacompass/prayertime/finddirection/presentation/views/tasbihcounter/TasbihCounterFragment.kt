@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Display
+import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
@@ -16,6 +17,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,7 +51,7 @@ class TasbihCounterFragment :
     private var maxCounter = 100
     var x1 = 0.0f
     var x2 = 0.0f
-    var MIN_DISTANCE = 100
+    var MIN_DISTANCE = 200
     lateinit var adapter: TasbihCounterAdapter
     lateinit var recyclerView: RecyclerView
     private lateinit var imageView: ImageView
@@ -175,65 +177,34 @@ class TasbihCounterFragment :
 // Update the counter TextView with the retrieved entered value
         binding.tvCount.text = enteredValue.toString()
 
-// Set onTouchListener to handle user interactions
         view1.setOnTouchListener { view, motionEvent ->
-
-
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
-                Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: User Clicked")
                 x1 = motionEvent.x
-                // Retrieve the stored entered value from SharedPreferences
-                val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
-
-                // Check if the current counter is less than the entered value
-                if (counter < enteredValue) {
-                    startMotionLayout()
-                    // Update the counter
-                    updateIncrementalCounter()
-                    // Play the MP3 sound
-                    playSound()
-                    // Check if the counter has reached the entered value
-                    if (counter == enteredValue) {
-                        // Stop the MotionLayout animation
-                        stopMotionLayout()
-
-                        // Show a toast message indicating maximum count reached
-                        Toast.makeText(
-                            mContext,
-                            "You've reached the maximum count.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                } else {
-                    // If the counter is equal or greater than the entered value
-                    // Stop the MotionLayout animation
-                    stopMotionLayout()
-
-                    // Show a toast message indicating maximum count reached
-                    Toast.makeText(
-                        mContext,
-                        "You've reached the maximum count.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Action Down..User Clicked " +
+                        "View X is "+view1.width +" Touch x1 is "+x1)
             }else if(motionEvent.action == MotionEvent.ACTION_UP){
                 x2 = motionEvent.x
                 val deltaX: Float = x2 - x1
-                Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: "+deltaX)
+                Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Action Up "+Math.abs(deltaX))
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     // Left to Right swipe action
                     if (x2 > x1) {
                         Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Left to Right swipe [Next]")
-                        motionLayout.setTransition(R.id.transition)
-                        motionLayout.transitionToEnd()
+                        checkValueAndGoForward()
                     } else {
                         Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Right to Left swipe [Previous]")
-                        motionLayout.setTransition(R.id.transition1)
-                        motionLayout.transitionToEnd()
-
+                        checkValueAndGoBackward()
                     }
                 } else {
                     // consider as something else - a screen tap for example
+                    Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: its a click")
+                    if(x1>= view1.width/2){
+                        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Go Forward")
+                        checkValueAndGoForward()
+                    }else{
+                        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Go Backward")
+                        checkValueAndGoBackward()
+                    }
                 }
 
             }
@@ -243,14 +214,14 @@ class TasbihCounterFragment :
 
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted:  "+p0?.targetPosition)
+                //Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted:  "+p0?.targetPosition)
                     // Calculate positions of images based on progress
                 val startX = binding.guidelineLeftTasbihCounter.x
                 val startY = imgFirst.y + imageView2.height / 2
                 val endX = binding.guidelineRightTasbihCounter.x
                 val endY = imageView2.y + imageView2.height / 2
                 // Update the arc view's path
-                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted: $startX - $startY : $endX - $endY")
+                //Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted: $startX - $startY : $endX - $endY")
                 arcView.updatePath(startX, startY, endX, endY)
             }
             override fun onTransitionChange(
@@ -259,27 +230,114 @@ class TasbihCounterFragment :
                 endId: Int,
                 progress: Float
             ) {
-                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionChange: Transition ")
+                //Log.d(TasbihCounterFragment::class.simpleName, "onTransitionChange: Transition ")
             }
 
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionCompleted: ")
+                //Log.d(TasbihCounterFragment::class.simpleName, "onTransitionCompleted: ")
             }
 
             override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
-                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionTrigger: ")
+                //Log.d(TasbihCounterFragment::class.simpleName, "onTransitionTrigger: ")
             }
         })
     }
 
+    private fun checkValueAndGoBackward() {
+        // Retrieve the stored entered value from SharedPreferences
+        val enteredValue =
+            SharedPreferences.retrieveEnteredValue(requireContext(), selectedImageName)
+
+        // Check if the current counter is less than the entered value
+        if (counter > 0) {
+            startMotionLayout()
+
+            // Apply Backward Animation...//
+            motionLayout.setTransition(R.id.transition1)
+            motionLayout.transitionToEnd()
+
+            // Update the counter
+            updateDecrementCounter()
+            // Play the MP3 sound
+            playSound()
+            // Check if the counter has reached the entered value
+            if (counter == enteredValue) {
+                // Stop the MotionLayout animation
+                stopMotionLayout()
+
+                // Show a toast message indicating maximum count reached
+                Toast.makeText(
+                    mContext,
+                    "You've reached the minimum count.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        } else {
+            // If the counter is equal or greater than the entered value
+            // Stop the MotionLayout animation
+            stopMotionLayout()
+
+            // Show a toast message indicating maximum count reached
+            Toast.makeText(
+                mContext,
+                "You've reached the minimum count.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun checkValueAndGoForward() {
+        // Retrieve the stored entered value from SharedPreferences
+        val enteredValue =
+            SharedPreferences.retrieveEnteredValue(requireContext(), selectedImageName)
+
+        // Check if the current counter is less than the entered value
+        if (counter < enteredValue) {
+
+            startMotionLayout()
+
+            // Apply Forward Animation...//
+            motionLayout.setTransition(R.id.transition)
+            motionLayout.transitionToEnd()
+
+            // Update the counter
+            updateIncrementalCounter()
+            // Play the MP3 sound
+            playSound()
+            // Check if the counter has reached the entered value
+            if (counter == enteredValue) {
+                // Stop the MotionLayout animation
+                stopMotionLayout()
+
+                // Show a toast message indicating maximum count reached
+                Toast.makeText(
+                    mContext,
+                    "You've reached the maximum count.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        } else {
+            // If the counter is equal or greater than the entered value
+            // Stop the MotionLayout animation
+            stopMotionLayout()
+
+            // Show a toast message indicating maximum count reached
+            Toast.makeText(
+                mContext,
+                "You've reached the maximum count.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
     private fun stopMotionLayout() {
         Log.d(TasbihCounterFragment::class.simpleName, "stopMotionLayout: stop motion layout")
-        motionLayout.isInteractionEnabled = false
+        //motionLayout.isInteractionEnabled = false
     }
 
     private fun startMotionLayout() {
         Log.d(TasbihCounterFragment::class.simpleName, "startMotionLayout: start motion layout")
-        motionLayout.isInteractionEnabled = true
+        //motionLayout.isInteractionEnabled = true
     }
 
     private fun updateCount(value: Int) {
@@ -293,7 +351,16 @@ class TasbihCounterFragment :
         // Save the counter value to SharedPreferences
         SharedPreferences.saveIncrementalCounter(mContext, counter,selectedImageName)
         // Notify the adapter that the data set has changed
-        adapter.notifyDataSetChanged()
+        adapter.notifyItemRangeChanged(0,imageResources.size)
+    }
+
+    private fun updateDecrementCounter() {
+        counter--
+        counterTextView.text = counter.toString()
+        // Save the counter value to SharedPreferences
+        SharedPreferences.saveIncrementalCounter(mContext, counter,selectedImageName)
+        // Notify the adapter that the data set has changed
+        adapter.notifyItemRangeChanged(0,imageResources.size)
     }
 
     private fun showBottomSheetSetCounter() {
@@ -341,9 +408,9 @@ class TasbihCounterFragment :
         Log.d(TasbihCounterFragment::class.simpleName, "onResume: $width - $height")
 
         val startX = 0
-        val startY = height/15
+        val startY = height/26
         val endX = width + width
-        val endY = height/15
+        val endY = height/26
         arcView.updatePath(startX.toFloat(), startY.toFloat(), endX.toFloat(), endY.toFloat())
     }
 
@@ -362,13 +429,13 @@ class TasbihCounterFragment :
 
     private fun playSound() {
         // Initialize MediaPlayer with the MP3 file
-        val mediaPlayer = MediaPlayer.create(requireContext(), R.raw.tasbih_sound)
-        mediaPlayer?.start()
-
-        // Release MediaPlayer when sound finishes playing
-        mediaPlayer?.setOnCompletionListener {
-            mediaPlayer.release()
-        }
+//        val mediaPlayer = MediaPlayer.create(requireContext(), R.raw.tasbih_sound)
+//        mediaPlayer?.start()
+//
+//        // Release MediaPlayer when sound finishes playing
+//        mediaPlayer?.setOnCompletionListener {
+//            mediaPlayer.release()
+//        }
     }
 
     object TasbihZhikrUtil {
