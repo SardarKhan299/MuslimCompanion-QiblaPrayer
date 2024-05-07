@@ -106,6 +106,8 @@ dependencies {
 
     // Dagger hilt
     implementation 'com.google.dagger:hilt-android:2.44'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.3.0'
+    implementation 'com.google.firebase:firebase-database:21.0.0'
     kapt 'com.google.dagger:hilt-compiler:2.44'
 
     // Sdp library
@@ -142,6 +144,7 @@ dependencies {
     //Firebase DB
     implementation 'com.google.firebase:firebase-database-ktx:20.3.0'
     implementation 'com.google.firebase:firebase-auth:20.0.0'
+    implementation 'com.firebaseui:firebase-ui-database:8.0.2'
 
     // Add the dependencies for the Remote Config and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
@@ -151,6 +154,9 @@ dependencies {
     implementation("com.google.firebase:firebase-config-ktx")
 
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-appcheck:17.1.2'
+    implementation 'com.google.firebase:firebase-appcheck-safetynet:16.1.2'
+
     implementation("com.google.android.gms:play-services-auth:20.7.0")
 
     // Room

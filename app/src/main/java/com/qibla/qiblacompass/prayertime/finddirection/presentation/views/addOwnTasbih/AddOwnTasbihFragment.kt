@@ -27,6 +27,18 @@ import com.bumptech.glide.request.transition.Transition
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.getValue
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
@@ -35,6 +47,8 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.common.invisible
 import com.qibla.qiblacompass.prayertime.finddirection.common.visible
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentAddOwnTasbihBinding
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbih.ZhikrTasbih
+import java.util.UUID
 
 
 class AddOwnTasbihFragment :
@@ -47,6 +61,9 @@ class AddOwnTasbihFragment :
 
     lateinit var edtTasbihName: EditText
 
+    // Firebase Auth instance
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +93,45 @@ class AddOwnTasbihFragment :
                 hideKeyboard(mContext, edtTasbihName)
             }
         }
+        databaseReference = FirebaseDatabase.getInstance().getReference("ZhikrTasbih")
+        //   databaseReference = FirebaseDatabase.getInstance().reference.child("ZhikrTasbih")
+//        val database = Firebase.database
+//        val myRef = database.getReference("message")
+//
+//        myRef.setValue("Hello, World!")
+//        // Read from the database
+//        myRef.addValueEventListener(object: ValueEventListener {
+//
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                val value = snapshot.getValue<String>()
+//                Log.d(AddOwnTasbihFragment::class.java.simpleName, "Value is: $value")
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                Log.w(AddOwnTasbihFragment::class.java.simpleName, "Failed to read value.", error.toException())
+//            }
+//
+//        })
+        // Initialize Firebase Auth
+//        auth = FirebaseAuth.getInstance()
+//
+//        // Initialize Firebase Database
+//        databaseReference = FirebaseDatabase.getInstance().reference
+//
+//        // Check if user is signed in
+//        val currentUser = auth.currentUser
+//        if (currentUser != null) {
+//            // User is signed in, you can perform database operations
+//            writeToDatabase()
+//            readFromDatabase()
+//        } else {
+//            // No user is signed in, prompt the user to sign in
+//            // You can implement your sign-in flow here
+//            // For example, start a sign-in activity
+//        }
+
         binding.viewCaptureImageCamera.setOnClickListener {
 
             invisibleGroup()
@@ -95,15 +151,22 @@ class AddOwnTasbihFragment :
         }
         binding.imgTickTasbihIcon.setOnClickListener {
             if (validateTasbih()) {
-                val data = saveTasbihImageUriAndNameToSharedPreferences()
-                Log.d(AddOwnTasbihFragment::class.simpleName, "saveTasbihImageUriAndNameToSharedPreferences $data")
-                findNavController().navigate(R.id.tasbihFragment)
+                //   val data = saveTasbihImageUriAndNameToSharedPreferences()
+                //   Log.d(AddOwnTasbihFragment::class.simpleName, "saveTasbihImageUriAndNameToSharedPreferences $data")
+                uri?.let {
+                    saveImageToFirebaseStorage(it)
+                    Log.d(AddOwnTasbihFragment::class.java.simpleName, "onViewCreated:$it ")
+                    //  findNavController().navigate(R.id.tasbihFragment)
+                }
             }
         }
     }
 
     private fun invisibleGroup() {
-        Handler(Looper.getMainLooper()).postDelayed({ binding.groupCaptureUploadImage.invisible() }, 10000)
+        Handler(Looper.getMainLooper()).postDelayed(
+            { binding.groupCaptureUploadImage.invisible() },
+            10000
+        )
     }
 
     private fun captureImageFromCamera() {
@@ -221,12 +284,251 @@ class AddOwnTasbihFragment :
         imm.hideSoftInputFromWindow(editText.windowToken, 0)
     }
 
-    private fun saveTasbihImageUriAndNameToSharedPreferences() {
-        val tasbihName = edtTasbihName.text.toString().trim()
-        val uriString = uri?.toString() ?: ""
+    private fun saveImageToFirebaseStorage(imageUri: Uri) {
+        val storageReference: StorageReference = FirebaseStorage.getInstance().reference
+        val imageRef = storageReference.child("images/${UUID.randomUUID()}")
 
-        SharedPreferences.saveDataTasbihName(mContext, tasbihName)
-        SharedPreferences.saveDataTasbihImageUri(mContext, uriString)
+        val uploadTask: UploadTask = imageRef.putFile(imageUri)
+
+        uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            imageRef.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val downloadUri = task.result
+                downloadUri?.let {
+                    // Get current user ID
+                    //  val userId = FirebaseAuth.getInstance().currentUser?.uid
+                    //  userId?.let {
+                    // Save Tasbih data with image URL and user ID
+                    saveTasbihDataToFirebase(tasbihName , imageUrl = it.toString())
+                    // }
+                }
+            } else {
+                // Handle errors
+                Log.e(
+                    AddOwnTasbihFragment::class.java.simpleName,
+                    "Failed to upload image: ${task.exception?.message}"
+                )
+            }
+        }
+    }
+
+
+    //    private fun saveTasbihDataToFirebase(zhikrName: String, zhikrImageUrl: String) {
+//
+//      val zhikrTasbih = ZhikrTasbih(zhikrName,zhikrImageUrl)
+//          databaseReference.child(zhikrName).setValue(zhikrTasbih)
+//
+//                .addOnSuccessListener {
+//                    binding.edtTasbihName.text!!.clear()
+//                    Log.d(AddOwnTasbihFragment::class.java.simpleName, "Zikr data saved successfully")
+//               findNavController().navigate(R.id.tasbihFragment)
+//                }
+//                .addOnFailureListener { exception ->
+//                    exception.printStackTrace()
+//                    Log.e(AddOwnTasbihFragment::class.java.simpleName, "Failed to save Zikr data: ${exception.message}")
+//                }
+//    }
+    private fun saveTasbihDataToFirebase(zhikrName :String,imageUrl: String) {
+
+        val zhikrTasbih = ZhikrTasbih(zhikrName,imageUrl)
+
+        val key = databaseReference.push().key
+        if (key != null) {
+            databaseReference.child(key).setValue(zhikrTasbih)
+                .addOnSuccessListener {
+
+                    Log.d(
+                        AddOwnTasbihFragment::class.java.simpleName,
+                        "Tasbih data saved successfully"
+                    )
+                    findNavController().navigate(R.id.tasbihFragment)
+                }
+                .addOnFailureListener { exception ->
+                    exception.printStackTrace()
+                    Log.e(
+                        AddOwnTasbihFragment::class.java.simpleName,
+                        "Failed to save Tasbih data: ${exception.message}"
+                    )
+                }
+        }
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    private fun saveTasbihDataToFirebase(imageUrl: String) {
+//        // Construct the database reference to the ZhikrTasbih table under the user's ID
+//
+//
+//        val tasbihName = edtTasbihName.text.toString()
+//        val imgUrl = imageUrl
+//     //   val zhikrTasbihUrl = ZhikrTasbih(tasbihName, imageUrl)
+//        val zhikrTasbih = hashMapOf(
+//            "zhikrName " to tasbihName,
+//            "zhikrImageUrl" to imgUrl
+//        )
+//
+//        val key = databaseReference.push().key
+//        if (key != null) {
+//            databaseReference.child(key).setValue(zhikrTasbih)
+//                .addOnSuccessListener {
+//
+//                    Log.d(
+//                        AddOwnTasbihFragment::class.java.simpleName,
+//                        "Tasbih data saved successfully"
+//                    )
+//                    findNavController().navigate(R.id.tasbihFragment)
+//                }
+//                .addOnFailureListener { exception ->
+//                    exception.printStackTrace()
+//                    Log.e(
+//                        AddOwnTasbihFragment::class.java.simpleName,
+//                        "Failed to save Tasbih data: ${exception.message}"
+//                    )
+//                }
+//        }
+
+
+
+//    private fun saveTasbihDataToFirebase(imageUrl: String) {
+//        val databaseReference = FirebaseDatabase.getInstance().getReference("ZhikrTasbih")
+//
+//        val tasbihName = edtTasbihName.text.toString()
+//        val zhikrTasbih = ZhikrTasbih(tasbihName, imageUrl)
+//
+//        val key = databaseReference.push().key
+//        if (key != null) {
+//           databaseReference.child(key).setValue(zhikrTasbih)
+//                .addOnSuccessListener {
+//                    Log.d(AddOwnTasbihFragment::class.java.simpleName, "Tasbih data saved successfully ${databaseReference.child(key).setValue(zhikrTasbih)}")
+//                    findNavController().navigate(R.id.tasbihFragment)
+//                }
+//                .addOnFailureListener { exception ->
+//                    exception.message
+//                    Log.e(AddOwnTasbihFragment::class.java.simpleName, "Failed to save Tasbih data: ${exception.message}")
+//                }
+//        }
+//    }
+
+
+//    private fun saveTasbihImageUriAndNameToSharedPreferences() {
+//        val tasbihName = edtTasbihName.text.toString().trim()
+//        val uriString = uri?.toString() ?: ""
+//
+//        SharedPreferences.saveDataTasbihName(mContext, tasbihName)
+//        SharedPreferences.saveDataTasbihImageUri(mContext, uriString)
+//    }
+
+
+//    private fun saveTasbihImageUriAndNameToFirebaseStorage() {
+//        val tasbihName = edtTasbihName.text.toString().trim()
+//
+//        // Check if the image URI is not null
+//        uri?.let { imageUri ->
+//            // Generate a unique file name for the image
+//            val imageName = UUID.randomUUID().toString()
+//            // Reference to the Firebase Storage location
+//            val storageRef = FirebaseStorage.getInstance().reference.child("tasbih_images/$imageName")
+//
+//            // Upload the image to Firebase Storage
+//            storageRef.putFile(imageUri)
+//                .addOnSuccessListener { taskSnapshot ->
+//                    // Image uploaded successfully, get the download URL
+//                    storageRef.downloadUrl.addOnSuccessListener { imageUrl ->
+//                        // Save the image URL and Tasbih name to the Realtime Database
+//                        saveTasbihDataToFirebaseDatabase(tasbihName, imageUrl.toString())
+//                    }.addOnFailureListener { exception ->
+//                        // Handle failure to get image URL
+//                        Log.e(AddOwnTasbihFragment::class.java.simpleName, "Failed to get image URL: ${exception.message}")
+//                    }
+//                }
+//                .addOnFailureListener { exception ->
+//                    // Handle failure to upload image
+//                    Log.e(AddOwnTasbihFragment::class.java.simpleName, "Failed to upload image: ${exception.message}")
+//                }
+//        }
+//    }
+//
+//    private fun saveTasbihDataToFirebaseDatabase(tasbihName: String, imageUrl: String) {
+//        // Get a reference to the "ZhikrTasbih" node in your Realtime Database
+//        val databaseReference = FirebaseDatabase.getInstance().getReference("ZhikrTasbih")
+//        // Generate a unique key for the new data entry
+//        val key = databaseReference.push().key
+//
+//        // Create a map to store the Tasbih data
+//        val tasbihData = HashMap<String, Any>()
+//        tasbihData["zhikrName"] = tasbihName
+//        tasbihData["zhikrImageUrl"] = imageUrl
+//
+//        // Set the data in the Realtime Database under the generated key
+//        if (key != null) {
+//            databaseReference.child(key).setValue(tasbihData)
+//                .addOnSuccessListener {
+//                    Log.d(AddOwnTasbihFragment::class.java.simpleName, "Tasbih data saved successfully")
+//                    // Navigate to the desired destination after saving data
+//                    findNavController().navigate(R.id.tasbihFragment)
+//                }
+//                .addOnFailureListener { exception ->
+//                    // Handle failure to save data
+//                    Log.e(AddOwnTasbihFragment::class.java.simpleName, "Failed to save Tasbih data: ${exception.message}")
+//                }
+//        }
+//    }
+
 

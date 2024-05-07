@@ -38,15 +38,12 @@ import java.util.regex.Pattern
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
     var mobileNumber = ""
     var password = ""
-    private lateinit var firebaseAuth: FirebaseAuth
 
     private lateinit var oneTapClient: SignInClient
     private lateinit var signInRequest: BeginSignInRequest
     companion object {
         private const val RC_SIGN_IN = 9001
     }
-
-    lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var auth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference

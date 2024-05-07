@@ -9,11 +9,20 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.ALHAMDULILLAH
@@ -28,8 +37,10 @@ import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentTasbi
 
 
 class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tasbih) {
-    lateinit var sharedPreferences: SharedPreferences
     lateinit var recyclerView: RecyclerView
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var adapter: TasbihZhikrAdapter
+    private lateinit var zhikrTasbihArrayList: ArrayList<ZhikrTasbih>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)?.hideActionBar()
@@ -40,49 +51,48 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
         binding.apply {
             tasbihFragment = this@TasbihFragment
         }
+
+        binding.tvTasbihDate.text = getCurrentDateFormatted()
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("ZhikrTasbih")
+        zhikrTasbihArrayList = arrayListOf()
+
+
+        adapter = TasbihZhikrAdapter(requireContext(),zhikrTasbihArrayList)
         recyclerView = binding.layoutTasbihFragment.findViewById(R.id.recycler_view_zhikr)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.tvTasbihDate.text = getCurrentDateFormatted()
-        // Retrieve stored image URI and Tasbih name from SharedPreferences
-        val imageUri = SharedPreferences.getImageUri(requireContext())
-        val tasbihName = SharedPreferences.getTasbihName(requireContext())
-        val data = ArrayList<TasbihZhikrData>()
 
-        // Add the retrieved image URI and Tasbih name to the data list
-        data.add(TasbihZhikrData(SUBHAN_ALLAH, R.drawable.ic_subhan_allah))
-        data.add(TasbihZhikrData(ALHAMDULILLAH, R.drawable.allhamdulillah))
-        data.add(TasbihZhikrData(LA_ILAHA_ILLA_ALLAH, R.drawable.laillaha))
-        data.add(TasbihZhikrData(ALLAHU_AKBAR, R.drawable.allahoakbar))
-        // Load the image from URI and convert it to a Drawable
-        imageUri?.let { uri ->
-            val uri1: Uri = Uri.parse(uri)
-            val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri1)
-            val drawable = BitmapDrawable(resources, bitmap)
 
-            // Add the retrieved image Drawable and Tasbih name to the data list
-            tasbihName?.let { name ->
-                data.add(TasbihZhikrData(tvZhikr = name, imgZhikrDrawable = drawable))
-            }
-        }
-
-        val adapter = TasbihZhikrAdapter(data) { selectedImageName ->
-            SharedPreferences.saveImageValue(requireContext(),selectedImageName)
-            Log.d("TasbihFragment", "onViewCreated: $selectedImageName")
-            Navigation.findNavController(requireView()).navigate(R.id.tasbihCounterFragment)
-        }
-        recyclerView.adapter = adapter
+        fetchDataFromFirebase()
 
         binding.imgTasbihClose.setOnClickListener {
-            findNavController().closeCurrentScreen()
+            findNavController().navigate(R.id.boardFragment)
 
         }
         binding.imgAddNewTasbih.setOnClickListener {
             findNavController().navigate(R.id.addOwnTasbihFragment)
         }
     }
+    private fun fetchDataFromFirebase() {
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                zhikrTasbihArrayList.clear()
+                for (childSnapshot in snapshot.children) {
+                    val zhikrTasbih = childSnapshot.getValue(ZhikrTasbih::class.java)
+                    zhikrTasbih?.let {
+                        zhikrTasbihArrayList.add(it)
 
-    // Function to convert Bitmap to Drawable
-    fun bitmapToDrawable(bitmap: Bitmap): Drawable {
-        return BitmapDrawable(resources, bitmap)
+                    }
+                }
+                recyclerView.adapter = adapter
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+            }
+        })
     }
+
 }
+
+
