@@ -293,7 +293,6 @@ class TasbihCounterFragment :
 
         // Check if the current counter is less than the entered value
         if (counter < enteredValue) {
-
             startMotionLayout()
 
             // Apply Forward Animation...//
@@ -425,13 +424,13 @@ class TasbihCounterFragment :
 
     private fun playSound() {
         // Initialize MediaPlayer with the MP3 file
-//        val mediaPlayer = MediaPlayer.create(requireContext(), R.raw.tasbih_sound)
-//        mediaPlayer?.start()
-//
-//        // Release MediaPlayer when sound finishes playing
-//        mediaPlayer?.setOnCompletionListener {
-//            mediaPlayer.release()
-//        }
+        val mediaPlayer = MediaPlayer.create(requireContext(), R.raw.tasbih_sound)
+        mediaPlayer?.start()
+
+        // Release MediaPlayer when sound finishes playing
+        mediaPlayer?.setOnCompletionListener {
+            mediaPlayer.release()
+        }
     }
 
     object TasbihZhikrUtil {
