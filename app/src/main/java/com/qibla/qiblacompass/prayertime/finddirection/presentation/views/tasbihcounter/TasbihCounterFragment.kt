@@ -43,6 +43,7 @@ class TasbihCounterFragment :
     private lateinit var arcView: ArcView
     private lateinit var imgFirst: ImageView
     private lateinit var imgZero: ImageView
+    private lateinit var imgZeroBottom: ImageView
     private lateinit var imgSecond: ImageView
     private lateinit var imgAnimated: ImageView
     private lateinit var imgFirstBottom: ImageView
@@ -110,6 +111,7 @@ class TasbihCounterFragment :
         imageView2 = binding.layoutTasbihCounterFragment.findViewById(R.id.img_bottom_count_counter)
         arcView = binding.layoutTasbihCounterFragment.findViewById(R.id.arcView)
         imgZero = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_zero)
+        imgZeroBottom = binding.layoutTasbihCounterFragment.findViewById(R.id.img_bottom_counter_zero)
         imgFirst = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_one)
         imgSecond = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_two)
         imgAnimated = binding.layoutTasbihCounterFragment.findViewById(R.id.img_animated_move)
@@ -150,6 +152,7 @@ class TasbihCounterFragment :
             // Handle the click event here to set the selected image to another ImageView
             // For example, if you have an ImageView called 'selectedImageView'
             imgZero.setImageResource(selectedImage)
+            imgZeroBottom.setImageResource(selectedImage)
             imgFirst.setImageResource(selectedImage)
             imgSecond.setImageResource(selectedImage)
             imgAnimated.setImageResource(selectedImage)
