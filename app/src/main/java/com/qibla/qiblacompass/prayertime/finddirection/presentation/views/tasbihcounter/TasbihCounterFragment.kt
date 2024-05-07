@@ -350,8 +350,6 @@ class TasbihCounterFragment :
         counterTextView.text = counter.toString()
         // Save the counter value to SharedPreferences
         SharedPreferences.saveIncrementalCounter(mContext, counter,selectedImageName)
-        // Notify the adapter that the data set has changed
-        adapter.notifyItemRangeChanged(0,imageResources.size)
     }
 
     private fun updateDecrementCounter() {
@@ -359,8 +357,6 @@ class TasbihCounterFragment :
         counterTextView.text = counter.toString()
         // Save the counter value to SharedPreferences
         SharedPreferences.saveIncrementalCounter(mContext, counter,selectedImageName)
-        // Notify the adapter that the data set has changed
-        adapter.notifyItemRangeChanged(0,imageResources.size)
     }
 
     private fun showBottomSheetSetCounter() {
