@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.FirebaseApp
@@ -57,9 +58,8 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
         databaseReference = FirebaseDatabase.getInstance().getReference("ZhikrTasbih")
         zhikrTasbihArrayList = arrayListOf()
 
-
-        adapter = TasbihZhikrAdapter(requireContext(),zhikrTasbihArrayList)
         recyclerView = binding.layoutTasbihFragment.findViewById(R.id.recycler_view_zhikr)
+        adapter = TasbihZhikrAdapter(requireContext(), zhikrTasbihArrayList, recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 
@@ -73,6 +73,7 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
             findNavController().navigate(R.id.addOwnTasbihFragment)
         }
     }
+
     private fun fetchDataFromFirebase() {
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

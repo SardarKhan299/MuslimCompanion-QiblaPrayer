@@ -15,8 +15,10 @@ import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.webkit.MimeTypeMap
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -48,6 +50,8 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.invisible
 import com.qibla.qiblacompass.prayertime.finddirection.common.visible
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentAddOwnTasbihBinding
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbih.ZhikrTasbih
+import java.io.IOException
+import java.util.Locale
 import java.util.UUID
 
 
@@ -221,28 +225,48 @@ class AddOwnTasbihFragment :
         }
 
     private fun setBitmapGlide(uri: Uri) {
-        Glide.with(mContext)
-            .asBitmap()
-            .load(uri)
-            .placeholder(R.drawable.doc_avatar)
-            .error(R.drawable.doc_avatar)
-            .into(object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    imageView.setImageBitmap(resource)
-                    profileBitmap = resource
-                    Log.d(
-                        AddOwnTasbihFragment::class.simpleName,
-                        "onResourceReady: ${profileBitmap.width} - ${profileBitmap.height}"
-                    )
-                }
+        if (isImageFormatValid(uri) && isImageSizeValid(uri)) {
+            Glide.with(mContext)
+                .asBitmap()
+                .load(uri)
+                .placeholder(R.drawable.doc_avatar)
+                .error(R.drawable.doc_avatar)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        // Check image format
+                        imageView.setImageBitmap(resource)
+                        profileBitmap = resource
 
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    // this is called when imageView is cleared on lifecycle call or for
-                    // some other reason.
-                    // if you are referencing the bitmap somewhere else too other than this imageView
-                    // clear it here as you can no longer have the bitmap
-                }
-            })
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                        // this is called when imageView is cleared on lifecycle call or for
+                        // some other reason.
+                        // if you are referencing the bitmap somewhere else too other than this imageView
+                        // clear it here as you can no longer have the bitmap
+                    }
+                })
+        } else {
+            Toast.makeText(mContext, "Not able to upload image", Toast.LENGTH_LONG).show()
+        }
+
+    }
+
+    // Function to check if image format is valid (PNG or JPEG)
+    private fun isImageFormatValid(uri: Uri): Boolean {
+        val extension = MimeTypeMap.getFileExtensionFromUrl(uri.toString())
+        val mimeType = MimeTypeMap.getSingleton()
+            .getMimeTypeFromExtension(extension.toLowerCase(Locale.getDefault()))
+        return mimeType == "image/jpeg" || mimeType == "image/png" || mimeType == "image/jpg"
+    }
+
+    // Function to check if image size is valid (less than or equal to 5MB)
+    private fun isImageSizeValid(uri: Uri): Boolean {
+        val inputStream = mContext.contentResolver.openInputStream(uri)
+        return inputStream?.available() ?: 0 <= 5 * 1024 * 1024
     }
 
     private fun validateTasbih(): Boolean {
@@ -305,7 +329,7 @@ class AddOwnTasbihFragment :
                     //  val userId = FirebaseAuth.getInstance().currentUser?.uid
                     //  userId?.let {
                     // Save Tasbih data with image URL and user ID
-                    saveTasbihDataToFirebase(tasbihName , imageUrl = it.toString())
+                    saveTasbihDataToFirebase(tasbihName, imageUrl = it.toString())
                     // }
                 }
             } else {
@@ -318,25 +342,9 @@ class AddOwnTasbihFragment :
         }
     }
 
+    private fun saveTasbihDataToFirebase(zhikrName: String, imageUrl: String) {
 
-    //    private fun saveTasbihDataToFirebase(zhikrName: String, zhikrImageUrl: String) {
-//
-//      val zhikrTasbih = ZhikrTasbih(zhikrName,zhikrImageUrl)
-//          databaseReference.child(zhikrName).setValue(zhikrTasbih)
-//
-//                .addOnSuccessListener {
-//                    binding.edtTasbihName.text!!.clear()
-//                    Log.d(AddOwnTasbihFragment::class.java.simpleName, "Zikr data saved successfully")
-//               findNavController().navigate(R.id.tasbihFragment)
-//                }
-//                .addOnFailureListener { exception ->
-//                    exception.printStackTrace()
-//                    Log.e(AddOwnTasbihFragment::class.java.simpleName, "Failed to save Zikr data: ${exception.message}")
-//                }
-//    }
-    private fun saveTasbihDataToFirebase(zhikrName :String,imageUrl: String) {
-
-        val zhikrTasbih = ZhikrTasbih(zhikrName,imageUrl)
+        val zhikrTasbih = ZhikrTasbih(zhikrName, imageUrl)
 
         val key = databaseReference.push().key
         if (key != null) {
@@ -360,56 +368,6 @@ class AddOwnTasbihFragment :
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //    private fun saveTasbihDataToFirebase(imageUrl: String) {
@@ -443,7 +401,6 @@ class AddOwnTasbihFragment :
 //                    )
 //                }
 //        }
-
 
 
 //    private fun saveTasbihDataToFirebase(imageUrl: String) {
