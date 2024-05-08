@@ -203,6 +203,9 @@ class TasbihCounterFragment :
                         motionLayout.setTransition(R.id.transition)
                         // Update MotionLayout progress
                         motionLayout.progress = progress
+                    }else{
+                        // increment the Loop and set Current Counter to 0...
+                        counter = 0
                     }
 
                 } else {
@@ -242,22 +245,8 @@ class TasbihCounterFragment :
                             motionLayout.transitionToStart()
                         }
                     }else{
-                        if(toast!=null) {
-                            toast?.cancel()
-                            toast = Toast.makeText(
-                                mContext,
-                                "You've reached the maximum count.",
-                                Toast.LENGTH_SHORT
-                            )
-                            toast?.show()
-                        }else{
-                            toast = Toast.makeText(
-                                mContext,
-                                "You've reached the maximum count.",
-                                Toast.LENGTH_SHORT
-                            )
-                            toast?.show()
-                        }
+                        // increment the Loop and set Current Counter to 0...
+                        counter = 0
                     }
 
 
