@@ -47,7 +47,7 @@ class TasbihCounterFragment :
     private lateinit var imgFirstBottom: ImageView
     private lateinit var counterTextView: TextView
     private var counter = 0
-    private var maxCounter = 100
+    private var maxCounterLimit = 0
     var x1 = 0.0f
     var x2 = 0.0f
     var MIN_DISTANCE = 200
@@ -132,8 +132,8 @@ class TasbihCounterFragment :
         // Set the image resource to the ImageView
         imageView.setImageResource(imageResource)
         saveImageValue(requireContext(), selectedImageName.toString())
-             // Retrieve the saved counter value from SharedPreferences
-        val counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext(),selectedImageName)
+        val counterValue =
+            SharedPreferences.retrieveIncrementalCounter(requireContext(), selectedImageName)
         counter = counterValue
 
         // Update the increment text with the saved counter value
@@ -174,11 +174,11 @@ class TasbihCounterFragment :
         }
 
 
-/// Retrieve the stored entered value from SharedPreferences
-        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
+        /// Retrieve the stored Max Counter value from SharedPreferences
+        getLatestMaxCounterValue()
 
 // Update the counter TextView with the retrieved entered value
-        binding.tvCount.text = enteredValue.toString()
+        binding.tvCount.text = maxCounterLimit.toString()
 
         view1.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
@@ -186,10 +186,7 @@ class TasbihCounterFragment :
                 Log.d(TasbihCounterFragment::class.simpleName, "ACTION_DOWN: ..User Clicked " +
                         "View X is "+view1.width +" Touch x1 is "+x1)
             }else if(motionEvent.action == MotionEvent.ACTION_MOVE){
-
-                val enteredValue =
-                    SharedPreferences.retrieveEnteredValue(requireContext(), selectedImageName)
-
+                getLatestMaxCounterValue()
                 x2 = motionEvent.x
                 val deltaX: Float = Math.abs(x2 - x1)
 
@@ -202,7 +199,7 @@ class TasbihCounterFragment :
                     Log.d(TasbihCounterFragment::class.simpleName, "ACTION_MOVE: Left to Right swipe [Next]")
 
                     // Check if the current counter is less than the entered value
-                    if (counter < enteredValue) {
+                    if (counter < maxCounterLimit) {
                         motionLayout.setTransition(R.id.transition)
                         // Update MotionLayout progress
                         motionLayout.progress = progress
@@ -221,6 +218,7 @@ class TasbihCounterFragment :
             } else if(motionEvent.action == MotionEvent.ACTION_UP){
                 x2 = motionEvent.x
                 val deltaX: Float = x2 - x1
+                getLatestMaxCounterValue()
                 Log.d(TasbihCounterFragment::class.simpleName, "ACTION_UP: "+Math.abs(deltaX))
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     // Left to Right swipe action
@@ -235,8 +233,8 @@ class TasbihCounterFragment :
                     // consider as something else - a screen tap for example
                     Log.d(TasbihCounterFragment::class.simpleName, "ACTION_UP: its a click")
                     // Check if the current counter is less than the entered value
-                    if (counter < enteredValue) {
-                        if(Math.abs(deltaX)<=2) {
+                    if (counter < maxCounterLimit) {
+                        if(Math.abs(deltaX)<=5) {
                             motionLayout.setTransition(R.id.transition)
                             motionLayout.progress = 0.2f
                             checkValueAndGoForward()
@@ -299,6 +297,11 @@ class TasbihCounterFragment :
                 //Log.d(TasbihCounterFragment::class.simpleName, "onTransitionTrigger: ")
             }
         })
+    }
+
+    private fun getLatestMaxCounterValue() {
+        // Retrieve the saved counter value from SharedPreferences
+        maxCounterLimit  = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
     }
 
     private fun checkValueAndGoBackward() {
@@ -445,11 +448,6 @@ class TasbihCounterFragment :
         //motionLayout.isInteractionEnabled = true
     }
 
-    private fun updateCount(value: Int) {
-        maxCounter = value
-        binding.tvCount.text = maxCounter.toString()
-    }
-
     private fun updateIncrementalCounter() {
         counter++
         counterTextView.text = counter.toString()
@@ -478,7 +476,6 @@ class TasbihCounterFragment :
         continueButton.setOnClickListener {
             val enteredValue = valueCounter.text.toString().toIntOrNull() ?: 0
             if (enteredValue != 0) {
-                // updateCount(enteredValue)
                 updateMaxCounter(enteredValue)
                 SharedPreferences.saveEnteredValue(mContext, enteredValue,selectedImageName)
 
@@ -493,8 +490,8 @@ class TasbihCounterFragment :
 
 
     private fun updateMaxCounter(newValue: Int) {
-        maxCounter = newValue
-        binding.tvCount.text = maxCounter.toString()
+        maxCounterLimit = newValue
+        binding.tvCount.text = maxCounterLimit.toString()
     }
 
 
