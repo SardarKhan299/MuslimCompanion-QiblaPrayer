@@ -50,7 +50,7 @@ class TasbihCounterFragment :
     private var maxCounter = 100
     var x1 = 0.0f
     var x2 = 0.0f
-    var MIN_DISTANCE = 100
+    var MIN_DISTANCE = 200
     lateinit var adapter: TasbihCounterAdapter
     lateinit var recyclerView: RecyclerView
     private lateinit var imageView: ImageView
@@ -73,6 +73,8 @@ class TasbihCounterFragment :
     )
 
     var selectedImageName = ""
+
+    var toast:Toast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -184,6 +186,10 @@ class TasbihCounterFragment :
                 Log.d(TasbihCounterFragment::class.simpleName, "ACTION_DOWN: ..User Clicked " +
                         "View X is "+view1.width +" Touch x1 is "+x1)
             }else if(motionEvent.action == MotionEvent.ACTION_MOVE){
+
+                val enteredValue =
+                    SharedPreferences.retrieveEnteredValue(requireContext(), selectedImageName)
+
                 x2 = motionEvent.x
                 val deltaX: Float = Math.abs(x2 - x1)
 
@@ -191,16 +197,26 @@ class TasbihCounterFragment :
                     val progress = kotlin.math.min(
                         kotlin.math.max(deltaX / 500.toFloat(), 0f), 1f
                     )
-                    Log.d(TasbihCounterFragment::class.simpleName, "ACTION_MOVE: Delta X is "+deltaX+" Progress is "+progress)
+                    //Log.d(TasbihCounterFragment::class.simpleName, "ACTION_MOVE: Delta X is "+deltaX+" Progress is "+progress)
                 if (x2 > x1) {
                     Log.d(TasbihCounterFragment::class.simpleName, "ACTION_MOVE: Left to Right swipe [Next]")
-                    motionLayout.setTransition(R.id.transition)
+
+                    // Check if the current counter is less than the entered value
+                    if (counter < enteredValue) {
+                        motionLayout.setTransition(R.id.transition)
+                        // Update MotionLayout progress
+                        motionLayout.progress = progress
+                    }
+
                 } else {
                     Log.d(TasbihCounterFragment::class.simpleName, "ACTION_MOVE: Right to Left swipe [Previous]")
-                    motionLayout.setTransition(R.id.transition1)
+                    if(counter>0) {
+                        motionLayout.setTransition(R.id.transition1)
+                        // Update MotionLayout progress
+                        motionLayout.progress = progress
+                    }
                 }
-                    // Update MotionLayout progress
-                    motionLayout.progress = progress
+
 
             } else if(motionEvent.action == MotionEvent.ACTION_UP){
                 x2 = motionEvent.x
@@ -218,18 +234,35 @@ class TasbihCounterFragment :
                 } else {
                     // consider as something else - a screen tap for example
                     Log.d(TasbihCounterFragment::class.simpleName, "ACTION_UP: its a click")
-                    if(Math.abs(deltaX)<=1) {
-                        motionLayout.setTransition(R.id.transition)
-                        motionLayout.progress = 0.2f
-                        checkValueAndGoForward()
+                    // Check if the current counter is less than the entered value
+                    if (counter < enteredValue) {
+                        if(Math.abs(deltaX)<=2) {
+                            motionLayout.setTransition(R.id.transition)
+                            motionLayout.progress = 0.2f
+                            checkValueAndGoForward()
+                        }else{
+                            motionLayout.transitionToStart()
+                        }
+                    }else{
+                        if(toast!=null) {
+                            toast?.cancel()
+                            toast = Toast.makeText(
+                                mContext,
+                                "You've reached the maximum count.",
+                                Toast.LENGTH_SHORT
+                            )
+                            toast?.show()
+                        }else{
+                            toast = Toast.makeText(
+                                mContext,
+                                "You've reached the maximum count.",
+                                Toast.LENGTH_SHORT
+                            )
+                            toast?.show()
+                        }
                     }
-//                    if(x1>= view1.width/2){
-//                        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Go Forward")
-//                        checkValueAndGoForward(true)
-//                    }else{
-//                        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Go Backward")
-//                        checkValueAndGoBackward(true)
-//                    }
+
+
                 }
 
             }
@@ -293,11 +326,23 @@ class TasbihCounterFragment :
                 stopMotionLayout()
 
                 // Show a toast message indicating maximum count reached
-                Toast.makeText(
-                    mContext,
-                    "You've reached the minimum count.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                if(toast!=null) {
+                    toast?.cancel()
+                    toast = Toast.makeText(
+                        mContext,
+                        "You've reached the minimum count.",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast?.show()
+                }else{
+                    toast = Toast.makeText(
+                        mContext,
+                        "You've reached the minimum count.",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast?.show()
+                }
+
             }
         } else {
             // If the counter is equal or greater than the entered value
@@ -305,11 +350,22 @@ class TasbihCounterFragment :
             stopMotionLayout()
 
             // Show a toast message indicating maximum count reached
-            Toast.makeText(
-                mContext,
-                "You've reached the minimum count.",
-                Toast.LENGTH_SHORT
-            ).show()
+            if(toast!=null) {
+                toast?.cancel()
+                toast = Toast.makeText(
+                    mContext,
+                    "You've reached the minimum count.",
+                    Toast.LENGTH_SHORT
+                )
+                toast?.show()
+            }else{
+                toast = Toast.makeText(
+                    mContext,
+                    "You've reached the minimum count.",
+                    Toast.LENGTH_SHORT
+                )
+                toast?.show()
+            }
         }
     }
 
@@ -337,24 +393,45 @@ class TasbihCounterFragment :
                 // Stop the MotionLayout animation
                 stopMotionLayout()
 
-                // Show a toast message indicating maximum count reached
-                Toast.makeText(
-                    mContext,
-                    "You've reached the maximum count.",
-                    Toast.LENGTH_SHORT
-                ).show()
+
+                if(toast!=null) {
+                    toast?.cancel()
+                    toast = Toast.makeText(
+                        mContext,
+                        "You've reached the maximum count.",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast?.show()
+                }else{
+                    toast = Toast.makeText(
+                        mContext,
+                        "You've reached the maximum count.",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast?.show()
+                }
             }
         } else {
             // If the counter is equal or greater than the entered value
             // Stop the MotionLayout animation
             stopMotionLayout()
 
-            // Show a toast message indicating maximum count reached
-            Toast.makeText(
-                mContext,
-                "You've reached the maximum count.",
-                Toast.LENGTH_SHORT
-            ).show()
+            if(toast!=null) {
+                toast?.cancel()
+                toast = Toast.makeText(
+                    mContext,
+                    "You've reached the maximum count.",
+                    Toast.LENGTH_SHORT
+                )
+                toast?.show()
+            }else{
+                toast = Toast.makeText(
+                    mContext,
+                    "You've reached the maximum count.",
+                    Toast.LENGTH_SHORT
+                )
+                toast?.show()
+            }
         }
     }
 
