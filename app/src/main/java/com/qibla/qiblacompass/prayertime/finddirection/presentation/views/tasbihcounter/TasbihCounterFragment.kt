@@ -6,7 +6,6 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Display
-import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
@@ -17,7 +16,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,7 +50,7 @@ class TasbihCounterFragment :
     private var maxCounter = 100
     var x1 = 0.0f
     var x2 = 0.0f
-    var MIN_DISTANCE = 200
+    var MIN_DISTANCE = 100
     lateinit var adapter: TasbihCounterAdapter
     lateinit var recyclerView: RecyclerView
     private lateinit var imageView: ImageView
@@ -183,31 +181,57 @@ class TasbihCounterFragment :
         view1.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
                 x1 = motionEvent.x
-                Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Action Down..User Clicked " +
+                Log.d(TasbihCounterFragment::class.simpleName, "ACTION_DOWN: ..User Clicked " +
                         "View X is "+view1.width +" Touch x1 is "+x1)
-            }else if(motionEvent.action == MotionEvent.ACTION_UP){
+            }else if(motionEvent.action == MotionEvent.ACTION_MOVE){
                 x2 = motionEvent.x
                 val deltaX: Float = x2 - x1
-                Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Action Up "+Math.abs(deltaX))
+
+                    // Calculate progress based on touch movement and desired range
+                    val progress = kotlin.math.min(
+                        kotlin.math.max(deltaX / 500.toFloat(), 0f), 1f
+                    )
+                    Log.d(TasbihCounterFragment::class.simpleName, "ACTION_MOVE: Delta X is "+deltaX+" Progress is "+progress)
+                if (x2 > x1) {
+                    Log.d(TasbihCounterFragment::class.simpleName, "ACTION_MOVE: Left to Right swipe [Next]")
+                    motionLayout.setTransition(R.id.transition)
+                } else {
+                    Log.d(TasbihCounterFragment::class.simpleName, "ACTION_MOVE: Right to Left swipe [Previous]")
+                    motionLayout.setTransition(R.id.transition1)
+                }
+                    // Update MotionLayout progress
+                    motionLayout.progress = progress
+
+            } else if(motionEvent.action == MotionEvent.ACTION_UP){
+                x2 = motionEvent.x
+                val deltaX: Float = x2 - x1
+                Log.d(TasbihCounterFragment::class.simpleName, "ACTION_UP: "+Math.abs(deltaX))
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     // Left to Right swipe action
                     if (x2 > x1) {
-                        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Left to Right swipe [Next]")
+                        Log.d(TasbihCounterFragment::class.simpleName, "ACTION_UP: Left to Right swipe [Next]")
                         checkValueAndGoForward()
                     } else {
-                        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Right to Left swipe [Previous]")
+                        Log.d(TasbihCounterFragment::class.simpleName, "ACTION_UP: Right to Left swipe [Previous]")
+                        motionLayout.setTransition(R.id.transition1)
+                        motionLayout.progress = 0.2f
                         checkValueAndGoBackward()
                     }
                 } else {
                     // consider as something else - a screen tap for example
-                    Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: its a click")
-                    if(x1>= view1.width/2){
-                        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Go Forward")
+                    Log.d(TasbihCounterFragment::class.simpleName, "ACTION_UP: its a click")
+                    if(Math.abs(deltaX)<=1) {
+                        motionLayout.setTransition(R.id.transition)
+                        motionLayout.progress = 0.2f
                         checkValueAndGoForward()
-                    }else{
-                        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Go Backward")
-                        checkValueAndGoBackward()
                     }
+//                    if(x1>= view1.width/2){
+//                        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Go Forward")
+//                        checkValueAndGoForward(true)
+//                    }else{
+//                        Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: Go Backward")
+//                        checkValueAndGoBackward(true)
+//                    }
                 }
 
             }
@@ -251,13 +275,15 @@ class TasbihCounterFragment :
         val enteredValue =
             SharedPreferences.retrieveEnteredValue(requireContext(), selectedImageName)
 
-        // Check if the current counter is less than the entered value
+        // Check if the current counter is greater than 0
         if (counter > 0) {
             startMotionLayout()
 
-            // Apply Backward Animation...//
-            motionLayout.setTransition(R.id.transition1)
-            motionLayout.transitionToEnd()
+            Log.d(TasbihCounterFragment::class.simpleName, "checkValueAndGoBackward: ${motionLayout.currentState}")
+            if(motionLayout.currentState == -1) {
+                motionLayout.setTransition(R.id.transition1)
+                motionLayout.transitionToEnd()
+            }
 
             // Update the counter
             updateDecrementCounter()
@@ -298,9 +324,11 @@ class TasbihCounterFragment :
         if (counter < enteredValue) {
             startMotionLayout()
 
-            // Apply Forward Animation...//
-            motionLayout.setTransition(R.id.transition)
-            motionLayout.transitionToEnd()
+            Log.d(TasbihCounterFragment::class.simpleName, "checkValueAndGoForward: ${motionLayout.currentState}")
+            if(motionLayout.currentState==-1) {
+                motionLayout.setTransition(R.id.transition)
+                motionLayout.transitionToEnd()
+            }
 
             // Update the counter
             updateIncrementalCounter()
