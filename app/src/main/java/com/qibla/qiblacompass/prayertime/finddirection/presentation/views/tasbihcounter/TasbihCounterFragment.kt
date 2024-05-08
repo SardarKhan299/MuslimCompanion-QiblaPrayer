@@ -185,7 +185,7 @@ class TasbihCounterFragment :
                         "View X is "+view1.width +" Touch x1 is "+x1)
             }else if(motionEvent.action == MotionEvent.ACTION_MOVE){
                 x2 = motionEvent.x
-                val deltaX: Float = x2 - x1
+                val deltaX: Float = Math.abs(x2 - x1)
 
                     // Calculate progress based on touch movement and desired range
                     val progress = kotlin.math.min(
@@ -213,8 +213,6 @@ class TasbihCounterFragment :
                         checkValueAndGoForward()
                     } else {
                         Log.d(TasbihCounterFragment::class.simpleName, "ACTION_UP: Right to Left swipe [Previous]")
-                        motionLayout.setTransition(R.id.transition1)
-                        motionLayout.progress = 0.2f
                         checkValueAndGoBackward()
                     }
                 } else {
