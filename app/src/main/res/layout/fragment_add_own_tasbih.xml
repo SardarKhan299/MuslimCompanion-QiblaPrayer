@@ -200,5 +200,38 @@
             app:layout_constraintEnd_toEndOf="@+id/guideline_add_own_tasbih_right"
             app:layout_constraintTop_toTopOf="@+id/view_tasbih_save_close" />
 
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progress_bar_add_own_tasbih"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:foregroundGravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/primary_color"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_add_own_tasbih_right"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_progress_wait"
+            style="@style/skip_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please wait"
+            app:layout_constraintBottom_toBottomOf="@+id/progress_bar_add_own_tasbih"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_add_own_tasbih_right"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/progress_bar_add_own_tasbih"
+            app:layout_constraintTop_toTopOf="@+id/progress_bar_add_own_tasbih"
+            app:layout_constraintVertical_bias="0.652" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="progress_bar_add_own_tasbih,tv_progress_wait"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

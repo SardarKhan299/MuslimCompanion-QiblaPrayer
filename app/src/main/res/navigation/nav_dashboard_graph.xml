@@ -114,6 +114,9 @@
         <action
             android:id="@+id/action_tasbihFragment_to_addOwnTasbihFragment"
             app:destination="@id/addOwnTasbihFragment" />
+        <action
+            android:id="@+id/action_tasbihFragment_to_boardFragment"
+            app:destination="@id/boardFragment" />
     </fragment>
     <fragment
         android:id="@+id/qibalDirectionFragment"
