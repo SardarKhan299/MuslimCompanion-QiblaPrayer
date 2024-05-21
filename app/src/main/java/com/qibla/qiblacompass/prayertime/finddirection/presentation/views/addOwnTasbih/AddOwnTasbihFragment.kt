@@ -32,12 +32,8 @@ import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.getValue
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -89,7 +85,7 @@ class AddOwnTasbihFragment :
         toolbar.groupToolbarTasbihCounter.visibility = View.VISIBLE
         toolbar.titleCounter.text = getString(R.string.add_own_tasbih)
         toolbar.imgNavigateBack.setOnClickListener {
-            findNavController().closeCurrentScreen()
+            findNavController().navigate(R.id.tasbihFragment)
         }
         toolbar.imgAddMore.invisible()
         imageView = binding.imgNewTasbihBackground
@@ -299,7 +295,7 @@ class AddOwnTasbihFragment :
                     val downloadUri = task.result
                     downloadUri?.let {
                             // Save Tasbih data with image URL and user ID
-                            saveTasbihDataToFirebase(tasbihName, imageUrl = imageUri.toString()) // Use download URL instead of imageUri.toString()
+                            saveTasbihDataToFirebase(tasbihName, imageUrl = downloadUri.toString()) // Use download URL instead of imageUri.toString()
 
                     }
                 } else {
@@ -323,8 +319,8 @@ class AddOwnTasbihFragment :
             val key = userReference.push().key
             key?.let { pushKey ->
                 val zhikrData = HashMap<String, Any>()
-                zhikrData["name"] = zhikrName
-                zhikrData["imageUrl"] = imageUrl
+                zhikrData["zhikrName"] = zhikrName
+                zhikrData["zhikrImageUrl"] = imageUrl // Use the image URL obtained from Firebase Storage
                 userReference.child(pushKey).setValue(zhikrData)
                     .addOnSuccessListener {
                         Log.d(
@@ -373,35 +369,4 @@ class AddOwnTasbihFragment :
     }
 
 
-//    private fun saveTasbihDataToFirebase(zhikrName: String, imageUrl: String, userId: String) {
-//
-//        // Check if the user ID exists
-//        val userReference = databaseReference.child(userId)
-//        val tasbihKey = userReference.push().key // Generate a unique key for the Tasbih entry
-//val imageUrl1 = imageUrl
-//        val tasbhName = zhikrName
-//        // Create a map to hold the Tasbih data
-//        val tasbihData = HashMap<String, Any?>()
-//        tasbihData["zhikrName"] = tasbhName
-//        tasbihData["zhikrImageUrl"] = imageUrl1
-//
-//        // Save the Tasbih data under the generated key
-//        tasbihKey?.let { key ->
-//            userReference.child(key).setValue(tasbihData)
-//                .addOnSuccessListener {
-//                    Log.d(
-//                        AddOwnTasbihFragment::class.java.simpleName,
-//                        "Tasbih data saved successfully"
-//                    )
-//                    findNavController().navigate(R.id.tasbihFragment)
-//                }
-//                .addOnFailureListener { exception ->
-//                    exception.printStackTrace()
-//                    Log.e(
-//                        AddOwnTasbihFragment::class.java.simpleName,
-//                        "Failed to save Tasbih data: ${exception.message}"
-//                    )
-//                }
-//        }
-//    }
 
