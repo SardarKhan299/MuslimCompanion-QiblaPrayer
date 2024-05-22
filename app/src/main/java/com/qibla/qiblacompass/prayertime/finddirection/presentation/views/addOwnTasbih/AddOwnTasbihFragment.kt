@@ -162,8 +162,8 @@ class AddOwnTasbihFragment :
                     cropImageOptions = CropImageOptions(
                         imageSourceIncludeCamera = includeCamera,
                         imageSourceIncludeGallery = includeGallery,
-                        maxCropResultHeight = 1500,
-                        maxCropResultWidth = 1500,
+                        maxCropResultHeight = 2500,
+                        maxCropResultWidth = 2500,
                         autoZoomEnabled = true
                     ),
                 ),
