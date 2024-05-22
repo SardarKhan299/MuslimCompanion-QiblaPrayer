@@ -54,6 +54,7 @@
         android:layout_marginTop="@dimen/_16sdp"
         android:backgroundTint="@color/primary_color"
         android:max="100"
+        android:visibility="invisible"
         android:progress="0"
         app:layout_constraintEnd_toEndOf="@+id/img_zhikr"
         app:layout_constraintStart_toStartOf="@+id/btn_start"

@@ -167,6 +167,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/background_transparent"
                 android:ems="10"
+                android:maxLines="5"
                 android:importantForAutofill="no" />
         </com.google.android.material.textfield.TextInputLayout>
 

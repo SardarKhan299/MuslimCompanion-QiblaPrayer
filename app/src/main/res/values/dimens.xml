@@ -64,4 +64,6 @@
     <dimen name="bias_horizontal_web">0.489</dimen>
     <dimen name="arcView_start_margin">10</dimen>
     <dimen name="arcView_margin_increment">10</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="view_holder_text_margin">8dp</dimen>
 </resources>
