@@ -41,6 +41,7 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.ProgressBar
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.gone
@@ -97,7 +98,7 @@ class AddOwnTasbihFragment :
                 hideKeyboard(mContext, edtTasbihName)
             }
         }
-   //     databaseReference = FirebaseDatabase.getInstance().getReference("ZhikrTasbih").child("user")
+        //     databaseReference = FirebaseDatabase.getInstance().getReference("ZhikrTasbih").child("user")
 
         binding.viewCaptureImageCamera.setOnClickListener {
 
@@ -110,7 +111,7 @@ class AddOwnTasbihFragment :
             openCropActivity(includeCamera = false, includeGallery = true)
             Handler(Looper.getMainLooper()).postDelayed(
                 { binding.groupCaptureUploadImage.invisible() },
-                1000
+                2000
             )
 
         }
@@ -120,18 +121,44 @@ class AddOwnTasbihFragment :
             // Clear the stored data from SharedPreferences
             SharedPreferences.clearTasbihImageUriAndTasbihName(mContext)
         }
+//        binding.imgTickTasbihIcon.setOnClickListener {
+//
+//            if (validateTasbih()) {
+//                ProgressBar.showProgressBar(mContext, "Please wait.")
+//                uri?.let {
+//                    // Save Tasbih data to Firebase only if user ID is not null
+//                    if (FirebaseAuth.getInstance().currentUser != null) {
+//                        saveImageToFirebaseStorage(it)
+//
+//                    } else {
+//                        // If user ID is null, show login dialog
+//                        showLoginDialog()
+//                    }
+//                }
+//            }
+//            ProgressBar.hideProgressBar()
+//
+//        }
+        ProgressBar.hideProgressBar()
         binding.imgTickTasbihIcon.setOnClickListener {
             if (validateTasbih()) {
-                uri?.let {
+                ProgressBar.showProgressBar(mContext, "Please wait...")
+                uri?.let { uri ->
                     // Save Tasbih data to Firebase only if user ID is not null
                     if (FirebaseAuth.getInstance().currentUser != null) {
-                        saveImageToFirebaseStorage(it)
+                        saveImageToFirebaseStorage(uri)
                     } else {
                         // If user ID is null, show login dialog
+                        ProgressBar.hideProgressBar()
                         showLoginDialog()
                     }
+                } ?: run {
+                    // If uri is null, hide progress bar and show a message
+                    ProgressBar.hideProgressBar()
+                    Toast.makeText(mContext, "No image selected", Toast.LENGTH_SHORT).show()
                 }
             }
+
         }
     }
 
@@ -312,7 +339,6 @@ class AddOwnTasbihFragment :
 
 
     private fun saveTasbihDataToFirebase(zhikrName: String, imageUrl: String) {
-        binding.groupProgressBar.visible()
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         userId?.let { uid ->
             val userReference = FirebaseDatabase.getInstance().getReference("ZhikrTasbih").child(uid)
@@ -328,7 +354,6 @@ class AddOwnTasbihFragment :
                             "Tasbih data saved successfully"
                         )
                         findNavController().navigate(R.id.tasbihFragment)
-                        binding.groupProgressBar.gone()
                     }
                     .addOnFailureListener { exception ->
                         exception.printStackTrace()
@@ -343,7 +368,6 @@ class AddOwnTasbihFragment :
                 AddOwnTasbihFragment::class.java.simpleName,
                 "User is not logged in"
             )
-            binding.groupProgressBar.visible()
         }
     }
 

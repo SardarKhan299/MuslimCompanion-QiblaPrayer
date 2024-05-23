@@ -27,6 +27,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.getCurrentDateFormatted
+import com.qibla.qiblacompass.prayertime.finddirection.common.ProgressBar
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentTasbihBinding
 import java.lang.Math.abs
@@ -67,6 +68,7 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
             findNavController().navigate(R.id.addOwnTasbihFragment)
         }
 
+        ProgressBar.hideProgressBar()
         fetchDataFromFirebase()
         setupSwipeToShowButtons()
     }
@@ -129,8 +131,91 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
 
     }
 
+//    private fun setupSwipeToShowButtons() {
+//        val swipeCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+//            override fun onMove(
+//                recyclerView: RecyclerView,
+//                viewHolder: RecyclerView.ViewHolder,
+//                target: RecyclerView.ViewHolder
+//            ): Boolean {
+//                return false
+//            }
+//
+//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                val position = viewHolder.adapterPosition
+//                val item = zhikrTasbihArrayList[position]
+//                showDeleteConfirmationDialog(item, position)
+//                adapter.notifyItemChanged(position)
+//            }
+//
+//            override fun onChildDraw(
+//                c: Canvas,
+//                recyclerView: RecyclerView,
+//                viewHolder: RecyclerView.ViewHolder,
+//                dX: Float,
+//                dY: Float,
+//                actionState: Int,
+//                isCurrentlyActive: Boolean
+//            ) {
+//                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+//                    val itemView = viewHolder.itemView
+//                    val paint = Paint().apply {
+//                        color = Color.RED
+//                    }
+//                    c.drawRect(
+//                        itemView.left.toFloat(),
+//                        itemView.top.toFloat(),
+//                        itemView.left.toFloat() + dX,
+//                        itemView.bottom.toFloat(),
+//                        paint
+//                    )
+//
+////                    val textPaint = Paint().apply {
+////                        color = Color.WHITE
+////                        textSize = 40f
+////                    }
+//                    // Set up the text paint with desired styles
+//                    val textPaint = Paint().apply {
+//                        color = Color.WHITE
+//                        textSize = 30f
+//                        isAntiAlias = true
+//                      //  typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+//                        typeface = ResourcesCompat.getFont(mContext, R.font.poppins_italic)
+//
+//                    }
+//                    val text = "Delete"
+//                    val textWidth = textPaint.measureText(text)
+//                    val textMargin = (itemView.height - textPaint.textSize) / 2
+//                    c.drawText(
+//                        text,
+//                        itemView.left + textMargin,
+//                        itemView.top + itemView.height / 2 + textPaint.textSize / 2,
+//                        textPaint
+//                    )
+//
+//                    val alpha = 1.0f - Math.abs(dX) / recyclerView.width.toFloat()
+//                    viewHolder.itemView.alpha = alpha
+//                    viewHolder.itemView.translationX = dX
+//                } else {
+//                    super.onChildDraw(
+//                        c,
+//                        recyclerView,
+//                        viewHolder,
+//                        dX,
+//                        dY,
+//                        actionState,
+//                        isCurrentlyActive
+//                    )
+//                }
+//            }
+//        }
+//
+//        val itemTouchHelper = ItemTouchHelper(swipeCallback)
+//        itemTouchHelper.attachToRecyclerView(binding.recyclerViewZhikr)
+//    }
+
     private fun setupSwipeToShowButtons() {
-        val swipeCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        val swipeCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -160,33 +245,32 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
                     val paint = Paint().apply {
                         color = Color.RED
                     }
+
+                    // Draw the red delete background on the left side
                     c.drawRect(
-                        itemView.left.toFloat(),
+                        itemView.right.toFloat() + dX,
                         itemView.top.toFloat(),
-                        itemView.left.toFloat() + dX,
+                        itemView.right.toFloat(),
                         itemView.bottom.toFloat(),
                         paint
                     )
 
-//                    val textPaint = Paint().apply {
-//                        color = Color.WHITE
-//                        textSize = 40f
-//                    }
                     // Set up the text paint with desired styles
                     val textPaint = Paint().apply {
                         color = Color.WHITE
                         textSize = 30f
                         isAntiAlias = true
-                      //  typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
                         typeface = ResourcesCompat.getFont(mContext, R.font.poppins_italic)
-
                     }
+
                     val text = "Delete"
                     val textWidth = textPaint.measureText(text)
                     val textMargin = (itemView.height - textPaint.textSize) / 2
+
+                    // Draw the text on the left side
                     c.drawText(
                         text,
-                        itemView.left + textMargin,
+                        itemView.right - textWidth - textMargin,
                         itemView.top + itemView.height / 2 + textPaint.textSize / 2,
                         textPaint
                     )
@@ -212,7 +296,9 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
         itemTouchHelper.attachToRecyclerView(binding.recyclerViewZhikr)
     }
 
+
     private fun fetchDataFromFirebase() {
+        ProgressBar.showProgressBar(mContext,"Please wait...")
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         val guestRef = databaseReference
         if (userId != null) {
@@ -233,9 +319,10 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
                             zhikrTasbihArrayList.add(zhikrItem)
                         }
                         recyclerView.adapter = adapter
+                        ProgressBar.hideProgressBar()  // Hide the progress bar after data is fetched
                     }
-
                     override fun onCancelled(error: DatabaseError) {
+                        ProgressBar.hideProgressBar()
                         Log.e(
                             TasbihFragment::class.java.simpleName,
                             "Database error: ${error.message}"
@@ -258,9 +345,11 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
                         zhikrTasbihArrayList.add(zhikrItem)
                     }
                     recyclerView.adapter = adapter
+                    ProgressBar.hideProgressBar()  // Hide the progress bar after data is fetched
                 }
 
                 override fun onCancelled(error: DatabaseError) {
+                    ProgressBar.hideProgressBar()  // Hide the progress bar after data is fetched
                     // Handle error
                     Log.e(
                         TasbihFragment::class.java.simpleName,
@@ -268,7 +357,6 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
                     )
                 }
             })
-
         }
     }
 }
