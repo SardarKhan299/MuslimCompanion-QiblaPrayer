@@ -13,10 +13,9 @@
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_30sdp"
         android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginTop="@dimen/_8sdp"
         android:background="@drawable/unselected_btn_bg"
         android:text="@string/start"
-        app:layout_constraintBottom_toTopOf="@id/horizontalProgressBar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,11 +40,11 @@
         android:gravity="center"
         android:maxLines="5"
         android:text="@string/subhanallah"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_start"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/img_zhikr"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/btn_start"
-        app:layout_constraintTop_toTopOf="@+id/btn_start" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/horizontalProgressBar"
@@ -62,4 +61,12 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_start"
         android:layout_marginBottom="@dimen/_8sdp"
         app:layout_constraintBottom_toBottomOf="parent"/>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/view_divider_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

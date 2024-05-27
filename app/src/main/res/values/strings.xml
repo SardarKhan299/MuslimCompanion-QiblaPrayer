@@ -306,5 +306,5 @@
     <string name="upload_image">Upload Image</string>
     <string name="tasbih_name">Enter your own tasbih</string>
     <string name="delete_text_title">Delete Confirmation</string>
-    <string name="delete_message">"Are you sure you want to delete this item?"</string>
+    <string name="delete_message">"Are you sure you want to delete this zhikr?"</string>
 </resources>

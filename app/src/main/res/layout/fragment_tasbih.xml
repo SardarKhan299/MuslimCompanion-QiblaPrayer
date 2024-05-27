@@ -32,7 +32,7 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_tasbih_main"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_150sdp"
         android:background="@drawable/ic_tasbih_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="@dimen/bias_zero"
