@@ -130,6 +130,6 @@ class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment
     }
 
     companion object {
-        val TAG = "SideMenuFragment"
+        private val TAG = "SideMenuFragment"
     }
 }
