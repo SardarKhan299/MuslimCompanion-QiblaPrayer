@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_tasbih_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_tasbih_left"
         app:layout_constraintTop_toBottomOf="@+id/img_tasbih_main"
-        app:layout_constraintBottom_toTopOf="@+id/img_add_new_tasbih"
+        app:layout_constraintBottom_toTopOf="@id/ads_banner_tasbih"
         tools:listitem="@layout/item_tasbih_dhikr" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -108,15 +108,15 @@
         android:layout_marginBottom="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_tasbih_right" />
-    <ProgressBar
-        android:id="@+id/loadingIndicator"
-        android:layout_width="wrap_content"
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ads_banner_tasbih"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        app:layout_constraintStart_toStartOf="parent"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+    ads:layout_constraintBottom_toTopOf="@id/img_add_new_tasbih"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

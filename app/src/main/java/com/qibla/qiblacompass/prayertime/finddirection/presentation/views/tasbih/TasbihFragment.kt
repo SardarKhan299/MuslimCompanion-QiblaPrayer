@@ -17,6 +17,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -26,10 +28,12 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.AdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.getCurrentDateFormatted
 import com.qibla.qiblacompass.prayertime.finddirection.common.ProgressBar
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentTasbihBinding
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
 import java.lang.Math.abs
 import kotlin.math.roundToInt
 
@@ -40,6 +44,7 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
     private lateinit var adapter: TasbihZhikrAdapter
     private lateinit var zhikrTasbihArrayList: MutableList<ZhikrTasbih>
     private lateinit var swipeHelper: ItemTouchHelper
+    private lateinit var adView: AdView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)?.hideActionBar()
@@ -71,6 +76,16 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
         ProgressBar.hideProgressBar()
         fetchDataFromFirebase()
         setupSwipeToShowButtons()
+
+        MobileAds.initialize(mContext) {
+            Log.d(
+                DashBoardFragment::class.java.simpleName,
+                "onViewCreated: onInitializationCompleted"
+            )
+        }
+        adView = binding.adsBannerTasbih
+        // Initialize AdUtil and load the banner ad
+        AdUtil.initialize(requireContext(), adView)
     }
 
     private fun showDeleteConfirmationDialog(item: ZhikrTasbih, position: Int) {
@@ -358,6 +373,26 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
                 }
             })
         }
+    }
+    override fun onResume() {
+        adView.resume()
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
+
+    override fun onPause() {
+        adView.pause()
+        super.onPause()
+        Log.d(TAG, "onPause: ")
+    }
+
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
+    }
+    companion object{
+        private val TAG = "TasbihFragment"
     }
 }
 
