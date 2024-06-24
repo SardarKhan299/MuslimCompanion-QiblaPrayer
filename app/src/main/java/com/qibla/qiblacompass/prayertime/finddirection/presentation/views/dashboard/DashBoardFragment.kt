@@ -21,8 +21,10 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
 import com.google.android.gms.location.*
@@ -33,7 +35,6 @@ import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
-import com.qibla.qiblacompass.prayertime.finddirection.common.AdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToUnixTime
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToUnixTimeDay
@@ -666,6 +667,42 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     private fun loadBannerAd() {
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
+        adView.adListener = object :  AdListener(){
+            override fun onAdClicked() {
+                super.onAdClicked()
+                Log.d(TAG, "onAdClicked: ")
+            }
+
+            override fun onAdClosed() {
+                super.onAdClosed()
+                Log.d(TAG, "onAdClosed: ")
+            }
+
+            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                super.onAdFailedToLoad(loadAdError)
+                Log.d(TAG, "onAdFailedToLoad: ")
+            }
+
+            override fun onAdImpression() {
+                super.onAdImpression()
+                Log.d(TAG, "onAdImpression: ")
+            }
+
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+                Log.d(TAG, "onAdLoaded: ")
+            }
+
+            override fun onAdOpened() {
+                super.onAdOpened()
+                Log.d(TAG, "onAdOpened: ")
+            }
+
+            override fun onAdSwipeGestureClicked() {
+                Log.d(TAG, "onAdSwipeGestureClicked: ")
+                super.onAdSwipeGestureClicked()
+            }
+        }
     }
 
 
@@ -689,7 +726,11 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     override fun onDestroy() {
         // Destroy the AdView when activity is destroyed
         adView.destroy()
+        Log.d(TAG, "onDestroy: ")
         super.onDestroy()
+    }
+    companion object{
+        const val TAG = "DashBoardFragment"
     }
 }
 
