@@ -62,7 +62,6 @@
             ads:layout_constraintBottom_toTopOf="@id/btn_calculate_zakat"
             ads:layout_constraintStart_toStartOf="parent"
             ads:layout_constraintEnd_toEndOf="parent"
-
              />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_calculate_zakat"

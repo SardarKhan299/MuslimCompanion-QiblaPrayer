@@ -27,15 +27,19 @@ import androidx.core.content.res.ResourcesCompat.getDrawable
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.location.LocationResult
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.AdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.CalibrationDialog
 import com.qibla.qiblacompass.prayertime.finddirection.common.MyLocationManager
 import com.qibla.qiblacompass.prayertime.finddirection.common.PopUpDialog
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentQibalDirectionBinding
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbihcounter.TasbihCounterAdapter
 import java.util.*
 
@@ -56,7 +60,7 @@ class QibalDirectionFragment :
     private lateinit var mLocationManager: MyLocationManager
     private var isFragmentAttached: Boolean = false
     private var qiblaAngel: Double = 0.0
-
+    private lateinit var adView: AdView
 
     private var currentAzimuth = 0f
     private val RC_Permission = 1221
@@ -113,6 +117,15 @@ class QibalDirectionFragment :
         recyclerView.adapter = adapter
         // Request location permission if not granted
 
+        MobileAds.initialize(mContext) {
+            Log.d(
+                DashBoardFragment::class.java.simpleName,
+                "onViewCreated: onInitializationCompleted"
+            )
+        }
+        adView = binding.adsBannerQibalDirection
+        // Initialize AdUtil and load the banner ad
+        AdUtil.initialize(requireContext(), adView)
 
     }
 
@@ -129,6 +142,7 @@ class QibalDirectionFragment :
 
     override fun onPause() {
         super.onPause()
+        adView.pause()
         compass?.stop()
         mLocationManager.stopLocationTracking()
 
@@ -141,7 +155,7 @@ class QibalDirectionFragment :
     @Suppress("DEPRECATION")
     override fun onResume() {
         super.onResume()
-
+        adView.resume()
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 ACCESS_FINE_LOCATION
@@ -452,6 +466,13 @@ class QibalDirectionFragment :
         return (meter * 0.001).toFloat()
     }
 
-
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
+    }
+    companion object{
+        private val TAG = "QibalDirectionFragment"
+    }
 }
 

@@ -82,10 +82,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view_qibal_direction"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_80sdp"
+            android:layout_height="@dimen/_60sdp"
             android:layout_marginBottom="@dimen/_4sdp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ads_banner_qibal_direction"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_direction"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_direction"
             tools:listitem="@layout/item_compass_layout" />
@@ -260,7 +260,17 @@
             app:srcCompat="@drawable/needle_new" />
 
 
-
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ads_banner_qibal_direction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id"
+            android:layout_marginBottom="@dimen/_8sdp"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintEnd_toEndOf="parent"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
