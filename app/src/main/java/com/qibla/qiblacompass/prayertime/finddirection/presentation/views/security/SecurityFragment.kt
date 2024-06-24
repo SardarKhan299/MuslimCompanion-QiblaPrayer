@@ -17,19 +17,23 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.Group
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.AdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.gone
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.common.visible
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentSecurityBinding
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.SplashActivity
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
 
 
 class SecurityFragment : BaseFragment<FragmentSecurityBinding>(R.layout.fragment_security) {
-
+    private lateinit var adView: AdView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)?.hideActionBar()
@@ -62,6 +66,15 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>(R.layout.fragment
         binding.viewDeleteAccount.setOnClickListener {
             showBottomSheet()
         }
+        MobileAds.initialize(mContext) {
+            Log.d(
+                DashBoardFragment::class.java.simpleName,
+                "onViewCreated: onInitializationCompleted"
+            )
+        }
+        adView = binding.adsBannerSecurity
+        // Initialize AdUtil and load the banner ad
+        AdUtil.initialize(requireContext(), adView)
     }
 
 
@@ -131,6 +144,25 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>(R.layout.fragment
         }
         bottomSheetDialog.show()
     }
+    override fun onResume() {
+        adView.resume()
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
 
+    override fun onPause() {
+        adView.pause()
+        super.onPause()
+        Log.d(TAG, "onPause: ")
+    }
+
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
+    }
+    companion object{
+        private val TAG = "NotificationSettingsFragment"
+    }
 
 }

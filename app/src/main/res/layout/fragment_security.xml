@@ -199,7 +199,7 @@
             app:layout_constraintStart_toStartOf="@+id/view_delete_account"
             app:layout_constraintTop_toTopOf="@+id/view_delete_account" />
         <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/ads_banner_account_settings"
+            android:id="@+id/ads_banner_security"
             android:layout_width="0dp"
             android:layout_height="@dimen/_80sdp"
             ads:adSize="BANNER"
