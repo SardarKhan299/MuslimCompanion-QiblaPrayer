@@ -65,6 +65,18 @@
             app:layout_constraintStart_toStartOf="@+id/tv_location_city"
             app:layout_constraintTop_toBottomOf="@+id/tv_location_city" />
 
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ads_banner_next_prayer_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id"
+            android:layout_marginBottom="@dimen/_8sdp"
+           ads:layout_constraintTop_toBottomOf="@id/tv_time"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintEnd_toEndOf="parent"
+            />
         <include
             android:id="@+id/layout_next_prayer_background"
             layout="@layout/layout_next_prayer_background"

@@ -10,6 +10,8 @@ import androidx.constraintlayout.widget.Group
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
@@ -65,6 +67,7 @@ class NextPrayerTimeFragment :
     lateinit var imgZuhrFajrNotification: ImageView
     lateinit var titleBottomSheet: TextView
     private var mediaPlayer: MediaPlayer? = null
+    private lateinit var adView: AdView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)?.hideActionBar()
@@ -101,7 +104,15 @@ class NextPrayerTimeFragment :
         imgZuhrFajrNotification = binding.layoutNextPrayerBackground.imgUnselectedZuharIcon
 
 
-
+        MobileAds.initialize(mContext) {
+            Log.d(
+                DashBoardFragment::class.java.simpleName,
+                "onViewCreated: onInitializationCompleted"
+            )
+        }
+        adView = binding.adsBannerNextPrayerTime
+        // Initialize AdUtil and load the banner ad
+        AdUtil.initialize(requireContext(), adView)
         binding.layoutNextPrayerBackground.viewFajr.setOnClickListener {
             showBottomSheetNotificationAlertSound(PRAYER_FAJR)
             // Update the bottom sheet title immediately
@@ -1152,10 +1163,30 @@ class NextPrayerTimeFragment :
 
         override fun onPause() {
             super.onPause()
+            adView.pause()
             // Stop the audio playback
             mediaPlayer?.stop()
             mediaPlayer?.release()
             mediaPlayer = null
         }
+
+
+
+
+    override fun onResume() {
+        adView.resume()
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
+
+
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
+    }
+    companion object{
+        private val TAG = "NextPrayerTimeFragment"
+    }
     }
 
