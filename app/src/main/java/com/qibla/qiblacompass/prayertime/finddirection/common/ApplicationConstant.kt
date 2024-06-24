@@ -9,6 +9,9 @@ class ApplicationConstant {
         const val LA_ILAHA_ILLA_ALLAH: String = "La Ilaha Illa Allah"
         const val ALLAHU_AKBAR: String = "Allahu Akbar"
         const val SELECTED_IMAGE: String = "SelectedImage"
+
+        const val DEFAULT_APP_ID :String = "DefaultAppId"
+        const val DEFAULT_BANNER_ID :String ="DefaultBannerId"
     }
 
 }

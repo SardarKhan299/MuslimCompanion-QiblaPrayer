@@ -259,5 +259,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/img_security_updates"
         app:layout_constraintEnd_toStartOf="@+id/guideline_about_us_right"
         app:layout_constraintTop_toTopOf="@+id/img_security_updates" />
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ads_banner_about_us"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_80sdp"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/app_ads_id"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

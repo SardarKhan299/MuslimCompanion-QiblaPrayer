@@ -177,8 +177,8 @@ dependencies {
     // Image cropper library
   implementation "com.theartofdev.edmodo:android-image-cropper:2.8.0"
     implementation 'com.vanniktech:android-image-cropper:4.5.0'
-
-
+    //Google Mobile Ads SDK
+    implementation 'com.google.android.gms:play-services-ads:21.5.0'
 
 
 }

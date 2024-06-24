@@ -324,61 +324,71 @@ class SharedPreferences {
             return 0
         }
 
-        fun saveIncrementalCounter(context: Context, counter: Int,imageName:String) {
+        fun saveIncrementalCounter(context: Context, counter: Int, imageName: String) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
 
-            when(imageName){
-                SUBHAN_ALLAH ->{
+            when (imageName) {
+                SUBHAN_ALLAH -> {
                     msharedPreferences!!.edit().apply {
                         putInt(KEY_INCREMENTAL_COUNTER_1, counter)
                         apply()
                     }
                 }
-                ALHAMDULILLAH->{
+
+                ALHAMDULILLAH -> {
                     msharedPreferences!!.edit().apply {
                         putInt(KEY_INCREMENTAL_COUNTER_2, counter)
                         apply()
                     }
                 }
-                ALLAHU_AKBAR ->{
+
+                ALLAHU_AKBAR -> {
                     msharedPreferences!!.edit().apply {
                         putInt(KEY_INCREMENTAL_COUNTER_3, counter)
                         apply()
                     }
                 }
-                LA_ILAHA_ILLA_ALLAH->{
+
+                LA_ILAHA_ILLA_ALLAH -> {
                     msharedPreferences!!.edit().apply {
                         putInt(KEY_INCREMENTAL_COUNTER_4, counter)
                         apply()
                     }
-                }else->{
-                msharedPreferences!!.edit().apply {
-                    putInt(KEY_INCREMENTAL_COUNTER_1, counter)
-                    apply()
                 }
+
+                else -> {
+                    msharedPreferences!!.edit().apply {
+                        putInt(KEY_INCREMENTAL_COUNTER_1, counter)
+                        apply()
+                    }
                 }
             }
 
 
         }
 
-        fun retrieveIncrementalCounter(context: Context,imageName: String): Int {
+        fun retrieveIncrementalCounter(context: Context, imageName: String): Int {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
 
-            when(imageName){
-                SUBHAN_ALLAH ->{
+            when (imageName) {
+                SUBHAN_ALLAH -> {
                     return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER_1, 0)
                 }
-                ALHAMDULILLAH->{
+
+                ALHAMDULILLAH -> {
                     return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER_2, 0)
                 }
-                ALLAHU_AKBAR ->{
+
+                ALLAHU_AKBAR -> {
                     return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER_3, 0)
                 }
-                LA_ILAHA_ILLA_ALLAH->{
+
+                LA_ILAHA_ILLA_ALLAH -> {
                     return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER_4, 0)
-                }else->{
-                return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER_1, 0)
+                }
+
+                else -> {
+                    return msharedPreferences!!.getInt(KEY_INCREMENTAL_COUNTER_1, 0)
                 }
             }
 
@@ -386,60 +396,70 @@ class SharedPreferences {
         }
 
 
-        fun saveEnteredValue(context: Context, enteredValue: Int,imageName: String) {
+        fun saveEnteredValue(context: Context, enteredValue: Int, imageName: String) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
 
-            when(imageName){
-                SUBHAN_ALLAH ->{
+            when (imageName) {
+                SUBHAN_ALLAH -> {
                     msharedPreferences!!.edit().apply {
                         putInt(ENTERED_VALUE_KEY_1, enteredValue)
                         apply()
                     }
                 }
-                ALHAMDULILLAH->{
+
+                ALHAMDULILLAH -> {
                     msharedPreferences!!.edit().apply {
                         putInt(ENTERED_VALUE_KEY_2, enteredValue)
                         apply()
                     }
                 }
-                ALLAHU_AKBAR ->{
+
+                ALLAHU_AKBAR -> {
                     msharedPreferences!!.edit().apply {
                         putInt(ENTERED_VALUE_KEY_3, enteredValue)
                         apply()
                     }
                 }
-                LA_ILAHA_ILLA_ALLAH->{
+
+                LA_ILAHA_ILLA_ALLAH -> {
                     msharedPreferences!!.edit().apply {
                         putInt(ENTERED_VALUE_KEY_4, enteredValue)
                         apply()
                     }
-                }else->{
-                msharedPreferences!!.edit().apply {
-                    putInt(ENTERED_VALUE_KEY_1, enteredValue)
-                    apply()
                 }
-            }
+
+                else -> {
+                    msharedPreferences!!.edit().apply {
+                        putInt(ENTERED_VALUE_KEY_1, enteredValue)
+                        apply()
+                    }
+                }
             }
         }
 
-        fun retrieveEnteredValue(context: Context,imageName: String): Int {
+        fun retrieveEnteredValue(context: Context, imageName: String): Int {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
 
-            when(imageName){
-                SUBHAN_ALLAH ->{
+            when (imageName) {
+                SUBHAN_ALLAH -> {
                     return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_1, 33)
                 }
-                ALHAMDULILLAH->{
+
+                ALHAMDULILLAH -> {
                     return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_2, 33)
                 }
-                ALLAHU_AKBAR ->{
+
+                ALLAHU_AKBAR -> {
                     return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_3, 33)
                 }
-                LA_ILAHA_ILLA_ALLAH->{
+
+                LA_ILAHA_ILLA_ALLAH -> {
                     return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_4, 33)
-                }else->{
-                return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_1, 33)
-            }
+                }
+
+                else -> {
+                    return msharedPreferences!!.getInt(ENTERED_VALUE_KEY_1, 33)
+                }
             }
 
 
@@ -541,24 +561,27 @@ class SharedPreferences {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getString(AUDIO_PREF_KEY, null)
         }
-        fun savePrayerInPrefs(context: Context,prayerName: String) {
+
+        fun savePrayerInPrefs(context: Context, prayerName: String) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             msharedPreferences!!.edit().apply {
                 putString(PRAYER_PREF_KEY, prayerName)
-               apply()
+                apply()
             }
         }
-        fun getStoredPrayerName(context: Context):String? {
+
+        fun getStoredPrayerName(context: Context): String? {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             return msharedPreferences!!.getString(PRAYER_PREF_KEY, null)
         }
+
         // Function to save the selected prayer
         fun saveSelectPrayerInPrefs(context: Context, prayer: String) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             msharedPreferences!!.edit().apply {
                 putString(KEY_SELECTED_PRAYER, prayer).apply()
             }
-            }
+        }
 
 
         // Function to retrieve the saved prayer
@@ -571,7 +594,8 @@ class SharedPreferences {
 
         fun saveNotificationOption(context: Context, prayerName: String, option: String?) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
-       msharedPreferences!!.edit().putString("${prayerName}_notification_option", option).apply()
+            msharedPreferences!!.edit().putString("${prayerName}_notification_option", option)
+                .apply()
         }
 
         fun getNotificationOption(context: Context, prayerName: String): String? {
@@ -581,7 +605,8 @@ class SharedPreferences {
 
         fun savePreAdhanReminderOption(context: Context, prayerName: String, option: String?) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
-           msharedPreferences!!.edit().putString("${prayerName}_pre_adhan_reminder_option", option).apply()
+            msharedPreferences!!.edit().putString("${prayerName}_pre_adhan_reminder_option", option)
+                .apply()
         }
 
         fun getPreAdhanReminderOption(context: Context, prayerName: String): String? {
@@ -600,9 +625,12 @@ class SharedPreferences {
         }
 
 
-
         // Method to save the selected pre-alert option for a specific prayer
-        fun saveSelectedPreAlertOption(context: Context, prayerName: String, selectedOption: String) {
+        fun saveSelectedPreAlertOption(
+            context: Context,
+            prayerName: String,
+            selectedOption: String
+        ) {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
             val editor = msharedPreferences!!.edit()
             editor.putString(KEY_SELECTED_PRE_ALERT_OPTION_PREFIX + prayerName, selectedOption)
@@ -612,7 +640,10 @@ class SharedPreferences {
         // Method to retrieve the selected pre-alert option for a specific prayer
         fun getSelectedPreAlertOption(context: Context, prayerName: String): String? {
             val msharedPreferences: SharedPreferences? = initShardPreference(context)
-            return msharedPreferences!!.getString(KEY_SELECTED_PRE_ALERT_OPTION_PREFIX + prayerName, null)
+            return msharedPreferences!!.getString(
+                KEY_SELECTED_PRE_ALERT_OPTION_PREFIX + prayerName,
+                null
+            )
         }
 
 //        fun saveDataToSharedPreferences(context: Context,imageUri: Uri, tasbihName: String) {

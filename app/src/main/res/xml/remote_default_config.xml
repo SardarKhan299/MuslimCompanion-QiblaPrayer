@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>bannerAdId</key>
+        <value>ca-app-pub-3940256099942544/6300978111</value> <!-- Default test ad unit ID -->
+    </entry>
+</defaultsMap>

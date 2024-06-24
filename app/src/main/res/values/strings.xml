@@ -307,4 +307,11 @@
     <string name="tasbih_name">Enter your own tasbih</string>
     <string name="delete_text_title">Delete Confirmation</string>
     <string name="delete_message">"Are you sure you want to delete this zhikr?"</string>
+
+    <string name="app_ads_id">ca-app-pub-8900249270810414~2908277829</string>
+    <string name="banner_ads_id">ca-app-pub-8900249270810414/7247708003</string>
+    <string name="full_screen_ads_id">ca-app-pub-8900249270810414/1786663616</string>
+
+
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

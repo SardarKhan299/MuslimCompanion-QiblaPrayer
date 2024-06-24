@@ -21,12 +21,20 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import com.google.android.gms.location.*
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.AdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods
-import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToMilliseconds
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToUnixTime
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToUnixTimeDay
 import com.qibla.qiblacompass.prayertime.finddirection.common.MyLocationManager
@@ -45,29 +53,27 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.IOException
-import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
-import kotlin.collections.HashMap
 import kotlin.collections.LinkedHashMap
 
 
 @AndroidEntryPoint
 class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragment_dash_board) {
-
+    private lateinit var remoteConfig: FirebaseRemoteConfig
     private lateinit var rView: RecyclerView
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var locationTextView: TextView
     private lateinit var mLocationManager: MyLocationManager
 
-    private lateinit var prayerTimeList: LinkedHashMap<Long,String>
+    private lateinit var prayerTimeList: LinkedHashMap<Long, String>
 
-    private lateinit var nextDayPrayerTimeList: LinkedHashMap<Long,String>
+    private lateinit var nextDayPrayerTimeList: LinkedHashMap<Long, String>
 
     val c = Calendar.getInstance()
 
     val currentYear = c.get(Calendar.YEAR)
-    val currentMonth = c.get(Calendar.MONTH)+1
+    val currentMonth = c.get(Calendar.MONTH) + 1
     val currentDay = c.get(Calendar.DAY_OF_MONTH)
     var currentLat = 0.0
     var currentLng = 0.0
@@ -76,9 +82,8 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     private val viewModel: DashboardViewModel by activityViewModels()
     private var firstTime = 0
 
-    lateinit var job:Job
-
-
+    lateinit var job: Job
+    private lateinit var adView: AdView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(DashBoardFragment::class.simpleName, "onCreate: ")
@@ -103,6 +108,46 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             startActivity(Intent(mContext, CompassDirectionActivity::class.java))
 
         }
+        //AdMob policy
+        MobileAds.setRequestConfiguration(RequestConfiguration.Builder().also {
+            // The tag for Children's Online Privacy Protection Act (COPPA)
+            it.setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
+
+            // Age consent
+            it.setTagForUnderAgeOfConsent(RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_TRUE)
+
+            // Maximum ad content rating
+            it.setMaxAdContentRating(RequestConfiguration.MAX_AD_CONTENT_RATING_PG) // Parental guidence
+        }.build())
+        MobileAds.initialize(mContext) {
+            Log.d(
+                DashBoardFragment::class.java.simpleName,
+                "onViewCreated: onInilializationCompleted"
+            )
+
+        }
+
+        adView = binding.viewAds
+
+     //   adContainer = view.findViewById(R.id.adContainer)
+       // adView = AdView(requireContext())
+
+       // AdUtil.loadBannerAd(requireContext(), adView)
+
+
+
+        remoteConfig = Firebase.remoteConfig
+        //remoteConfig = FirebaseRemoteConfig.getInstance()
+        val configSettings = FirebaseRemoteConfigSettings.Builder()
+            .setMinimumFetchIntervalInSeconds(3600) // Fetch every hour
+            .build()
+        remoteConfig.setConfigSettingsAsync(configSettings)
+        remoteConfig.setDefaultsAsync(R.xml.remote_default_config)
+
+      //   Fetch remote config values
+        fetchAndSetAdUnitId()
+
+
 
         binding.viewQiblaDirection.setOnClickListener {
             Log.d(DashBoardFragment::class.simpleName, "onViewCreated: ")
@@ -160,39 +205,44 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     }
 
     private fun initObserver() {
-        with(viewModel){
+        with(viewModel) {
             getPrayerTimeState.observe(viewLifecycleOwner) { response ->
                 when (response) {
                     is NetworkResult.Success -> {
                         response.data?.let {
-                            Log.d(DashBoardFragment::class.simpleName, "initObservation: Receive Data ${it.data.size }")
+                            Log.d(
+                                DashBoardFragment::class.simpleName,
+                                "initObservation: Receive Data ${it.data.size}"
+                            )
                             val prayTime = it.data[currentDay - 1].timings
                             val nextDayPrayTime = it.data[currentDay].timings
-                            setAlarms(listOf(
-                                prayTime.Fajr,
-                                prayTime.Dhuhr,
-                                prayTime.Asr,
-                                prayTime.Maghrib,
-                                prayTime.Isha
-                            ))
+                            setAlarms(
+                                listOf(
+                                    prayTime.Fajr,
+                                    prayTime.Dhuhr,
+                                    prayTime.Asr,
+                                    prayTime.Maghrib,
+                                    prayTime.Isha
+                                )
+                            )
                             prayerTimeList = linkedMapOf(
-                                convertTimeToUnixTime(prayTime.Fajr) to prayTime.Fajr.formatTimeTo12Hour() ,
+                                convertTimeToUnixTime(prayTime.Fajr) to prayTime.Fajr.formatTimeTo12Hour(),
                                 convertTimeToUnixTime(prayTime.Dhuhr) to prayTime.Dhuhr.formatTimeTo12Hour(),
                                 convertTimeToUnixTime(prayTime.Asr) to prayTime.Asr.formatTimeTo12Hour(),
                                 convertTimeToUnixTime(prayTime.Maghrib) to prayTime.Maghrib.formatTimeTo12Hour(),
                                 convertTimeToUnixTime(prayTime.Isha) to prayTime.Isha.formatTimeTo12Hour(),
                             )
                             nextDayPrayerTimeList = linkedMapOf(
-                                convertTimeToUnixTimeDay(nextDayPrayTime.Fajr) to nextDayPrayTime.Fajr.formatTimeTo12Hour() ,
+                                convertTimeToUnixTimeDay(nextDayPrayTime.Fajr) to nextDayPrayTime.Fajr.formatTimeTo12Hour(),
                                 convertTimeToUnixTimeDay(nextDayPrayTime.Dhuhr) to nextDayPrayTime.Dhuhr.formatTimeTo12Hour(),
                                 convertTimeToUnixTimeDay(nextDayPrayTime.Asr) to nextDayPrayTime.Asr.formatTimeTo12Hour(),
                                 convertTimeToUnixTimeDay(nextDayPrayTime.Maghrib) to nextDayPrayTime.Maghrib.formatTimeTo12Hour(),
                                 convertTimeToUnixTimeDay(nextDayPrayTime.Isha) to nextDayPrayTime.Isha.formatTimeTo12Hour(),
                             )
                             viewModel.setPrayerTimes(prayerTimeList)
-                            val hijriMonth = it.data[currentDay-1].date.hijri.month.en
-                            val hijriYear = it.data[currentDay-1].date.hijri.year
-                            val hijriDay = it.data[currentDay-1].date.hijri.day
+                            val hijriMonth = it.data[currentDay - 1].date.hijri.month.en
+                            val hijriYear = it.data[currentDay - 1].date.hijri.year
+                            val hijriDay = it.data[currentDay - 1].date.hijri.day
                             val hijriDate = "$hijriDay $hijriMonth $hijriYear"
                             binding.tvIslamicMonth.text = hijriDate
 
@@ -215,26 +265,31 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 }
             }
 
-            viewModel.prayerTimes.observe(viewLifecycleOwner) {prayerTimesList->
+            viewModel.prayerTimes.observe(viewLifecycleOwner) { prayerTimesList ->
                 Log.d(DashBoardFragment::class.simpleName, "initObservation: Setting prayer times")
                 // set prayer times on Views..//
-                if(prayerTimesList!=null && prayerTimesList.size ==5) {
-                    binding.layoutPrayerTiming.tvTimePrayer.text = prayerTimesList.values.elementAt(0)
-                    binding.layoutPrayerTiming.tvTimeZuhrPrayer.text = prayerTimesList.values.elementAt(1)
-                    binding.layoutPrayerTiming.tvTimeAsrPrayer.text = prayerTimesList.values.elementAt(2)
-                    binding.layoutPrayerTiming.tvTimeMaghribPrayer.text = prayerTimesList.values.elementAt(3)
-                    binding.layoutPrayerTiming.tvTimeIshaPrayer.text = prayerTimesList.values.elementAt(4)
+                if (prayerTimesList != null && prayerTimesList.size == 5) {
+                    binding.layoutPrayerTiming.tvTimePrayer.text =
+                        prayerTimesList.values.elementAt(0)
+                    binding.layoutPrayerTiming.tvTimeZuhrPrayer.text =
+                        prayerTimesList.values.elementAt(1)
+                    binding.layoutPrayerTiming.tvTimeAsrPrayer.text =
+                        prayerTimesList.values.elementAt(2)
+                    binding.layoutPrayerTiming.tvTimeMaghribPrayer.text =
+                        prayerTimesList.values.elementAt(3)
+                    binding.layoutPrayerTiming.tvTimeIshaPrayer.text =
+                        prayerTimesList.values.elementAt(4)
                 }
-                if(firstTime==0) {
+                if (firstTime == 0) {
                     firstTime++
                     //get next prayer time
                     val time = nextPrayer(prayerTimesList.keys.toList())
-                    if(time == -1L){
+                    if (time == -1L) {
                         // fetch next Day time for fajar namaz...//
                         val time = nextPrayer(nextDayPrayerTimeList.keys.toList())
                         SharedPreferences.saveTimerEndTime(mContext, time)
                         startCountdown(TimeUnit.MILLISECONDS.toSeconds(time))
-                    }else {
+                    } else {
                         SharedPreferences.saveTimerEndTime(mContext, time)
                         startCountdown(TimeUnit.MILLISECONDS.toSeconds(time))
                     }
@@ -242,7 +297,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             }
 
             // handle count down value
-            viewModel.counter.observe(viewLifecycleOwner){
+            viewModel.counter.observe(viewLifecycleOwner) {
                 binding.tvCounterNextPrayerTime.text = "$it"
             }
 
@@ -254,7 +309,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             // to handle count down
             viewModel.index.observe(viewLifecycleOwner) { index ->
                 Log.d(DashBoardFragment::class.simpleName, "initObserver: next Prayer $index")
-                binding.tvNextPrayerTimeVal.text = prayerTimeList.values.elementAt(index-1)
+                binding.tvNextPrayerTimeVal.text = prayerTimeList.values.elementAt(index - 1)
                 when (index) {
                     1 -> {
                         binding.tvPrayerTime.text = "Fajr"
@@ -284,7 +339,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         Log.d(DashBoardFragment::class.simpleName, "setAlarms: ")
         val prayerReminder = PrayerReminder(mContext, prayerTimeList)
 
-        if(prayerTimeList.size ==5) {
+        if (prayerTimeList.size == 5) {
             prayerReminder.setAlarms()
         }
 
@@ -295,27 +350,26 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         job = CoroutineScope(Dispatchers.Main).launch {
             for (seconds in totalSeconds downTo 0) {
                 //Log.d(DashBoardFragment::class.simpleName, "startCountdown: $seconds")
-                SharedPreferences.saveTimerEndTime(mContext,seconds)
+                SharedPreferences.saveTimerEndTime(mContext, seconds)
                 viewModel.setCounterValue(seconds)
                 delay(1000)
                 // add  condition for count down timer ends..
-                if(seconds.toInt() ==2){
+                if (seconds.toInt() == 2) {
                     Log.d(DashBoardFragment::class.simpleName, "startCountdown: Time Ends")
                     // reload api and values on dashboard.//
                     firstTime = 0
-                    viewModel.getPrayerTimes(currentYear,currentMonth,currentLat,currentLng,1)
+                    viewModel.getPrayerTimes(currentYear, currentMonth, currentLat, currentLng, 1)
                 }
             }
         }
     }
 
 
-
     private fun nextPrayer(times: List<Long>): Long {
         Log.d(DashBoardFragment::class.simpleName, "nextPrayer: ")
         val currentTime = Calendar.getInstance().timeInMillis
-        val timeExistInThisDay = times.filter {currentTime<it}
-        if(timeExistInThisDay.isEmpty()){
+        val timeExistInThisDay = times.filter { currentTime < it }
+        if (timeExistInThisDay.isEmpty()) {
             return -1
         }
         for (i in times) {
@@ -330,7 +384,6 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         }
         return 0
     }
-
 
 
     private fun checkLocationPermissions() {
@@ -383,18 +436,18 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
     private fun setUpQibla() {
         val data = ArrayList<QiblaData>()
-        data.add(QiblaData((R.drawable.ic_qibla),getString(R.string.qibla)))
-        data.add(QiblaData((R.drawable.ic_zakat),getString(R.string.zakat)))
-        data.add(QiblaData((R.drawable.ic_names),getString(R.string.names)))
-        data.add(QiblaData((R.drawable.ic_tasbih),getString(R.string.tasbih)))
-        data.add(QiblaData((R.drawable.ic_prayer),getString(R.string.prayer)))
-        data.add(QiblaData((R.drawable.ic_quran),getString(R.string.quran)))
-        data.add(QiblaData((R.drawable.ic_makkah),getString(R.string.makkah_live)))
-        data.add(QiblaData((R.drawable.ic_near_me),getString(R.string.near_me)))
-        data.add(QiblaData((R.drawable.ic_calendar),getString(R.string.hijri_calendar)))
-        data.add(QiblaData((R.drawable.ic_hadith),getString(R.string.hadith)))
-        data.add(QiblaData((R.drawable.ic_dua),getString(R.string.dua)))
-        data.add(QiblaData((R.drawable.ic_streak),getString(R.string.streak)))
+        data.add(QiblaData((R.drawable.ic_qibla), getString(R.string.qibla)))
+        data.add(QiblaData((R.drawable.ic_zakat), getString(R.string.zakat)))
+        data.add(QiblaData((R.drawable.ic_names), getString(R.string.names)))
+        data.add(QiblaData((R.drawable.ic_tasbih), getString(R.string.tasbih)))
+        data.add(QiblaData((R.drawable.ic_prayer), getString(R.string.prayer)))
+        data.add(QiblaData((R.drawable.ic_quran), getString(R.string.quran)))
+        data.add(QiblaData((R.drawable.ic_makkah), getString(R.string.makkah_live)))
+        data.add(QiblaData((R.drawable.ic_near_me), getString(R.string.near_me)))
+        data.add(QiblaData((R.drawable.ic_calendar), getString(R.string.hijri_calendar)))
+        data.add(QiblaData((R.drawable.ic_hadith), getString(R.string.hadith)))
+        data.add(QiblaData((R.drawable.ic_dua), getString(R.string.dua)))
+        data.add(QiblaData((R.drawable.ic_streak), getString(R.string.streak)))
 
 
         val adapter = QiblaAdapter(requireContext(), data) { position ->
@@ -413,31 +466,38 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
                 findNavController().navigate(R.id.qibalDirectionFragment)
 
             }
+
             1 -> {
 
                 findNavController().navigate(R.id.zakatFragment)
             }
-            2->{
+
+            2 -> {
                 Navigation.findNavController(requireView()).navigate(R.id.namesFragment)
 
             }
+
             3 -> {
                 findNavController().navigate(R.id.tasbihFragment)
             }
+
             4 -> {
                 QiblaApp.selectedPrayerPos = 0
                 findNavController().navigate(R.id.nextPrayerTimeFragment)
 
             }
+
             5 -> {
                 QiblaApp.selectedPrayerPos = 0
                 findNavController().navigate(R.id.quranFragment)
 
             }
+
             6 -> {
                 findNavController().navigate(R.id.makkahLiveFragment)
 
             }
+
             10 -> {
                 findNavController().navigate(R.id.duaFragment)
 
@@ -455,29 +515,33 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
     private fun requestLocationPermission() {
         Log.d(DashBoardFragment::class.simpleName, "requestLocationPermission: ")
-        permReqLauncher.launch(arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ))
+        permReqLauncher.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        )
     }
 
     var settingsLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()) { result ->
-        if(mLocationManager.isLocationEnabled()){
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (mLocationManager.isLocationEnabled()) {
             fetchLocation()
-        }else{
+        } else {
             Log.d(DashBoardFragment::class.simpleName, ": Tell user to why they need location.")
         }
     }
 
-    private val permReqLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+    private val permReqLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             val granted = permissions.entries.all {
                 it.value
             }
             if (granted) {
                 Log.d(DashBoardFragment::class.simpleName, ": Permission Granted")
                 fetchLocation()
-            }else{
+            } else {
                 Log.d(DashBoardFragment::class.simpleName, ": Permission Not Granted")
             }
         }
@@ -495,7 +559,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
             Log.d(DashBoardFragment::class.simpleName, "fetchLocation: Permission not granted")
             return
         }
-        if(!mLocationManager.isLocationEnabled()){
+        if (!mLocationManager.isLocationEnabled()) {
             Log.d(DashBoardFragment::class.simpleName, "fetchLocation: Location Not enabled..")
             AlertDialog.Builder(mContext)
                 .setMessage(R.string.gps_network_not_enabled)
@@ -529,10 +593,19 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
     }
 
     private fun getPrayerTimings(location: Location) {
-        Log.d(DashBoardFragment::class.simpleName, "getPrayerTimings: ${location.latitude} - ${location.longitude}")
+        Log.d(
+            DashBoardFragment::class.simpleName,
+            "getPrayerTimings: ${location.latitude} - ${location.longitude}"
+        )
         currentLat = location.latitude
         currentLng = location.longitude
-        viewModel.getPrayerTimes(currentYear,currentMonth,location.latitude,location.longitude,1)
+        viewModel.getPrayerTimes(
+            currentYear,
+            currentMonth,
+            location.latitude,
+            location.longitude,
+            1
+        )
     }
 
     private fun updateLocationText(location: Location) {
@@ -542,7 +615,7 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         Log.d(DashBoardFragment::class.simpleName, "updateLocationText: $city")
         val locationText = "$city"
         locationTextView.text = locationText
-        SharedPreferences.saveUserCity(mContext,city)
+        SharedPreferences.saveUserCity(mContext, city)
     }
 
     private fun getCityFromLocation(latitude: Double, longitude: Double): String {
@@ -561,9 +634,44 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         return getString(R.string.unknown_city)
     }
 
+    private fun fetchAndSetAdUnitId() {
+        remoteConfig.fetchAndActivate()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Fetch and activate succeeded
+                    val adUnitId = remoteConfig.getString("bannerAdId")
+                    // Check if adView has already been initialized
+                    if (adView.adUnitId.isEmpty()) {
+                        // Set ad unit ID and ad size on AdView
+                        setupAdView(adUnitId)
+                    } else {
+                        // AdView already has ad unit ID set, skip setting it again
+                        loadBannerAd()
+                    }
+                } else {
+                    // Fetch failed
+                    val defaultAdUnitId = getString(R.string.banner_ad_unit_id)
+                    setupAdView(defaultAdUnitId)
+                }
+            }
+    }
+
+    private fun setupAdView(adUnitId: String) {
+        adView.adUnitId = adUnitId
+        // Load the ad
+        loadBannerAd()
+
+    }
+
+    private fun loadBannerAd() {
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+    }
+
 
     override fun onPause() {
         super.onPause()
+        adView.pause()
         Log.d(DashBoardFragment::class.simpleName, "onPause: ")
     }
 
@@ -574,6 +682,23 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
 
     override fun onResume() {
         super.onResume()
+        adView.resume()
         Log.d(DashBoardFragment::class.simpleName, "onResume: ")
     }
+
+    override fun onDestroy() {
+        // Destroy the AdView when activity is destroyed
+        adView.destroy()
+        super.onDestroy()
+    }
 }
+
+
+
+
+
+
+
+
+
+

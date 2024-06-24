@@ -95,6 +95,10 @@
             android:enabled="true"
             android:exported="false"
             android:process=":remote" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8900249270810414~2908277829"/>
     </application>
 
 </manifest>
