@@ -46,14 +46,23 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_calculate_zakat"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right_zakat"
             app:layout_constraintHorizontal_bias="@dimen/bias_zero"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_zakat"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_zakat"
-            app:layout_constraintVertical_bias="@dimen/bias_zero"
+            app:layout_constraintBottom_toTopOf="@id/ads_banner_zakat"
             tools:listitem="@layout/item_zakat" />
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ads_banner_zakat"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_80sdp"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id"
+            ads:layout_constraintBottom_toTopOf="@id/btn_calculate_zakat"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintEnd_toEndOf="parent"
 
+             />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_calculate_zakat"
             style="@style/button_text_style"
