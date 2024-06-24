@@ -36,7 +36,17 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintGuide_percent="@dimen/dashboard_guideline_right" />
-
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ads_banner_name_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        android:layout_marginTop="@dimen/_8sdp"
+        ads:layout_constraintTop_toBottomOf="@id/toolbar_names_detail"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        />
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_main_name"
         android:layout_width="@dimen/_250sdp"
@@ -45,7 +55,7 @@
         android:src="@drawable/ic_name_detail"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_names_detail"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_names_detail"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_names_detail" />
+        app:layout_constraintTop_toBottomOf="@+id/ads_banner_name_detail" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_name_number"
