@@ -3,19 +3,25 @@ package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.zakat
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.AdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentZakatCalculateBinding
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
 
 class ZakatCalculateFragment :
     BaseFragment<FragmentZakatCalculateBinding>(R.layout.fragment_zakat_calculate) {
+    private lateinit var adView: AdView
 
     private lateinit var edittext1: EditText
     private lateinit var edittext2: EditText
@@ -72,6 +78,15 @@ class ZakatCalculateFragment :
         binding.apply {
             zakatCalculateFragment = this@ZakatCalculateFragment
         }
+        MobileAds.initialize(mContext) {
+            Log.d(
+                DashBoardFragment::class.java.simpleName,
+                "onViewCreated: onInitializationCompleted"
+            )
+        }
+        adView = binding.adsBannerZakatCalculate
+        // Initialize AdUtil and load the banner ad
+        AdUtil.initialize(requireContext(), adView)
         binding.toolbarZakatCalculate.groupToolbarSubScreenProfile.visibility = View.VISIBLE
         binding.toolbarZakatCalculate.tvToolbarSubScreen.text = getString(R.string.zakat_calculator)
         val zakatFragment = binding.includeZakatCalculateForm
@@ -330,5 +345,25 @@ class ZakatCalculateFragment :
 
         // Set the result in the Zakatable Wealth TextView
         zakatableWealthTextView.text = "$zakatableWealth"
+    }
+    override fun onResume() {
+        adView.resume()
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
+
+    override fun onPause() {
+        adView.pause()
+        super.onPause()
+        Log.d(TAG, "onPause: ")
+    }
+
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
+    }
+    companion object{
+        private val TAG = "ZakatCalculateFragment"
     }
 }
