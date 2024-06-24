@@ -201,7 +201,7 @@
         <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/ads_banner_security"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_80sdp"
+            android:layout_height="wrap_content"
             ads:adSize="BANNER"
             ads:adUnitId="@string/banner_ad_unit_id"
             app:layout_constraintBottom_toBottomOf="parent"

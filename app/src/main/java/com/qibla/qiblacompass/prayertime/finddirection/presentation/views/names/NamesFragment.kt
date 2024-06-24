@@ -9,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.allahNamesImages
@@ -17,11 +19,13 @@ import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp.Companion.ra
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
 import com.qibla.qiblacompass.prayertime.finddirection.common.*
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentNamesBinding
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
 
 
 class NamesFragment : BaseFragment<FragmentNamesBinding>(R.layout.fragment_names) {
     lateinit var recyclerView: RecyclerView
     val position = Int
+    private lateinit var adView: AdView
 
 
     private val allahNamesImages = QiblaApp.allahNamesImages
@@ -65,7 +69,15 @@ class NamesFragment : BaseFragment<FragmentNamesBinding>(R.layout.fragment_names
 //            SharedPreferences.getSelectionFromSharedPreferences(mContext, PREFS_SELECTED_KEY_RASOOL)
 //        // Set the initial data based on the stored preference
 
-
+        MobileAds.initialize(mContext) {
+            Log.d(
+                DashBoardFragment::class.java.simpleName,
+                "onViewCreated: onInitializationCompleted"
+            )
+        }
+        adView = binding.adsBannerNames
+        // Initialize AdUtil and load the banner ad
+        AdUtil.initialize(requireContext(), adView)
 
 
         binding.viewAllahNames.setOnClickListener {
@@ -170,117 +182,26 @@ class NamesFragment : BaseFragment<FragmentNamesBinding>(R.layout.fragment_names
             binding.viewRasoolNames.setBackgroundResource(R.drawable.button_bg)
         }
     }
+    override fun onResume() {
+        adView.resume()
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
+
+    override fun onPause() {
+        adView.pause()
+        super.onPause()
+        Log.d(TAG, "onPause: ")
+    }
+
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
+    }
+    companion object{
+        private val TAG = "NotificationSettingsFragment"
+    }
 }
 
 
-//
-//imageResourceRasool = ArrayList()
-//imageResourceRasool.add(NamesData(R.drawable.ic_rasool_name_two, R.drawable.ic_one_number))
-//imageResourceRasool.add(NamesData(R.drawable.ic_rasool_name_one, R.drawable.ic_two_number))
-//
-//// isAllahNamesSelected = getSelectionFromSharedPreferences(PREFS_SELECTED_KEY_ALLAH)
-////  isRasoolNamesSelected = getSelectionFromSharedPreferences(PREFS_SELECTED_KEY_RASOOL)
-//
-//
-//isAllahNamesSelected =
-//SharedPreferences.getSelectionFromSharedPreferences(mContext, PREFS_SELECTED_KEY_ALLAH)
-//isRasoolNamesSelected =
-//SharedPreferences.getSelectionFromSharedPreferences(mContext, PREFS_SELECTED_KEY_RASOOL)
-//// Set the initial data based on the stored preference
-//if (isAllahNamesSelected) {
-//    //    adapter.setData(imageResource)
-//    updateViewStyles()
-//} else if (isRasoolNamesSelected) {
-//    //   adapter.setData(imageResourceRasool)
-//    updateViewStyles()
-//}
-//
-//// Set up the RecyclerView with a grid layout manager
-//val spanCount = 2 // Adjust as needed
-//recyclerView.layoutManager = GridLayoutManager(requireContext(), spanCount)
-//val adapter = NamesAdapter(allahNamesImages, numberImages) { position ->
-//    // Handle item click
-//    saveClickedPosition(position)
-//    Log.d(NamesFragment::class.java.simpleName, "onViewCreated: $position")
-//    // findNavController().navigate(R.id.nameDetailFragment)
-//}
-//recyclerView.adapter = adapter
-//// recyclerView.adapter = adapter
-//
-//
-//view.findViewById<View>(R.id.viewAllahNames)
-//
-//binding.viewAllahNames.setOnClickListener {
-//    Log.d(NamesFragment::class.java.simpleName, "onViewCreated:view Name clicked.")
-//    isAllahNamesSelected = true
-//    isRasoolNamesSelected = false
-//    val adapterRasool = NamesAdapter(allahNamesImages,numberImages) { position ->
-//        saveClickedPosition(position, true) // Save Rasool name clicked position
-//    }
-//    recyclerView.adapter = adapterRasool
-//    //  adapter.setData(imageResource)
-//    // saveSelectionToSharedPreferences(true) // Save the selection type
-//    SharedPreferences.saveSelectionToSharedPreferences(mContext, false)
-//    SharedPreferences.saveSelectionToSharedPreferences(mContext, PREFS_SELECTED_KEY_ALLAH)
-//
-//    //saveSelectionToSharedPreferences(PREFS_SELECTED_KEY_ALLAH)
-//    updateViewStyles()
-//}
-//
-//binding.viewRasoolNames.setOnClickListener {
-//    Log.d(NamesFragment::class.java.simpleName, "onViewCreated: view Rasool Name clicked.")
-//    isAllahNamesSelected = false
-//    isRasoolNamesSelected = true
-//    val adapterRasool = NamesAdapter(rasoolNamesImages,numberImages) { position ->
-//        Log.d(NamesFragment::class.java.simpleName, "onViewCreated:Rasool $position")
-//        saveClickedPosition(position, false) // Save Rasool name clicked position
-//    }
-//    recyclerView.adapter = adapterRasool
-//    // adapter.setData(imageResourceRasool)
-//    // saveSelectionToSharedPreferences(false) // Save the selection type
-//    // SharedPreferences.saveSelectionToSharedPreferences(mContext, false)
-//    //  saveSelectionToSharedPreferences(PREFS_SELECTED_KEY_RASOOL)
-//    SharedPreferences.saveSelectionToSharedPreferences(mContext, PREFS_SELECTED_KEY_RASOOL)
-//    updateViewStyles()
-//}
-
-
-//    private fun onItemClick(namesData: NamesData) {
-//
-//        val position = if (isAllahNamesSelected) {
-//          //  imageResource.indexOf(namesData)
-//
-//        } else {
-//            imageResourceRasool.indexOf(namesData)
-//        }
-//        val translation = if (isAllahNamesSelected) {
-//           // allahNamesTranslations[position]
-//        } else {
-//          //  SharedPreferences.rasoolNamesTranslation[position]
-//        }
-//        //save player click position.
-//        // SharedPreferences.saveSelectedPlayerPosition(requireContext(), position)
-//
-//        //    saveSelectedDataToSharedPreferences(namesData, translation)
-//        // Navigate to the detail screen
-//    //    findNavController().navigate(R.id.nameDetailFragment)
-//    }
-
-//    private fun saveSelectedDataToSharedPreferences(
-//        namesData: NamesData,
-//        translation: Pair<String, String>
-//    ) {
-//        val sharedPreferences =
-//            requireContext().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
-//        val editor = sharedPreferences.edit()
-//
-//        // Access the integer values from namesData:
-//        editor.putInt("selected_name_image", namesData.nameImage)  // Use namesData.nameImage
-//        editor.putInt(
-//            "selected_name_number_image",
-//            namesData.nameNumberImage
-//        )  // Use namesData.nameNumberImage
-//        editor.putString("selected_translation_urdu", translation.first)
-//        editor.putString("selected_translation_english", translation.second)
-//        editor.apply()
-//    }
