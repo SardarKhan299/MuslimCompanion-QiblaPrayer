@@ -76,52 +76,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_right_quran"
             app:layout_constraintStart_toStartOf="@id/guideline_left_quran"
-            app:layout_constraintTop_toBottomOf="@id/searchView" />
+            app:layout_constraintTop_toBottomOf="@id/ads_banner_quran"
+            />
 
-
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ads_banner_quran"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            android:layout_marginTop="@dimen/_8sdp"
+            ads:adUnitId="@string/banner_ad_unit_id"
+            ads:layout_constraintTop_toBottomOf="@id/searchView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 
-    <!--    <include-->
-    <!--        android:id="@+id/include_layout_item_list"-->
-    <!--        layout="@layout/layout_quran_list_item"-->
-    <!--        android:layout_marginTop="@dimen/_8sdp"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline_left_quran"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/toolbar_quran"-->
-    <!--         />-->
-
-    <!--    <androidx.appcompat.widget.SearchView-->
-    <!--        android:id="@+id/searchView"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="@dimen/_8sdp"-->
-    <!--        android:background="@drawable/search_bar_quran_bg"-->
-    <!--        android:queryHint="Search"-->
-    <!--        android:textColorHint="@color/search_text_color"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline_right_quran"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline_left_quran"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/include_layout_item_list" />-->
-
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/recycler_view_quran_sura"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:layout_marginTop="@dimen/_8sdp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline_right_quran"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline_left_quran"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/include_sura_read_plan"-->
-    <!--        tools:listitem="@layout/item_quran_sura_list_layout" />-->
-
-    <!--    <include-->
-    <!--        android:id="@+id/include_sura_read_plan"-->
-    <!--        layout="@layout/layout_read_quran_sura"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="@dimen/_8sdp"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline_right_quran"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline_left_quran"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/searchView" />-->

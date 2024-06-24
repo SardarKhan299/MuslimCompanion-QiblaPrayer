@@ -49,7 +49,17 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_names"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_names"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_names" />
-
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ads_banner_names"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        android:layout_marginTop="@dimen/_8sdp"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_view_names"
+        />
     <View
         android:id="@+id/view_main_names"
         android:layout_width="0dp"
@@ -58,7 +68,7 @@
         android:background="@drawable/search_bg"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_names"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_names"
-        app:layout_constraintTop_toBottomOf="@+id/search_view_names" />
+        app:layout_constraintTop_toBottomOf="@+id/ads_banner_names" />
 
     <View
         android:id="@+id/viewAllahNames"
@@ -111,16 +121,8 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_names"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_names"
         app:layout_constraintTop_toBottomOf="@+id/view_main_names"
-        app:layout_constraintBottom_toTopOf="@id/ads_banner_names"
-        tools:listitem="@layout/items_names_layout" />
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/ads_banner_names"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:listitem="@layout/items_names_layout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
