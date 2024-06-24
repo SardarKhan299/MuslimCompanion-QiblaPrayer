@@ -234,5 +234,14 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             app:constraint_referenced_ids="progress_bar_add_own_tasbih,tv_progress_wait"/>
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ads_banner_tasbih"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id"
+            ads:layout_constraintBottom_toTopOf="@id/view_tasbih_save_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

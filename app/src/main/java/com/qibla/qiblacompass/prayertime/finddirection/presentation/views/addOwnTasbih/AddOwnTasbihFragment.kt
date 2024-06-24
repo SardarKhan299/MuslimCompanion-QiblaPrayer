@@ -31,6 +31,8 @@ import com.bumptech.glide.request.transition.Transition
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -41,6 +43,7 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.AdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.ProgressBar
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
@@ -49,6 +52,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.common.invisible
 import com.qibla.qiblacompass.prayertime.finddirection.common.visible
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentAddOwnTasbihBinding
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login.LoginActivity
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbih.ZhikrTasbih
 import java.io.IOException
@@ -63,7 +67,7 @@ class AddOwnTasbihFragment :
     lateinit var profileBitmap: Bitmap
     var tasbihName = ""
     private var uri: Uri? = null
-
+    private lateinit var adView: AdView
     lateinit var edtTasbihName: EditText
 
     // Firebase Auth instance
@@ -121,24 +125,15 @@ class AddOwnTasbihFragment :
             // Clear the stored data from SharedPreferences
             SharedPreferences.clearTasbihImageUriAndTasbihName(mContext)
         }
-//        binding.imgTickTasbihIcon.setOnClickListener {
-//
-//            if (validateTasbih()) {
-//                ProgressBar.showProgressBar(mContext, "Please wait.")
-//                uri?.let {
-//                    // Save Tasbih data to Firebase only if user ID is not null
-//                    if (FirebaseAuth.getInstance().currentUser != null) {
-//                        saveImageToFirebaseStorage(it)
-//
-//                    } else {
-//                        // If user ID is null, show login dialog
-//                        showLoginDialog()
-//                    }
-//                }
-//            }
-//            ProgressBar.hideProgressBar()
-//
-//        }
+        MobileAds.initialize(mContext) {
+            Log.d(
+                DashBoardFragment::class.java.simpleName,
+                "onViewCreated: onInitializationCompleted"
+            )
+        }
+        adView = binding.adsBannerTasbih
+        // Initialize AdUtil and load the banner ad
+        AdUtil.initialize(requireContext(), adView)
         ProgressBar.hideProgressBar()
         binding.imgTickTasbihIcon.setOnClickListener {
             if (validateTasbih()) {
@@ -390,6 +385,26 @@ class AddOwnTasbihFragment :
             }
             alertDialogBuilder.create().show()
         }
+    override fun onResume() {
+        adView.resume()
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
+
+    override fun onPause() {
+        adView.pause()
+        super.onPause()
+        Log.d(TAG, "onPause: ")
+    }
+
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
+    }
+    companion object{
+        private val TAG = "AddOwnTasbihFragment"
+    }
     }
 
 
