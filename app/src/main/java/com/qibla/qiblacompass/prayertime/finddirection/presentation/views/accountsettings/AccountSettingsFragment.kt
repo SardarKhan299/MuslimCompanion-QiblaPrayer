@@ -17,13 +17,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.AdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentAccountSettingsBinding
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.security.SecurityFragment
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.sidemenu.SideMenuFragment
 
 
 class AccountSettingsFragment :
@@ -31,7 +36,7 @@ class AccountSettingsFragment :
 
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var biometricManager: BiometricManager
-
+    private lateinit var adView: AdView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)?.hideActionBar()
@@ -61,6 +66,15 @@ class AccountSettingsFragment :
             }
         }
 
+        MobileAds.initialize(mContext) {
+            Log.d(
+                DashBoardFragment::class.java.simpleName,
+                "onViewCreated: onInitializationCompleted"
+            )
+        }
+        adView = binding.adsBannerAccountSettings
+        // Initialize AdUtil and load the banner ad
+        AdUtil.initialize(requireContext(), adView)
     }
 
     fun gotoSecurityScreen() {
@@ -155,4 +169,25 @@ class AccountSettingsFragment :
                 Log.d(AccountSettingsFragment::class.simpleName, ": User cancelled the Settings.")
             }
         }
+    override fun onResume() {
+        adView.resume()
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
+
+    override fun onPause() {
+        adView.pause()
+        super.onPause()
+        Log.d(TAG, "onPause: ")
+    }
+
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
+    }
+    companion object{
+        private const val TAG = "AccountSettingsFragment"
+    }
+
 }

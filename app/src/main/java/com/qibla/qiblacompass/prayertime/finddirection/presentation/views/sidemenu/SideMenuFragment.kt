@@ -7,20 +7,24 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.AdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods
 import com.qibla.qiblacompass.prayertime.finddirection.common.PopUpDialog
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentSideMenuBinding
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login.LoginActivity
 
 
 class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment_side_menu) {
 
-
+    private lateinit var adView: AdView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(SideMenuFragment::class.simpleName, "onCreate: ")
@@ -66,7 +70,34 @@ class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment
             CommonMethods.rateApp(mContext)
         }
 
+        MobileAds.initialize(mContext) {
+            Log.d(
+                DashBoardFragment::class.java.simpleName,
+                "onViewCreated: onInitializationCompleted"
+            )
+        }
+        adView = binding.adsBannerSideMenu
+        // Initialize AdUtil and load the banner ad
+        AdUtil.initialize(requireContext(), adView)
 
+    }
+
+    override fun onResume() {
+        adView.resume()
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
+
+    override fun onPause() {
+        adView.pause()
+        super.onPause()
+        Log.d(TAG, "onPause: ")
+    }
+
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
     }
 
     fun gotoUpdateAccountSettings() {
@@ -96,5 +127,9 @@ class SideMenuFragment : BaseFragment<FragmentSideMenuBinding>(R.layout.fragment
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    companion object {
+        val TAG = "SideMenuFragment"
     }
 }
