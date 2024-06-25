@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseActivity
 import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.common.FullScreenAdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardActivity
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.login.LoginActivity
@@ -23,6 +24,8 @@ class OnboardingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
+        // Initialize AdUtil to load the first interstitial ad
+        FullScreenAdUtil.initialize(this)
         viewPager = findViewById(R.id.view_pager)
         btnNext = findViewById(R.id.btn_next)
         findViewById<TextView>(R.id.tv_skip).setOnClickListener {

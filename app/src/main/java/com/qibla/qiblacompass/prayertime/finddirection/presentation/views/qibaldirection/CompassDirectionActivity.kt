@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.gms.location.LocationResult
 import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.common.FullScreenAdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.MyLocationManager
 import java.util.*
 
@@ -51,7 +52,8 @@ class CompassDirectionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compass_direction)
-
+// Initialize AdUtil to load the first interstitial ad
+        FullScreenAdUtil.initialize(this)
         /////////////////////////////////////////////////
         /////////////////////////////////////////////////
         prefs = getSharedPreferences("", MODE_PRIVATE)

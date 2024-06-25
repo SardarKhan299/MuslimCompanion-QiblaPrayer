@@ -11,6 +11,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.FullScreenAdUtil
 
 abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
     Fragment() {
@@ -31,6 +32,14 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes private val layout
         // Optionally set lifecycle owner if needed
         binding.lifecycleOwner = viewLifecycleOwner
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+        // Show ad before displaying fragment content
+        binding.root.visibility = View.GONE
+        FullScreenAdUtil.showInterstitialAd(requireActivity()) {
+            // Show fragment content after ad is closed
+            binding.root.visibility = View.VISIBLE
+        }
+
         return binding.root
     }
 

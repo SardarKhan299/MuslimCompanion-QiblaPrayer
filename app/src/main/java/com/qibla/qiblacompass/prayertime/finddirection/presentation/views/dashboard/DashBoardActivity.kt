@@ -11,6 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.qibla.qiblacompass.prayertime.finddirection.R
+import com.qibla.qiblacompass.prayertime.finddirection.common.FullScreenAdUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,7 +35,8 @@ class DashBoardActivity : AppCompatActivity() {
             .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
+           // Initialize AdUtil to load the first interstitial ad
+        FullScreenAdUtil.initialize(this)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -47,6 +49,7 @@ class DashBoardActivity : AppCompatActivity() {
                 Log.d(DashBoardActivity::class.simpleName, "onBackPressed: Finish")
                 finish()
             }
+
             else -> {
                 onBackPressedDispatcher.onBackPressed()
             }

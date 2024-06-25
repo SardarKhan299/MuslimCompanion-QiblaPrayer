@@ -100,12 +100,23 @@
             android:id="@+id/recyclerView_tasbih_bg"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_marginBottom="@dimen/_40sdp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_right_tasbih_counter"
             app:layout_constraintStart_toStartOf="@+id/guideline_left_tasbih_counter"
-            tools:listitem="@layout/item_tasbih_counter_backround_layout" />
+            tools:layout_editor_absoluteY="787dp"
+            tools:listitem="@layout/item_tasbih_counter_backround_layout"
+            app:layout_constraintBottom_toTopOf="@id/ads_banner_tasbih_counter"
+            />
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ads_banner_tasbih_counter"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_80sdp"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <include
             android:id="@+id/include"

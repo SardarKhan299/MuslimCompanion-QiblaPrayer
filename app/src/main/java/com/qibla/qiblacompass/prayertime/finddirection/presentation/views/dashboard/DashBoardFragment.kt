@@ -39,6 +39,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.AdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToUnixTime
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToUnixTimeDay
+import com.qibla.qiblacompass.prayertime.finddirection.common.FullScreenAdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.MyLocationManager
 import com.qibla.qiblacompass.prayertime.finddirection.common.NetworkResult
 import com.qibla.qiblacompass.prayertime.finddirection.common.PrayerReminder
