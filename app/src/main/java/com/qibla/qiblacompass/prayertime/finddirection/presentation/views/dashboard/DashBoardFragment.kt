@@ -35,6 +35,7 @@ import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.app.QiblaApp
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.AdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToUnixTime
 import com.qibla.qiblacompass.prayertime.finddirection.common.CommonMethods.Companion.convertTimeToUnixTimeDay
@@ -123,32 +124,13 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         MobileAds.initialize(mContext) {
             Log.d(
                 DashBoardFragment::class.java.simpleName,
-                "onViewCreated: onInilializationCompleted"
+                "onViewCreated: onInitializationCompleted"
             )
 
         }
-
         adView = binding.viewAds
-
-     //   adContainer = view.findViewById(R.id.adContainer)
-       // adView = AdView(requireContext())
-
-       // AdUtil.loadBannerAd(requireContext(), adView)
-
-
-
-        remoteConfig = Firebase.remoteConfig
-        //remoteConfig = FirebaseRemoteConfig.getInstance()
-        val configSettings = FirebaseRemoteConfigSettings.Builder()
-            .setMinimumFetchIntervalInSeconds(3600) // Fetch every hour
-            .build()
-        remoteConfig.setConfigSettingsAsync(configSettings)
-        remoteConfig.setDefaultsAsync(R.xml.remote_default_config)
-
-      //   Fetch remote config values
-        fetchAndSetAdUnitId()
-
-
+        // Initialize AdUtil and load the banner ad
+        AdUtil.initialize(requireContext(), adView)
 
         binding.viewQiblaDirection.setOnClickListener {
             Log.d(DashBoardFragment::class.simpleName, "onViewCreated: ")
@@ -635,75 +617,75 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         return getString(R.string.unknown_city)
     }
 
-    private fun fetchAndSetAdUnitId() {
-        remoteConfig.fetchAndActivate()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    // Fetch and activate succeeded
-                    val adUnitId = remoteConfig.getString("bannerAdId")
-                    // Check if adView has already been initialized
-                    if (adView.adUnitId.isEmpty()) {
-                        // Set ad unit ID and ad size on AdView
-                        setupAdView(adUnitId)
-                    } else {
-                        // AdView already has ad unit ID set, skip setting it again
-                        loadBannerAd()
-                    }
-                } else {
-                    // Fetch failed
-                    val defaultAdUnitId = getString(R.string.banner_ad_unit_id)
-                    setupAdView(defaultAdUnitId)
-                }
-            }
-    }
-
-    private fun setupAdView(adUnitId: String) {
-        adView.adUnitId = adUnitId
-        // Load the ad
-        loadBannerAd()
-
-    }
-
-    private fun loadBannerAd() {
-        val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
-        adView.adListener = object :  AdListener(){
-            override fun onAdClicked() {
-                super.onAdClicked()
-                Log.d(TAG, "onAdClicked: ")
-            }
-
-            override fun onAdClosed() {
-                super.onAdClosed()
-                Log.d(TAG, "onAdClosed: ")
-            }
-
-            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                super.onAdFailedToLoad(loadAdError)
-                Log.d(TAG, "onAdFailedToLoad: ")
-            }
-
-            override fun onAdImpression() {
-                super.onAdImpression()
-                Log.d(TAG, "onAdImpression: ")
-            }
-
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-                Log.d(TAG, "onAdLoaded: ")
-            }
-
-            override fun onAdOpened() {
-                super.onAdOpened()
-                Log.d(TAG, "onAdOpened: ")
-            }
-
-            override fun onAdSwipeGestureClicked() {
-                Log.d(TAG, "onAdSwipeGestureClicked: ")
-                super.onAdSwipeGestureClicked()
-            }
-        }
-    }
+//    private fun fetchAndSetAdUnitId() {
+//        remoteConfig.fetchAndActivate()
+//            .addOnCompleteListener { task ->
+//                if (task.isSuccessful) {
+//                    // Fetch and activate succeeded
+//                    val adUnitId = remoteConfig.getString("bannerAdId")
+//                    // Check if adView has already been initialized
+//                    if (adView.adUnitId.isEmpty()) {
+//                        // Set ad unit ID and ad size on AdView
+//                        setupAdView(adUnitId)
+//                    } else {
+//                        // AdView already has ad unit ID set, skip setting it again
+//                        loadBannerAd()
+//                    }
+//                } else {
+//                    // Fetch failed
+//                    val defaultAdUnitId = getString(R.string.banner_ad_unit_id)
+//                    setupAdView(defaultAdUnitId)
+//                }
+//            }
+//    }
+//
+//    private fun setupAdView(adUnitId: String) {
+//        adView.adUnitId = adUnitId
+//        // Load the ad
+//        loadBannerAd()
+//
+//    }
+//
+//    private fun loadBannerAd() {
+//        val adRequest = AdRequest.Builder().build()
+//        adView.loadAd(adRequest)
+//        adView.adListener = object :  AdListener(){
+//            override fun onAdClicked() {
+//                super.onAdClicked()
+//                Log.d(TAG, "onAdClicked: ")
+//            }
+//
+//            override fun onAdClosed() {
+//                super.onAdClosed()
+//                Log.d(TAG, "onAdClosed: ")
+//            }
+//
+//            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+//                super.onAdFailedToLoad(loadAdError)
+//                Log.d(TAG, "onAdFailedToLoad: ")
+//            }
+//
+//            override fun onAdImpression() {
+//                super.onAdImpression()
+//                Log.d(TAG, "onAdImpression: ")
+//            }
+//
+//            override fun onAdLoaded() {
+//                super.onAdLoaded()
+//                Log.d(TAG, "onAdLoaded: ")
+//            }
+//
+//            override fun onAdOpened() {
+//                super.onAdOpened()
+//                Log.d(TAG, "onAdOpened: ")
+//            }
+//
+//            override fun onAdSwipeGestureClicked() {
+//                Log.d(TAG, "onAdSwipeGestureClicked: ")
+//                super.onAdSwipeGestureClicked()
+//            }
+//        }
+//    }
 
 
     override fun onPause() {
@@ -729,7 +711,8 @@ class DashBoardFragment : BaseFragment<FragmentDashBoardBinding>(R.layout.fragme
         Log.d(TAG, "onDestroy: ")
         super.onDestroy()
     }
-    companion object{
+
+    companion object {
         const val TAG = "DashBoardFragment"
     }
 }
