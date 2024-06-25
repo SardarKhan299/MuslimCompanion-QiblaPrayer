@@ -132,7 +132,7 @@ class TasbihCounterFragment :
         imageView = binding.layoutTasbihCounterFragment.findViewById(R.id.img_tasbih)
 
 
-        selectedImageName = SharedPreferences.retrieveImageValue(requireContext())!!
+      //  selectedImageName = SharedPreferences.retrieveImageValue(requireContext())!!
         Log.d(TasbihCounterFragment::class.simpleName, "Selected image name: $selectedImageName")
         // Map the image name to the corresponding resource ID
         val imageResource = TasbihZhikrUtil.getImageResource(selectedImageName ?: "")

@@ -35,7 +35,8 @@ import com.google.firebase.storage.FirebaseStorage
 class TasbihZhikrAdapter(
     private val context: Context,
     val data: MutableList<ZhikrTasbih>,
-    private val onItemLongClick: (ZhikrTasbih, Int) -> Unit
+    private val onItemLongClick: (ZhikrTasbih, Int) -> Unit,
+    private val onItemClick: (ZhikrTasbih) -> Unit
 
 ) : RecyclerView.Adapter<TasbihZhikrAdapter.TasbihZhikrViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasbihZhikrViewHolder {
@@ -59,6 +60,14 @@ class TasbihZhikrAdapter(
     inner class TasbihZhikrViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemLayout: ConstraintLayout = itemView.findViewById(R.id.item_view_tasbih)
         val btnStart: Button = itemView.findViewById(R.id.btn_start)
+
+        init {
+
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                onItemClick(data[position])
+            }
+        }
 
         fun bind(item: ZhikrTasbih) {
             itemView.findViewById<TextView>(R.id.tv_zhikr).text = item.zhikrName
@@ -99,10 +108,3 @@ class TasbihZhikrAdapter(
     }
 }
 
-//        holder.itemLayout.setOnClickListener {
-//            currentItem.zhikrName?.let { it1 -> onItemClick.invoke(it1) }
-//        }
-//
-//        holder.btnStart.setOnClickListener {
-//            currentItem.zhikrName?.let { it1 -> onItemClick.invoke(it1) }
-//        }

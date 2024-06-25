@@ -3,10 +3,7 @@ package com.qibla.qiblacompass.prayertime.finddirection.presentation.views.tasbi
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.Rect
-import android.graphics.Typeface
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -34,8 +31,6 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.ProgressBar
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentTasbihBinding
 import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
-import java.lang.Math.abs
-import kotlin.math.roundToInt
 
 
 class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tasbih) {
@@ -60,9 +55,10 @@ class TasbihFragment : BaseFragment<FragmentTasbihBinding>(R.layout.fragment_tas
         zhikrTasbihArrayList = mutableListOf()
 
         recyclerView = binding.layoutTasbihFragment.findViewById(R.id.recycler_view_zhikr)
-        adapter = TasbihZhikrAdapter(mContext, zhikrTasbihArrayList) { item, position ->
+        adapter = TasbihZhikrAdapter(mContext, zhikrTasbihArrayList, { item, position ->
             showDeleteConfirmationDialog(item, position)
-        }
+        },{findNavController().navigate(R.id.tasbihCounterFragment)})
+
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.imgTasbihClose.setOnClickListener {
