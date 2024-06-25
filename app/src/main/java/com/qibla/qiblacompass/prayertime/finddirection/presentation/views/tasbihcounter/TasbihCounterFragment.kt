@@ -20,9 +20,12 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.qibla.qiblacompass.prayertime.finddirection.R
 import com.qibla.qiblacompass.prayertime.finddirection.base.BaseFragment
+import com.qibla.qiblacompass.prayertime.finddirection.common.AdUtil
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.ALHAMDULILLAH
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.ALLAHU_AKBAR
 import com.qibla.qiblacompass.prayertime.finddirection.common.ApplicationConstant.Companion.LA_ILAHA_ILLA_ALLAH
@@ -32,6 +35,7 @@ import com.qibla.qiblacompass.prayertime.finddirection.common.SharedPreferences.
 import com.qibla.qiblacompass.prayertime.finddirection.common.closeCurrentScreen
 import com.qibla.qiblacompass.prayertime.finddirection.common.hideActionBar
 import com.qibla.qiblacompass.prayertime.finddirection.databinding.FragmentTasbihCounterBinding
+import com.qibla.qiblacompass.prayertime.finddirection.presentation.views.dashboard.DashBoardFragment
 import kotlin.math.log
 
 
@@ -53,6 +57,7 @@ class TasbihCounterFragment :
     private lateinit var imageView: ImageView
     private var mediaPlayer: MediaPlayer? = null
     private var userClicked = 0
+    private lateinit var adView: AdView
     private val imageResources = listOf(
         R.drawable.ic_counter_one,
         R.drawable.m1,
@@ -100,7 +105,16 @@ class TasbihCounterFragment :
             }
 
         }
+        MobileAds.initialize(mContext) {
+            Log.d(
+                DashBoardFragment::class.java.simpleName,
+                "onViewCreated: onInitializationCompleted"
+            )
 
+        }
+        adView = binding.adsBannerTasbihCounter
+        // Initialize AdUtil and load the banner ad
+        AdUtil.initialize(requireContext(), adView)
         val includelayout = binding.include
         motionLayout = includelayout.motionLayout
         imageView1 = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_three)
@@ -307,6 +321,7 @@ class TasbihCounterFragment :
 
     override fun onResume() {
         super.onResume()
+        adView.resume()
         Log.d(TasbihCounterFragment::class.simpleName, "onResume: ")
         val display: Display = requireActivity().windowManager.defaultDisplay
         val size = Point()
@@ -323,6 +338,7 @@ class TasbihCounterFragment :
 
     override fun onDestroy() {
         super.onDestroy()
+        adView.destroy()
         // Release MediaPlayer when the fragment is destroyed
         mediaPlayer?.release()
         mediaPlayer = null
@@ -343,6 +359,20 @@ class TasbihCounterFragment :
         mediaPlayer?.setOnCompletionListener {
             mediaPlayer.release()
         }
+    }
+    override fun onPause() {
+        super.onPause()
+        adView.pause()
+        Log.d(DashBoardFragment::class.simpleName, "onPause: ")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(DashBoardFragment::class.simpleName, "onStart: ")
+    }
+
+    companion object {
+        const val TAG = "TasbihCounterFragment"
     }
 
     object TasbihZhikrUtil {
