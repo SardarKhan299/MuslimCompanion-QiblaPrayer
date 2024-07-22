@@ -32,8 +32,8 @@ class ArcView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         Log.d(ArcView::class.simpleName, "updatePath: ")
         path.reset()
         path.moveTo(startX, startY)
-        val controlX = (startX + endX) / 2
-        path.quadTo(controlX, startY - 100, endX, endY)
+        val controlX = (startX + endX)
+        path.quadTo(controlX, startY, endX, endY)
         invalidate()
     }
 }

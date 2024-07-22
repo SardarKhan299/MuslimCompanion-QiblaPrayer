@@ -42,16 +42,20 @@ import kotlin.math.log
 class TasbihCounterFragment :
     BaseFragment<FragmentTasbihCounterBinding>(R.layout.fragment_tasbih_counter) {
     private lateinit var motionLayout: MotionLayout
-    private lateinit var imageView1: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var arcView: ArcView
     private lateinit var imgFirst: ImageView
+    private lateinit var imgZero: ImageView
+    private lateinit var imgZeroBottom: ImageView
     private lateinit var imgSecond: ImageView
     private lateinit var imgAnimated: ImageView
     private lateinit var imgFirstBottom: ImageView
     private lateinit var counterTextView: TextView
     private var counter = 0
-    private var maxCounter = 100
+    private var maxCounterLimit = 0
+    var x1 = 0.0f
+    var x2 = 0.0f
+    var MIN_DISTANCE = 200
     lateinit var adapter: TasbihCounterAdapter
     lateinit var recyclerView: RecyclerView
     private lateinit var imageView: ImageView
@@ -75,6 +79,8 @@ class TasbihCounterFragment :
     )
 
     var selectedImageName = ""
+
+    var toast:Toast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,9 +123,10 @@ class TasbihCounterFragment :
         AdUtil.initialize(requireContext(), adView)
         val includelayout = binding.include
         motionLayout = includelayout.motionLayout
-        imageView1 = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_three)
         imageView2 = binding.layoutTasbihCounterFragment.findViewById(R.id.img_bottom_count_counter)
         arcView = binding.layoutTasbihCounterFragment.findViewById(R.id.arcView)
+        imgZero = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_zero)
+        imgZeroBottom = binding.layoutTasbihCounterFragment.findViewById(R.id.img_bottom_counter_zero)
         imgFirst = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_one)
         imgSecond = binding.layoutTasbihCounterFragment.findViewById(R.id.img_top_counter_two)
         imgAnimated = binding.layoutTasbihCounterFragment.findViewById(R.id.img_animated_move)
@@ -140,8 +147,8 @@ class TasbihCounterFragment :
         // Set the image resource to the ImageView
         imageView.setImageResource(imageResource)
         saveImageValue(requireContext(), selectedImageName.toString())
-             // Retrieve the saved counter value from SharedPreferences
-        val counterValue = SharedPreferences.retrieveIncrementalCounter(requireContext(),selectedImageName)
+        val counterValue =
+            SharedPreferences.retrieveIncrementalCounter(requireContext(), selectedImageName)
         counter = counterValue
 
         // Update the increment text with the saved counter value
@@ -159,10 +166,10 @@ class TasbihCounterFragment :
             Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: ImageSelected")
             // Handle the click event here to set the selected image to another ImageView
             // For example, if you have an ImageView called 'selectedImageView'
-            imageView1.setImageResource(selectedImage)
+            imgZero.setImageResource(selectedImage)
+            imgZeroBottom.setImageResource(selectedImage)
             imgFirst.setImageResource(selectedImage)
             imgSecond.setImageResource(selectedImage)
-            imgFirst.setImageResource(selectedImage)
             imgAnimated.setImageResource(selectedImage)
             imgFirstBottom.setImageResource(selectedImage)
             imageView2.setImageResource(selectedImage)
@@ -182,67 +189,100 @@ class TasbihCounterFragment :
         }
 
 
-/// Retrieve the stored entered value from SharedPreferences
-        val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
+        /// Retrieve the stored Max Counter value from SharedPreferences
+        getLatestMaxCounterValue()
 
 // Update the counter TextView with the retrieved entered value
-        binding.tvCount.text = enteredValue.toString()
+        binding.tvCount.text = maxCounterLimit.toString()
 
-// Set onTouchListener to handle user interactions
         view1.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
-                Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: User Clicked")
-                // Retrieve the stored entered value from SharedPreferences
-                val enteredValue = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
+                x1 = motionEvent.x
+                Log.d(TasbihCounterFragment::class.simpleName, "ACTION_DOWN: ..User Clicked " +
+                        "View X is "+view1.width +" Touch x1 is "+x1)
+            }else if(motionEvent.action == MotionEvent.ACTION_MOVE){
+                getLatestMaxCounterValue()
+                x2 = motionEvent.x
+                val deltaX: Float = Math.abs(x2 - x1)
 
-                // Check if the current counter is less than the entered value
-                if (counter < enteredValue) {
-                    startMotionLayout()
-                    // Update the counter
-                    updateIncrementalCounter()
-                    // Play the MP3 sound
-                    playSound()
-                    // Check if the counter has reached the entered value
-                    if (counter == enteredValue) {
-                        // Stop the MotionLayout animation
-                        stopMotionLayout()
+                    // Calculate progress based on touch movement and desired range
+                    val progress = kotlin.math.min(
+                        kotlin.math.max(deltaX / 500.toFloat(), 0f), 1f
+                    )
+                    //Log.d(TasbihCounterFragment::class.simpleName, "ACTION_MOVE: Delta X is "+deltaX+" Progress is "+progress)
+                if (x2 > x1) {
+                    Log.d(TasbihCounterFragment::class.simpleName, "ACTION_MOVE: Left to Right swipe [Next]")
 
-                        // Show a toast message indicating maximum count reached
-                        Toast.makeText(
-                            mContext,
-                            "You've reached the maximum count.",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    // Check if the current counter is less than the entered value
+                    if (counter < maxCounterLimit) {
+                        motionLayout.setTransition(R.id.transition)
+                        // Update MotionLayout progress
+                        motionLayout.progress = progress
+                    }else{
+                        // increment the Loop and set Current Counter to 0...
+                        counter = 0
+                    }
+
+                } else {
+                    Log.d(TasbihCounterFragment::class.simpleName, "ACTION_MOVE: Right to Left swipe [Previous]")
+                    if(counter>0) {
+                        motionLayout.setTransition(R.id.transition1)
+                        // Update MotionLayout progress
+                        motionLayout.progress = progress
+                    }
+                }
+
+
+            } else if(motionEvent.action == MotionEvent.ACTION_UP){
+                x2 = motionEvent.x
+                val deltaX: Float = x2 - x1
+                getLatestMaxCounterValue()
+                Log.d(TasbihCounterFragment::class.simpleName, "ACTION_UP: "+Math.abs(deltaX))
+                if (Math.abs(deltaX) > MIN_DISTANCE) {
+                    // Left to Right swipe action
+                    if (x2 > x1) {
+                        Log.d(TasbihCounterFragment::class.simpleName, "ACTION_UP: Left to Right swipe [Next]")
+                        checkValueAndGoForward()
+                    } else {
+                        Log.d(TasbihCounterFragment::class.simpleName, "ACTION_UP: Right to Left swipe [Previous]")
+                        checkValueAndGoBackward()
                     }
                 } else {
-                    // If the counter is equal or greater than the entered value
-                    // Stop the MotionLayout animation
-                    stopMotionLayout()
+                    // consider as something else - a screen tap for example
+                    Log.d(TasbihCounterFragment::class.simpleName, "ACTION_UP: its a click")
+                    // Check if the current counter is less than the entered value
+                    if (counter < maxCounterLimit) {
+                        if(Math.abs(deltaX)<=5) {
+                            motionLayout.setTransition(R.id.transition)
+                            motionLayout.progress = 0.2f
+                            checkValueAndGoForward()
+                        }else{
+                            motionLayout.transitionToStart()
+                        }
+                    }else{
+                        // increment the Loop and set Current Counter to 0...
+                        counter = 0
+                    }
 
-                    // Show a toast message indicating maximum count reached
-                    Toast.makeText(
-                        mContext,
-                        "You've reached the maximum count.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+
                 }
+
             }
             // Return false to indicate that the listener has not consumed the event
-            false
+            true
         }
 
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted: ")
-                    Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted: Clicked...")
+                //Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted:  "+p0?.targetPosition)
                     // Calculate positions of images based on progress
-                    val startX = imageView1.x + imageView1.width / 2
-                    val startY = imageView1.y + imageView1.height / 2
-                    val endX = imageView2.x + imageView2.width / 2
-                    val endY = imageView2.y
-                    // Update the arc view's path
-                Log.d(TasbihCounterFragment::class.simpleName, "onViewCreated: $startX - $startY : $endX - $endY")
-                    arcView.updatePath(startX, startY, endX, endY)
+                val startX = binding.guidelineLeftTasbihCounter.x
+                val startY = imgFirst.y + imageView2.height / 2
+                val endX = binding.guidelineRightTasbihCounter.x
+                val endY = imageView2.y + imageView2.height / 2
+                // Update the arc view's path
+                //Log.d(TasbihCounterFragment::class.simpleName, "onTransitionStarted: $startX - $startY : $endX - $endY")
+                arcView.updatePath(startX, startY, endX, endY)
             }
             override fun onTransitionChange(
                 motionLayout: MotionLayout?,
@@ -250,30 +290,166 @@ class TasbihCounterFragment :
                 endId: Int,
                 progress: Float
             ) {
-                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionChange: Transition ")
+                //Log.d(TasbihCounterFragment::class.simpleName, "onTransitionChange: Transition ")
             }
 
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionCompleted: ")
+                //Log.d(TasbihCounterFragment::class.simpleName, "onTransitionCompleted: ")
             }
 
             override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
-                Log.d(TasbihCounterFragment::class.simpleName, "onTransitionTrigger: ")
+                //Log.d(TasbihCounterFragment::class.simpleName, "onTransitionTrigger: ")
             }
         })
     }
 
+    private fun getLatestMaxCounterValue() {
+        // Retrieve the saved counter value from SharedPreferences
+        maxCounterLimit  = SharedPreferences.retrieveEnteredValue(requireContext(),selectedImageName)
+    }
+
+    private fun checkValueAndGoBackward() {
+        // Retrieve the stored entered value from SharedPreferences
+        val enteredValue =
+            SharedPreferences.retrieveEnteredValue(requireContext(), selectedImageName)
+
+        // Check if the current counter is greater than 0
+        if (counter > 0) {
+            startMotionLayout()
+
+            Log.d(TasbihCounterFragment::class.simpleName, "checkValueAndGoBackward: ${motionLayout.currentState}")
+            if(motionLayout.currentState == -1) {
+                motionLayout.setTransition(R.id.transition1)
+                motionLayout.transitionToEnd()
+            }
+
+            // Update the counter
+            updateDecrementCounter()
+            // Play the MP3 sound
+            playSound()
+            // Check if the counter has reached the entered value
+            if (counter == enteredValue) {
+                // Stop the MotionLayout animation
+                stopMotionLayout()
+
+                // Show a toast message indicating maximum count reached
+                if(toast!=null) {
+                    toast?.cancel()
+                    toast = Toast.makeText(
+                        mContext,
+                        "You've reached the minimum count.",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast?.show()
+                }else{
+                    toast = Toast.makeText(
+                        mContext,
+                        "You've reached the minimum count.",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast?.show()
+                }
+
+            }
+        } else {
+            // If the counter is equal or greater than the entered value
+            // Stop the MotionLayout animation
+            stopMotionLayout()
+
+            // Show a toast message indicating maximum count reached
+            if(toast!=null) {
+                toast?.cancel()
+                toast = Toast.makeText(
+                    mContext,
+                    "You've reached the minimum count.",
+                    Toast.LENGTH_SHORT
+                )
+                toast?.show()
+            }else{
+                toast = Toast.makeText(
+                    mContext,
+                    "You've reached the minimum count.",
+                    Toast.LENGTH_SHORT
+                )
+                toast?.show()
+            }
+        }
+    }
+
+    private fun checkValueAndGoForward() {
+        // Retrieve the stored entered value from SharedPreferences
+        val enteredValue =
+            SharedPreferences.retrieveEnteredValue(requireContext(), selectedImageName)
+
+        // Check if the current counter is less than the entered value
+        if (counter < enteredValue) {
+            startMotionLayout()
+
+            Log.d(TasbihCounterFragment::class.simpleName, "checkValueAndGoForward: ${motionLayout.currentState}")
+            if(motionLayout.currentState==-1) {
+                motionLayout.setTransition(R.id.transition)
+                motionLayout.transitionToEnd()
+            }
+
+            // Update the counter
+            updateIncrementalCounter()
+            // Play the MP3 sound
+            playSound()
+            // Check if the counter has reached the entered value
+            if (counter == enteredValue) {
+                // Stop the MotionLayout animation
+                stopMotionLayout()
+
+
+                if(toast!=null) {
+                    toast?.cancel()
+                    toast = Toast.makeText(
+                        mContext,
+                        "You've reached the maximum count.",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast?.show()
+                }else{
+                    toast = Toast.makeText(
+                        mContext,
+                        "You've reached the maximum count.",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast?.show()
+                }
+            }
+        } else {
+            // If the counter is equal or greater than the entered value
+            // Stop the MotionLayout animation
+            stopMotionLayout()
+
+            if(toast!=null) {
+                toast?.cancel()
+                toast = Toast.makeText(
+                    mContext,
+                    "You've reached the maximum count.",
+                    Toast.LENGTH_SHORT
+                )
+                toast?.show()
+            }else{
+                toast = Toast.makeText(
+                    mContext,
+                    "You've reached the maximum count.",
+                    Toast.LENGTH_SHORT
+                )
+                toast?.show()
+            }
+        }
+    }
+
     private fun stopMotionLayout() {
-        motionLayout.isInteractionEnabled = false
+        Log.d(TasbihCounterFragment::class.simpleName, "stopMotionLayout: stop motion layout")
+        //motionLayout.isInteractionEnabled = false
     }
 
     private fun startMotionLayout() {
-        motionLayout.isInteractionEnabled = true
-    }
-
-    private fun updateCount(value: Int) {
-        maxCounter = value
-        binding.tvCount.text = maxCounter.toString()
+        Log.d(TasbihCounterFragment::class.simpleName, "startMotionLayout: start motion layout")
+        //motionLayout.isInteractionEnabled = true
     }
 
     private fun updateIncrementalCounter() {
@@ -281,8 +457,13 @@ class TasbihCounterFragment :
         counterTextView.text = counter.toString()
         // Save the counter value to SharedPreferences
         SharedPreferences.saveIncrementalCounter(mContext, counter,selectedImageName)
-        // Notify the adapter that the data set has changed
-        adapter.notifyDataSetChanged()
+    }
+
+    private fun updateDecrementCounter() {
+        counter--
+        counterTextView.text = counter.toString()
+        // Save the counter value to SharedPreferences
+        SharedPreferences.saveIncrementalCounter(mContext, counter,selectedImageName)
     }
 
     private fun showBottomSheetSetCounter() {
@@ -299,7 +480,6 @@ class TasbihCounterFragment :
         continueButton.setOnClickListener {
             val enteredValue = valueCounter.text.toString().toIntOrNull() ?: 0
             if (enteredValue != 0) {
-                // updateCount(enteredValue)
                 updateMaxCounter(enteredValue)
                 SharedPreferences.saveEnteredValue(mContext, enteredValue,selectedImageName)
 
@@ -314,8 +494,8 @@ class TasbihCounterFragment :
 
 
     private fun updateMaxCounter(newValue: Int) {
-        maxCounter = newValue
-        binding.tvCount.text = maxCounter.toString()
+        maxCounterLimit = newValue
+        binding.tvCount.text = maxCounterLimit.toString()
     }
 
 
@@ -329,16 +509,16 @@ class TasbihCounterFragment :
         val width = size.x
         val height = size.y
         Log.d(TasbihCounterFragment::class.simpleName, "onResume: $width - $height")
-        val startX = width/3
-        val startY = height/16
-        val endX = width + (width/4.5)
-        val endY = height - (height/8)
+
+        val startX = 0
+        val startY = height/26
+        val endX = width + width
+        val endY = height/26
         arcView.updatePath(startX.toFloat(), startY.toFloat(), endX.toFloat(), endY.toFloat())
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        adView.destroy()
         // Release MediaPlayer when the fragment is destroyed
         mediaPlayer?.release()
         mediaPlayer = null
