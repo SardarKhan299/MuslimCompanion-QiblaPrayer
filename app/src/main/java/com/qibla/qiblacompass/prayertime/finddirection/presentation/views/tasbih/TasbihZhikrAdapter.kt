@@ -67,7 +67,12 @@ class TasbihZhikrAdapter(
                 val position = adapterPosition
                 onItemClick(data[position])
             }
+            btnStart.setOnClickListener {
+                val position = adapterPosition
+                onItemClick(data[position])
+            }
         }
+
 
         fun bind(item: ZhikrTasbih) {
             itemView.findViewById<TextView>(R.id.tv_zhikr).text = item.zhikrName
